@@ -4,12 +4,14 @@
 }
 
 body {
-	background: #F0F0F0;
+	background: rgb(45, 45, 53);
 	font-family: 'Open Sans', sans-serif;
+	color: #DEDEDE;
 }
 
 header{
-
+	height: 200px;
+	background: #0c0c0c;
 }
 
 nav ul {
@@ -40,9 +42,37 @@ main {
 	min-height: calc(100vh - 60px);
 }
 
+.container {
+	margin: 0 auto; /* centering */
+	max-width: 1200px;
+}
+
+.content {
+	width: 100%;
+	background: #18181b;
+	padding: 20px;
+}
+
+.center {
+	text-align: center;
+}
+
+.countdown {
+	font-family: Consolas;
+	font-weight: 800;
+	color: #EEEEEE;
+}
+#countdown-days {
+	font-size: 100px;
+}
+#countdown-time {
+	font-size: 100px;
+}
+
 footer {
 	height: 60px;
 	text-align: center;
 	line-height: 60px;
 	color: #666666;
+	background: #0c0c0c;
 }

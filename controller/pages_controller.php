@@ -9,7 +9,10 @@ class PagesController extends \app\core\Controller
 	{
 		$myValue = 4 * 4;
 
+		$title = "Welcome - BORD-Festival";
+
 		$this->_params['myValue'] = $myValue;
+		$this->_params['title'] = $title;
 	}
 
 	public function actionLogin()

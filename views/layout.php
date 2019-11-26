@@ -1,7 +1,8 @@
 <html>
 	<head>
-		<title>Meine PDO Welt</title>
+		<title><?php echo $title ?></title>
 		<link rel="stylesheet" type="text/css" href="assets/css/layout.css">
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 		<?php if(isset($css) && is_array($css)) : ?>
 			<?php foreach($css as $index => $file) : ?>
 			<link rel="stylesheet" type="text/css" href="assets/css/<?=$file?>.css">
@@ -11,6 +12,7 @@
 	<body>
 		<div class="content-wrap">
 			<header>
+				<div class="container">
 				<nav>
 					<ul>
 						<li><a href="?a=index">Index</a></li>
@@ -22,13 +24,18 @@
 						<?php endif; ?>
 					</ul>
 				</nav>
+				</div>
 			</header>
 			<main>
-				<?php echo $body ?>
+				<div class="container">
+					<div class="content">
+					<?php echo $body ?>
+					</div>
+				</div>
 			</main>
 		</div>
 		<footer>
-			&copy; Kristof Friess for DWP FH Erfurt.
+			&copy; Daniel Depta, Raphael Freybe DWP FH Erfurt
 		</footer>
 	</body>
 </html>
