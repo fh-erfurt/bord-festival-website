@@ -57,6 +57,10 @@ main {
 	text-align: center;
 }
 
+.festival-logo {
+	font-size: 50px;
+}
+
 .countdown {
 	font-family: Consolas;
 	font-weight: 800;

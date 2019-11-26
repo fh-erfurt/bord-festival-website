@@ -5,6 +5,3 @@
 </div>
 
 <br/>
-Index !!!
-
-<?=$myValue?>

@@ -24,6 +24,9 @@
 						<?php endif; ?>
 					</ul>
 				</nav>
+				<div class="center">
+					<p class="festival-logo">BORD-Festival</p>
+				</div>
 				</div>
 			</header>
 			<main>
@@ -35,7 +38,7 @@
 			</main>
 		</div>
 		<footer>
-			&copy; Daniel Depta, Raphael Freybe DWP FH Erfurt
+			&copy; Daniel Depta, Raphael Freybe - FH Erfurt
 		</footer>
 	</body>
 </html>
