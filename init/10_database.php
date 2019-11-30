@@ -15,6 +15,7 @@ $database = null;
 try
 {
     $database = new PDO($dns, $dbuser, $dbpassword, $options);
+	$database->exec("SET CHARACTER SET utf8");
 }
 catch(\PDOException $e)
 {

@@ -2,6 +2,8 @@
 
 namespace app\controller;
 
+require_once 'model/User.php';
+
 class PagesController extends \app\core\Controller
 {
 
