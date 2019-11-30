@@ -18,32 +18,36 @@ USE festival;
 --
 -- Tabellenstruktur für Tabelle adressen
 --
-DROP TABLE IF EXISTS adressen;
+DROP TABLE IF EXISTS addresses;
 
-CREATE TABLE IF NOT EXISTS adressen
+CREATE TABLE IF NOT EXISTS addresses
 	(
-		ADRESSID int(7) NOT NULL AUTO_INCREMENT,
-		STRASSE_HNR varchar(100) NOT NULL,
-		PLZ varchar(10) NOT NULL,
-		ORT varchar(100) NOT NULL,
-		LAND varchar(30) default 'GER',
-		CONSTRAINT adressen_pk PRIMARY KEY (ADRESSID)
+		ADDRESSID int(7) NOT NULL AUTO_INCREMENT,
+		STREET varchar(100) NOT NULL,
+		ZIP varchar(10) NOT NULL,
+		CITY varchar(100) NOT NULL,
+		COUNTRY varchar(30) default 'GER',
+		CONSTRAINT addresses_pk PRIMARY KEY (ADDRESSID)
 	);
 
 --
 -- Tabellenstruktur für Tabelle clients
 --
+DROP TABLE IF EXISTS clients;
 
-CREATE TABLE clients (
+CREATE TABLE clients 
+(
   CLIENTID int(7) NOT NULL AUTO_INCREMENT,
   MAIL varchar(100) NOT NULL,
-  VORNAME varchar(50) NOT NULL,
-  NACHNAME varchar(50) NOT NULL,
-  GEBURTSDATUM date NOT NULL,
+  FIRSTNAME varchar(50) NOT NULL,
+  LASTNAME varchar(50) NOT NULL,
+  DATEOFBIRTH date NOT NULL,
   PASSWORD binary(60) NOT NULL,
   SALT varchar(100) NOT NULL,
-  ADRESSID int (7) NOT NULL,
+  CREATEDAT datetime NOT NULL,
+  UPDATEDAT datetime NOT NULL,
+  ADDRESSID int (7) NOT NULL,
   CONSTRAINT clients_pk PRIMARY KEY (CLIENTID),
   CONSTRAINT mail_uq UNIQUE (MAIL),
-  CONSTRAINT clients_adressen_fk FOREIGN KEY (ADRESSID) REFERENCES ADRESSEN (ADRESSID)
+  CONSTRAINT clients_addresses_fk FOREIGN KEY (ADDRESSID) REFERENCES ADDRESSES (ADDRESSID)
 );
