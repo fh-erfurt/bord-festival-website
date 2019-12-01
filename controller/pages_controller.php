@@ -1,8 +1,11 @@
 <?php
 
 namespace app\controller;
+use app\model\Client;
+use app\model\Address;
 
 require_once 'model/User.php';
+require_once 'model/Address.php';
 
 class PagesController extends \app\core\Controller
 {
@@ -27,19 +30,39 @@ class PagesController extends \app\core\Controller
 		{
 			if(isset($_POST['reg_user']))
 			{
-				$email		= $_POST['email'] ?? null;
+				$mail		= $_POST['email'] ?? null;
 				$password1	= $_POST['password_1'] ?? null;
 				$password2	= $_POST['password_2'] ?? null;
 
-				$geburtstag	= $_POST['geburtstag'] ?? null;
-				$vorname	= $_POST['vorname'] ?? null;
-				$nachname	= $_POST['nachname'] ?? null;
-				$strassehnr	= $_POST['strassehnr'] ?? null;
-				$plz		= $_POST['plz'] ?? null;
-				$ort		= $_POST['ort'] ?? null;
+				$dateofbirth= $_POST['geburtstag'] ?? null;
+				$firstname	= $_POST['vorname'] ?? null;
+				$lastname	= $_POST['nachname'] ?? null;
+				$street		= $_POST['strassehnr'] ?? null;
+				$zip		= $_POST['plz'] ?? null;
+				$city		= $_POST['ort'] ?? null;
 
 				if($password1 === $password2)
 				{
+					$user = new Client();
+
+					$address = new Address();
+					$address->STREET = $street;
+					$address->ZIP = $zip;
+					$address->CITY = $city;
+					$address->COUNTRY = 'GER';
+
+					$address->save();
+
+					$user->MAIL 		= $mail;
+					$user->FIRSTNAME 	= $firstname;
+					$user->LASTNAME 	= $lastname;
+					$user->DATEOFBIRTH 	= $dateofbirth;
+					$user->PASSWORD 	= $password1;
+					$user->SALT 		= '34trzgh34g';
+					$user->CREATEDAT 	= date("Y-m-d H:i:s");
+					$user->UPDATEDAT 	= date("Y-m-d H:i:s");
+					$user->ADDRESSID 	= $address->ADDRESSID;
+					
 					$_SESSION['loggedIn'] = true;
 					header('Location: index.php');
 				}

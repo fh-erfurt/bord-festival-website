@@ -15,7 +15,7 @@ abstract class ModelBase
 	public function getPdo()
 	{
 		if (self::$pdo === null) {
-			self::$pdo = new \PDO('mysql:host=localhost;dbname=mvc-example', 'root', '123');
+			self::$pdo = new \PDO('mysql:host=localhost;dbname=festival', 'root', '');
 		}
 
 		return self::$pdo;
@@ -78,17 +78,20 @@ abstract class ModelBase
 		/** @var \PDO $pdo */
 		$pdo = $this->getPdo();
 
-		if ($this->id === null) {
+		$id = array_values($this->attributes)[0];
+		$key = array_key_first($this->attributes);
+
+		if ($id === null) {
 			// new entry
-			if (method_exists($this, 'beforeCreate')) {
-				$this->beforeCreate();
-			}
+			// if (method_exists($this, 'beforeCreate')) {
+			// 	$this->beforeCreate();
+			// }
 
 			if (!$pdo->exec('INSERT INTO `'.$table.'` SET '.implode(',', $this->getFields()))) {
 				throw new \RuntimeException('Could not crate '.get_class($this).': '.$pdo->errorInfo()[2]);
 			}
 			// fill the id
-			$this->id = $pdo->lastInsertId();
+			$this->attributes[$key] = $pdo->lastInsertId();
 		} else {
 			// update entry
 			if (method_exists($this, 'beforeUpdate')) {
@@ -111,7 +114,7 @@ abstract class ModelBase
 		$pdo = $this->getPdo();
 
 		$fields = [];
-		foreach ($this as $name => $val) {
+		foreach ($this->attributes as $name => $val) {
 			if ($val === null) {
 				$fields[] = "`$name`=null";
 			} elseif (is_int($val)) {

@@ -1,44 +1,22 @@
 <?php
 namespace app\model;
 
-class Client extends ModelBase
+class Address extends ModelBase
 {
 	protected $attributes = [
-		'CLIENTID' => null,
-		'MAIL' => null,
-		'FIRSTNAME' => null,
-		'LASTNAME' => null,
-		'DATEOFBIRTH' => null,
-		'PASSWORD' => null,
-		'SALT' => null,
-		'CREATEDAT' => null,
-		'UPDATEDAT' => null,
-		'ADDRESSID' => null
+		'ADDRESSID' => null,
+		'STREET' => null,
+		'ZIP' => null,
+		'CITY' => null,
+		'COUNTRY' => null
 	];
 
 	public $name, $created;
 
 	public function getSource()
 	{
-		return 'clients';
+		return 'addresses';
 	}
-
-	public function beforeCreate()
-	{
-		$this->created = date('Y-m-d H:i:s');
-	}
-
-	// TODO: MOVE TO BASEMODEL
-	// function __construct($dbData)
-	// {
-	// 	foreach ($this->attributes as $key => $value)
-	// 	{
-	// 		if(isset($dbData[$key]))
-	// 		{
-	// 			$this->attributes[$key] = $dbData[$key];
-	// 		}
-	// 	}
-	// }
 
 	// TODO: MOVE TO BASEMODEL
 	public function __get($key)
