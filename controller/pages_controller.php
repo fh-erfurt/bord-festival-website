@@ -12,11 +12,8 @@ class PagesController extends \app\core\Controller
 
 	public function actionIndex()
 	{
-		$myValue = 4 * 4;
-
 		$title = "Welcome - BORD-Festival";
 
-		$this->_params['myValue'] = $myValue;
 		$this->_params['title'] = $title;
 	}
 
@@ -62,6 +59,8 @@ class PagesController extends \app\core\Controller
 					$user->CREATEDAT 	= date("Y-m-d H:i:s");
 					$user->UPDATEDAT 	= date("Y-m-d H:i:s");
 					$user->ADDRESSID 	= $address->ADDRESSID;
+
+					//Clientsave?
 					
 					$_SESSION['loggedIn'] = true;
 					header('Location: index.php');
