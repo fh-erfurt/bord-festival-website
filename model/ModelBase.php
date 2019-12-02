@@ -14,11 +14,9 @@ abstract class ModelBase
 	 */
 	public function getPdo()
 	{
-		if (self::$pdo === null) {
-			self::$pdo = new \PDO('mysql:host=localhost;dbname=festival', 'root', '');
-		}
+		$db = $GLOBALS['database'];
 
-		return self::$pdo;
+		return $db;
 	}
 
 	/**
