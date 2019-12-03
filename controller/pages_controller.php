@@ -83,6 +83,7 @@ class PagesController extends \app\core\Controller
 
 	public function actionLogin()
 	{
+		// TODO: else-Zweig für Fehlerbehandlung
 		if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === false)
 		{
 			if(isset($_POST['submit']))
@@ -101,11 +102,14 @@ class PagesController extends \app\core\Controller
 					if(isset($user))
 					{
 						$tmpassword = $user->PASSWORD;
+
 						if(isset($tmpassword))
 						{
 							if(password_verify($password, $user->PASSWORD))
 							{
 								$_SESSION['loggedIn'] = true;
+								$_SESSION['client_mail'] = $mail;
+								$_SESSION['client_id'] = $user->CLIENTID;
 
 							}
 							else {
