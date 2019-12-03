@@ -10,7 +10,6 @@ class Client extends ModelBase
 		'LASTNAME' => null,
 		'DATEOFBIRTH' => null,
 		'PASSWORD' => null,
-		'SALT' => null,
 		'CREATEDAT' => null,
 		'UPDATEDAT' => null,
 		'ADDRESSID' => null

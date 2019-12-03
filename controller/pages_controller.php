@@ -50,12 +50,13 @@ class PagesController extends \app\core\Controller
 
 					$address->save();
 
+					$hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
+
 					$user->MAIL 		= $mail;
 					$user->FIRSTNAME 	= $firstname;
 					$user->LASTNAME 	= $lastname;
 					$user->DATEOFBIRTH 	= $dateofbirth;
-					$user->PASSWORD 	= $password1;
-					$user->SALT 		= '34trzgh34g';
+					$user->PASSWORD 	= $hashedpassword;
 					$user->CREATEDAT 	= date("Y-m-d H:i:s");
 					$user->UPDATEDAT 	= date("Y-m-d H:i:s");
 					$user->ADDRESSID 	= $address->ADDRESSID;
@@ -86,13 +87,29 @@ class PagesController extends \app\core\Controller
 		{
 			if(isset($_POST['submit']))
 			{
-				$email    = $_POST['email'] ?? null;
+				$mail    = $_POST['email'] ?? null;
 				$password = $_POST['password'] ?? null;
 
-				if($email === 'max@fh-erfurt.de' && $password === '12345678')
+				if(isset($mail) && isset($password))
 				{
-					$_SESSION['loggedIn'] = true;
-					header('Location: index.php');
+					$filterOptions = [
+						'bind' => [':mail' => $mail],
+						'criteria' => 'mail = :mail'
+					];
+
+					$user = Client::findFirst($filterOptions);
+					if(isset($user))
+					{
+						$tmpassword = $user->PASSWORD;
+						if(isset($tmpassword))
+						{
+							if(password_verify($password, $user->PASSWORD))
+							{
+								$_SESSION['loggedIn'] = true;
+
+							}
+						}
+					}
 				}
 				else
 				{

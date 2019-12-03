@@ -3,7 +3,7 @@
 
 $dns = 'mysql:host=localhost;dbname=festival';
 $dbuser = 'root';
-$dbpassword = 'nH56v@L2m+QZM81#-S24$ER\wfQW.jsd';
+$dbpassword = '';
 $options    = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
