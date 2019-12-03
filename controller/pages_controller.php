@@ -59,6 +59,8 @@ class PagesController extends \app\core\Controller
 					$user->CREATEDAT 	= date("Y-m-d H:i:s");
 					$user->UPDATEDAT 	= date("Y-m-d H:i:s");
 					$user->ADDRESSID 	= $address->ADDRESSID;
+
+					//Clientsave?
 					
 					$user->save();
 					
