@@ -24,16 +24,18 @@ abstract class ModelBase
 	 *
 	 * @return static
 	 */
-	public static function findFirst($options)
+	public function findFirst($options)
 	{
 		$model = new static();
 		$table = $model->getSource();
 		/** @var \PDO $pdo */
 		$pdo = $model->getPdo();
+		
+		$idfield = $model->getIdName();
 
 		if (is_int($options)) {
 			// we are looking for an ID
-			$stmt = $pdo->prepare('SELECT * FROM `'.$table.'` WHERE id = ? LIMIT 1');
+			$stmt = $pdo->prepare('SELECT * FROM `'.$table.'` WHERE '.$idfield.' = ? LIMIT 1');
 			$stmt->execute([$options]);
 		} elseif (is_array($options) && isset($options['criteria'])) {
 			$stmt = $pdo->prepare('SELECT * FROM `'.$table.'` WHERE '.$options['criteria'].' LIMIT 1');

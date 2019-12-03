@@ -22,6 +22,11 @@ class Client extends ModelBase
 		return 'clients';
 	}
 
+	public function getIdName()
+	{
+		return array_key_first($this->attributes);
+	}
+
 	public function beforeCreate()
 	{
 		$this->created = date('Y-m-d H:i:s');
