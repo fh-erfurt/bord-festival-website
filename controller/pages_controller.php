@@ -66,6 +66,8 @@ class PagesController extends \app\core\Controller
 					$user->save();
 					
 					$_SESSION['loggedIn'] = true;
+					$_SESSION['client_mail'] = $mail;
+					$_SESSION['client_id'] = $user->CLIENTID;
 					header('Location: index.php');
 				}
 				else
@@ -146,6 +148,11 @@ class PagesController extends \app\core\Controller
 	{
 		if($_SESSION['loggedIn'] === true)
 		{
+			$clientid = (int)$_SESSION['client_id'];
+			$user = Client::findFirst($clientid);
+
+			
+			$this->_params['mail'] = $user->MAIL;
 
 		}
 		else
