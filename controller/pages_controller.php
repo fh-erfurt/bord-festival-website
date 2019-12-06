@@ -3,9 +3,11 @@
 namespace app\controller;
 use app\model\Client;
 use app\model\Address;
+use app\model\Ticket;
 
 require_once 'model/User.php';
 require_once 'model/Address.php';
+require_once 'model/Ticket.php';
 
 class PagesController extends \app\core\Controller
 {
@@ -103,9 +105,9 @@ class PagesController extends \app\core\Controller
 					$user = Client::findFirst($filterOptions);
 					if(isset($user))
 					{
-						$tmpassword = $user->PASSWORD;
+						$tmppassword = $user->PASSWORD;
 
-						if(isset($tmpassword))
+						if(isset($tmppassword))
 						{
 							if(password_verify($password, $user->PASSWORD))
 							{
@@ -146,19 +148,13 @@ class PagesController extends \app\core\Controller
 
 	public function actionProfile()
 	{
-		if($_SESSION['loggedIn'] === true)
-		{
-			$clientid = (int)$_SESSION['client_id'];
-			$user = Client::findFirst($clientid);
 
-			
-			$this->_params['mail'] = $user->MAIL;
+	}
 
-		}
-		else
-		{
-			header('Location: index.php');
-		}
+	public function actionTicketshop()
+	{
+		$tickets = Ticket::findAll();
+		$this->_params['tickets'] = $tickets;
 	}
 
 	public function actionError404()
