@@ -69,6 +69,24 @@ abstract class ModelBase
 		return $stmt->fetchAll(\PDO::FETCH_CLASS, get_class($model));
 	}
 
+
+	/**
+	 * @param array $options
+	 *
+	 * @return static
+	 */
+	public static function findAll()
+	{
+		$model = new static();
+		$table = $model->getSource();
+		/** @var \PDO $pdo */
+		$pdo = $model->getPdo();
+
+		$stmt = $pdo->query('SELECT * FROM `'.$table.'`');
+
+		return $stmt->fetchAll(\PDO::FETCH_CLASS, get_class($model));
+	}
+
 	/**
 	 * Create/update data.
 	 */
