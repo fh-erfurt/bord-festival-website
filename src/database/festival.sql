@@ -50,3 +50,18 @@ CREATE TABLE clients
   CONSTRAINT mail_uq UNIQUE (MAIL),
   CONSTRAINT clients_addresses_fk FOREIGN KEY (ADDRESSID) REFERENCES ADDRESSES (ADDRESSID)
 );
+
+--
+-- Tabellenstruktur für Tabelle tickets
+--
+DROP TABLE IF EXISTS tickets;
+
+CREATE TABLE tickets 
+(
+  TICKETID int(7) NOT NULL AUTO_INCREMENT,
+  NAME varchar(100) NOT NULL,
+  DESCRIPTION varchar(500) NOT NULL,
+  PRICE varchar(50) NOT NULL,
+  CONSTRAINT tickets_pk PRIMARY KEY (TICKETID),
+  CONSTRAINT ticketname_uq UNIQUE (NAME)
+);

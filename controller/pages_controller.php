@@ -105,10 +105,6 @@ class PagesController extends \app\core\Controller
 					$user = Client::findFirst($filterOptions);
 					if(isset($user))
 					{
-						$tmppassword = $user->PASSWORD;
-
-						if(isset($tmppassword))
-						{
 							if(password_verify($password, $user->PASSWORD))
 							{
 								$_SESSION['loggedIn'] = true;
@@ -119,7 +115,6 @@ class PagesController extends \app\core\Controller
 							else {
 								// TODO
 							}
-						}
 					}
 				}
 				else
@@ -148,7 +143,7 @@ class PagesController extends \app\core\Controller
 
 	public function actionProfile()
 	{
-
+		
 	}
 
 	public function actionTicketshop()
