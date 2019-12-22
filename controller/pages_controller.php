@@ -1,9 +1,9 @@
 <?php
 
 namespace app\controller;
-use app\model\Client;
-use app\model\Address;
-use app\model\Ticket;
+use Client;
+use Address;
+use Ticket;
 
 require_once 'model/User.php';
 require_once 'model/Address.php';
@@ -42,34 +42,42 @@ class PagesController extends \app\core\Controller
 
 				if($password1 === $password2)
 				{
-					$user = new Client();
+					//$user = new Client();
 
-					$address = new Address();
-					$address->STREET = $street;
-					$address->ZIP = $zip;
-					$address->CITY = $city;
-					$address->COUNTRY = 'GER';
+					$addressdata = [
+						'STREET' 	=> $street,
+						'ZIP' 		=> $zip,
+						'CITY' 		=> $city,
+						'COUNTRY' 	=> 'GER'						
+					];
+
+					$address = new Address($addressdata);
+					// $address->STREET = $street;
+					// $address->ZIP = $zip;
+					// $address->CITY = $city;
+					// $address->COUNTRY = 'GER';
 
 					$address->save();
 
 					$hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
 
-					$user->MAIL 		= $mail;
-					$user->FIRSTNAME 	= $firstname;
-					$user->LASTNAME 	= $lastname;
-					$user->DATEOFBIRTH 	= $dateofbirth;
-					$user->PASSWORD 	= $hashedpassword;
-					$user->CREATEDAT 	= date("Y-m-d H:i:s");
-					$user->UPDATEDAT 	= date("Y-m-d H:i:s");
-					$user->ADDRESSID 	= $address->ADDRESSID;
-
-					//Clientsave?
-					
+					$clientdata = [						
+						'MAIL' 			=> $mail,
+						'FIRSTNAME'		=> $firstname,
+						'LASTNAME' 		=> $lastname,
+						'DATEOFBIRTH'	=> $dateofbirth,
+						'PASSWORD' 		=> $hashedpassword,
+						'CREATEDAT' 	=> date("Y-m-d H:i:s"),
+						'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
+						'ADDRESSID' 	=> $address->schema['ADDRESSID']
+					];
+					$user = new Client($clientdata);
 					$user->save();
 					
 					$_SESSION['loggedIn'] = true;
 					$_SESSION['client_mail'] = $mail;
 					$_SESSION['client_id'] = $user->CLIENTID;
+
 					header('Location: index.php');
 				}
 				else
@@ -97,19 +105,19 @@ class PagesController extends \app\core\Controller
 
 				if(isset($mail) && isset($password))
 				{
-					$filterOptions = [
-						'bind' => [':mail' => $mail],
-						'criteria' => 'mail = :mail'
-					];
+					$where = 'MAIL = "'.$mail.'"';
 
-					$user = Client::findFirst($filterOptions);
+					$user = Client::find($where);
+					
 					if(isset($user))
-					{
-							if(password_verify($password, $user->PASSWORD))
+					{						
+							$userdata = $user[0];
+
+							if(password_verify($password, $userdata['PASSWORD']))
 							{
 								$_SESSION['loggedIn'] = true;
 								$_SESSION['client_mail'] = $mail;
-								$_SESSION['client_id'] = $user->CLIENTID;
+								$_SESSION['client_id'] = $userdata['CLIENTID'];
 
 							}
 							else {
@@ -148,7 +156,8 @@ class PagesController extends \app\core\Controller
 
 	public function actionTicketshop()
 	{
-		$tickets = Ticket::findAll();
+		$tickets = Ticket::find();
+		$ticketdata = $tickets[0];
 		$this->_params['tickets'] = $tickets;
 	}
 

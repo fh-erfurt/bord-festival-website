@@ -1,154 +1,245 @@
 <?php
-namespace app\model;
 
-abstract class ModelBase
+abstract class BaseModel
 {
-	private static $pdo;
-
-	public $id;
-
-	/**
-	 * Get the connection. This will open a connection, if does not exist yet.
-	 *
-	 * @return \PDO
-	 */
-	public function getPdo()
+	const TYPE_INT = 'int';
+	const TYPE_FLOAT = 'float';
+	const TYPE_STRING = 'string';
+	
+	
+	protected $schema = [];
+	protected $data = [];
+	 
+	
+	public function __construct($params)
+	{
+		foreach($this->schema as $key => $value)
+		{
+			if(isset($params[$key]))
+			{
+				$this->{$key} = $params[$key];
+			}
+			else
+			{
+				$this->{$key} = null;
+			}
+		}
+	}
+	
+	public function __get($key)
+	{
+		if(array_key_exists($key, $this->data))
+		{
+			return $this->data[$key];
+		}
+		
+		//throw new \Exception('You can\'t access property "'.$key.'" for the class "'.get_called_class());
+	}
+	  
+	public function __set($key, $value)
+	{
+		if(array_key_exists($key, $this->schema))
+		{
+			$this->data[$key] = $value;
+			return;
+		}
+		
+		throw new \Exception('You can\'t write property "'.$key.'" for the class "'.get_called_class());
+	}
+	
+	public function validate(&$errors = null)
+	{
+		foreach ($this->schema as $key => $schemaOptions)
+		{
+			if(isset($this->data[$key]) && is_array($schemaOptions))
+			{
+				$valueErrors = $this->validateValue($key, $this->data[$key], $schemaOptions);
+				
+				if($valueErrors !== true)
+				{
+					array_push($errors, ...$valueErrors);
+				}
+			}
+		}
+		
+		if(count($errors) === 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	protected function validateValue($attribute, &$value, &$schemaOptions)
+	{
+		$type = $schemaOptions['type'];
+		$errors = [];
+		
+		switch($type)
+		{
+			case BaseModel::TYPE_INT:
+			break;
+			case BaseModel::TYPE_FLOAT:
+			break;
+			case BaseModel::TYPE_STRING:
+			{
+				if(isset($schemaOptions['min']) && mb_strlen($value) < $schemaOptions['min'])
+				{
+					$errors[] = $attribute.': String needs minimum '.$schemaOptions['min'].' characters!';
+				}
+				if(isset($schemaOptions['max']) && mb_strlen($value) < $schemaOptions['max'])
+				{
+					$errors[] = $attribute.': String can have maximum '.$schemaOptions['max'].' characters!';
+				}
+			}
+			break;
+		}
+		
+		return count($errors) > 0 ? $errors : true;
+	}
+	  
+	
+    public static function tablename()
+    {
+        $class = get_called_class();
+        if(defined($class.'::TABLENAME'))
+        {
+            return $class::TABLENAME;
+        }
+        return null;
+    }
+	
+	public function save(&$errors = null)
+	{
+		if($this->id === null)
+		{
+			$this->insert($errors);
+		}
+		else
+		{
+			$this->update($errors);
+		}
+	}
+	
+	
+	protected function insert(&$errors)
 	{
 		$db = $GLOBALS['database'];
-
-		return $db;
-	}
-
-	/**
-	 * @param int|array $options
-	 *
-	 * @return static
-	 */
-	public function findFirst($options)
-	{
-		$model = new static();
-		$table = $model->getSource();
-		/** @var \PDO $pdo */
-		$pdo = $model->getPdo();
+		$idkey = array_key_first($this->schema);
 		
-		$idfield = $model->getIdName();
-
-		if (is_int($options)) {
-			// we are looking for an ID
-			$stmt = $pdo->prepare('SELECT * FROM `'.$table.'` WHERE '.$idfield.' = ? LIMIT 1');
-			$stmt->execute([$options]);
-		} elseif (is_array($options) && isset($options['criteria'])) {
-			$stmt = $pdo->prepare('SELECT * FROM `'.$table.'` WHERE '.$options['criteria'].' LIMIT 1');
-			$stmt->execute($options['bind']);
-		} else {
-			throw new \UnexpectedValueException('you need to specify the criteria');
-		}
-
-		return $stmt->fetchObject(get_class($model));
-	}
-
-	/**
-	 * @param array $options
-	 *
-	 * @return static
-	 */
-	public static function find(array $options)
-	{
-		$model = new static();
-		$table = $model->getSource();
-		/** @var \PDO $pdo */
-		$pdo = $model->getPdo();
-
-		if (!isset($options['criteria'])) {
-			throw new \UnexpectedValueException('you need to specify the criteria');
-		}
-
-		$stmt = $pdo->prepare('SELECT * FROM `'.$table.'` WHERE '.$options['criteria']);
-		$stmt->execute($options['bind']);
-
-		return $stmt->fetchAll(\PDO::FETCH_CLASS, get_class($model));
-	}
-
-
-	/**
-	 * @param array $options
-	 *
-	 * @return static
-	 */
-	public static function findAll()
-	{
-		$model = new static();
-		$table = $model->getSource();
-		/** @var \PDO $pdo */
-		$pdo = $model->getPdo();
-
-		$stmt = $pdo->query('SELECT * FROM `'.$table.'`');
-
-		return $stmt->fetchAll(\PDO::FETCH_CLASS, get_class($model));
-	}
-
-	/**
-	 * Create/update data.
-	 */
-	public function save()
-	{
-		$table = $this->getSource();
-		/** @var \PDO $pdo */
-		$pdo = $this->getPdo();
-
-		$id = array_values($this->attributes)[0];
-		$key = array_key_first($this->attributes);
-
-		if ($id === null) {
-			// new entry
-			// if (method_exists($this, 'beforeCreate')) {
-			// 	$this->beforeCreate();
-			// }
-
-			if (!$pdo->exec('INSERT INTO `'.$table.'` SET '.implode(',', $this->getFields()))) {
-				throw new \RuntimeException('Could not crate '.get_class($this).': '.$pdo->errorInfo()[2]);
+		try
+		{
+			$sql = 'INSERT INTO '.self::tablename().' (';
+			$valueString = ' VALUES (';
+			
+			foreach($this->schema as $key => $schemaOptions)
+			{
+				$sql .= '`'.$key.'`,';
+				
+				if($this->data[$key] === null)
+				{
+					$valueString .= 'NULL,';
+				}
+				else
+				{
+					$valueString .= $db->quote($this->data[$key]).',';
+				}
 			}
+			
+			$sql = trim($sql, ',');
+			$valueString = trim($valueString, ',');
+			$sql .= ')'.$valueString.');';
+			
+			$statement = $db->prepare($sql);
+			$statement->execute();
+
 			// fill the id
-			$this->attributes[$key] = $pdo->lastInsertId();
-		} else {
-			// update entry
-			if (method_exists($this, 'beforeUpdate')) {
-				$this->beforeUpdate();
-			}
-
-			if ($pdo->exec('UPDATE `'.$table.'` SET '.implode(',', $this->getFields()).' WHERE `id` = '.((int)$this->id)) === false) {
-				throw new \RuntimeException('Could not update '.get_class($this).': '.$pdo->errorInfo()[2]);
-			}
+			$this->schema[$idkey] = $db->lastInsertId();
+			
+			return true;
 		}
+		catch(\PDOException $e)
+		{
+			$errors[] = 'Error inserting '.get_called_class();
+		}
+		
+		return false;
 	}
-
-	/**
-	 * Build fields data.
-	 *
-	 * @return array
-	 */
-	private function getFields()
+	
+	protected function update(&$errors)
 	{
-		$pdo = $this->getPdo();
-
-		$fields = [];
-		foreach ($this->attributes as $name => $val) {
-			if ($val === null) {
-				$fields[] = "`$name`=null";
-			} elseif (is_int($val)) {
-				$fields[] = "`$name`=".$val;
-			} else {
-				$fields[] = "`$name`=".$pdo->quote($val);
+		$db = $GLOBALS['database'];
+		
+		try
+		{
+			$sql = 'UPDATE '.self::tablename().' SET ';
+			
+			foreach($this->schema as $key => $schemaOptions)
+			{				
+				if($this->data[$key] !== null)
+				{
+					$sql .= $key.' = '.$db->quote($this->data[$key]).',';
+				}
 			}
+			
+			$sql = trim($sql, ',');
+			$sql .= ' WHERE id = '.$this->data['id'];
+			
+			$statement = $db->prepare($sql);
+			$statement->execute();
+			
+			return true;
 		}
-
-		return $fields;
+		catch(\PDOException $e)
+		{
+			$errors[] = 'Error updating '.get_called_class();
+		}
+		
+		return false;
+	}
+	
+	protected function delete(&$errors = null)
+	{
+		$db = $GLOBALS['database'];
+		
+		try
+		{
+			$sql = 'DELETE FROM '.self::tablename().' WHERE id = '.$this->id;
+			$db->exec($sql);
+			
+			return true;
+		}
+		catch(\PDOException $e)
+		{
+			$errors[] = 'Error deleting '.get_called_class();
+		}
+		
+		return false;		
 	}
 
-	/**
-	 * The table name of the model.
-	 *
-	 * @return string
-	 */
-	abstract public function getSource();
-} 
+    public static function find($where = '')
+    {
+        $db  = $GLOBALS['database'];
+        $result = null;
+
+        try
+        {
+            $sql = 'SELECT * FROM ' . self::tablename();
+                
+            if(!empty($where))
+            {
+				$sql .= ' WHERE ' . $where .  ';';
+			}
+			
+            $result = $db->query($sql)->fetchAll();
+        }
+        catch(\PDOException $e)
+        {
+            die('Select statment failed: ' . $e->getMessage());
+		}
+
+        return $result;
+    }
+}
