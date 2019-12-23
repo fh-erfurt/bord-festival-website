@@ -5,9 +5,9 @@ use Client;
 use Address;
 use Ticket;
 
-require_once 'model/User.php';
-require_once 'model/Address.php';
-require_once 'model/Ticket.php';
+require_once 'model/user.class.php';
+require_once 'model/address.class.php';
+require_once 'model/ticket.class.php';
 
 class PagesController extends \app\core\Controller
 {
