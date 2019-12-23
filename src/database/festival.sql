@@ -58,10 +58,49 @@ DROP TABLE IF EXISTS tickets;
 
 CREATE TABLE tickets 
 (
-  TICKETID int(7) NOT NULL AUTO_INCREMENT,
+  TICKETID int(2) NOT NULL AUTO_INCREMENT,
   NAME varchar(100) NOT NULL,
   DESCRIPTION varchar(500) NOT NULL,
-  PRICE varchar(50) NOT NULL,
+  PRICE decimal(6,2) NOT NULL,
   CONSTRAINT tickets_pk PRIMARY KEY (TICKETID),
   CONSTRAINT ticketname_uq UNIQUE (NAME)
 );
+
+--
+-- Tabellenstruktur für Tabelle carts
+--
+DROP TABLE IF EXISTS carts;
+
+CREATE TABLE carts 
+(
+  CARTID int(7) NOT NULL AUTO_INCREMENT,
+  TOTALPRICE decimal(8,2),
+  LASTUPDATED datetime NOT NULL,
+  CLIENTID int(7) NOT NULL,
+  CONSTRAINT carts_pk PRIMARY KEY (CARTID),
+  CONSTRAINT carts_clients_fk FOREIGN KEY (CLIENTID) REFERENCES clients (CLIENTID)
+);
+
+--
+-- Tabellenstruktur für Tabelle shoppingcart
+--
+DROP TABLE IF EXISTS cartitems;
+
+CREATE TABLE cartitems 
+(
+  CARTITEMID int(10) NOT NULL AUTO_INCREMENT,
+  CARTID int(7) NOT NULL,
+  TICKETID int(7) NOT NULL,
+  QUANTITY int(3) NOT NULL,
+  CONSTRAINT cartitems_pk PRIMARY KEY (CARTITEMID),
+  CONSTRAINT cartitems_carts_fk FOREIGN KEY (CARTID) REFERENCES carts (CARTID),
+  CONSTRAINT cartitems_tickets_fk FOREIGN KEY (TICKETID) REFERENCES tickets (TICKETID)
+);
+
+--
+-- Initialbefüllung für Ticket-Tabelle
+--
+
+INSERT INTO `tickets` (`TICKETID`, `NAME`, `DESCRIPTION`, `PRICE`) VALUES 
+                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von xxx bis yyy', '49.99'), 
+                      (NULL, 'VIP', 'für die Bonzen', '999.99');
