@@ -4,10 +4,14 @@ namespace app\controller;
 use Client;
 use Address;
 use Ticket;
+use Cart;
+use Cartitem;
 
 require_once 'model/user.class.php';
 require_once 'model/address.class.php';
 require_once 'model/ticket.class.php';
+require_once 'model/cart.class.php';
+require_once 'model/cartitem.class.php';
 
 class PagesController extends \app\core\Controller
 {
@@ -76,7 +80,7 @@ class PagesController extends \app\core\Controller
 					
 					$_SESSION['loggedIn'] = true;
 					$_SESSION['client_mail'] = $mail;
-					$_SESSION['client_id'] = $user->CLIENTID;
+					$_SESSION['client_id'] = $user->schema['CLIENTID'];
 
 					header('Location: index.php');
 				}
@@ -118,6 +122,7 @@ class PagesController extends \app\core\Controller
 								$_SESSION['loggedIn'] = true;
 								$_SESSION['client_mail'] = $mail;
 								$_SESSION['client_id'] = $userdata['CLIENTID'];
+								header('Location: index.php');
 
 							}
 							else {
@@ -142,6 +147,8 @@ class PagesController extends \app\core\Controller
 		if($_SESSION['loggedIn'] === true)
 		{
 			$_SESSION['loggedIn'] = false;
+			$_SESSION['client_mail'] = null;
+			$_SESSION['client_id'] = null;
 		}
 
 		header('Location: index.php');
@@ -156,6 +163,68 @@ class PagesController extends \app\core\Controller
 
 	public function actionTicketshop()
 	{
+		$title = "Tickets - BORD-Festival";
+		$this->_params['title'] = $title;
+
+		if(isset($_POST['addtickettocart']))
+		{
+			if(isset($_SESSION['client_id']))
+			{
+				$clientid = $_SESSION['client_id'];
+				$ticketid = $_POST['ticketid'] ?? null;
+				$ticketcount = $_POST['ticketcount'] ?? null;
+	
+				$success = false;
+	
+				if($ticketid !== null && $ticketcount !== null)
+				{
+					$cart = Cart::find('CLIENTID = '.$clientid);
+					$cartid = 0;
+
+					if(empty($cart))
+					{
+						$cartdata = [
+							'TOTALPRICE'	=> null,
+							'LASTUPDATED'	=> date("Y-m-d H:i:s"),
+							'CLIENTID' 		=> $clientid
+
+						];
+
+						$cart = new Cart($cartdata);
+						$cart->save();
+
+						$cartid = $cart->schema['CARTID'];
+					}
+					else
+					{
+						$cartid = $cart[0]['CARTID'];
+
+					}
+
+					$cartitemdata = [
+						'CARTID'		=> $cartid,
+						'TICKETID'  	=> $ticketid,
+						'QUANTITY' 		=> $ticketcount
+					];
+					$cartitem = new Cartitem($cartitemdata);
+					$cartitem->save();
+
+					$this->_params['updatedcartsuccess'] = true;
+					$success = true;
+				}
+				else
+				{
+					$this->_params['updatedcartsuccess'] = false;
+					$success = false;
+				}
+				// PRG (Post-Redirect-Get) Pattern to allow page reloading after using a form
+				http_response_code( 303 );
+				header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
+				exit();
+			}
+
+		}
+		
 		$tickets = Ticket::find();
 		$ticketdata = $tickets[0];
 		$this->_params['tickets'] = $tickets;
