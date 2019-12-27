@@ -109,17 +109,7 @@ abstract class BaseModel
             return $class::TABLENAME;
         }
         return null;
-    }
-	
-    public static function idcolumnname()
-    {
-		
-		$class = get_called_class();
-		$tmp = self::$schema;
-		die(var_dump($tmp));
-		
-        return null;
-    }
+	}
 	
 	public function save(&$errors = null)
 	{
@@ -216,13 +206,15 @@ abstract class BaseModel
 		return false;
 	}
 	
-	protected function delete(&$errors = null)
+	public function delete(&$errors = null)
 	{
 		$db = $GLOBALS['database'];
 		
 		try
 		{
-			$sql = 'DELETE FROM '.self::tablename().' WHERE id = '.$this->id;
+			$idfield = array_key_first($this->schema);
+			$id = array_values($this->data)[0];
+			$sql = 'DELETE FROM '.self::tablename().' WHERE '.$idfield.' = '.$id;
 			$db->exec($sql);
 			
 			return true;
@@ -235,7 +227,7 @@ abstract class BaseModel
 		return false;		
 	}
 
-    public static function find($where = '')
+    public static function find($where = '', $debug = false)
     {
         $db  = $GLOBALS['database'];
         $result = null;
@@ -248,6 +240,12 @@ abstract class BaseModel
             {
 				$sql .= ' WHERE ' . $where .  ';';
 			}
+
+			if($debug)
+			{
+				die($sql.'<br>');
+
+			}
 			
             $result = $db->query($sql)->fetchAll();
         }
@@ -257,7 +255,33 @@ abstract class BaseModel
 		}
 
         return $result;
-    }
+	}
+	/*
+	public function findFirst($where = '')
+	{
+        $db  = $GLOBALS['database'];
+        $result = null;
+		$model = new static();
+
+        try
+        {                
+            if(!empty($where))
+            {
+				$sql = 'SELECT * FROM ' . self::tablename();
+				$sql .= ' WHERE ' . $where .  'LIMIT 1;';
+			}
+			
+			$stmt = $db->prepare($sql);
+			$result = $stmt->fetchObject(get_class($model));
+        }
+        catch(\PDOException $e)
+        {
+            die('Select statment failed: ' . $e->getMessage());
+		}
+
+		return $result;
+	}
+	*/
 
     public static function count($where = '')
     {

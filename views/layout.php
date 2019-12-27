@@ -26,10 +26,10 @@
 						<?php endif; ?>
 						
 						<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) : ?>
-							<?php if(empty($cartitemcount) || empty($carttotalprice)) : ?>
-								<li>Warenkorb (<?php echo $cartitemcount ?>)</li>
+							<?php if(empty($carttotalcount) || empty($carttotalprice)) : ?>
+								<li>Warenkorb (<?php echo $carttotalcount ?>)</li>
 							<?php else : ?>							
-								<li>Warenkorb (<?php echo $cartitemcount ?>): <?php echo $carttotalprice ?></li>
+								<li><a href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?></a></li>
 							<?php endif; ?>
 						<?php endif; ?>
 					</ul>
