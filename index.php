@@ -41,6 +41,7 @@ if(file_exists($controllerPath))
 		{
 			// call the action method and render HTML !!!
 			$controllerInstance->{$actionMethodName}();
+			$controllerInstance->actionCart();
 			$controllerInstance->renderHTML();
 		}
 		else

@@ -24,6 +24,14 @@
 						<li><a href="?a=login">Login</a></li>
 						<li><a href="?a=register">Registrieren</a></li>
 						<?php endif; ?>
+						
+						<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) : ?>
+							<?php if(empty($cartitemcount) || empty($carttotalprice)) : ?>
+								<li>Warenkorb (<?php echo $cartitemcount ?>)</li>
+							<?php else : ?>							
+								<li>Warenkorb (<?php echo $cartitemcount ?>): <?php echo $carttotalprice ?></li>
+							<?php endif; ?>
+						<?php endif; ?>
 					</ul>
 				</nav>
 				<div class="center">

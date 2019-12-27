@@ -158,7 +158,36 @@ class PagesController extends \app\core\Controller
 
 	public function actionProfile()
 	{
-		
+
+	}
+
+	public function actionCart()
+	{
+		if(isset($_SESSION['client_id']))
+		{
+			$clientid = $_SESSION['client_id'];
+			$cart = Cart::find('CLIENTID = '.$clientid);
+			$sum = 0;
+
+			if(empty($cart))
+			{
+				
+			}
+			else
+			{
+
+				$cartid = $cart[0]['CARTID'];
+
+				$cartitems = Cart::find('CARTID ='.$cartid);
+
+				$carttotalprice = $cart[0]['TOTALPRICE'];
+
+				$cartitemcount = Cartitem::count('CARTID = '.$cartid);
+				$this->_params['carttotalprice'] = $carttotalprice;
+				$this->_params['cartitemcount'] = $cartitemcount;
+			}
+
+		}
 	}
 
 	public function actionTicketshop()
@@ -180,6 +209,7 @@ class PagesController extends \app\core\Controller
 				{
 					$cart = Cart::find('CLIENTID = '.$clientid);
 					$cartid = 0;
+					$oldtotalprice = 0;
 
 					if(empty($cart))
 					{
@@ -198,14 +228,33 @@ class PagesController extends \app\core\Controller
 					else
 					{
 						$cartid = $cart[0]['CARTID'];
-
+						$oldtotalprice = $cart[0]['TOTALPRICE'];
 					}
 
+					$ticket = Ticket::find('TICKETID = '.$ticketid);
+					$ticketprice = $ticket[0]['PRICE'];
+
+					$addedprice = $ticketprice * $ticketcount;
+
+					$totalprice = $oldtotalprice + $addedprice;
+					
 					$cartitemdata = [
 						'CARTID'		=> $cartid,
 						'TICKETID'  	=> $ticketid,
 						'QUANTITY' 		=> $ticketcount
 					];
+
+					
+					$changedcartdata = [
+						'CARTID'		=> $cartid,
+						'TOTALPRICE'	=> $totalprice,
+						'LASTUPDATED'	=> date("Y-m-d H:i:s"),
+						'CLIENTID' 		=> $clientid
+
+					];
+					$changedcart = new Cart($changedcartdata);
+					$changedcart->save();
+
 					$cartitem = new Cartitem($cartitemdata);
 					$cartitem->save();
 
