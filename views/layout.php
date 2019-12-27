@@ -29,7 +29,7 @@
 							<?php if(empty($carttotalcount) || empty($carttotalprice)) : ?>
 								<li>Warenkorb (<?php echo $carttotalcount ?>)</li>
 							<?php else : ?>							
-								<li><a href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?></a></li>
+								<li><a href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> €</a></li>
 							<?php endif; ?>
 						<?php endif; ?>
 					</ul>

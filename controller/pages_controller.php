@@ -324,15 +324,32 @@ class PagesController extends \app\core\Controller
 						$cartid = $cart[0]['CARTID'];
 						$oldtotalprice = $cart[0]['TOTALPRICE'];
 					}
-					
-					$cartitemdata = [
-						'CARTID'		=> $cartid,
-						'TICKETID'  	=> $ticketid,
-						'QUANTITY' 		=> $ticketcount
-					];					
 
-					$cartitem = new Cartitem($cartitemdata);
-					$cartitem->save();
+					$cartitem = Cartitem::find('CARTID = '.$cartid.' AND TICKETID = '.$ticketid);
+
+					if(empty($cartitem))
+					{
+						$cartitemdata = [
+							'CARTID'		=> $cartid,
+							'TICKETID'  	=> $ticketid,
+							'QUANTITY' 		=> $ticketcount
+						];
+					}
+					else
+					{
+						$oldticketcount = $cartitem[0]['QUANTITY'];
+						$newticketcount = $oldticketcount + $ticketcount;
+						$cartitemdata = [
+							'CARTITEMID'	=> $cartitem[0]['CARTITEMID'],
+							'CARTID'		=> $cartid,
+							'TICKETID'  	=> $ticketid,
+							'QUANTITY' 		=> $newticketcount
+						];
+						//die(var_dump($cartitemdata));
+
+					}
+					$newcartitem = new Cartitem($cartitemdata);
+					$newcartitem->save();
 
 					//update total
 					self::updateCart($cartid, $clientid);

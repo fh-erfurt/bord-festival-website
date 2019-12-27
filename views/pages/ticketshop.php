@@ -1,3 +1,4 @@
+<script type="text/javascript" src="assets/js/changeTicketcount.js"></script>
 <h1>Ticketshop</h1>
 <?php
 if(isset($_GET['success']))
@@ -26,7 +27,8 @@ if(isset($_SESSION['client_id']))
 ?>
 <form action="index.php?a=ticketshop" method="post">
     <input type="hidden" name="ticketid" value="<?php echo $ticket["TICKETID"]; ?>" />
-    Anzahl: <input type="text" name="ticketcount" value="1"><br>
+    Anzahl: <button type="button" class="btn" onclick="changeTicketcount('-')">-</button><input type="text" id="ticketcount" name="ticketcount" value="1"><button type="button" class="btn" onclick="changeTicketcount('+')">+</button>
+    <br>
     <button type="submit" class="btn" name="addtickettocart">in den Warenkorb</button>
 </form>
 <?php
