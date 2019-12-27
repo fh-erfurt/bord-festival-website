@@ -111,9 +111,21 @@ abstract class BaseModel
         return null;
     }
 	
+    public static function idcolumnname()
+    {
+		
+		$class = get_called_class();
+		$tmp = self::$schema;
+		die(var_dump($tmp));
+		
+        return null;
+    }
+	
 	public function save(&$errors = null)
 	{
-		if($this->id === null)
+		$id = array_values($this->data)[0];
+		
+		if($id === null)
 		{
 			$this->insert($errors);
 		}
@@ -185,7 +197,11 @@ abstract class BaseModel
 			}
 			
 			$sql = trim($sql, ',');
-			$sql .= ' WHERE id = '.$this->data['id'];
+
+			$idfield = array_key_first($this->schema);
+			
+			$id = array_values($this->data)[0];
+			$sql .= ' WHERE '.$idfield.' = '.$id;
 			
 			$statement = $db->prepare($sql);
 			$statement->execute();
@@ -234,6 +250,30 @@ abstract class BaseModel
 			}
 			
             $result = $db->query($sql)->fetchAll();
+        }
+        catch(\PDOException $e)
+        {
+            die('Select statment failed: ' . $e->getMessage());
+		}
+
+        return $result;
+    }
+
+    public static function count($where = '')
+    {
+        $db  = $GLOBALS['database'];
+        $result = null;
+
+        try
+        {
+            $sql = 'SELECT COUNT(*) FROM ' . self::tablename();
+                
+            if(!empty($where))
+            {
+				$sql .= ' WHERE ' . $where .  ';';
+			}
+			
+            $result = $db->query($sql)->fetchColumn();
         }
         catch(\PDOException $e)
         {
