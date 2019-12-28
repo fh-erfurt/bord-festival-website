@@ -24,10 +24,11 @@ foreach($tickets as $ticket) {
 <?php 
 if(isset($_SESSION['client_id']))
 {
+    $ticketid = $ticket["TICKETID"];
 ?>
 <form action="index.php?a=ticketshop" method="post">
-    <input type="hidden" name="ticketid" value="<?php echo $ticket["TICKETID"]; ?>" />
-    Anzahl: <button type="button" class="btn" onclick="changeTicketcount('-')">-</button><input type="text" id="ticketcount" name="ticketcount" value="1"><button type="button" class="btn" onclick="changeTicketcount('+')">+</button>
+    <input type="hidden" name="ticketid" value="<?php echo $ticketid; ?>" />
+    Anzahl: <button type="button" class="btn" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '-')">-</button><input type="text" id="ticketcount<?php echo $ticketid; ?>" name="ticketcount" value="1"><button type="button" class="btn" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '+')">+</button>
     <br>
     <button type="submit" class="btn" name="addtickettocart">in den Warenkorb</button>
 </form>
