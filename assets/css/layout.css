@@ -1,6 +1,7 @@
 :root {
 	--success: rgb(11, 71, 5);
 	--danger: rgb(80, 0, 0);
+	--warning: rgb(196, 176, 0);
 }
 
 * {
@@ -88,12 +89,18 @@ main {
 .alert-success {
 	color: #a7caaf;
 	background-color: var(--success);
-	border-color: rgb(6, 46, 3);
+	border-color: #a7caaf;
+}
+
+.alert-warning {
+	color: #f8f4dc;
+	background-color: var(--warning);
+	border-color: rgb(122, 114, 0);
 }
 .alert-danger {
 	color: #caa7a7;
 	background-color: var(--danger);
-	border-color: rgb(46, 3, 3);
+	border-color: #caa7a7;
 }
 
 .btn {

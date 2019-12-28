@@ -1,4 +1,29 @@
+<h1>Warenkorb</h1>
+<?php
+$cartDeleted = false;
+if(isset($_GET['success']))
+{
+    if($_GET['success'] === "1")
+    {
+        $cartDeleted = true;
+        ?>        
+        <div class="alert alert-success">
+            Das Ticket wurde erfolgreich aus dem Warenkorb gelöscht
+        </div>
+        <?php
+    }
+    else
+    {
+        ?>        
+        <div class="alert alert-danger">
+            Es gab einen Fehler beim Entfernen aus dem Warenkorb. Bitte kontaktiere uns!
+        </div>
+        <?php
+    }
+}
+?>
 <?php 
+$i = 0;
 foreach($shoppingcart as $item) {
     echo $item[1].': '.$item[3];
     echo '<br>'.$item[2];
@@ -10,9 +35,25 @@ foreach($shoppingcart as $item) {
     </form>
     <br><br>
 <?php
+    $i++;
 }
-?>
-<form action="index.php?a=shoppingcart" method="post">
-        <button type="submit" class="btn btn-danger" name="deletewholecart">Warenkorb leeren</button>
-        <button type="submit" class="btn btn-primary" name="buycart">bestellen</button>
-</form>
+if($cartDeleted === false)
+{
+    if($i === 0)
+    {
+    ?>        
+    <div class="alert alert-warning">
+        Der Warenkorb ist leer.
+    </div>
+    <?php
+    }
+    else
+    {
+        ?>
+        <form action="index.php?a=shoppingcart" method="post">
+                    <button type="submit" class="btn btn-danger" name="deletewholecart">Warenkorb leeren</button>
+                    <button type="submit" class="btn btn-primary" name="buycart">bestellen</button>
+        </form>
+        <?php
+    }
+}
