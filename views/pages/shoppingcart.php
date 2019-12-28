@@ -6,15 +6,13 @@ foreach($shoppingcart as $item) {
 ?>  <br>
     <form action="index.php?a=shoppingcart" method="post">
         <input type="hidden" name="cartitemid" value="<?php echo $item[0]; ?>" />
-        <button type="submit" class="btn" name="deleteitemfromcart">löschen</button>
+        <button type="submit" class="btn btn-danger" name="deleteitemfromcart">löschen</button>
     </form>
     <br><br>
 <?php
 }
 ?>
 <form action="index.php?a=shoppingcart" method="post">
-        <button type="submit" class="btn" name="deletewholecart">Warenkorb leeren</button>
-</form>
-<form action="index.php?a=shoppingcart" method="post">
-        <button type="submit" class="btn" name="buycart">bestellen</button>
+        <button type="submit" class="btn btn-danger" name="deletewholecart">Warenkorb leeren</button>
+        <button type="submit" class="btn btn-primary" name="buycart">bestellen</button>
 </form>
