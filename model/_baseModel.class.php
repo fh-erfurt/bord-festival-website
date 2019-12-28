@@ -206,16 +206,24 @@ abstract class BaseModel
 		return false;
 	}
 	
-	public function delete(&$errors = null)
+	public function delete($where = '', &$errors = null)
 	{
 		$db = $GLOBALS['database'];
 		
 		try
 		{
-			$idfield = array_key_first($this->schema);
-			$id = array_values($this->data)[0];
-			$sql = 'DELETE FROM '.self::tablename().' WHERE '.$idfield.' = '.$id;
-			$db->exec($sql);
+			if(empty($where))
+			{
+				$idfield = array_key_first($this->schema);
+				$id = array_values($this->data)[0];
+				$sql = 'DELETE FROM '.self::tablename().' WHERE '.$idfield.' = '.$id;
+				$db->exec($sql);
+			}
+			else
+			{				
+				$sql = 'DELETE FROM '.self::tablename().' WHERE '.$where;
+				$db->exec($sql);
+			}
 			
 			return true;
 		}
