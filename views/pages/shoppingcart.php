@@ -12,3 +12,9 @@ foreach($shoppingcart as $item) {
 <?php
 }
 ?>
+<form action="index.php?a=shoppingcart" method="post">
+        <button type="submit" class="btn" name="deletewholecart">Warenkorb leeren</button>
+</form>
+<form action="index.php?a=shoppingcart" method="post">
+        <button type="submit" class="btn" name="buycart">bestellen</button>
+</form>

@@ -161,52 +161,66 @@ class PagesController extends \app\core\Controller
 
 	}
 
+	public function actionConfirmorder()
+	{
+
+	}
+
 	public function actionShoppingcart()
 	{
 		if(isset($_SESSION['client_id']))
 		{
+			$clientid = $_SESSION['client_id'];
+
 			if(isset($_POST['deleteitemfromcart']))
 			{
-				if(isset($_SESSION['client_id']))
+				$cartitemid = $_POST['cartitemid'] ?? null;
+				
+				$success = false;
+				if($cartitemid !== null)
 				{
-					$clientid = $_SESSION['client_id'];
-					$cartitemid = $_POST['cartitemid'] ?? null;
-					
-					$success = false;
-					if($cartitemid !== null)
+					$cartitem = Cartitem::find('CARTITEMID = '.$cartitemid);
+					$cartid = 0;
+
+					if(!empty($cartitem))
 					{
-						$cartitem = Cartitem::find('CARTITEMID = '.$cartitemid);
-						$cartid = 0;
-	
-						if(!empty($cartitem))
-						{
-							$cartitemdata = [
-								'CARTITEMID'	=> $cartitem[0]['CARTITEMID'],
-								'CARTID'		=> $cartitem[0]['CARTID'],
-								'TICKETID'  	=> $cartitem[0]['TICKETID'],
-								'QUANTITY' 		=> $cartitem[0]['QUANTITY'],
-							];
+						$cartitemdata = [
+							'CARTITEMID'	=> $cartitem[0]['CARTITEMID'],
+							'CARTID'		=> $cartitem[0]['CARTID'],
+							'TICKETID'  	=> $cartitem[0]['TICKETID'],
+							'QUANTITY' 		=> $cartitem[0]['QUANTITY'],
+						];
 
-							$cartid = $cartitem[0]['CARTID'];
-							$newcartitem = new Cartitem($cartitemdata);
-							$newcartitem->delete();
+						$cartid = $cartitem[0]['CARTID'];
+						$newcartitem = new Cartitem($cartitemdata);
+						$newcartitem->delete();
 
-							//update total
-							self::updateCart($cartid, $clientid);
-														
-							$success = true;
-						}
+						//update total
+						self::updateCart($cartid, $clientid);
+													
+						$success = true;
 					}
-					
-					// PRG (Post-Redirect-Get) Pattern to allow page reloading after using a form
-					http_response_code( 303 );
-					header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
-					exit();
 				}
-	
+				
+				// PRG (Post-Redirect-Get) Pattern to allow page reloading after using a form
+				http_response_code( 303 );
+				header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
+				exit();	
 			}
 
-			$clientid = $_SESSION['client_id'];
+			if(isset($_POST['deletewholecart']))
+			{
+				$success = self::deleteWholecart($clientid);
+				http_response_code( 303 );
+				header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
+				exit();	
+			}
+
+			if(isset($_POST['buycart']))
+			{
+				header('Location: index.php?a=confirmorder');
+			}
+
 			$cart = Cart::find('CLIENTID = '.$clientid);
 			$sum = 0;
 
@@ -251,6 +265,29 @@ class PagesController extends \app\core\Controller
 			}
 		}
 
+	}
+
+	private function deleteWholecart($clientid)
+	{		
+		$cart = Cart::find('CLIENTID = '.$clientid);
+		$success = false;
+
+		if(!empty($cart))
+		{					
+			$cartid = $cart[0]['CARTID'];
+			$cartitemdata = Cartitem::find('CARTID = '.$cartid);
+
+			if(!empty($cartitemdata))
+			{
+				$cartitem = new Cartitem($cartitemdata[0]);
+				$where = 'CARTID = '.$cartid;
+				$cartitem->delete($where);
+				self::updateCart($cartid, $clientid);
+				$success = true;
+			}			
+		}
+
+		return $success;
 	}
 
 	public function actionNavbar()
