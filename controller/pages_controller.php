@@ -188,6 +188,10 @@ class PagesController extends \app\core\Controller
 
 	public function actionShoppingcart()
 	{
+		$title = "Warenkorb - BORD-Festival";
+
+		$this->_params['title'] = $title;
+
 		if(isset($_SESSION['client_id']))
 		{
 			$clientid = $_SESSION['client_id'];
@@ -428,8 +432,11 @@ class PagesController extends \app\core\Controller
 		}
 		
 		$tickets = Ticket::find();
-		$ticketdata = $tickets[0];
-		$this->_params['tickets'] = $tickets;
+		if(!empty($tickets))
+		{
+			$ticketdata = $tickets[0];
+			$this->_params['tickets'] = $tickets;
+		}
 	}
 
 	public function actionError404()
