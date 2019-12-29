@@ -8,7 +8,7 @@ if(isset($_GET['success']))
         $cartDeleted = true;
         ?>        
         <div class="alert alert-success">
-            Das Ticket wurde erfolgreich aus dem Warenkorb gelöscht
+            Das Ticket/die Tickets wurde(n) erfolgreich aus dem Warenkorb gelöscht
         </div>
         <?php
     }
@@ -25,35 +25,55 @@ if(isset($_GET['success']))
 <?php 
 $i = 0;
 foreach($shoppingcart as $item) {
-    echo $item[1].': '.$item[3];
-    echo '<br>'.$item[2];
-    echo '<br>Menge: '.$item[4].' Preis: '.$item[4] * $item[3].' €';
-?>  <br>
-    <form action="index.php?a=shoppingcart" method="post">
-        <input type="hidden" name="cartitemid" value="<?php echo $item[0]; ?>" />
-        <button type="submit" class="btn btn-danger" name="deleteitemfromcart">löschen</button>
-    </form>
-    <br><br>
-<?php
-    $i++;
-}
-if($cartDeleted === false)
-{
-    if($i === 0)
+    if($i > 0)
     {
-    ?>        
-    <div class="alert alert-warning">
-        Der Warenkorb ist leer.
-    </div>
-    <?php
+        ?>
+<div class="ticket border-bottom">
+        <?php
     }
     else
     {
         ?>
-        <form action="index.php?a=shoppingcart" method="post">
-                    <button type="submit" class="btn btn-danger" name="deletewholecart">Warenkorb leeren</button>
-                    <button type="submit" class="btn btn-primary" name="buycart">bestellen</button>
-        </form>
+<div class="ticket border-top border-bottom">
         <?php
     }
+    ?>
+    <h4 class="ticket-name"><?php echo $item[1]; ?>: <?php echo $item[3] ?> € pro Ticket</h4>
+    <p class="ticket-description">
+        <?php echo $item[2]; ?>
+    </p>
+        Menge: <?php echo $item[4]; ?> Gesamtpreis: <?php echo $item[4] * $item[3]; ?> €
+    <p>
+    <form action="index.php?a=shoppingcart" method="post">
+        <input type="hidden" name="cartitemid" value="<?php echo $item[0]; ?>" />
+        <button type="submit" class="btn btn-danger" name="deleteitemfromcart">löschen</button>
+    </form>
+</div>
+<?php
+    $i++;
+}
+if($i === 0)
+{
+    if($cartDeleted === false)
+    {
+?>        
+<div class="alert alert-warning">
+    Der Warenkorb ist leer.
+</div>
+<?php
+    }
+}
+else
+{
+    ?>
+    <div class="bottom-buttons">
+        <form action="index.php?a=shoppingcart" method="post">
+            <button type="submit" class="btn btn-danger float-left" name="deletewholecart">Warenkorb leeren</button>
+            <div class="float-right">
+                Warenkorb(Anzahl): Summe € 
+                <button type="submit" class="btn btn-primary" name="buycart">bestellen</button>
+            </div>
+        </form>
+    </div>
+    <?php
 }

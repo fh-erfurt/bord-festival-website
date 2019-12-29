@@ -140,6 +140,20 @@ main {
 	width: 50px;
 }
 
+.bottom-buttons {
+	padding-top: 15px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
 footer {
 	height: 60px;
 	text-align: center;
@@ -151,8 +165,13 @@ footer {
 .ticket {
 
 }
-.ticket .border-top {
+.ticket.border-top {
 	border-top: 3px solid #333;
 	margin-top: 20px;
 	padding-top: 20px;
+}
+.ticket.border-bottom {
+	border-bottom: 3px solid #333;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
 }
