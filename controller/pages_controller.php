@@ -158,7 +158,27 @@ class PagesController extends \app\core\Controller
 
 	public function actionProfile()
 	{
+		if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true)
+		{
+			$userID = $_SESSION['client_id'];
+			$user = Client::findFirst($userID);
+			$addressID = $user->addressID;
+			$address = Address::findFirst($addressID);
 
+			$this->_params['MAIL'] = $user->__get('MAIL');
+			$this->_params['FIRSTNAME'] = $user->__get('FIRSTNAME');
+			$this->_params['LASTNAME'] = $user->__get('LASTNAME');
+			$this->_params['DATEOFBIRTH'] = $user->__get('DATEOFBIRTH');
+
+			$this->_params['STREET'] = $address->__get('STREET');
+			$this->_params['ZIP'] = $address->__get('ZIP');
+			$this->_params['CITY'] = $address->__get('CITY');
+			$this->_params['COUNTRY'] = $address->__get('COUNTRY');
+		}
+		else
+		{
+			header('Location: index.php?c=pages&a=error404');
+		}
 	}
 
 	public function actionConfirmorder()
