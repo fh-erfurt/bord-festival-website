@@ -99,7 +99,10 @@ class PagesController extends \app\core\Controller
 
 	public function actionLogin()
 	{
-		// TODO: else-Zweig für Fehlerbehandlung
+		$title = "Login - BORD-Festival";
+
+		$this->_params['title'] = $title;
+		
 		if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === false)
 		{
 			if(isset($_POST['submit']))
@@ -113,26 +116,31 @@ class PagesController extends \app\core\Controller
 
 					$user = Client::find($where);
 					
-					if(isset($user))
+					if(!empty($user))
 					{						
-							$userdata = $user[0];
+						$userdata = $user[0];
 
-							if(password_verify($password, $userdata['PASSWORD']))
-							{
-								$_SESSION['loggedIn'] = true;
-								$_SESSION['client_mail'] = $mail;
-								$_SESSION['client_id'] = $userdata['CLIENTID'];
-								header('Location: index.php');
+						if(password_verify($password, $userdata['PASSWORD']))
+						{
+							$_SESSION['loggedIn'] = true;
+							$_SESSION['client_mail'] = $mail;
+							$_SESSION['client_id'] = $userdata['CLIENTID'];
+							header('Location: index.php');
 
-							}
-							else {
-								// TODO
-							}
+						}
+						else 
+						{
+							$this->_params['loginerror'] = 'E-Mail und Passwort stimmen nicht überein';
+						}
+					}
+					else
+					{
+						$this->_params['loginerror'] = 'E-Mail und Passwort stimmen nicht überein';
 					}
 				}
 				else
 				{
-					$_SESSION['loggedIn'] = false;
+					$this->_params['loginerror'] = 'Bitte E-Mail und Passwort eingeben!';
 				}
 			}
 		}
@@ -324,7 +332,7 @@ class PagesController extends \app\core\Controller
 			if(empty($cart))
 			{
 				$this->_params['carttotalprice'] = 0;
-				$this->_params['cartitemcount'] = 0;
+				$this->_params['carttotalcount'] = 0;
 				
 			}
 			else
@@ -367,18 +375,11 @@ class PagesController extends \app\core\Controller
 
 					if(empty($cart))
 					{
-						$cartdata = [
-							'TOTALPRICE'	=> null,
-							'TOTALCOUNT'	=> null,
-							'LASTUPDATED'	=> date("Y-m-d H:i:s"),
-							'CLIENTID' 		=> $clientid
-
-						];
-
-						$cart = new Cart($cartdata);
-						$cart->save();
-
-						$cartid = $cart->schema['CARTID'];
+						$tmpcart = self::intizialiseCart($clientid);
+						var_dump($tmpcart->schema['CARTID']);
+						die(var_dump($tmpcart));
+						$cartid = $tmpcart['CARTID'];
+						$oldtotalprice = $tmpcart['TOTALPRICE'];
 					}
 					else
 					{
@@ -437,6 +438,29 @@ class PagesController extends \app\core\Controller
 			$ticketdata = $tickets[0];
 			$this->_params['tickets'] = $tickets;
 		}
+	}
+
+	private function intizialiseCart($clientid)
+	{
+		$result = null;
+		if(!empty($clientid))
+		{
+			$cartdata = [
+				'TOTALPRICE'	=> null,
+				'TOTALCOUNT'	=> null,
+				'LASTUPDATED'	=> date("Y-m-d H:i:s"),
+				'CLIENTID' 		=> $clientid
+	
+			];
+	
+			$cart = new Cart($cartdata);
+			$cart->save();
+	
+			$cartid = $cart->schema['CARTID'];
+			$result = $cart;
+		}
+
+		return $result;
 	}
 
 	public function actionError404()

@@ -1,4 +1,14 @@
 <h1>Login</h1>
+<?php
+if(!empty($loginerror))
+{
+	?>
+	<div class="alert alert-danger">
+		<?php echo $loginerror; ?>
+	</div>
+	<?php
+}
+?>
 <form method="post">
 	<label for="email">E-Mail</label> <br />
 	<input type="email" name="email" id="email" /><br />

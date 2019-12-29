@@ -27,7 +27,7 @@
 						
 						<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) : ?>
 							<?php if(empty($carttotalcount) || empty($carttotalprice)) : ?>
-								<li>Warenkorb (<?php echo $carttotalcount ?>)</li>
+								<li><a href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>)</a></li>
 							<?php else : ?>							
 								<li><a href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> €</a></li>
 							<?php endif; ?>
