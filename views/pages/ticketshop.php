@@ -24,49 +24,60 @@ if(isset($_GET['success']))
 <br/>
 <?php
 $i = 0;
-foreach($tickets as $ticket) {
-    if($i > 0)
-    {
+if(empty($tickets))
+{
+    ?>        
+    <div class="alert alert-warning">
+        Es sind keine Tickets verfügbar! Bitte kontaktiere uns oder trag dich in den Newsletter ein, um zu erfahren, wenn Tickets verfügbar sind.
+    </div>
+    <?php
+}
+else
+{
+    foreach($tickets as $ticket) {
+        if($i > 0)
+        {
+            ?>
+    <div class="ticket border-top">
+            <?php
+        }
+        else
+        {
+            ?>
+    <div class="ticket">
+            <?php
+        }
         ?>
-<div class="ticket border-top">
-        <?php
-    }
-    else
-    {
+        <h4 class="ticket-name"><?php echo $ticket['NAME']; ?></h4>
+        <p class="ticket-description">
+            <?php echo $ticket['DESCRIPTION']; ?>
+        </p>
+    
+        <?php 
+        if(isset($_SESSION['client_id']))
+        {
+            $ticketid = $ticket["TICKETID"];
         ?>
-<div class="ticket">
+        <form action="index.php?a=ticketshop" method="post">
+            <input type="hidden" name="ticketid" value="<?php echo $ticketid; ?>" />    
+            <p>Preis: <?php echo $ticket['PRICE']; ?> €</p>
+            <p>Anzahl: 
+            <button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '-')">-</button><input type="text" id="ticketcount<?php echo $ticketid; ?>" class="form-control input-ticketcount" name="ticketcount" value="1"><button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '+')">+</button>
+            </p><br>
+            <button type="submit" class="btn btn-primary" name="addtickettocart">in den Warenkorb</button>
+        </form>
         <?php
-    }
-    ?>
-    <h4 class="ticket-name"><?php echo $ticket['NAME']; ?></h4>
-    <p class="ticket-description">
-        <?php echo $ticket['DESCRIPTION']; ?>
-    </p>
-
+        }
+        else
+        {
+        ?>
+        <button class="btn" disabled>in den Warenkorb</button> Bitte einloggen!
+    </div>
+        <?php
+        }
+    
+        $i++;
+        ?>
     <?php 
-    if(isset($_SESSION['client_id']))
-    {
-        $ticketid = $ticket["TICKETID"];
-    ?>
-    <form action="index.php?a=ticketshop" method="post">
-        <input type="hidden" name="ticketid" value="<?php echo $ticketid; ?>" />    
-        <p>Preis: <?php echo $ticket['PRICE']; ?> €</p>
-        <p>Anzahl: 
-        <button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '-')">-</button><input type="text" id="ticketcount<?php echo $ticketid; ?>" class="form-control input-ticketcount" name="ticketcount" value="1"><button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '+')">+</button>
-        </p><br>
-        <button type="submit" class="btn btn-primary" name="addtickettocart">in den Warenkorb</button>
-    </form>
-    <?php
     }
-    else
-    {
-    ?>
-    <button class="btn" disabled>in den Warenkorb</button> Bitte einloggen!
-</div>
-    <?php
-    }
-
-    $i++;
-    ?>
-<?php 
 }
