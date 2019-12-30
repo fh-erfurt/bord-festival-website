@@ -177,18 +177,18 @@ class PagesController extends \app\core\Controller
 		{
 			$userID = $_SESSION['client_id'];
 			$user = Client::find('CLIENTID = ' . $userID);
-			$addressID = $user->addressID;
+			$addressID = $user[0]['ADDRESSID'];
 			$address = Address::find('ADDRESSID = ' . $addressID);
 
-			$this->_params['MAIL'] = $user->__get('MAIL');
-			$this->_params['FIRSTNAME'] = $user->__get('FIRSTNAME');
-			$this->_params['LASTNAME'] = $user->__get('LASTNAME');
-			$this->_params['DATEOFBIRTH'] = $user->__get('DATEOFBIRTH');
+			$this->_params['MAIL'] = $user[0]['MAIL'];
+			$this->_params['FIRSTNAME'] = $user[0]['FIRSTNAME'];
+			$this->_params['LASTNAME'] = $user[0]['LASTNAME'];
+			$this->_params['DATEOFBIRTH'] = $user[0]['DATEOFBIRTH'];
 
-			$this->_params['STREET'] = $address->__get('STREET');
-			$this->_params['ZIP'] = $address->__get('ZIP');
-			$this->_params['CITY'] = $address->__get('CITY');
-			$this->_params['COUNTRY'] = $address->__get('COUNTRY');
+			$this->_params['STREET'] = $address[0]['STREET'];
+			$this->_params['ZIP'] = $address[0]['ZIP'];
+			$this->_params['CITY'] = $address[0]['CITY'];
+			$this->_params['COUNTRY'] = $address[0]['COUNTRY'];
 		}
 		else
 		{
