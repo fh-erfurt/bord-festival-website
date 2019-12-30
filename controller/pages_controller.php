@@ -44,50 +44,57 @@ class PagesController extends \app\core\Controller
 				$zip		= $_POST['plz'] ?? null;
 				$city		= $_POST['ort'] ?? null;
 
-				if($password1 === $password2)
+				$where = 'MAIL = "'.$mail.'"';
+
+				$client = Client::find($where);
+
+				if(empty($client))
 				{
-					//$user = new Client();
+					if($password1 === $password2)
+					{
+						$addressdata = [
+							'STREET' 	=> $street,
+							'ZIP' 		=> $zip,
+							'CITY' 		=> $city,
+							'COUNTRY' 	=> 'GER'						
+						];
+	
+						$address = new Address($addressdata);
+	
+						$address->save();
+	
+						$hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
+	
+						$clientdata = [						
+							'MAIL' 			=> $mail,
+							'FIRSTNAME'		=> $firstname,
+							'LASTNAME' 		=> $lastname,
+							'DATEOFBIRTH'	=> $dateofbirth,
+							'PASSWORD' 		=> $hashedpassword,
+							'CREATEDAT' 	=> date("Y-m-d H:i:s"),
+							'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
+							'ADDRESSID' 	=> $address->schema['ADDRESSID']
+						];
+						$user = new Client($clientdata);
+						$user->save();
+						
+						$_SESSION['loggedIn'] = true;
+						$_SESSION['client_mail'] = $mail;
+						$_SESSION['client_id'] = $user->schema['CLIENTID'];
+	
+						header('Location: index.php');
+					}
+					else
+					{
+						$_SESSION['loggedIn'] = false;
+						// ERROR: passwort nicht gleich
+					}
 
-					$addressdata = [
-						'STREET' 	=> $street,
-						'ZIP' 		=> $zip,
-						'CITY' 		=> $city,
-						'COUNTRY' 	=> 'GER'						
-					];
-
-					$address = new Address($addressdata);
-					// $address->STREET = $street;
-					// $address->ZIP = $zip;
-					// $address->CITY = $city;
-					// $address->COUNTRY = 'GER';
-
-					$address->save();
-
-					$hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
-
-					$clientdata = [						
-						'MAIL' 			=> $mail,
-						'FIRSTNAME'		=> $firstname,
-						'LASTNAME' 		=> $lastname,
-						'DATEOFBIRTH'	=> $dateofbirth,
-						'PASSWORD' 		=> $hashedpassword,
-						'CREATEDAT' 	=> date("Y-m-d H:i:s"),
-						'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
-						'ADDRESSID' 	=> $address->schema['ADDRESSID']
-					];
-					$user = new Client($clientdata);
-					$user->save();
-					
-					$_SESSION['loggedIn'] = true;
-					$_SESSION['client_mail'] = $mail;
-					$_SESSION['client_id'] = $user->schema['CLIENTID'];
-
-					header('Location: index.php');
 				}
 				else
 				{
-					$_SESSION['loggedIn'] = false;
-					// ERROR: passwort nicht gleich
+					$this->_params['registererror'] = 'Diese E-Mail-Adresse ist bereits registriert. Du kannst dich <a href="index.php?a=login" class="link">hier</a> einloggen.';
+					
 				}
 			}
 		}
@@ -99,7 +106,10 @@ class PagesController extends \app\core\Controller
 
 	public function actionLogin()
 	{
-		// TODO: else-Zweig für Fehlerbehandlung
+		$title = "Login - BORD-Festival";
+
+		$this->_params['title'] = $title;
+		
 		if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === false)
 		{
 			if(isset($_POST['submit']))
@@ -113,26 +123,31 @@ class PagesController extends \app\core\Controller
 
 					$user = Client::find($where);
 					
-					if(isset($user))
+					if(!empty($user))
 					{						
-							$userdata = $user[0];
+						$userdata = $user[0];
 
-							if(password_verify($password, $userdata['PASSWORD']))
-							{
-								$_SESSION['loggedIn'] = true;
-								$_SESSION['client_mail'] = $mail;
-								$_SESSION['client_id'] = $userdata['CLIENTID'];
-								header('Location: index.php');
+						if(password_verify($password, $userdata['PASSWORD']))
+						{
+							$_SESSION['loggedIn'] = true;
+							$_SESSION['client_mail'] = $mail;
+							$_SESSION['client_id'] = $userdata['CLIENTID'];
+							header('Location: index.php');
 
-							}
-							else {
-								// TODO
-							}
+						}
+						else 
+						{
+							$this->_params['loginerror'] = 'E-Mail und Passwort stimmen nicht überein';
+						}
+					}
+					else
+					{
+						$this->_params['loginerror'] = 'E-Mail und Passwort stimmen nicht überein';
 					}
 				}
 				else
 				{
-					$_SESSION['loggedIn'] = false;
+					$this->_params['loginerror'] = 'Bitte E-Mail und Passwort eingeben!';
 				}
 			}
 		}
@@ -188,6 +203,10 @@ class PagesController extends \app\core\Controller
 
 	public function actionShoppingcart()
 	{
+		$title = "Warenkorb - BORD-Festival";
+
+		$this->_params['title'] = $title;
+
 		if(isset($_SESSION['client_id']))
 		{
 			$clientid = $_SESSION['client_id'];
@@ -283,6 +302,12 @@ class PagesController extends \app\core\Controller
 
 				$this->_params['shoppingcart'] = $shoppingcart;
 			}
+			
+			self::CalculateCart($clientid);
+		}
+		else
+		{
+			header('Location: index.php?c=pages&a=error404');
 		}
 
 	}
@@ -315,28 +340,32 @@ class PagesController extends \app\core\Controller
 		if(isset($_SESSION['client_id']))
 		{
 			$clientid = $_SESSION['client_id'];
-			$cart = Cart::find('CLIENTID = '.$clientid);
+			self::CalculateCart($clientid);
+		}
+	}
 
-			if(empty($cart))
-			{
-				$this->_params['carttotalprice'] = 0;
-				$this->_params['cartitemcount'] = 0;
-				
-			}
-			else
-			{
+	private function CalculateCart($clientid)
+	{
+		$cart = Cart::find('CLIENTID = '.$clientid);
 
-				$cartid = $cart[0]['CARTID'];
+		if(empty($cart))
+		{
+			$this->_params['carttotalprice'] = 0;
+			$this->_params['carttotalcount'] = 0;
+			
+		}
+		else
+		{
 
-				$cartitems = Cart::find('CARTID ='.$cartid);
+			$cartid = $cart[0]['CARTID'];
 
-				$carttotalprice = $cart[0]['TOTALPRICE'];
+			$cartitems = Cart::find('CARTID ='.$cartid);
 
-				$carttotalcount = $cart[0]['TOTALCOUNT'];
-				$this->_params['carttotalprice'] = $carttotalprice;
-				$this->_params['carttotalcount'] = $carttotalcount;
-			}
+			$carttotalprice = $cart[0]['TOTALPRICE'];
 
+			$carttotalcount = $cart[0]['TOTALCOUNT'];
+			$this->_params['carttotalprice'] = $carttotalprice;
+			$this->_params['carttotalcount'] = $carttotalcount;
 		}
 	}
 
@@ -363,18 +392,9 @@ class PagesController extends \app\core\Controller
 
 					if(empty($cart))
 					{
-						$cartdata = [
-							'TOTALPRICE'	=> null,
-							'TOTALCOUNT'	=> null,
-							'LASTUPDATED'	=> date("Y-m-d H:i:s"),
-							'CLIENTID' 		=> $clientid
-
-						];
-
-						$cart = new Cart($cartdata);
-						$cart->save();
-
-						$cartid = $cart->schema['CARTID'];
+						$tmpcart = self::intizialiseCart($clientid);
+						$cartid = $tmpcart->schema['CARTID'];
+						$oldtotalprice = $tmpcart->schema['TOTALPRICE'];
 					}
 					else
 					{
@@ -428,8 +448,34 @@ class PagesController extends \app\core\Controller
 		}
 		
 		$tickets = Ticket::find();
-		$ticketdata = $tickets[0];
-		$this->_params['tickets'] = $tickets;
+		if(!empty($tickets))
+		{
+			$ticketdata = $tickets[0];
+			$this->_params['tickets'] = $tickets;
+		}
+	}
+
+	private function intizialiseCart($clientid)
+	{
+		$result = null;
+		if(!empty($clientid))
+		{
+			$cartdata = [
+				'TOTALPRICE'	=> null,
+				'TOTALCOUNT'	=> null,
+				'LASTUPDATED'	=> date("Y-m-d H:i:s"),
+				'CLIENTID' 		=> $clientid
+	
+			];
+	
+			$cart = new Cart($cartdata);
+			$cart->save();
+	
+			$cartid = $cart->schema['CARTID'];
+			$result = $cart;
+		}
+
+		return $result;
 	}
 
 	public function actionError404()

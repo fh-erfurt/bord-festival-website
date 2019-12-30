@@ -40,6 +40,27 @@ nav ul li a:hover {
 	opacity: 0.7;
 }
 
+.link:link {
+	font-weight: bold;
+	text-decoration: underline;
+	color: #fff;
+}
+.link:visited {
+	font-weight: bold;
+	text-decoration: underline;
+	color: #fff;
+}
+.link:hover {
+	font-weight: bold;
+	text-decoration: underline;
+	color: #fff;
+}
+.link:active {
+	font-weight: bold;
+	text-decoration: underline;
+	color: #fff;
+}
+
 main {
 
 }
@@ -57,6 +78,7 @@ main {
 	width: 100%;
 	background: #18181b;
 	padding: 20px;
+	float: left;
 }
 
 .center {
@@ -78,59 +100,7 @@ main {
 #countdown-time {
 	font-size: 100px;
 }
-
-.alert {
-	position: relative;
-	padding: .75rem 1.25rem;
-	margin-bottom: 1rem;
-	border: 1px solid transparent;
-}
-
-.alert-success {
-	color: #a7caaf;
-	background-color: var(--success);
-	border-color: #a7caaf;
-}
-
-.alert-warning {
-	color: #f8f4dc;
-	background-color: var(--warning);
-	border-color: rgb(122, 114, 0);
-}
-.alert-danger {
-	color: #caa7a7;
-	background-color: var(--danger);
-	border-color: #caa7a7;
-}
-
-.btn {
-	display: inline-block;
-	text-align: center;
-	vertical-align: middle;
-	border: 1px solid transparent;
-	padding: .375rem .75rem;
-}
-.btn-primary {
-	color: #fff;
-	background-color: #3b3030;
-	border-color: #3b3030;
-}
-.btn-primary:hover {
-	color: #fff;
-	background-color: #312828;
-	border-color: #312828;
-}
-.btn-danger {
-	color: #fff;
-	background-color: var(--danger);
-	border-color: var(--danger);
-}
-.btn-danger:hover {
-	color: #fff;
-	background-color: rgb(63, 0, 0);
-	border-color: rgb(63, 0, 0);
-}
-.form-control {
+.input-inline {
 	padding: 0.375rem 0.75rem;
 	color: #444;
 	background-color: #fff;
@@ -139,6 +109,13 @@ main {
 .input-ticketcount {
 	width: 50px;
 }
+
+.bottom-buttons {
+	padding-top: 15px;
+	width: 100%;
+	overflow: hidden;
+}
+
 
 footer {
 	height: 60px;
@@ -151,8 +128,13 @@ footer {
 .ticket {
 
 }
-.ticket .border-top {
+.ticket.border-top {
 	border-top: 3px solid #333;
 	margin-top: 20px;
 	padding-top: 20px;
+}
+.ticket.border-bottom {
+	border-bottom: 3px solid #333;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
 }
