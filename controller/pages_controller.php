@@ -161,9 +161,9 @@ class PagesController extends \app\core\Controller
 		if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true)
 		{
 			$userID = $_SESSION['client_id'];
-			$user = Client::findFirst($userID);
+			$user = Client::find('CLIENTID = ' . $userID);
 			$addressID = $user->addressID;
-			$address = Address::findFirst($addressID);
+			$address = Address::find('ADDRESSID = ' . $addressID);
 
 			$this->_params['MAIL'] = $user->__get('MAIL');
 			$this->_params['FIRSTNAME'] = $user->__get('FIRSTNAME');
