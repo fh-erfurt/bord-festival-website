@@ -214,13 +214,19 @@ class PagesController extends \app\core\Controller
 			$addressID = $client[0]['ADDRESSID'];
 			$address = Address::find('ADDRESSID = ' . $addressID);
 
-			$this->_params['PRICE'] = $cart[0]['TOTALPRICE'];
+			if($cart[0]['TOTALCOUNT'] !== '0')
+			{
+				$this->_params['PRICE'] = $cart[0]['TOTALPRICE'];
 			
-			$this->_params['STREET'] = $address[0]['STREET'];
-			$this->_params['ZIP'] = $address[0]['ZIP'];
-			$this->_params['CITY'] = $address[0]['CITY'];
-			$this->_params['COUNTRY'] = $address[0]['COUNTRY'];
-			
+				$this->_params['STREET'] = $address[0]['STREET'];
+				$this->_params['ZIP'] = $address[0]['ZIP'];
+				$this->_params['CITY'] = $address[0]['CITY'];
+				$this->_params['COUNTRY'] = $address[0]['COUNTRY'];
+			}
+			else
+			{
+				header('Location: index.php?c=pages&a=error404');
+			}
 		}
 		else
 		{
