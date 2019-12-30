@@ -302,6 +302,8 @@ class PagesController extends \app\core\Controller
 
 				$this->_params['shoppingcart'] = $shoppingcart;
 			}
+			
+			self::CalculateCart($clientid);
 		}
 
 	}
@@ -334,28 +336,32 @@ class PagesController extends \app\core\Controller
 		if(isset($_SESSION['client_id']))
 		{
 			$clientid = $_SESSION['client_id'];
-			$cart = Cart::find('CLIENTID = '.$clientid);
+			self::CalculateCart($clientid);
+		}
+	}
 
-			if(empty($cart))
-			{
-				$this->_params['carttotalprice'] = 0;
-				$this->_params['carttotalcount'] = 0;
-				
-			}
-			else
-			{
+	private function CalculateCart($clientid)
+	{
+		$cart = Cart::find('CLIENTID = '.$clientid);
 
-				$cartid = $cart[0]['CARTID'];
+		if(empty($cart))
+		{
+			$this->_params['carttotalprice'] = 0;
+			$this->_params['carttotalcount'] = 0;
+			
+		}
+		else
+		{
 
-				$cartitems = Cart::find('CARTID ='.$cartid);
+			$cartid = $cart[0]['CARTID'];
 
-				$carttotalprice = $cart[0]['TOTALPRICE'];
+			$cartitems = Cart::find('CARTID ='.$cartid);
 
-				$carttotalcount = $cart[0]['TOTALCOUNT'];
-				$this->_params['carttotalprice'] = $carttotalprice;
-				$this->_params['carttotalcount'] = $carttotalcount;
-			}
+			$carttotalprice = $cart[0]['TOTALPRICE'];
 
+			$carttotalcount = $cart[0]['TOTALCOUNT'];
+			$this->_params['carttotalprice'] = $carttotalprice;
+			$this->_params['carttotalcount'] = $carttotalcount;
 		}
 	}
 

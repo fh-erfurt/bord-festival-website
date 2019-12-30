@@ -24,33 +24,36 @@ if(isset($_GET['success']))
 ?>
 <?php 
 $i = 0;
-foreach($shoppingcart as $item) {
-    if($i > 0)
-    {
+if(!empty($shoppingcart))
+{
+    foreach($shoppingcart as $item) {
+        if($i > 0)
+        {
+            ?>
+    <div class="ticket border-bottom">
+            <?php
+        }
+        else
+        {
+            ?>
+    <div class="ticket border-top border-bottom">
+            <?php
+        }
         ?>
-<div class="ticket border-bottom">
-        <?php
+        <h4 class="ticket-name"><?php echo $item[1]; ?>: <?php echo $item[3] ?> € pro Ticket</h4>
+        <p class="ticket-description">
+            <?php echo $item[2]; ?>
+        </p>
+            Menge: <?php echo $item[4]; ?> Gesamtpreis: <?php echo $item[4] * $item[3]; ?> €
+        <p>
+        <form action="index.php?a=shoppingcart" method="post">
+            <input type="hidden" name="cartitemid" value="<?php echo $item[0]; ?>" />
+            <button type="submit" class="btn btn-danger" name="deleteitemfromcart">löschen</button>
+        </form>
+    </div>
+    <?php
+        $i++;
     }
-    else
-    {
-        ?>
-<div class="ticket border-top border-bottom">
-        <?php
-    }
-    ?>
-    <h4 class="ticket-name"><?php echo $item[1]; ?>: <?php echo $item[3] ?> € pro Ticket</h4>
-    <p class="ticket-description">
-        <?php echo $item[2]; ?>
-    </p>
-        Menge: <?php echo $item[4]; ?> Gesamtpreis: <?php echo $item[4] * $item[3]; ?> €
-    <p>
-    <form action="index.php?a=shoppingcart" method="post">
-        <input type="hidden" name="cartitemid" value="<?php echo $item[0]; ?>" />
-        <button type="submit" class="btn btn-danger" name="deleteitemfromcart">löschen</button>
-    </form>
-</div>
-<?php
-    $i++;
 }
 if($i === 0)
 {
@@ -70,7 +73,7 @@ else
         <form action="index.php?a=shoppingcart" method="post">
             <button type="submit" class="btn btn-danger float-left" name="deletewholecart">Warenkorb leeren</button>
             <div class="float-right">
-                Warenkorb(Anzahl): Summe € 
+                Warenkorb(<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> € 
                 <button type="submit" class="btn btn-primary" name="buycart">bestellen</button>
             </div>
         </form>
