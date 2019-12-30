@@ -383,10 +383,8 @@ class PagesController extends \app\core\Controller
 					if(empty($cart))
 					{
 						$tmpcart = self::intizialiseCart($clientid);
-						var_dump($tmpcart->schema['CARTID']);
-						die(var_dump($tmpcart));
-						$cartid = $tmpcart['CARTID'];
-						$oldtotalprice = $tmpcart['TOTALPRICE'];
+						$cartid = $tmpcart->schema['CARTID'];
+						$oldtotalprice = $tmpcart->schema['TOTALPRICE'];
 					}
 					else
 					{
