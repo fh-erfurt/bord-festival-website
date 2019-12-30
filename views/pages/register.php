@@ -1,17 +1,19 @@
-	<h1>Registrierung</h1>
+<div class="col-lg-6 col-sm-12 center clear-fix">
+	<h1 class="float-left clear-fix">Registrierung</h1>
+</div>
+
+<form method="post">
+	<div class="col-lg-6 col-sm-12 center">
 <?php
 if(!empty($registererror))
 {
 	?>
-	<div class="alert alert-danger">
+	<div class="col-lg-12 clear-fix alert alert-danger">
 		<?php echo $registererror; ?>
 	</div>
 	<?php
 }
 ?>
-
-<form method="post">
-	<div class="col-lg-6 col-sm-12 center">
 		<div class="col-lg-6 col-sm-12 float-left">
 			<div class="input-group">
 				<label class="form-for" for="InputEmail">E-Mail</label>

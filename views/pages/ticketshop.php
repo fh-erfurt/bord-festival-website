@@ -71,7 +71,8 @@ else
         else
         {
         ?>
-        <button class="btn" disabled>in den Warenkorb</button> Bitte einloggen!
+        <p>Preis: <?php echo $ticket['PRICE']; ?> €</p>
+        <button class="btn btn-disabled" disabled>in den Warenkorb</button> Bitte einloggen!
     </div>
         <?php
         }

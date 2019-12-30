@@ -93,7 +93,7 @@ class PagesController extends \app\core\Controller
 				}
 				else
 				{
-					$this->_params['registererror'] = 'Diese E-Mail-Adresse ist bereits registriert. Du kannst dich hier einloggen.';
+					$this->_params['registererror'] = 'Diese E-Mail-Adresse ist bereits registriert. Du kannst dich <a href="index.php?a=login" class="link">hier</a> einloggen.';
 					
 				}
 			}
@@ -304,6 +304,10 @@ class PagesController extends \app\core\Controller
 			}
 			
 			self::CalculateCart($clientid);
+		}
+		else
+		{
+			header('Location: index.php?c=pages&a=error404');
 		}
 
 	}
