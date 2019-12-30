@@ -173,17 +173,21 @@ class PagesController extends \app\core\Controller
 
 	public function actionProfile()
 	{
+		$title = "Profil";
+
+		$this->_params['title'] = $title;
+
 		if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true)
 		{
-			$userID = $_SESSION['client_id'];
-			$user = Client::find('CLIENTID = ' . $userID);
-			$addressID = $user[0]['ADDRESSID'];
+			$clientid = $_SESSION['client_id'];
+			$client = Client::find('CLIENTID = ' . $clientid);
+			$addressID = $client[0]['ADDRESSID'];
 			$address = Address::find('ADDRESSID = ' . $addressID);
 
-			$this->_params['MAIL'] = $user[0]['MAIL'];
-			$this->_params['FIRSTNAME'] = $user[0]['FIRSTNAME'];
-			$this->_params['LASTNAME'] = $user[0]['LASTNAME'];
-			$this->_params['DATEOFBIRTH'] = $user[0]['DATEOFBIRTH'];
+			$this->_params['MAIL'] = $client[0]['MAIL'];
+			$this->_params['FIRSTNAME'] = $client[0]['FIRSTNAME'];
+			$this->_params['LASTNAME'] = $client[0]['LASTNAME'];
+			$this->_params['DATEOFBIRTH'] = $client[0]['DATEOFBIRTH'];
 
 			$this->_params['STREET'] = $address[0]['STREET'];
 			$this->_params['ZIP'] = $address[0]['ZIP'];
@@ -198,7 +202,36 @@ class PagesController extends \app\core\Controller
 
 	public function actionConfirmorder()
 	{
+		$title = "Bestätigen";
 
+		$this->_params['title'] = $title;
+
+		if(isset($_SESSION['client_id']))
+		{
+			$clientid = $_SESSION['client_id'];
+			$client = Client::find('CLIENTID = ' . $clientid);
+			$cart = Cart::find('CLIENTID = ' . $clientid);
+			$addressID = $client[0]['ADDRESSID'];
+			$address = Address::find('ADDRESSID = ' . $addressID);
+
+			$this->_params['PRICE'] = $cart[0]['TOTALPRICE'];
+			
+			$this->_params['STREET'] = $address[0]['STREET'];
+			$this->_params['ZIP'] = $address[0]['ZIP'];
+			$this->_params['CITY'] = $address[0]['CITY'];
+			$this->_params['COUNTRY'] = $address[0]['COUNTRY'];
+			
+		}
+		else
+		{
+			header('Location: index.php?c=pages&a=error404');
+		}
+
+		if(isset($_POST['deletewholecart']))
+			{
+				self::deletewholecart($clientid);
+				header('Location: index.php?c=pages&a=index');
+			}
 	}
 
 	public function actionShoppingcart()
