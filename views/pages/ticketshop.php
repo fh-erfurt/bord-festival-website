@@ -62,7 +62,7 @@ else
             <input type="hidden" name="ticketid" value="<?php echo $ticketid; ?>" />    
             <p>Preis: <?php echo $ticket['PRICE']; ?> €</p>
             <p>Anzahl: 
-            <button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '-')">-</button><input type="text" id="ticketcount<?php echo $ticketid; ?>" class="form-control input-ticketcount" name="ticketcount" value="1"><button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '+')">+</button>
+            <button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '-')">-</button><input type="text" id="ticketcount<?php echo $ticketid; ?>" class="input-inline input-ticketcount" name="ticketcount" value="1"><button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '+')">+</button>
             </p><br>
             <button type="submit" class="btn btn-primary" name="addtickettocart">in den Warenkorb</button>
         </form>

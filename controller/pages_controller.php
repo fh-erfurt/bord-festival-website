@@ -44,50 +44,57 @@ class PagesController extends \app\core\Controller
 				$zip		= $_POST['plz'] ?? null;
 				$city		= $_POST['ort'] ?? null;
 
-				if($password1 === $password2)
+				$where = 'MAIL = "'.$mail.'"';
+
+				$client = Client::find($where);
+
+				if(empty($client))
 				{
-					//$user = new Client();
+					if($password1 === $password2)
+					{
+						$addressdata = [
+							'STREET' 	=> $street,
+							'ZIP' 		=> $zip,
+							'CITY' 		=> $city,
+							'COUNTRY' 	=> 'GER'						
+						];
+	
+						$address = new Address($addressdata);
+	
+						$address->save();
+	
+						$hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
+	
+						$clientdata = [						
+							'MAIL' 			=> $mail,
+							'FIRSTNAME'		=> $firstname,
+							'LASTNAME' 		=> $lastname,
+							'DATEOFBIRTH'	=> $dateofbirth,
+							'PASSWORD' 		=> $hashedpassword,
+							'CREATEDAT' 	=> date("Y-m-d H:i:s"),
+							'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
+							'ADDRESSID' 	=> $address->schema['ADDRESSID']
+						];
+						$user = new Client($clientdata);
+						$user->save();
+						
+						$_SESSION['loggedIn'] = true;
+						$_SESSION['client_mail'] = $mail;
+						$_SESSION['client_id'] = $user->schema['CLIENTID'];
+	
+						header('Location: index.php');
+					}
+					else
+					{
+						$_SESSION['loggedIn'] = false;
+						// ERROR: passwort nicht gleich
+					}
 
-					$addressdata = [
-						'STREET' 	=> $street,
-						'ZIP' 		=> $zip,
-						'CITY' 		=> $city,
-						'COUNTRY' 	=> 'GER'						
-					];
-
-					$address = new Address($addressdata);
-					// $address->STREET = $street;
-					// $address->ZIP = $zip;
-					// $address->CITY = $city;
-					// $address->COUNTRY = 'GER';
-
-					$address->save();
-
-					$hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
-
-					$clientdata = [						
-						'MAIL' 			=> $mail,
-						'FIRSTNAME'		=> $firstname,
-						'LASTNAME' 		=> $lastname,
-						'DATEOFBIRTH'	=> $dateofbirth,
-						'PASSWORD' 		=> $hashedpassword,
-						'CREATEDAT' 	=> date("Y-m-d H:i:s"),
-						'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
-						'ADDRESSID' 	=> $address->schema['ADDRESSID']
-					];
-					$user = new Client($clientdata);
-					$user->save();
-					
-					$_SESSION['loggedIn'] = true;
-					$_SESSION['client_mail'] = $mail;
-					$_SESSION['client_id'] = $user->schema['CLIENTID'];
-
-					header('Location: index.php');
 				}
 				else
 				{
-					$_SESSION['loggedIn'] = false;
-					// ERROR: passwort nicht gleich
+					$this->_params['registererror'] = 'Diese E-Mail-Adresse ist bereits registriert. Du kannst dich hier einloggen.';
+					
 				}
 			}
 		}
