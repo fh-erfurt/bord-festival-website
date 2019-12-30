@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title><?php echo $title ?? "BORD-Festival" ?></title>
+		<link rel="stylesheet" type="text/css" href="assets/css/grid.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/layout.css">
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 		<?php if(isset($css) && is_array($css)) : ?>
