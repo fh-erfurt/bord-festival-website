@@ -416,61 +416,68 @@ class PagesController extends \app\core\Controller
 				$ticketcount = $_POST['ticketcount'] ?? null;
 	
 				$success = false;
-	
-				if($ticketid !== null && $ticketcount !== null)
+				if($ticketcount !== '0')
 				{
-					$cart = Cart::find('CLIENTID = '.$clientid);
-					$cartid = 0;
-					$oldtotalprice = 0;
-
-					if(empty($cart))
+					if($ticketid !== null && $ticketcount !== null)
 					{
-						$tmpcart = self::intizialiseCart($clientid);
-						$cartid = $tmpcart->schema['CARTID'];
-						$oldtotalprice = $tmpcart->schema['TOTALPRICE'];
+						$cart = Cart::find('CLIENTID = '.$clientid);
+						$cartid = 0;
+						$oldtotalprice = 0;
+
+						if(empty($cart))
+						{
+							$tmpcart = self::intizialiseCart($clientid);
+							$cartid = $tmpcart->schema['CARTID'];
+							$oldtotalprice = $tmpcart->schema['TOTALPRICE'];
+						}
+						else
+						{
+							$cartid = $cart[0]['CARTID'];
+							$oldtotalprice = $cart[0]['TOTALPRICE'];
+						}
+
+						$cartitem = Cartitem::find('CARTID = '.$cartid.' AND TICKETID = '.$ticketid);
+
+						if(empty($cartitem))
+						{
+							$cartitemdata = [
+								'CARTID'		=> $cartid,
+								'TICKETID'  	=> $ticketid,
+								'QUANTITY' 		=> $ticketcount
+							];
+						}
+						else
+						{
+							$oldticketcount = $cartitem[0]['QUANTITY'];
+							$newticketcount = $oldticketcount + $ticketcount;
+							$cartitemdata = [
+								'CARTITEMID'	=> $cartitem[0]['CARTITEMID'],
+								'CARTID'		=> $cartid,
+								'TICKETID'  	=> $ticketid,
+								'QUANTITY' 		=> $newticketcount
+							];
+							//die(var_dump($cartitemdata));
+
+						}
+						$newcartitem = new Cartitem($cartitemdata);
+						$newcartitem->save();
+
+						//update total
+						self::updateCart($cartid, $clientid);
+
+						$this->_params['updatedcartsuccess'] = true;
+						$success = 1;
 					}
 					else
 					{
-						$cartid = $cart[0]['CARTID'];
-						$oldtotalprice = $cart[0]['TOTALPRICE'];
+						$this->_params['updatedcartsuccess'] = false;
+						$success = 0;
 					}
-
-					$cartitem = Cartitem::find('CARTID = '.$cartid.' AND TICKETID = '.$ticketid);
-
-					if(empty($cartitem))
-					{
-						$cartitemdata = [
-							'CARTID'		=> $cartid,
-							'TICKETID'  	=> $ticketid,
-							'QUANTITY' 		=> $ticketcount
-						];
-					}
-					else
-					{
-						$oldticketcount = $cartitem[0]['QUANTITY'];
-						$newticketcount = $oldticketcount + $ticketcount;
-						$cartitemdata = [
-							'CARTITEMID'	=> $cartitem[0]['CARTITEMID'],
-							'CARTID'		=> $cartid,
-							'TICKETID'  	=> $ticketid,
-							'QUANTITY' 		=> $newticketcount
-						];
-						//die(var_dump($cartitemdata));
-
-					}
-					$newcartitem = new Cartitem($cartitemdata);
-					$newcartitem->save();
-
-					//update total
-					self::updateCart($cartid, $clientid);
-
-					$this->_params['updatedcartsuccess'] = true;
-					$success = true;
 				}
 				else
 				{
 					$this->_params['updatedcartsuccess'] = false;
-					$success = false;
+					$success = 2;
 				}
 				// PRG (Post-Redirect-Get) Pattern to allow page reloading after using a form
 				http_response_code( 303 );

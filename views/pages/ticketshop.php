@@ -11,11 +11,19 @@ if(isset($_GET['success']))
         </div>
         <?php
     }
-    else
+    else if($_GET['success'] === "0")
     {
         ?>        
         <div class="alert alert-danger">
             Es gab einen Fehler beim Hinzufügen zum Warenkorb. Bitte kontaktiere uns!
+        </div>
+        <?php
+    }
+    else if($_GET['success'] === "2")
+    {
+        ?>        
+        <div class="alert alert-danger">
+            Bitte ein oder mehr Tickets angeben!
         </div>
         <?php
     }
@@ -62,7 +70,9 @@ else
             <input type="hidden" name="ticketid" value="<?php echo $ticketid; ?>" />    
             <p>Preis: <?php echo $ticket['PRICE']; ?> €</p>
             <p>Anzahl: 
-            <button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '-')">-</button><input type="text" id="ticketcount<?php echo $ticketid; ?>" class="input-inline input-ticketcount" name="ticketcount" value="1"><button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '+')">+</button>
+            <button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '-')">-</button>
+            <input type="text" id="ticketcount<?php echo $ticketid; ?>" class="input-inline input-ticketcount" name="ticketcount" value="1">
+            <button type="button" class="btn btn-primary" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '+')">+</button>
             </p><br>
             <button type="submit" class="btn btn-primary" name="addtickettocart">in den Warenkorb</button>
         </form>
