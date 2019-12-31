@@ -589,4 +589,11 @@ class PagesController extends \app\core\Controller
 		$changedcart->save();
 		*/
 	}
+
+	public function actionContact()
+	{
+		$title = "Kontakt";
+
+		$this->_params['title'] = $title;
+	}
 }

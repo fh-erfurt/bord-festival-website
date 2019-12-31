@@ -19,6 +19,7 @@
 					<ul>
 						<li><a href="?a=index">Start</a></li>
 						<li><a href="?a=ticketshop">Ticketshop</a></li>
+						<li><a href="?a=contact">Kontakt aufnehmen</a></li>
 						<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) : ?>
 						<li><a href="?a=profile">Profile</a></li>
 						<li><a href="?a=logout">Abmelden</a></li>
