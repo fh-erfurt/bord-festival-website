@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="col-lg-4 col-md-6 col-sm-12 center clear-fix">
 		<h1 class="float-left clear-fix">Login</h1>
-	<?php
-	if(!empty($loginerror))
-	{
+		<?php
+		if(!empty($loginerror))
+		{
 		?>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 clear-fix">
@@ -13,8 +13,8 @@
 			</div>
 		</div>
 		<?php
-	}
-	?>
+		}
+		?>
 		<form method="post">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12">

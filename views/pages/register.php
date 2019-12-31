@@ -2,10 +2,10 @@
 	<div class="col-lg-6 col-md-10 col-sm-10 center clear-fix">
 		<h1 class="float-left clear-fix">Registrierung</h1>
 
-	<?php
-	if(!empty($registererror))
-	{
-		?>
+		<?php
+		if(!empty($registererror))
+		{
+			?>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 clear-fix">
 				<div class="alert alert-danger">
@@ -14,8 +14,8 @@
 			</div>
 		</div>
 		<?php
-	}
-	?>
+		}
+		?>
 		<form method="post">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 float-left clear-left">
@@ -67,7 +67,6 @@
 					</div>
 				</div>
 			</div>
-
 		</form>
 	</div>
 </div>
