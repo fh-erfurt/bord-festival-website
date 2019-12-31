@@ -42,9 +42,11 @@
 			</header>
 			<main>
 				<div class="container">
-					<div class="content">
-					<?php echo $body ?>
-					</div>
+					<article>
+						<div class="content">
+							<?php echo $body ?>
+						</div>
+					</article>
 				</div>
 			</main>
 		</div>
