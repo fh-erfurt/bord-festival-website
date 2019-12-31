@@ -65,22 +65,6 @@ main {
 
 }
 
-.content-wrap {
-	min-height: calc(100vh - 60px);
-}
-
-.container {
-	margin: 0 auto; /* centering */
-	max-width: 1200px;
-}
-
-.content {
-	width: 100%;
-	background: #18181b;
-	padding: 20px;
-	float: left;
-}
-
 .center {
 	text-align: center;
 }
