@@ -9,6 +9,7 @@
 			<link rel="stylesheet" type="text/css" href="assets/css/<?=$file?>.css">
 			<?php endforeach; ?>
 		<?php endif; ?>
+		<meta name="viewport" content="initial-scale=1.0,width=device-width" />
 	</head>
 	<body>
 		<div class="content-wrap">

@@ -90,13 +90,13 @@ html {
 	margin-top: 0.5rem;
 }
 .float-left {
-	float: left;
+    float: left;
 }
 
 .float-right {
 	float: right;
 }
-@media only screen and (min-width: 951px) {
+@media (min-width: 951px), (min-device-width: 951px) {
     .col-lg-12, .col-lg-6, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1 {
         box-sizing: border-box;
         padding-left: 15px;
@@ -150,7 +150,7 @@ html {
 
 }
 
-@media only screen and (max-width: 950px) {
+@media (max-width: 950px), (max-device-width: 950px) {
     .col-md-12, .col-md-6, .col-md-4, .col-md-3, .col-md-2, .col-md-1 {
         box-sizing: border-box;
         padding-left: 15px;
@@ -185,7 +185,7 @@ html {
         padding-right: 20px;
     }
 }
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px), (max-device-width: 600px) {
     .col-sm-12, .col-sm-6, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1 {
         box-sizing: border-box;
         padding-left: 15px;
