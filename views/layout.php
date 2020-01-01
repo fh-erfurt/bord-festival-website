@@ -52,7 +52,7 @@
 				</div>
 			</main>
 		</div>
-		<footer>
+		<footer class="footer">
 			&copy; Daniel Depta, Raphael Freybe - FH Erfurt
 		</footer>
 	</body>

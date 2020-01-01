@@ -1,7 +1,8 @@
 html {
     box-sizing: border-box;
+	position: relative;
+	min-height: 100%;
 }
-
 .container {
     margin: 0 auto; /* centering */
     max-width: 1200px;
@@ -15,6 +16,7 @@ html {
     float: left;
     padding: 15px;
     box-sizing: border-box;
+    margin-bottom: 70px;
 }
 
 

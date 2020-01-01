@@ -99,6 +99,19 @@ CREATE TABLE cartitems
 );
 
 --
+-- Tabellenstruktur für Tabelle newsletter
+--
+DROP TABLE IF EXISTS newsletter;
+
+CREATE TABLE newsletter 
+(
+  NEWSLETTERID int(10) NOT NULL AUTO_INCREMENT,
+  MAIL varchar(100) NOT NULL
+  CREATEDAT datetime NOT NULL,
+  CONSTRAINT newsletter_pk PRIMARY KEY (NEWSLETTERID)
+);
+
+--
 -- Initialbefüllung für Ticket-Tabelle
 --
 
