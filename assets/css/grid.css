@@ -7,8 +7,22 @@ html {
     margin: 0 auto; /* centering */
     max-width: 1200px;
 }
+.container-top {
+    max-width: 1200px;
+    margin: 0 auto; /* centering */
+}
 .content-wrap {
 	min-height: calc(100vh - 60px);
+	width: 100%;
+    float: left;
+    padding: 0;
+    box-sizing: border-box;
+}
+.content-top {
+	width: 100%;
+    float: left;
+    padding: 15px;
+    box-sizing: border-box;
 }
 .content {
 	width: 100%;
@@ -17,6 +31,24 @@ html {
     padding: 15px;
     box-sizing: border-box;
     margin-bottom: 70px;
+}
+.navbar {
+    padding-top: 15px;
+}
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: inline-block;
+}
+.nav-header {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+
 }
 
 
@@ -99,7 +131,7 @@ html {
 	float: right;
 }
 @media (min-width: 951px), (min-device-width: 951px) {
-    .col-lg-12, .col-lg-6, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1 {
+    .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-lg {
         box-sizing: border-box;
         padding-left: 15px;
         padding-right: 15px;
@@ -115,15 +147,20 @@ html {
     .col-lg-8 {
         width: 66.666%;
     }
+    .col-lg-7 {
+        width: 58.333%;
+    }
     .col-lg-6 {
         width: 50%;
     }
-    .col-lg-3 {
-        width: 25%;
+    .col-lg-5 {
+        width: 41.666%;
     }
     .col-lg-4 {
         width: 33.333%;
-        padding-right: 20px;
+    }
+    .col-lg-3 {
+        width: 25%;
     }
     .col-lg-2 {
         width: 16.666%;
@@ -150,6 +187,10 @@ html {
     margin-left: -15px;
     margin-right: -15px;
 
+}
+
+.no-padding {
+    padding: 0 !important;
 }
 
 @media (max-width: 950px), (max-device-width: 950px) {

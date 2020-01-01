@@ -14,32 +14,35 @@
 	<body>
 		<div class="content-wrap">
 			<header>
-				<div class="container">
-				<nav>
-					<ul>
-						<li><a href="?a=index">Start</a></li>
-						<li><a href="?a=ticketshop">Ticketshop</a></li>
-						<li><a href="?a=contact">Kontakt aufnehmen</a></li>
-						<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) : ?>
-						<li><a href="?a=profile">Profile</a></li>
-						<li><a href="?a=logout">Abmelden</a></li>
-						<?php else : ?>
-						<li><a href="?a=login">Login</a></li>
-						<li><a href="?a=register">Registrieren</a></li>
-						<?php endif; ?>
-						
-						<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) : ?>
-							<?php if(empty($carttotalcount) || empty($carttotalprice)) : ?>
-								<li><a href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>)</a></li>
-							<?php else : ?>							
-								<li><a href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> €</a></li>
-							<?php endif; ?>
-						<?php endif; ?>
-					</ul>
-				</nav>
-				<div class="center">
-					<p class="festival-logo">BORD-Festival</p>
-				</div>
+				<div class="container-top">
+					<nav class="navbar">
+						<div class="content-top">
+							<div class="row">
+								<div class="col-lg col-md-12 col-sm-12 float-left">
+									<p class="festival-logo"><a class="nav-header" href="index.php">BORD-Festival</a></p>
+								</div>
+								<div class="col-lg-8 col-md-12 col-sm-12 float-left nav-menu">
+									<a class="nav-link" href="?a=ticketshop">Tickets</a>
+									<a class="nav-link" href="?a=contact">Kontakt</a>
+									<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) : ?>
+									<a class="nav-link" href="?a=profile">Account</a>
+									<a class="nav-link" href="?a=logout">Abmelden</a>
+									<?php else : ?>
+									<a class="nav-link" href="?a=login">Login</a>
+									<a class="nav-link" href="?a=register">Registrieren</a>
+									<?php endif; ?>
+									
+									<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) : ?>
+										<?php if(empty($carttotalcount) || empty($carttotalprice)) : ?>
+											<a class="nav-link" href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>)</a>
+										<?php else : ?>							
+											<a class="nav-link" href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> €</a>
+										<?php endif; ?>
+									<?php endif; ?>
+								</div>
+							</div>
+						</div>
+					</nav>
 				</div>
 			</header>
 			<main>
