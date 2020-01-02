@@ -121,14 +121,15 @@ main {
 }
 .lineup-col {	
 	float: left;
-    display: flex;
     padding: 0 !important;
 	border: 5px solid transparent;
 	overflow: hidden;
 }
+
 .lineup-image {
 	object-fit: contain;
 	width: 100%;
+	overflow: hidden;
 }
 .footer {
 	display: block;
