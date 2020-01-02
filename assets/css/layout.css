@@ -73,14 +73,19 @@ main {
 .festival-logo {
 	font-size: 40px;
 }
+.festival-title {
+	font-size: 80px;
+}
 
 .countdown {
 	font-family: Consolas, Menlo;
 	font-weight: 800;
 	color: #EEEEEE;
-}
-#countdown-days, #countdown-time {
 	font-size: 100px;
+}
+.countdown-noch {
+	color: #EEEEEE;
+	font-size: 60px;
 }
 .newsletter-form {
 	background: rgb(240, 191, 85);
@@ -105,7 +110,7 @@ main {
 	.newsletter-button {
 		margin-top: 1rem;
 	}
-	#countdown-days, #countdown-time {
+	.countdown {
 		font-size: 16vw;
 	}
 }

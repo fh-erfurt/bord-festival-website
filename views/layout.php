@@ -10,6 +10,11 @@
 			<?php endforeach; ?>
 		<?php endif; ?>
 		<meta name="viewport" content="initial-scale=1.0,width=device-width" />
+		<noscript>
+			<style>
+				.no-script {display:none;}
+			</style>
+		</noscript>
 	</head>
 	<body>
 		<div class="content-wrap">

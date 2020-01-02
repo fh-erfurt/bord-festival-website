@@ -19,8 +19,22 @@ class PagesController extends \app\core\Controller
 	public function actionIndex()
 	{
 		$title = "Welcome - BORD-Festival";
-
 		$this->_params['title'] = $title;
+
+		$date1 = new \DateTime("2020-07-31 18:00:00");
+		$date2 = new \DateTime();
+		$diff = $date1->getTimestamp() - $date2->getTimestamp();
+
+		$days = floor($diff / (60 * 60 * 24));
+		$hours = floor(($diff % (60 * 60 * 24)) / (60 * 60));
+		$festivalstart = "31.07.2020 18:00";
+		$festivalende = "02.08.2020 20:00";
+
+		$this->_params['days'] = $days;
+		$this->_params['hours'] = $hours;
+		$this->_params['festivalstart'] = $festivalstart;
+		$this->_params['festivalende'] = $festivalende;
+
 	}
 
 	public function actionRegister()

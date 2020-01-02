@@ -1,10 +1,18 @@
 <script type="text/javascript" src="assets/js/countdown.js"></script>
 <div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 center">
+    <p class="countdown-noch">noch</p>
+</div>
+</div>
+<div class="row">
     <div class="col-lg-6 col-md-10 col-sm-12 center clear-fix">
         <section>
-            <div class="center countdown">
-                <p id="countdown-days"></p>
-                <p id="countdown-time"></p>
+            <div class="center">
+                <div class="countdown" id="countdown-days"><?php echo $days; ?> Tage</div>
+                <div class="countdown" id="countdown-time">
+                    <div class="countdown no-script">loading...</div>
+                    <noscript><?php echo $hours; ?> Stunden</noscript>
+                </div>
             </div>
         </section>
     </div> 
