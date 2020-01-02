@@ -86,7 +86,10 @@ html {
 	vertical-align: middle;
 	border: 1px solid transparent;
 	padding: .375rem .75rem;
-	cursor: pointer;
+    cursor: pointer;
+    margin-top: 1rem;    
+	font-family: "Segoe UI", "Open Sans", sans-serif;
+    font-size: 16px;
 }
 .btn-primary {
 	color: #fff;
@@ -195,6 +198,9 @@ html {
 .no-padding {
     padding: 0 !important;
 }
+.no-margin {
+    margin: 0 !important;
+}
 
 @media (max-width: 950px), (max-device-width: 950px) {
     .col-md-12, .col-md-6, .col-md-4, .col-md-3, .col-md-2, .col-md-1 {
@@ -264,5 +270,9 @@ html {
     .col-sm-1 {
         width: 8.333%;
         padding-right: 20px;
+    }
+    .btn {
+        width: 100%;
+        margin-top: 1rem;
     }
 }

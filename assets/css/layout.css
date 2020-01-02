@@ -11,7 +11,7 @@
 
 body {
 	background: rgb(45, 45, 53);
-	font-family: 'Open Sans', sans-serif;
+	font-family: "Segoe UI", "Open Sans", sans-serif;
 	color: #DEDEDE;
 	margin-bottom: 60px;
 }
@@ -75,7 +75,7 @@ main {
 }
 
 .countdown {
-	font-family: Consolas;
+	font-family: Consolas, Menlo;
 	font-weight: 800;
 	color: #EEEEEE;
 }
@@ -97,10 +97,22 @@ main {
 	color: #444;
 	text-align: right;
 }
+.newsletter-button {
+	margin: 0;
+}
 
 @media (max-width: 600px), (max-device-width: 600px) {
 	.newsletter-label {
 		text-align: left;
+	}
+	.newsletter-button {
+		margin-top: 1rem;
+	}
+	#countdown-days {
+		font-size: 60px;
+	}
+	#countdown-time {
+		font-size: 60px;
 	}
 
 }
@@ -130,7 +142,12 @@ main {
 	object-fit: contain;
 	width: 100%;
 	overflow: hidden;
+	transition: transform .5s ease;
 }
+.lineup-col:hover img {
+	transform: scale(1.5);
+}
+
 .footer {
 	display: block;
 	position: absolute;

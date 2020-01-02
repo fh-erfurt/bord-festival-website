@@ -21,7 +21,7 @@
                     <input id="InputEmail" class="form-control" type="email" name="email" placeholder="E-Mail">
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 float-left">
-                    <button type="submit" class="btn btn-primary float-left" name="reg_newsletter">Newsletter abonnieren</button>
+                    <button type="submit" class="btn btn-primary newsletter-button float-left" name="reg_newsletter">Newsletter abonnieren</button>
                 </div>
             </form>
         </section>
