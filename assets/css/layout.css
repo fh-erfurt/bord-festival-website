@@ -79,10 +79,7 @@ main {
 	font-weight: 800;
 	color: #EEEEEE;
 }
-#countdown-days {
-	font-size: 100px;
-}
-#countdown-time {
+#countdown-days, #countdown-time {
 	font-size: 100px;
 }
 .newsletter-form {
@@ -108,13 +105,9 @@ main {
 	.newsletter-button {
 		margin-top: 1rem;
 	}
-	#countdown-days {
-		font-size: 60px;
+	#countdown-days, #countdown-time {
+		font-size: 16vw;
 	}
-	#countdown-time {
-		font-size: 60px;
-	}
-
 }
 .input-inline {
 	padding: 0.375rem 0.75rem;
