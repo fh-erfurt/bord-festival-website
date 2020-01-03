@@ -11,7 +11,7 @@
                 <div class="countdown" id="countdown-days"><?php echo $days; ?> Tage</div>
                 <div class="countdown" id="countdown-time">
                     <div class="countdown no-script">loading...</div>
-                    <noscript><?php echo $hours; ?> Stunden</noscript>
+                    <noscript><?php echo $hourstext; ?></noscript>
                 </div>
             </div>
         </section>

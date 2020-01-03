@@ -30,8 +30,16 @@ class PagesController extends \app\core\Controller
 		$festivalstart = "31.07.2020 18:00";
 		$festivalende = "02.08.2020 20:00";
 
+		if($hours <> 1)
+		{
+			$hourstext = strval($hours).' Stunden';
+		}
+		else
+		{
+			$hourstext = strval($hours).' Stunde';
+		}
 		$this->_params['days'] = $days;
-		$this->_params['hours'] = $hours;
+		$this->_params['hourstext'] = $hourstext;
 		$this->_params['festivalstart'] = $festivalstart;
 		$this->_params['festivalende'] = $festivalende;
 
