@@ -44,6 +44,10 @@ html {
     padding-bottom: 15px;
     display: inline-block;
 }
+.nav-link-active {
+    color: #fff !important;
+    font-weight: bold;
+}
 .nav-link:hover {
     color: #fff
 }
