@@ -155,7 +155,6 @@ html {
         box-sizing: border-box;
         padding-left: 15px;
         padding-right: 15px;
-        overflow: hidden;
     }
     .col-lg-12 {
         width: 100%;
@@ -221,7 +220,6 @@ html {
         box-sizing: border-box;
         padding-left: 15px;
         padding-right: 15px;
-        overflow: hidden;
     }
     .col-md-12 {
         width: 100%;
@@ -256,7 +254,6 @@ html {
         box-sizing: border-box;
         padding-left: 15px;
         padding-right: 15px;
-        overflow: hidden;
     }
     .col-sm-12 {
         width: 100%;
