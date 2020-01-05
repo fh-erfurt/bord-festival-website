@@ -163,22 +163,34 @@ main {
 	color: #444;
 	text-align: right;
 }
-.newsletter-button {
-	margin: 0;
+.sm-margin-top {
+	margin-top: 0;
+}
+.sm-margin-bottom {
+	margin-top: 0;
+}
+.padding-top {
+	padding: 0.375rem;
 }
 
 @media (max-width: 600px), (max-device-width: 600px) {
 	.newsletter-label {
 		text-align: left;
 	}
-	.newsletter-button {
+	.sm-margin-top {
 		margin-top: 1rem;
+	}
+	.sm-margin-bottom {
+		margin-bottom: 1rem;
 	}
 	.countdown {
 		font-size: 16vw;
 	}
 	.hide-mobile {
 		display: none;
+	}
+	.sm-width-100 {
+		width: 100%;
 	}
 }
 .input-inline {
@@ -243,6 +255,10 @@ main {
 }
 .fadeIn-bottom{
 	top: 50%;
+}
+.flex-end {
+	display: flex;   
+	justify-content: flex-end; 
 }
   
 
