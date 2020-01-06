@@ -74,10 +74,16 @@
                 ?>
                 <div class="bottom-buttons">
                     <form action="index.php?a=shoppingcart" method="post">
-                        <button type="submit" class="btn btn-danger float-left" name="deletewholecart">Warenkorb leeren</button>
-                        <div class="float-right">
-                            Warenkorb(<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> € 
-                            <button type="submit" class="btn btn-primary" name="buycart">bestellen</button>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 float-left">
+                                <button type="submit" class="btn no-margin btn-danger" name="deletewholecart">Warenkorb leeren</button>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 float-left">
+                            <div class="float-right sm-width-100">
+                                <div class="padding-top float-left sm-margin-top sm-margin-bottom">Summe(<?php echo $carttotalcount ?> Ticket(s)): <?php echo $carttotalprice ?> €</div>
+                                <button type="submit" class="btn no-margin btn-primary float-left" name="buycart">bestellen</button>
+                            </div>
+                            </div>
                         </div>
                     </form>
                 </div>

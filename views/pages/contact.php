@@ -27,7 +27,7 @@
         <table>
             <tr>
                 <th class="float-left">Vorname:</th>
-                <td><input type="text" name="firstname" value=""></td>
+                <td><input type="text" name="firstname" value="" required></td>
             </tr>
             <tr>
                 <th class="float-left">Nachname:</th>
