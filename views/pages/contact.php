@@ -21,7 +21,7 @@
     }
 ?>
 
-<form action=<?php echo($formAction)?> method="post">
+<form action="index.php?a=confirmcontact" method="post">
     <fieldset>
         <legend>Persönliche Angaben</legend>
         <table>
@@ -31,11 +31,11 @@
             </tr>
             <tr>
                 <th class="float-left">Nachname:</th>
-                <td><input type="text" name="lastname" value=""></td>
+                <td><input type="text" name="lastname" value="" required></td>
             </tr>
             <tr>
                 <th class="float-left">E-Mail:</th>
-                <td><input type="text" name="mail" value=""></td>
+                <td><input type="text" name="mail" value="" required></td>
             </tr>
         </table>
     </fieldset><br>
@@ -46,7 +46,7 @@
             <tr>
                 <th class="float-left">Bitte auswählen:</th>
                 <td>
-                    <select name="problem">
+                    <select name="problem" required>
                         <option value="ticketshop">Fehler beim Ticketkauf</option>
                         <option value="missingticket">Ticket erscheint nicht in meiner Inbox</option>
                         <option value="password">Passwort vergessen</option>
@@ -57,7 +57,7 @@
             </tr>
             <tr>
                 <th class="float-left"><br><br>Probleme/Fragen:</th>
-                <td><br><br><textarea name="information" cols="30" rows="10"></textarea></td><br><br>
+                <td><br><br><textarea name="information" cols="30" rows="10" required></textarea></td>
             </tr>
         </table>
     </fieldset>
