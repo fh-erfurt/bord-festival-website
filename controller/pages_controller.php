@@ -443,7 +443,7 @@ class PagesController extends \app\core\Controller
 				$ticketid = $_POST['ticketid'] ?? null;
 				$ticketcount = $_POST['ticketcount'] ?? null;
 	
-				$success = false;
+				$success = 0;
 				if($ticketcount !== '0')
 				{
 					if($ticketid !== null && $ticketcount !== null)
@@ -613,6 +613,46 @@ class PagesController extends \app\core\Controller
 	}
 
 	public function actionContact()
+	{
+		$title = "Kontakt";
+
+		$this->_params['title'] = $title;
+
+		if(isset($_POST['inputContact']))
+		{
+			$firstname = $_POST['firstname'] ?? null;
+			$lastname = $_POST['lastname'] ?? null;
+			$mail = $_POST['mail'] ?? null;
+
+			$inputProblem = $_POST['problem'] ?? null;
+			$inputInformation = $_POST['information'] ?? null;
+			
+			if($firstname != null && $lastname != null && $mail != null && $inputProblem != null && $inputInformation != null)
+			{
+				$success = 1;
+			}
+			else
+			{
+				$success = 0;
+				
+				// Array containing information about which inputs are missing
+				$missingInformation = [];
+
+				$missingInformation['firstname'] 	= $this->_POST['firstname'] !== null ? true : false;
+				$missingInformation['lastname'] 	= $this->_POST['lastname'] !== null ? true : false;
+				$missingInformation['mail']			= $this->_POST['mail'] !== null ? true : false;
+				$missingInformation['problem'] 		= $this->_POST['problem'] !== null ? true : false;
+				$missingInformation['information'] 	= $this->_POST['information'] !== null ? true : false;
+			}
+
+			// PRG (Post-Redirect-Get) Pattern to allow page reloading after using a form
+			http_response_code( 303 );
+			header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
+			exit();
+		}
+	}
+
+	public function actionConfirmcontact()
 	{
 		$title = "Kontakt";
 

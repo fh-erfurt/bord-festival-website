@@ -77,7 +77,7 @@
                         <input type="text" id="ticketcount<?php echo $ticketid; ?>" class="input-inline input-ticketcount" name="ticketcount" value="1">
                         <button type="button" class="btn-fixed btn-primary no-script" onclick="changeTicketcount('ticketcount<?php echo $ticketid; ?>', '+')">+</button>
                         </p><br>
-                        <button type="submit" class="btn btn-primary" name="addtickettocart">in den Warenkorb</button>
+                        <button type="submit" class="btn btn-primary" name="addtickettocart">In den Warenkorb</button>
                     </form>
                     <?php
                     }

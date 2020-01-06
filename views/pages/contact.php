@@ -2,7 +2,26 @@
 <br>
 <p>Bitte füllen Sie alle Angaben aus und drücken Sie auf absenden, um mit uns in Kontakt zu treten.</p><br><br>
 
-<form action="index.php?a=confirmContact">
+<?php
+    if(isset($_GET['success']))
+    { 
+        if($_GET['success'] === '0')
+        {
+            $formAction = "";
+            ?>
+            <div class="alert alert-danger">
+                Bitte alle fehlenden Felder ausfüllen!
+            </div><br>
+            <?php
+        }
+        else if($_GET['success'] === '1')
+        {
+            $formAction = "index.php?a=confirmcontact";
+        }
+    }
+?>
+
+<form action=<?php echo($formAction)?> method="post">
     <fieldset>
         <legend>Persönliche Angaben</legend>
         <table>
@@ -38,9 +57,9 @@
             </tr>
             <tr>
                 <th class="float-left"><br><br>Probleme/Fragen:</th>
-                <td><br><br><textarea name="information" cols="30" rows="10"></textarea><br><br></td>
+                <td><br><br><textarea name="information" cols="30" rows="10"></textarea></td><br><br>
             </tr>
         </table>
     </fieldset>
-    <button type="submit" class="btn btn-primary">Bestätigen</button>
+    <input type="submit" name="inputContact" class="btn btn-primary" value="Bestätigen">
 </form>
