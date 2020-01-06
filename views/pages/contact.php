@@ -24,7 +24,7 @@
     }
 ?>
 
-<form method="post">
+<form action="index.php?a=confirmcontact" method="post">
     <fieldset>
         <legend>Persönliche Angaben</legend>
         <table>
