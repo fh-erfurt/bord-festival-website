@@ -3,39 +3,45 @@
 <p>Bitte füllen Sie alle Angaben aus und drücken Sie auf absenden, um mit uns in Kontakt zu treten.</p><br><br>
 
 <?php
-    if(isset($_GET['success']))
+    if(!isset($missing))
+    {
+        $missing['firstname'] = false;
+        $missing['lastname'] = false;
+        $missing['mail'] = false;
+        $missing['information'] = false;
+    }
+
+    if(isset($success))
     { 
-        if($_GET['success'] === '0')
+        if($success === '0')
         {
-            $formAction = "";
-            ?>
+                ?>
             <div class="alert alert-danger">
                 Bitte alle fehlenden Felder ausfüllen!
             </div><br>
             <?php
         }
-        else if($_GET['success'] === '1')
-        {
-            $formAction = "index.php?a=confirmcontact";
-        }
     }
 ?>
 
-<form action="index.php?a=confirmcontact" method="post">
+<form method="post">
     <fieldset>
         <legend>Persönliche Angaben</legend>
         <table>
             <tr>
                 <th class="float-left">Vorname:</th>
-                <td><input type="text" name="firstname" value="" required></td>
+                <td><input class="form-control <?php echo ($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
+                     type="text" name="firstname" value=""></td>
             </tr>
             <tr>
                 <th class="float-left">Nachname:</th>
-                <td><input type="text" name="lastname" value="" required></td>
+                <td><input class="form-control <?php echo ($missing['lastname'] === false) ? '' : 'text-validate-red' ?>"
+                     type="text" name="lastname" value=""></td>
             </tr>
             <tr>
                 <th class="float-left">E-Mail:</th>
-                <td><input type="text" name="mail" value="" required></td>
+                <td><input class="form-control <?php echo ($missing['mail'] === false) ? '' : 'text-validate-red' ?>"
+                     type="text" name="mail" value=""></td>
             </tr>
         </table>
     </fieldset><br>
@@ -46,7 +52,7 @@
             <tr>
                 <th class="float-left">Bitte auswählen:</th>
                 <td>
-                    <select name="problem" required>
+                    <select name="problem">
                         <option value="ticketshop">Fehler beim Ticketkauf</option>
                         <option value="missingticket">Ticket erscheint nicht in meiner Inbox</option>
                         <option value="password">Passwort vergessen</option>
@@ -57,7 +63,8 @@
             </tr>
             <tr>
                 <th class="float-left"><br><br>Probleme/Fragen:</th>
-                <td><br><br><textarea name="information" cols="30" rows="10" required></textarea></td>
+                <td><br><br><textarea class="<?php echo ($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
+                             name="information" cols="30" rows="10"></textarea></td>
             </tr>
         </table>
     </fieldset>

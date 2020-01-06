@@ -629,26 +629,23 @@ class PagesController extends \app\core\Controller
 			
 			if($firstname != null && $lastname != null && $mail != null && $inputProblem != null && $inputInformation != null)
 			{
-				$success = 1;
+				$this->_params['success'] = 1;
 			}
 			else
 			{
-				$success = 0;
+				$this->_params['success'] = 0;
 				
 				// Array containing information about which inputs are missing
 				$missingInformation = [];
 
-				$missingInformation['firstname'] 	= $this->_POST['firstname'] !== null ? true : false;
-				$missingInformation['lastname'] 	= $this->_POST['lastname'] !== null ? true : false;
-				$missingInformation['mail']			= $this->_POST['mail'] !== null ? true : false;
-				$missingInformation['problem'] 		= $this->_POST['problem'] !== null ? true : false;
-				$missingInformation['information'] 	= $this->_POST['information'] !== null ? true : false;
-			}
+				$missingInformation['firstname'] 	= $_POST['firstname'] != null ? false : true;
+				$missingInformation['lastname'] 	= $_POST['lastname'] != null ? false : true;
+				$missingInformation['mail']			= $_POST['mail'] != null ? false : true;
+				$missingInformation['problem'] 		= $_POST['problem'] != null ? false : true;
+				$missingInformation['information'] 	= $_POST['information'] != null ? false : true;
 
-			// PRG (Post-Redirect-Get) Pattern to allow page reloading after using a form
-			http_response_code( 303 );
-			header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
-			exit();
+				$this->_params['missing'] = $missingInformation;
+			}
 		}
 	}
 

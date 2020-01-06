@@ -2,17 +2,17 @@
 
 <table>
     <tr>
-        <th>Lieferadresse: </th>
+        <th class="float-left">Lieferadresse: </th>
         <td><?= $this->_params['STREET'] . '<br>' . $this->_params['ZIP'] .
         '<br>' . $this->_params['CITY'] . '<br>' . $this->_params['COUNTRY']?></td>
     </tr>
     <tr>
-        <th>Preis: </th>
+        <th class="float-left">Preis: </th>
         <td><?= $this->_params['PRICE']?></td>
     </tr>
 </table>
-<div class="ticket border-bottom">
+<div class="ticket border-top">
     <form method="post">
-        <button type="submit" class="btn btn-primary" name="deletewholecart">Besätigen</button>
+        <button type="submit" class="btn btn-primary" name="deletewholecart">Bestätigen</button>
     </form>
 </div>

@@ -44,7 +44,7 @@ if(isset($_GET['a']))
 											<a href="#">Dokumentation</a>
 										</div>
 									</div>
-									<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) : ?>
+									<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) :?>
 										<div class="dropdown">
 											<a href="?a=profile" class="nav-link<?php echo ($activeAction === 'profile' ? ' nav-link-active' : ''); ?>"><div class="hide-mobile">Mein </div>Konto <div class="dropdown-icons"><span class="dropdown-closed">▸</span><span class="dropdown-open">▾</span></div></a>
 											<div class="dropdown-content">
