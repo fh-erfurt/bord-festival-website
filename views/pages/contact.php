@@ -13,18 +13,20 @@
 
     if(isset($success))
     { 
-        if($success === '0')
+        if($success == 0)
         {
-                ?>
+            ?>
             <div class="alert alert-danger">
                 Bitte alle fehlenden Felder ausfüllen!
             </div><br>
             <?php
         }
     }
+   
 ?>
 
-<form action="index.php?a=confirmcontact" method="post">
+
+<form method="post">
     <fieldset>
         <legend>Persönliche Angaben</legend>
         <table>
@@ -63,7 +65,7 @@
             </tr>
             <tr>
                 <th class="float-left"><br><br>Probleme/Fragen:</th>
-                <td><br><br><textarea class="<?php echo ($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
+                <td><br><br><textarea class="<?php echo ($missing['information'] === false) ? '' : 'text-validate-red' ?>"
                              name="information" cols="30" rows="10"></textarea></td>
             </tr>
         </table>

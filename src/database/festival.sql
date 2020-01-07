@@ -83,7 +83,7 @@ CREATE TABLE carts
 );
 
 --
--- Tabellenstruktur für Tabelle shoppingcart
+-- Tabellenstruktur für Tabelle caritems
 --
 DROP TABLE IF EXISTS cartitems;
 
@@ -109,6 +109,24 @@ CREATE TABLE newsletter
   MAIL varchar(100) NOT NULL,
   CREATEDAT datetime NOT NULL,
   CONSTRAINT newsletter_pk PRIMARY KEY (NEWSLETTERID)
+);
+
+--
+-- Tabellenstruktur für Tabelle support_mails
+--
+
+DROP TABLE IF EXISTS support_mails;
+
+CREATE TABLE support_mails
+(
+  MAILID int(10) NOT NULL AUTO_INCREMENT,
+  FIRSTNAME varchar(50) NOT NULL,
+  LASTNAME varchar(50) NOT NULL,
+  MAIL varchar(100) NOT NULL,
+  PROBLEM varchar(30) NOT NULL,
+  INFORMATION varchar(2048) NOT NULL,
+  CREATEDAT datetime NOT NULL,
+  CONSTRAINT support_mails_pk PRIMARY KEY (MAILID)
 );
 
 --

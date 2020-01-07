@@ -6,12 +6,16 @@ use Address;
 use Ticket;
 use Cart;
 use Cartitem;
+use Support_mail; 	
+
 
 require_once 'model/user.class.php';
 require_once 'model/address.class.php';
 require_once 'model/ticket.class.php';
 require_once 'model/cart.class.php';
 require_once 'model/cartitem.class.php';
+require_once 'model/support_mail.class.php';
+
 
 class PagesController extends \app\core\Controller
 {
@@ -20,6 +24,9 @@ class PagesController extends \app\core\Controller
 	{
 		$title = "Welcome - BORD-Festival";
 		$this->_params['title'] = $title;
+
+		$this->_params['title'];
+		$title;
 
 		$date1 = new \DateTime("2020-07-31 18:00:00");
 		$date2 = new \DateTime();
@@ -206,15 +213,15 @@ class PagesController extends \app\core\Controller
 			$addressID = $client[0]['ADDRESSID'];
 			$address = Address::find('ADDRESSID = ' . $addressID);
 
-			$this->_params['MAIL'] = $client[0]['MAIL'];
-			$this->_params['FIRSTNAME'] = $client[0]['FIRSTNAME'];
-			$this->_params['LASTNAME'] = $client[0]['LASTNAME'];
-			$this->_params['DATEOFBIRTH'] = $client[0]['DATEOFBIRTH'];
+			$this->_params['mail'] = $client[0]['MAIL'];
+			$this->_params['firstname'] = $client[0]['FIRSTNAME'];
+			$this->_params['lastname'] = $client[0]['LASTNAME'];
+			$this->_params['dateofbirth'] = $client[0]['DATEOFBIRTH'];
 
-			$this->_params['STREET'] = $address[0]['STREET'];
-			$this->_params['ZIP'] = $address[0]['ZIP'];
-			$this->_params['CITY'] = $address[0]['CITY'];
-			$this->_params['COUNTRY'] = $address[0]['COUNTRY'];
+			$this->_params['street'] = $address[0]['STREET'];
+			$this->_params['zip'] = $address[0]['ZIP'];
+			$this->_params['city'] = $address[0]['CITY'];
+			$this->_params['country'] = $address[0]['COUNTRY'];
 		}
 		else
 		{
@@ -238,12 +245,12 @@ class PagesController extends \app\core\Controller
 
 			if($cart[0]['TOTALCOUNT'] !== '0')
 			{
-				$this->_params['PRICE'] = $cart[0]['TOTALPRICE'];
+				$this->_params['price'] = $cart[0]['TOTALPRICE'];
 			
-				$this->_params['STREET'] = $address[0]['STREET'];
-				$this->_params['ZIP'] = $address[0]['ZIP'];
-				$this->_params['CITY'] = $address[0]['CITY'];
-				$this->_params['COUNTRY'] = $address[0]['COUNTRY'];
+				$this->_params['street'] = $address[0]['STREET'];
+				$this->_params['zip'] = $address[0]['ZIP'];
+				$this->_params['city'] = $address[0]['CITY'];
+				$this->_params['country'] = $address[0]['COUNTRY'];
 			}
 			else
 			{
@@ -630,6 +637,21 @@ class PagesController extends \app\core\Controller
 			if($firstname != null && $lastname != null && $mail != null && $inputProblem != null && $inputInformation != null)
 			{
 				$this->_params['success'] = 1;
+
+				$maildata = [
+					'FIRSTNAME'		=> $firstname,
+					'LASTNAME'		=> $lastname,
+					'MAIL'			=> $mail,
+					'PROBLEM'		=> $inputProblem,
+					'INFORMATION'	=> $inputInformation,
+					'CREATEDAT' 	=> date("Y-m-d H:i:s")
+				];
+
+				$newSupportMail = new Support_mail($maildata);
+
+				$newSupportMail->save();
+
+				header('Location: index.php?a=confirmcontact');
 			}
 			else
 			{

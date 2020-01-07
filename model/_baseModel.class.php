@@ -6,7 +6,6 @@ abstract class BaseModel
 	const TYPE_FLOAT = 'float';
 	const TYPE_STRING = 'string';
 	
-	
 	protected $schema = [];
 	protected $data = [];
 	 
