@@ -21,11 +21,6 @@
             </div><br>
             <?php
         }
-        var_dump($_POST['firstname']);
-        var_dump($_POST['lastname']);
-        var_dump($_POST['mail']);
-        var_dump($_POST['problem']);
-        var_dump($_POST['information']);
     }
    
 ?>

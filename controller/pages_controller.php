@@ -648,9 +648,10 @@ class PagesController extends \app\core\Controller
 				];
 
 				$newSupportMail = new Support_mail($maildata);
+
 				$newSupportMail->save();
 
-				// header('Location: index.php?a=confirmcontact');
+				header('Location: index.php?a=confirmcontact');
 			}
 			else
 			{
