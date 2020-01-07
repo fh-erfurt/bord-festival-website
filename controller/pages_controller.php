@@ -213,15 +213,15 @@ class PagesController extends \app\core\Controller
 			$addressID = $client[0]['ADDRESSID'];
 			$address = Address::find('ADDRESSID = ' . $addressID);
 
-			$this->_params['MAIL'] = $client[0]['MAIL'];
-			$this->_params['FIRSTNAME'] = $client[0]['FIRSTNAME'];
-			$this->_params['LASTNAME'] = $client[0]['LASTNAME'];
-			$this->_params['DATEOFBIRTH'] = $client[0]['DATEOFBIRTH'];
+			$this->_params['mail'] = $client[0]['MAIL'];
+			$this->_params['firstname'] = $client[0]['FIRSTNAME'];
+			$this->_params['lastname'] = $client[0]['LASTNAME'];
+			$this->_params['dateofbirth'] = $client[0]['DATEOFBIRTH'];
 
-			$this->_params['STREET'] = $address[0]['STREET'];
-			$this->_params['ZIP'] = $address[0]['ZIP'];
-			$this->_params['CITY'] = $address[0]['CITY'];
-			$this->_params['COUNTRY'] = $address[0]['COUNTRY'];
+			$this->_params['street'] = $address[0]['STREET'];
+			$this->_params['zip'] = $address[0]['ZIP'];
+			$this->_params['city'] = $address[0]['CITY'];
+			$this->_params['country'] = $address[0]['COUNTRY'];
 		}
 		else
 		{
@@ -245,12 +245,12 @@ class PagesController extends \app\core\Controller
 
 			if($cart[0]['TOTALCOUNT'] !== '0')
 			{
-				$this->_params['PRICE'] = $cart[0]['TOTALPRICE'];
+				$this->_params['price'] = $cart[0]['TOTALPRICE'];
 			
-				$this->_params['STREET'] = $address[0]['STREET'];
-				$this->_params['ZIP'] = $address[0]['ZIP'];
-				$this->_params['CITY'] = $address[0]['CITY'];
-				$this->_params['COUNTRY'] = $address[0]['COUNTRY'];
+				$this->_params['street'] = $address[0]['STREET'];
+				$this->_params['zip'] = $address[0]['ZIP'];
+				$this->_params['city'] = $address[0]['CITY'];
+				$this->_params['country'] = $address[0]['COUNTRY'];
 			}
 			else
 			{

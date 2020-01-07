@@ -1,34 +1,34 @@
 <table>
     <tr>
-        <th>Vorname:</th>
-        <td><?=$this->_params['FIRSTNAME']?></td>
+        <th class="float-left">Vorname:</th>
+        <td><?=$firstname?></td>
     </tr>
     <tr>
-        <th>Nachname:</th>
-        <td><?=$this->_params['LASTNAME']?></td>
+        <th class="float-left">nachname:</th>
+        <td><?=$lastname?></td>
     </tr>
     <tr>
-        <th>Geburtstag:</th>
-        <td><?=$this->_params['DATEOFBIRTH']?></td>
+        <th class="float-left">Geburtstag:</th>
+        <td><?=$dateofbirth?></td>
     </tr>
     <tr>
-        <th>E-Mail:</th>
-        <td><?=$this->_params['MAIL']?></td>
+        <th class="float-left">E-Mail:</th>
+        <td><?=$mail?></td>
     </tr>
     <tr>
-        <th>Straße:</th>
-        <td><?=$this->_params['STREET']?></td>
+        <th class="float-left">Straße:</th>
+        <td><?=$street?></td>
     </tr>
     <tr>
-        <th>ZIP:</th>
-        <td><?=$this->_params['ZIP']?></td>
+        <th class="float-left">ZIP:</th>
+        <td><?=$zip?></td>
     </tr>
     <tr>
-        <th>Stadt:</th>
-        <td><?=$this->_params['CITY']?></td>
+        <th class="float-left">Stadt:</th>
+        <td><?=$city?></td>
     </tr>
     <tr>
-        <th>Land:</th>
-        <td><?=$this->_params['COUNTRY']?></td>
+        <th class="float-left">Land:</th>
+        <td><?=$country?></td>
     </tr>
 </table>

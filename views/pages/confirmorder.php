@@ -3,12 +3,12 @@
 <table>
     <tr>
         <th class="float-left">Lieferadresse: </th>
-        <td><?= $this->_params['STREET'] . '<br>' . $this->_params['ZIP'] .
-        '<br>' . $this->_params['CITY'] . '<br>' . $this->_params['COUNTRY']?></td>
+        <td><?= $street . '<br>' .  $zip .
+        '<br>' . $city . '<br>' . $country?></td>
     </tr>
     <tr>
         <th class="float-left">Preis: </th>
-        <td><?= $this->_params['PRICE']?></td>
+        <td><?= $price?></td>
     </tr>
 </table>
 <div class="ticket border-top">
