@@ -6,12 +6,16 @@ use Address;
 use Ticket;
 use Cart;
 use Cartitem;
+use Support_mail; 	
+
 
 require_once 'model/user.class.php';
 require_once 'model/address.class.php';
 require_once 'model/ticket.class.php';
 require_once 'model/cart.class.php';
 require_once 'model/cartitem.class.php';
+require_once 'model/support_mail.class.php';
+
 
 class PagesController extends \app\core\Controller
 {
@@ -20,6 +24,9 @@ class PagesController extends \app\core\Controller
 	{
 		$title = "Welcome - BORD-Festival";
 		$this->_params['title'] = $title;
+
+		$this->_params['title'];
+		$title;
 
 		$date1 = new \DateTime("2020-07-31 18:00:00");
 		$date2 = new \DateTime();
@@ -630,6 +637,20 @@ class PagesController extends \app\core\Controller
 			if($firstname != null && $lastname != null && $mail != null && $inputProblem != null && $inputInformation != null)
 			{
 				$this->_params['success'] = 1;
+
+				$maildata = [
+					'FIRSTNAME'		=> $firstname,
+					'LASTNAME'		=> $lastname,
+					'MAIL'			=> $mail,
+					'PROBLEM'		=> $inputProblem,
+					'INFORMATION'	=> $inputInformation,
+					'CREATEDAT' 	=> date("Y-m-d H:i:s")
+				];
+
+				$newSupportMail = new Support_mail($maildata);
+				$newSupportMail->save();
+
+				// header('Location: index.php?a=confirmcontact');
 			}
 			else
 			{
