@@ -6,7 +6,9 @@ use Address;
 use Ticket;
 use Cart;
 use Cartitem;
-use Support_mail; 	
+use Support_mail;
+use Purchase;
+use Purchaseitem;
 
 
 require_once 'model/user.class.php';
@@ -15,6 +17,8 @@ require_once 'model/ticket.class.php';
 require_once 'model/cart.class.php';
 require_once 'model/cartitem.class.php';
 require_once 'model/support_mail.class.php';
+require_once 'model/purchase.class.php';
+require_once 'model/purchaseitem.class.php';
 
 
 class PagesController extends \app\core\Controller
@@ -251,6 +255,52 @@ class PagesController extends \app\core\Controller
 				$this->_params['zip'] = $address[0]['ZIP'];
 				$this->_params['city'] = $address[0]['CITY'];
 				$this->_params['country'] = $address[0]['COUNTRY'];
+
+				if(isset($_POST['deletewholecart']))
+				{
+					$purchase = Purchase::find('CLIENTID = ' . $clientid);
+
+					$purchaseid = 0;
+
+					if(empty($purchase))
+					{
+						$purchasedata = [
+							'PURCHASEDAT'	=> date("Y-m-d H:i:s"),
+							'CLIENTID' 		=> $clientid				
+						];
+				
+						$tmppurchase = new Purchase($purchasedata);
+						$tmppurchase->save();
+				
+						$purchaseid = $tmppurchase->schema['PURCHASEID'];
+					}
+					else
+					{
+						$purchaseid = $purchase[0]['PURCHASEID'];
+					}
+
+					$cartitems = Cartitem::find('CARTID = ' . $cart[0]['CARTID']);
+
+					foreach($cartitems as $item)
+					{
+						$ticketid = $item['TICKETID'];
+						$ticket = Ticket::find('TICKETID = '.$ticketid);
+						$ticketprice = $ticket[0]['PRICE'];
+						
+						$purchaseitemdata = [
+							'PURCHASEID'	=> $purchaseid,
+							'TICKETID'  	=> $item['TICKETID'],
+							'QUANTITY' 		=> $item['QUANTITY'],
+							'PRICE'	        => $ticketprice
+						];
+
+						$purchaseitem = new Purchaseitem($purchaseitemdata);
+						$purchaseitem->save();
+					}
+
+					self::deletewholecart($clientid);
+					header('Location: index.php?c=pages&a=index');
+				}
 			}
 			else
 			{
@@ -261,12 +311,6 @@ class PagesController extends \app\core\Controller
 		{
 			header('Location: index.php?c=pages&a=error404');
 		}
-
-		if(isset($_POST['deletewholecart']))
-			{
-				self::deletewholecart($clientid);
-				header('Location: index.php?c=pages&a=index');
-			}
 	}
 
 	public function actionShoppingcart()
