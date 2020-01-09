@@ -99,6 +99,37 @@ CREATE TABLE cartitems
 );
 
 --
+-- Tabellenstruktur für Tabelle purchases
+--
+DROP TABLE IF EXISTS purchases;
+
+CREATE TABLE purchases 
+(
+  PURCHASEID int(7) NOT NULL AUTO_INCREMENT,
+  PURCHASEDAT datetime NOT NULL,
+  CLIENTID int(7) NOT NULL,
+  CONSTRAINT purchases_pk PRIMARY KEY (PURCHASEID),
+  CONSTRAINT purchases_clients_fk FOREIGN KEY (CLIENTID) REFERENCES clients (CLIENTID)
+);
+
+--
+-- Tabellenstruktur für Tabelle purchaseitems
+--
+DROP TABLE IF EXISTS purchaseitems;
+
+CREATE TABLE purchaseitems 
+(
+  PURCHASEITEMID int(10) NOT NULL AUTO_INCREMENT,
+  PURCHASEID int(7) NOT NULL,
+  TICKETID int(7) NOT NULL,
+  QUANTITY int(3) NOT NULL,
+  PRICE decimal(6,2) NOT NULL,
+  CONSTRAINT purchaseitems_pk PRIMARY KEY (PURCHASEITEMID),
+  CONSTRAINT purchaseitems_purchases_fk FOREIGN KEY (PURCHASEID) REFERENCES purchases (PURCHASEID),
+  CONSTRAINT purchaseitems_tickets_fk FOREIGN KEY (TICKETID) REFERENCES tickets (TICKETID)
+);
+
+--
 -- Tabellenstruktur für Tabelle newsletter
 --
 DROP TABLE IF EXISTS newsletter;
