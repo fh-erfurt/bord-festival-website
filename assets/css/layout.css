@@ -226,7 +226,9 @@ main {}
         max-width: 100%;
     }
     .item-details {    
-      padding: 1em;
+        padding-left: 1em;
+        padding-top: 1em;
+        padding-bottom: 1em;
       width: 65%;
       margin-left: 35%;
     }
@@ -260,7 +262,9 @@ main {}
         max-width: 100%;
     }
     .item-details {    
-      padding: 1em;
+        padding-left: 1em;
+        padding-top: 1em;
+        padding-bottom: 1em;
       width: 65%;
       margin-left: 35%;
     }
@@ -370,7 +374,8 @@ main {}
     clear: both;
     overflow: hidden;
     display: flex;
-    padding: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     min-height: 190px;
 }
 .item-image {    
@@ -381,9 +386,11 @@ main {}
     max-width: 100%;
 }
 .item-details {    
-  padding: 1em;
-  width: 100%;
-  margin-left: 23%;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    width: 100%;
+    margin-left: 23%;
 }
 
 .ticket.border-top {

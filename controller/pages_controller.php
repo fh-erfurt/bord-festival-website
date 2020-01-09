@@ -604,7 +604,6 @@ class PagesController extends \app\core\Controller
 		$tickets = Ticket::find();
 		if(!empty($tickets))
 		{
-			$ticketdata = $tickets[0];
 			$this->_params['tickets'] = $tickets;
 		}
 	}

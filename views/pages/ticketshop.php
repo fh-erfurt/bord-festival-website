@@ -60,7 +60,7 @@
                     }
                     ?>
                     <div class="float-left item-image">
-                        <img class="" src="assets/img/ticket_VIP.png" />
+                        <img class="" src="<?php echo $ticket['IMAGEURL']; ?>" />
                     </div>
                     <div class="float-left item-details">                    
                     <h4 class="ticket-name"><?php echo $ticket['NAME']; ?></h4>
