@@ -108,6 +108,7 @@ class PagesController extends \app\core\Controller
 							'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
 							'ADDRESSID' 	=> $address->schema['ADDRESSID']
 						];
+
 						$user = new Client($clientdata);
 						$user->save();
 						
@@ -713,9 +714,9 @@ class PagesController extends \app\core\Controller
 			$inputInformation = $_POST['information'] ?? null;
 			
 			if($firstname != null && $lastname != null && $mail != null && $inputProblem != null && $inputInformation != null)
-			{
+			{	
 				$this->_params['success'] = 1;
-
+				
 				$maildata = [
 					'FIRSTNAME'		=> $firstname,
 					'LASTNAME'		=> $lastname,
@@ -726,7 +727,6 @@ class PagesController extends \app\core\Controller
 				];
 
 				$newSupportMail = new Support_mail($maildata);
-
 				$newSupportMail->save();
 
 				header('Location: index.php?a=confirmcontact');
