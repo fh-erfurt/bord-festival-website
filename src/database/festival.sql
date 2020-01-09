@@ -114,7 +114,6 @@ CREATE TABLE newsletter
 --
 -- Tabellenstruktur für Tabelle support_mails
 --
-
 DROP TABLE IF EXISTS support_mails;
 
 CREATE TABLE support_mails
@@ -132,7 +131,6 @@ CREATE TABLE support_mails
 --
 -- Initialbefüllung für Ticket-Tabelle
 --
-
 INSERT INTO `tickets` (`TICKETID`, `NAME`, `DESCRIPTION`, `PRICE`) VALUES 
                       (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von xxx bis yyy', '49.99'), 
                       (NULL, 'VIP', 'für die Bonzen', '999.99');
