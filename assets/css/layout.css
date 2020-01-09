@@ -300,18 +300,17 @@ main {}
 }
 
 .band-title {
-    background: rgba(88, 0, 0, 0.7);
+    background: rgb(143, 0, 0);
     position: absolute;
     text-align: center;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 2rem;
-    width: 50%;
-    height: 25%;
-    top: 50%;
-	left: 25%;
+    padding: 10px;
+    bottom: 10%;
+    left: 50%;
 	font-weight: bold;
 	font-size: 1.2rem;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    cursor: default;
 }
 
 .lineup-col:hover .content-details {

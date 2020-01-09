@@ -43,92 +43,83 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
+            <img class="lineup-image" src="assets/img/dth.jpg" />
+            <div class="band-title">
+                Die Toten Hosen
+            </div>
+        </div> 
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
             <img class="lineup-image" src="assets/img/festival_band.png" />
+            <div class="band-title">
+                Platzhalter
+            </div>
+        </div> 
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
+            <img class="lineup-image" src="assets/img/metallica.jpg" />
+            <div class="band-title">
+                Metallica
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
+            <img class="lineup-image" src="assets/img/festival_band.png" />
+            <div class="band-title">
+                Platzhalter
+            </div>
+        </div> 
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
+            <img class="lineup-image" src="assets/img/rammstein.jpg" />
             <div class="band-title">
                 Rammstein
             </div>
         </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
             <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
+            <div class="band-title">
+                Platzhalter
             </div>
-        </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
-            </div>
-        </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
-            </div>
-        </div> 
+        </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
+            <img class="lineup-image" src="assets/img/system_of_a_down.jpg" />
+            <div class="band-title">
+                System of a down
             </div>
         </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
             <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
+            <div class="band-title">
+                Platzhalter
             </div>
         </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
+            <img class="lineup-image" src="assets/img/slipknot.jpg" />
+            <div class="band-title">
+                Slipknot
             </div>
-        </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
-            </div>
-        </div> 
+        </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
             <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
+            <div class="band-title">
+                Platzhalter
             </div>
         </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
+            <img class="lineup-image" src="assets/img/disturbed.jpg" />
+            <div class="band-title">
+                Disturbed
             </div>
         </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
+        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
             <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
+            <div class="band-title">
+                Platzhalter
             </div>
-        </div> 
-        <div class="col-lg-3 col-md-4 col-sm-6 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/festival_band.png" />
-            <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Band</h3>
-                <p class="content-text">Beschreibung</p>
-            </div>
-        </div> 
+        </div>
     </div>
 </section>
