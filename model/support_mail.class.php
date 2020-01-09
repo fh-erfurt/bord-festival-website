@@ -10,7 +10,7 @@ class Support_mail extends BaseModel
 		'LASTNAME' 		=> [ 'type' => BaseModel::TYPE_STRING ],
 		'MAIL'			=> [ 'type' => BaseModel::TYPE_STRING ],
 		'PROBLEM' 		=> [ 'type' => BaseModel::TYPE_STRING ],
-		'INFROMATION' 	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'INFORMATION' 	=> [ 'type' => BaseModel::TYPE_STRING ],
 		'CREATEDAT' 	=> [ 'type' => BaseModel::TYPE_STRING ]
 	];
 }
