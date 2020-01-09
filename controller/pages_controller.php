@@ -226,6 +226,40 @@ class PagesController extends \app\core\Controller
 			$this->_params['zip'] = $address[0]['ZIP'];
 			$this->_params['city'] = $address[0]['CITY'];
 			$this->_params['country'] = $address[0]['COUNTRY'];
+
+			$purchase = Purchase::find('CLIENTID = '.$clientid);
+
+			if(!empty($purchase))
+			{
+				$purchaseid = $purchase[0]['PURCHASEID'];
+				
+				$purchaseitems = Purchaseitem::find('PURCHASEID = '.$purchaseid);				
+				$this->_params['purchaseitems'] = $purchaseitems;
+
+				$purchasehistory = [];
+
+				foreach($purchaseitems as $item)
+				{
+					$ticketid = $item['TICKETID'];
+					$ticket = Ticket::find('TICKETID = '.$ticketid);
+
+					$ticketname = $ticket[0]['NAME'];
+					$ticketdescription = $ticket[0]['DESCRIPTION'];
+					$quantity = $item['QUANTITY'];
+					$price = $item['PRICE'];
+
+					$iteminfo = [
+						$ticketname,
+						$ticketdescription,
+						$price,
+						$quantity
+					];
+
+					$purchasehistory[] = $iteminfo;
+				}	
+
+				$this->_params['purchasehistory'] = $purchasehistory;
+			}
 		}
 		else
 		{
