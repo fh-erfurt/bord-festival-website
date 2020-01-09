@@ -62,6 +62,7 @@ CREATE TABLE tickets
   NAME varchar(100) NOT NULL,
   DESCRIPTION varchar(500) NOT NULL,
   PRICE decimal(6,2) NOT NULL,
+  IMAGEURL varchar(100) NOT NULL,
   CONSTRAINT tickets_pk PRIMARY KEY (TICKETID),
   CONSTRAINT ticketname_uq UNIQUE (NAME)
 );

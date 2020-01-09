@@ -338,7 +338,21 @@ main {}
     background: #0c0c0c;
 }
 
-.ticket {}
+.ticket {
+    clear: both;
+    overflow: hidden;
+    display: flex;
+    padding: 0.5em;
+}
+.item-image {    
+    position: absolute;
+    width: 20%;
+}
+.item-details {    
+  padding: 1em;
+  width: 80%;
+  margin-left: 20%;
+}
 
 .ticket.border-top {
     border-top: 3px solid #333;
