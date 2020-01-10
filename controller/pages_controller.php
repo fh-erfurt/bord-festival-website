@@ -170,10 +170,10 @@ class PagesController extends \app\core\Controller
 		{
 			if(isset($_POST['submit']))
 			{
-				$mail    = $_POST['email'] ?? null;
+				$mail    = $_POST['mail'] ?? null;
 				$password = $_POST['password'] ?? null;
 
-				if(isset($mail) && isset($password))
+				if($mail != null && $password != null)
 				{
 					$where = 'MAIL = '.$mail;
 
@@ -204,6 +204,12 @@ class PagesController extends \app\core\Controller
 				}
 				else
 				{
+					$missingInformation = [];
+
+					$missingInformation['mail'] = $mail != null ? false : true;
+					$missingInformation['password'] = $password != null ? false : true;
+
+					$this->_params['missing'] = $missingInformation;
 					$this->_params['loginerror'] = 'Bitte E-Mail und Passwort eingeben!';
 				}
 			}
