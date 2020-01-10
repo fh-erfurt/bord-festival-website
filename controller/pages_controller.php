@@ -739,12 +739,10 @@ class PagesController extends \app\core\Controller
 			$mail = $_POST['mail'] ?? null;
 
 			$inputProblem = $_POST['problem'] ?? null;
-			$inputInformation = $_POST['information'] ?? null;
+			$inputInformation = trim($_POST['information']) ?? null;
 			
 			if($firstname != null && $lastname != null && $mail != null && $inputProblem != null && $inputInformation != null)
 			{	
-				$this->_params['success'] = 1;
-				
 				$maildata = [
 					'FIRSTNAME'		=> $firstname,
 					'LASTNAME'		=> $lastname,
@@ -761,16 +759,16 @@ class PagesController extends \app\core\Controller
 			}
 			else
 			{
-				$this->_params['success'] = 0;
+				$this->_params['contacterror'] = 'Bitte alle fehlenden Felder ausfüllen!';
 				
 				// Array containing information about which inputs are missing
 				$missingInformation = [];
 
-				$missingInformation['firstname'] 	= $_POST['firstname'] != null ? false : true;
-				$missingInformation['lastname'] 	= $_POST['lastname'] != null ? false : true;
-				$missingInformation['mail']			= $_POST['mail'] != null ? false : true;
-				$missingInformation['problem'] 		= $_POST['problem'] != null ? false : true;
-				$missingInformation['information'] 	= $_POST['information'] != null ? false : true;
+				$missingInformation['firstname'] 	= $firstname != null ? false : true;
+				$missingInformation['lastname'] 	= $lastname != null ? false : true;
+				$missingInformation['mail']			= $mail != null ? false : true;
+				$missingInformation['problem'] 		= $inputProblem != null ? false : true;
+				$missingInformation['information'] 	= $inputInformation != null ? false : true;
 
 				$this->_params['missing'] = $missingInformation;
 			}
