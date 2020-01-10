@@ -35,7 +35,7 @@
 						<div class="input-group">
 							<label class="form-for" for="InputEmail">E-Mail</label>
 							<input id="InputEmail" class="form-control <?php echo($missing['mail'] === false) ? '' : 'text-validate-red' ?>"
-								   type="text" name="mail" placeholder="E-Mail">
+								   type="email" name="mail" placeholder="E-Mail">
 							<?php if($missing['mail'] === true) : ?>
 								<div class="validation-helptext">Bitte geben Sie Ihre E-Mail an</div>
 							<?php endif; ?>
@@ -43,7 +43,7 @@
 						<div class="input-group">
 							<label class="form-for" for="InputPassword">Passwort</label>
 							<input id="InputPassword" class="form-control <?php echo($missing['password1'] === false) ? '' : 'text-validate-red' ?>"
-							       type="text" name="password1" placeholder="Passwort">
+							       type="password" name="password1" placeholder="Passwort">
 							<?php if($missing['password1'] === true) : ?>
 								<div class="validation-helptext">Bitte geben Sie ein Passwort an</div>
 							<?php endif; ?>
@@ -51,7 +51,7 @@
 						<div class="input-group">
 							<label class="form-for" for="InputPassword2">Passwort wiederholen</label>
 							<input id="InputPassword2" class="form-control <?php echo($missing['password2'] === false) ? '' : 'text-validate-red' ?>"
-								   type="text" name="password2" placeholder="Passwort wiederholen">
+								   type="password" name="password2" placeholder="Passwort wiederholen">
 							<?php if($missing['password2'] === true) : ?>
 								<div class="validation-helptext">Bitte bestätigen Sie das Passwort</div>
 							<?php endif; ?>
@@ -78,7 +78,7 @@
 						<div class="input-group">
 							<label class="form-for" for="InputBirthday">Geburtsdatum</label>
 							<input id="InputBirthday" class="form-control <?php echo($missing['dateofbirth'] === false) ? '' : 'text-validate-red' ?>"
-								   type="text" name="dateofbirth" placeholder="Geburtsdatum">
+								   type="date" name="dateofbirth" placeholder="Geburtsdatum">
 							<?php if($missing['dateofbirth'] === true) : ?>
 								<div class="validation-helptext">Bitte geben Sie Ihr Geburtsdatum an</div>
 							<?php endif; ?>
