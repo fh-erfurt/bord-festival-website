@@ -62,6 +62,7 @@ CREATE TABLE tickets
   NAME varchar(100) NOT NULL,
   DESCRIPTION varchar(500) NOT NULL,
   PRICE decimal(6,2) NOT NULL,
+  IMAGEURL varchar(100) NOT NULL,
   CONSTRAINT tickets_pk PRIMARY KEY (TICKETID),
   CONSTRAINT ticketname_uq UNIQUE (NAME)
 );
@@ -162,6 +163,9 @@ CREATE TABLE support_mails
 --
 -- Initialbefüllung für Ticket-Tabelle
 --
-INSERT INTO `tickets` (`TICKETID`, `NAME`, `DESCRIPTION`, `PRICE`) VALUES 
-                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von xxx bis yyy', '49.99'), 
-                      (NULL, 'VIP', 'für die Bonzen', '999.99');
+INSERT INTO `tickets` (`TICKETID`, `NAME`, `DESCRIPTION`, `PRICE`, `IMAGEURL`) VALUES 
+                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'assets/img/ticket_freitag.png'), 
+                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'assets/img/ticket_samstag.png'), 
+                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'assets/img/ticket_sonntag.png'), 
+                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von xxx bis yyy', '149.99', 'assets/img/ticket_3tage.png'), 
+                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'assets/img/ticket_vip.png');

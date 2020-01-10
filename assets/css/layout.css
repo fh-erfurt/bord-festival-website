@@ -216,6 +216,24 @@ main {}
     padding: 0.375rem;
 }
 
+@media (max-width: 950px),
+(max-device-width: 950px) {
+    .item-image {    
+        position: absolute;
+        width: 30%;
+    }
+    .item-image img {    
+        max-width: 100%;
+    }
+    .item-details {    
+        padding-left: 1em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+      width: 65%;
+      margin-left: 35%;
+    }
+}
+
 @media (max-width: 600px),
 (max-device-width: 600px) {
     .newsletter-label {
@@ -236,6 +254,21 @@ main {}
     .sm-width-100 {
         width: 100%;
     }
+    .item-image {    
+        position: absolute;
+        width: 30%;
+    }
+    .item-image img {    
+        max-width: 100%;
+    }
+    .item-details {    
+        padding-left: 1em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+      width: 65%;
+      margin-left: 35%;
+    }
+    
 }
 
 .input-inline {
@@ -300,18 +333,17 @@ main {}
 }
 
 .band-title {
-    background: rgba(88, 0, 0, 0.7);
+    background: rgb(143, 0, 0);
     position: absolute;
     text-align: center;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 2rem;
-    width: 50%;
-    height: 25%;
-    top: 50%;
-    left: 25%;
-    font-weight: bold;
-    font-size: 1.2rem;
+    padding: 10px;
+    bottom: 10%;
+    left: 50%;
+	font-weight: bold;
+	font-size: 1.2rem;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    cursor: default;
 }
 
 .lineup-col:hover .content-details {
@@ -338,7 +370,28 @@ main {}
     background: #0c0c0c;
 }
 
-.ticket {}
+.ticket {
+    clear: both;
+    overflow: hidden;
+    display: flex;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    min-height: 190px;
+}
+.item-image {    
+    position: absolute;
+    max-width: 20%;
+}
+.item-image img {    
+    max-width: 100%;
+}
+.item-details {    
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    width: 100%;
+    margin-left: 23%;
+}
 
 .ticket.border-top {
     border-top: 3px solid #333;

@@ -59,6 +59,10 @@
                         <?php
                     }
                     ?>
+                    <div class="float-left item-image">
+                        <img class="" src="<?php echo $ticket['IMAGEURL']; ?>" />
+                    </div>
+                    <div class="float-left item-details">                    
                     <h4 class="ticket-name"><?php echo $ticket['NAME']; ?></h4>
                     <p class="ticket-description">
                         <?php echo $ticket['DESCRIPTION']; ?>
@@ -86,12 +90,13 @@
                     ?>
                     <p>Preis: <?php echo $ticket['PRICE']; ?> €</p>
                     <button class="btn btn-disabled" disabled>in den Warenkorb</button> Bitte einloggen!
-                </div>
                     <?php
                     }
                 
                     $i++;
                     ?>
+                    </div>
+                    </div>
                 <?php 
                 }
             }

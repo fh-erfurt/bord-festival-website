@@ -32,3 +32,31 @@
         <td><?=$country?></td>
     </tr>
 </table>
+<?php 
+$i = 0;
+if(!empty($purchasehistory))
+{
+    foreach($purchasehistory as $item) {
+        if($i > 0)
+        {
+            ?>
+    <div class="ticket border-bottom">
+            <?php
+        }
+        else
+        {
+            ?>
+    <div class="ticket border-top border-bottom">
+            <?php
+        }
+        ?>
+        <h4 class="ticket-name"><?php echo $item[0]; ?>: <?php echo $item[2] ?> € pro Ticket</h4>
+        <p class="ticket-description">
+            <?php echo $item[1]; ?>
+        </p>
+            Menge: <?php echo $item[3]; ?> Gesamtpreis: <?php echo $item[3] * $item[2]; ?> €
+    </div>
+    <?php
+        $i++;
+    }
+}
