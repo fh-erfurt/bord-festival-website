@@ -309,9 +309,9 @@ main {}
     width: 50%;
     height: 25%;
     top: 50%;
-	left: 25%;
-	font-weight: bold;
-	font-size: 1.2rem;
+    left: 25%;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 .lineup-col:hover .content-details {
@@ -355,10 +355,11 @@ main {}
 .text-validate-red {
     border: 2px solid red;
 }
+
 .validation-helptext {
-	clear: both;
-	text-align: left;
-	color: rgb(255, 87, 87);
-	font-size: 0.75rem;
-	display: none;
+    clear: both;
+    text-align: left;
+    color: rgb(255, 87, 87);
+    font-size: 0.75rem;
+    display: block;
 }

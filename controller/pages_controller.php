@@ -66,75 +66,97 @@ class PagesController extends \app\core\Controller
 		{
 			if(isset($_POST['reg_user']))
 			{
-				$mail		= $_POST['email'] ?? null;
-				$password1	= $_POST['password_1'] ?? null;
-				$password2	= $_POST['password_2'] ?? null;
+				$mail		= $_POST['mail'] ?? null;
+				$password1	= $_POST['password1'] ?? null;
+				$password2	= $_POST['password2'] ?? null;
 
-				$dateofbirth= $_POST['geburtstag'] ?? null;
-				$firstname	= $_POST['vorname'] ?? null;
-				$lastname	= $_POST['nachname'] ?? null;
-				$street		= $_POST['strassehnr'] ?? null;
-				$zip		= $_POST['plz'] ?? null;
-				$city		= $_POST['ort'] ?? null;
+				$dateofbirth= $_POST['dateofbirth'] ?? null;
+				$firstname	= $_POST['firstname'] ?? null;
+				$lastname	= $_POST['lastname'] ?? null;
+				$street		= $_POST['street'] ?? null;
+				$zip		= $_POST['zip'] ?? null;
+				$city		= $_POST['city'] ?? null;
 
-				$where = 'MAIL = "'.$mail.'"';
-
-				$client = Client::find($where);
-
-				if(empty($client))
+				if($mail != null && $password1 != null && $password2 != null && $dateofbirth != null && $firstname != null &&
+				   $lastname != null && $street != null && $zip != null && $city != null)
 				{
-					if($password1 === $password2)
-					{
-						$addressdata = [
-							'STREET' 	=> $street,
-							'ZIP' 		=> $zip,
-							'CITY' 		=> $city,
-							'COUNTRY' 	=> 'GER'						
-						];
-	
-						$address = new Address($addressdata);
-	
-						$address->save();
-	
-						$hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
-	
-						$clientdata = [						
-							'MAIL' 			=> $mail,
-							'FIRSTNAME'		=> $firstname,
-							'LASTNAME' 		=> $lastname,
-							'DATEOFBIRTH'	=> $dateofbirth,
-							'PASSWORD' 		=> $hashedpassword,
-							'CREATEDAT' 	=> date("Y-m-d H:i:s"),
-							'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
-							'ADDRESSID' 	=> $address->schema['ADDRESSID']
-						];
+					$where = 'MAIL = "'.$mail.'"';
 
-						$user = new Client($clientdata);
-						$user->save();
-						
-						$_SESSION['loggedIn'] = true;
-						$_SESSION['client_mail'] = $mail;
-						$_SESSION['client_id'] = $user->schema['CLIENTID'];
-	
-						header('Location: index.php');
+					$client = Client::find($where);
+
+					if(empty($client))
+					{
+						if($password1 === $password2)
+						{
+							$addressdata = [
+								'STREET' 	=> $street,
+								'ZIP' 		=> $zip,
+								'CITY' 		=> $city,
+								'COUNTRY' 	=> 'GER'						
+							];
+		
+							$address = new Address($addressdata);
+		
+							$address->save();
+		
+							$hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
+		
+							$clientdata = [						
+								'MAIL' 			=> $mail,
+								'FIRSTNAME'		=> $firstname,
+								'LASTNAME' 		=> $lastname,
+								'DATEOFBIRTH'	=> $dateofbirth,
+								'PASSWORD' 		=> $hashedpassword,
+								'CREATEDAT' 	=> date("Y-m-d H:i:s"),
+								'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
+								'ADDRESSID' 	=> $address->schema['ADDRESSID']
+							];
+
+							$user = new Client($clientdata);
+							$user->save();
+							
+							$_SESSION['loggedIn'] = true;
+							$_SESSION['client_mail'] = $mail;
+							$_SESSION['client_id'] = $user->schema['CLIENTID'];
+		
+							header('Location: index.php');
+						}
+						else
+						{
+							$_SESSION['loggedIn'] = false;
+							// ERROR: passwort nicht gleich
+						}
 					}
 					else
 					{
-						$_SESSION['loggedIn'] = false;
-						// ERROR: passwort nicht gleich
+						$this->_params['registererror'] = 'Diese E-Mail-Adresse ist bereits registriert.
+						Du kannst dich <a href="index.php?a=login" class="link">hier</a> einloggen.';
+						
 					}
-
 				}
 				else
 				{
-					$this->_params['registererror'] = 'Diese E-Mail-Adresse ist bereits registriert. Du kannst dich <a href="index.php?a=login" class="link">hier</a> einloggen.';
+					$missingInformation = [];
+
+					$missingInformation['mail'] 		= $_POST['mail'] != null ? false : true;
+					$missingInformation['password1'] 	= $_POST['password1'] != null ? false : true;
+					$missingInformation['password2']	= $_POST['password2'] != null ? false : true;
+					$missingInformation['dateofbirth'] 	= $_POST['dateofbirth'] != null ? false : true;
+					$missingInformation['firstname'] 	= $_POST['firstname'] != null ? false : true;
+					$missingInformation['lastname'] 	= $_POST['lastname'] != null ? false : true;
+					$missingInformation['street']		= $_POST['street'] != null ? false : true;
+					$missingInformation['zip'] 			= $_POST['zip'] != null ? false : true;
+					$missingInformation['city'] 		= $_POST['city'] != null ? false : true;
 					
+					$this->_params['missing'] = $missingInformation;
+
+					$this->_params['registererror'] = "Bitte alle fehlenden Felder ausfüllen!";
 				}
 			}
 		}
 		else
 		{
-			header('Location: index.php');
+			header('Location: index.php?a=error404');
 		}
 	}
 
@@ -153,7 +175,7 @@ class PagesController extends \app\core\Controller
 
 				if(isset($mail) && isset($password))
 				{
-					$where = 'MAIL = "'.$mail.'"';
+					$where = 'MAIL = '.$mail;
 
 					$user = Client::find($where);
 					
@@ -166,6 +188,7 @@ class PagesController extends \app\core\Controller
 							$_SESSION['loggedIn'] = true;
 							$_SESSION['client_mail'] = $mail;
 							$_SESSION['client_id'] = $userdata['CLIENTID'];
+
 							header('Location: index.php');
 
 						}

@@ -4,7 +4,7 @@
         <td><?=$firstname?></td>
     </tr>
     <tr>
-        <th class="float-left">nachname:</th>
+        <th class="float-left">Nachname:</th>
         <td><?=$lastname?></td>
     </tr>
     <tr>
