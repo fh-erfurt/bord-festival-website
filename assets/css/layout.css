@@ -218,19 +218,19 @@ main {}
 
 @media (max-width: 950px),
 (max-device-width: 950px) {
-    .item-image {    
+    .item-image {
         position: absolute;
         width: 30%;
     }
-    .item-image img {    
+    .item-image img {
         max-width: 100%;
     }
-    .item-details {    
+    .item-details {
         padding-left: 1em;
         padding-top: 1em;
         padding-bottom: 1em;
-      width: 65%;
-      margin-left: 35%;
+        width: 65%;
+        margin-left: 35%;
     }
 }
 
@@ -254,21 +254,20 @@ main {}
     .sm-width-100 {
         width: 100%;
     }
-    .item-image {    
+    .item-image {
         position: absolute;
         width: 30%;
     }
-    .item-image img {    
+    .item-image img {
         max-width: 100%;
     }
-    .item-details {    
+    .item-details {
         padding-left: 1em;
         padding-top: 1em;
         padding-bottom: 1em;
-      width: 65%;
-      margin-left: 35%;
+        width: 65%;
+        margin-left: 35%;
     }
-    
 }
 
 .input-inline {
@@ -339,8 +338,8 @@ main {}
     padding: 10px;
     bottom: 10%;
     left: 50%;
-	font-weight: bold;
-	font-size: 1.2rem;
+    font-weight: bold;
+    font-size: 1.2rem;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     cursor: default;
@@ -378,14 +377,17 @@ main {}
     padding-bottom: 0.5em;
     min-height: 190px;
 }
-.item-image {    
+
+.item-image {
     position: absolute;
     max-width: 20%;
 }
-.item-image img {    
+
+.item-image img {
     max-width: 100%;
 }
-.item-details {    
+
+.item-details {
     padding-left: 1em;
     padding-top: 1em;
     padding-bottom: 1em;
