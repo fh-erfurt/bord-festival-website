@@ -49,7 +49,7 @@
                     </p>
                         Menge: <?php echo $item[4]; ?> Gesamtpreis: <?php echo $item[4] * $item[3]; ?> €
                     <p>
-                    <form action="index.php?a=shoppingcart" method="post">
+                    <form action="index.php?c=order&a=shoppingcart" method="post">
                         <input type="hidden" name="cartitemid" value="<?php echo $item[0]; ?>" />
                         <button type="submit" class="btn btn-danger" name="deleteitemfromcart">löschen</button>
                     </form>
@@ -73,7 +73,7 @@
             {
                 ?>
                 <div class="bottom-buttons">
-                    <form action="index.php?a=shoppingcart" method="post">
+                    <form method="post">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-12 float-left">
                                 <button type="submit" class="btn no-margin btn-danger" name="deletewholecart">Warenkorb leeren</button>

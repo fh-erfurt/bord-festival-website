@@ -73,7 +73,7 @@
                     {
                         $ticketid = $ticket["TICKETID"];
                     ?>
-                    <form action="index.php?a=ticketshop" method="post">
+                    <form method="post">
                         <input type="hidden" name="ticketid" value="<?php echo $ticketid; ?>" />    
                         <p>Preis: <?php echo $ticket['PRICE']; ?> €</p>
                         <p>Anzahl: 

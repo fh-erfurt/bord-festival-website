@@ -36,7 +36,7 @@ if(isset($_GET['a']))
 								</div>
 								<div class="col-lg-8 col-md-12 col-sm-12 float-left nav-menu">
 									<a class="nav-link<?php echo ($activeAction === 'ticketshop' ? ' nav-link-active' : ''); ?>"
-									   href="?a=ticketshop">Tickets</a>
+									   href="?c=order&a=ticketshop">Tickets</a>
 									<div class="dropdown">
 										<a href='#' class="nav-link<?php echo ($activeAction === 'contact' ? ' nav-link-active' : ''); ?>">
 										<div>Über<div class="hide-mobile"> uns</div> <div class="dropdown-icons"><span class="dropdown-closed">▸</span>
@@ -44,7 +44,7 @@ if(isset($_GET['a']))
 										</a>
 										<div class="dropdown-content">
 											<a class="<?php echo ($activeAction === 'contact' ? ' dropdown-link-active' : ''); ?>"
-											   href="?a=contact">Kontakt</a>
+											   href="?c=contact&a=contact">Kontakt</a>
 											<a href="#">Anfahrt</a>
 											<a href="#">Dokumentation</a>
 										</div>
@@ -53,19 +53,23 @@ if(isset($_GET['a']))
 										if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) :
 									?>
 										<div class="dropdown">
-											<a href="?a=profile" class="nav-link<?php echo ($activeAction === 'profile' ? ' nav-link-active' : ''); ?>">
-											<div class="hide-mobile">Mein </div>Konto <div class="dropdown-icons"><span class="dropdown-closed">▸</span>
-											<span class="dropdown-open">▾</span></div></a>
+											<a href="?c=account&a=profile" class="nav-link<?php echo ($activeAction === 'profile' ? ' nav-link-active' : ''); ?>">
+												<div class="hide-mobile">Mein </div>Konto 
+												<div class="dropdown-icons">
+													<span class="dropdown-closed">▸</span>
+													<span class="dropdown-open">▾</span>
+												</div>
+											</a>
 											<div class="dropdown-content">
-												<a class="<?php echo ($activeAction === 'profile' ? ' dropdown-link-active' : ''); ?>" href="?a=profile">Account</a>
-												<a href="?a=logout">Abmelden</a>
+												<a class="<?php echo ($activeAction === 'profile' ? ' dropdown-link-active' : ''); ?>" href="?c=account&a=profile">Account</a>
+												<a href="?c=account&a=logout">Abmelden</a>
 											</div>
 										</div>
 									<?php
 										else :
 									?>
-										<a class="nav-link<?php echo ($activeAction === 'login' ? ' nav-link-active' : ''); ?>" href="?a=login">Login</a>
-										<a class="nav-link<?php echo ($activeAction === 'register' ? ' nav-link-active' : ''); ?>" href="?a=register">Registrieren</a>
+										<a class="nav-link<?php echo ($activeAction === 'login' ? ' nav-link-active' : ''); ?>" href="?c=account&a=login">Login</a>
+										<a class="nav-link<?php echo ($activeAction === 'register' ? ' nav-link-active' : ''); ?>" href="?c=account&a=register">Registrieren</a>
 									<?php
 										endif;
 									?>
@@ -75,13 +79,13 @@ if(isset($_GET['a']))
 											if(empty($carttotalcount) || empty($carttotalprice)) :
 									?>
 												<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>"
-												href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>)
+												href="?c=order&a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>)
 												</a>
 										<?php 
 											else :
 										?>							
 												<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>" ´
-												href="?a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> €
+												href="?c=order&a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> €
 												</a>
 										<?php 
 											endif;

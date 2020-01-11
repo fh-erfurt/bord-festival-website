@@ -237,8 +237,8 @@ abstract class BaseModel
     public static function find($where = '', $debug = false)
     {
         $db  = $GLOBALS['database'];
-        $result = null;
-
+		$result = null;
+		
         try
         {
             $sql = 'SELECT * FROM ' . self::tablename();
