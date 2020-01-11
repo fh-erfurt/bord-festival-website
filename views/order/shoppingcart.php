@@ -33,13 +33,13 @@
                     if($i > 0)
                     {
                         ?>
-                <div class="ticket border-bottom">
+                <div class="border-bottom">
                         <?php
                     }
                     else
                     {
                         ?>
-                <div class="ticket border-top border-bottom">
+                <div class="border-top border-bottom">
                         <?php
                     }
                     ?>
