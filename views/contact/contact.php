@@ -3,7 +3,6 @@
 <p>Bitte füllen Sie alle Angaben aus und drücken Sie auf absenden, um mit uns in Kontakt zu treten.</p><br><br>
 
 <?php
-    var_dump($missing['information']);
     if(!isset($missing))
     {
         $missing['firstname'] = false;

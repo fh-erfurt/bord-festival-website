@@ -63,6 +63,7 @@ CREATE TABLE items
   DESCRIPTION varchar(500) NOT NULL,
   PRICE decimal(6,2) NOT NULL,
   CATEGORY varchar(30) NOT NULL,
+  FILTERCATEGORY varchar(30) NOT NULL,
   IMAGEURL varchar(100) NOT NULL,
   CONSTRAINT items_pk PRIMARY KEY (ITEMID),
   CONSTRAINT itemname_uq UNIQUE (NAME)
@@ -96,6 +97,7 @@ CREATE TABLE cartitems
   ITEMID int(7) NOT NULL,
   QUANTITY int(3) NOT NULL,
   CATEGORY varchar(30) NOT NULL,
+  FILTERCATEGORY varchar(30) NOT NULL,
   CONSTRAINT cartitems_pk PRIMARY KEY (CARTITEMID),
   CONSTRAINT cartitems_carts_fk FOREIGN KEY (CARTID) REFERENCES carts (CARTID),
   CONSTRAINT cartitems_items_fk FOREIGN KEY (ITEMID) REFERENCES items (ITEMID)
@@ -165,9 +167,14 @@ CREATE TABLE support_mails
 --
 -- Initialbefüllung für Item-Tabelle
 --
-INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `CATEGORY`, `IMAGEURL`) VALUES 
-                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'ticket', 'assets/img/ticket_freitag.png'), 
-                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'ticket', 'assets/img/ticket_samstag.png'), 
-                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'ticket', 'assets/img/ticket_sonntag.png'), 
-                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von xxx bis yyy', '149.99', 'ticket', 'assets/img/ticket_3tage.png'), 
-                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'ticket', 'assets/img/ticket_vip.png');
+INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `CATEGORY`, `FILTERCATEGORY`, `IMAGEURL`) VALUES 
+                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'tickets', 'ticket', 'assets/img/ticket_freitag.png'), 
+                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'tickets', 'ticket', 'assets/img/ticket_samstag.png'), 
+                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'tickets', 'ticket', 'assets/img/ticket_sonntag.png'), 
+                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von Freitag bis Sonntag', '149.99', 'tickets', 'ticket', 'assets/img/ticket_3tage.png'), 
+                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'tickets', 'ticket', 'assets/img/ticket_vip.png'),
+                      (NULL, 'Original BORD Hoodie', 'Aus echter Baumwolle', '49.99', 'merchandise', 'hoodie', 'assets/img/ticket_vip.png'),
+                      (NULL, 'BORD Festival Cap', 'Written Logo', '19.99', 'merchandise', 'cap', 'assets/img/ticket_vip.png'),
+                      (NULL, 'BORD Festival Feuerzeug', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'lighter', 'assets/img/ticket_vip.png'),
+                      (NULL, 'BORD Festival Poster', '1% Chance für gratis Autogramm', '9.99', 'merchandise', 'poster', 'assets/img/ticket_vip.png');
+                      
