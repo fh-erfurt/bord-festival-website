@@ -3,7 +3,7 @@
 namespace app\controller;
 use Client;
 use Address;
-use Ticket;
+use Item;
 use Cart;
 use Cartitem;
 use Support_mail;
@@ -13,7 +13,7 @@ use Purchaseitem;
 
 require_once 'model/user.class.php';
 require_once 'model/address.class.php';
-require_once 'model/ticket.class.php';
+require_once 'model/item.class.php';
 require_once 'model/cart.class.php';
 require_once 'model/cartitem.class.php';
 require_once 'model/support_mail.class.php';

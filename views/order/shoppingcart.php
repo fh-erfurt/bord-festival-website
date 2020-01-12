@@ -11,7 +11,7 @@
                     $cartDeleted = true;
                     ?>        
                     <div class="alert alert-success">
-                        Das Ticket/die Tickets wurde(n) erfolgreich aus dem Warenkorb gelöscht
+                        Das Item/die Items wurde(n) erfolgreich aus dem Warenkorb gelöscht
                     </div>
                     <?php
                 }
@@ -43,8 +43,8 @@
                         <?php
                     }
                     ?>
-                    <h4 class="ticket-name"><?php echo $item[1]; ?>: <?php echo $item[3] ?> € pro Ticket</h4>
-                    <p class="ticket-description">
+                    <h4 class="item-name"><?php echo $item[1]; ?>: <?php echo $item[3] ?> € pro Gegenstand</h4>
+                    <p class="item-description">
                         <?php echo $item[2]; ?>
                     </p>
                         Menge: <?php echo $item[4]; ?> Gesamtpreis: <?php echo $item[4] * $item[3]; ?> €
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-12 float-left">
                             <div class="float-right sm-width-100">
-                                <div class="padding-top float-left sm-margin-top sm-margin-bottom">Summe(<?php echo $carttotalcount ?> Ticket(s)): <?php echo $carttotalprice ?> €</div>
+                                <div class="padding-top float-left sm-margin-top sm-margin-bottom">Summe(<?php echo $carttotalcount ?> Item(s)): <?php echo $carttotalprice ?> €</div>
                                 <button type="submit" class="btn no-margin btn-primary float-left" name="buycart">bestellen</button>
                             </div>
                             </div>

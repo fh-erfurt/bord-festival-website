@@ -52,19 +52,20 @@ CREATE TABLE clients
 );
 
 --
--- Tabellenstruktur für Tabelle tickets
+-- Tabellenstruktur für Tabelle items
 --
-DROP TABLE IF EXISTS tickets;
+DROP TABLE IF EXISTS items;
 
-CREATE TABLE tickets 
+CREATE TABLE items 
 (
-  TICKETID int(2) NOT NULL AUTO_INCREMENT,
+  ITEMID int(2) NOT NULL AUTO_INCREMENT,
   NAME varchar(100) NOT NULL,
   DESCRIPTION varchar(500) NOT NULL,
   PRICE decimal(6,2) NOT NULL,
+  CATEGORY varchar(30) NOT NULL,
   IMAGEURL varchar(100) NOT NULL,
-  CONSTRAINT tickets_pk PRIMARY KEY (TICKETID),
-  CONSTRAINT ticketname_uq UNIQUE (NAME)
+  CONSTRAINT items_pk PRIMARY KEY (ITEMID),
+  CONSTRAINT itemname_uq UNIQUE (NAME)
 );
 
 --
@@ -92,11 +93,12 @@ CREATE TABLE cartitems
 (
   CARTITEMID int(10) NOT NULL AUTO_INCREMENT,
   CARTID int(7) NOT NULL,
-  TICKETID int(7) NOT NULL,
+  ITEMID int(7) NOT NULL,
   QUANTITY int(3) NOT NULL,
+  CATEGORY varchar(30) NOT NULL,
   CONSTRAINT cartitems_pk PRIMARY KEY (CARTITEMID),
   CONSTRAINT cartitems_carts_fk FOREIGN KEY (CARTID) REFERENCES carts (CARTID),
-  CONSTRAINT cartitems_tickets_fk FOREIGN KEY (TICKETID) REFERENCES tickets (TICKETID)
+  CONSTRAINT cartitems_items_fk FOREIGN KEY (ITEMID) REFERENCES items (ITEMID)
 );
 
 --
@@ -122,12 +124,12 @@ CREATE TABLE purchaseitems
 (
   PURCHASEITEMID int(10) NOT NULL AUTO_INCREMENT,
   PURCHASEID int(7) NOT NULL,
-  TICKETID int(7) NOT NULL,
+  ITEMID int(7) NOT NULL,
   QUANTITY int(3) NOT NULL,
   PRICE decimal(6,2) NOT NULL,
   CONSTRAINT purchaseitems_pk PRIMARY KEY (PURCHASEITEMID),
   CONSTRAINT purchaseitems_purchases_fk FOREIGN KEY (PURCHASEID) REFERENCES purchases (PURCHASEID),
-  CONSTRAINT purchaseitems_tickets_fk FOREIGN KEY (TICKETID) REFERENCES tickets (TICKETID)
+  CONSTRAINT purchaseitems_items_fk FOREIGN KEY (ITEMID) REFERENCES items (ITEMID)
 );
 
 --
@@ -161,11 +163,11 @@ CREATE TABLE support_mails
 );
 
 --
--- Initialbefüllung für Ticket-Tabelle
+-- Initialbefüllung für Item-Tabelle
 --
-INSERT INTO `tickets` (`TICKETID`, `NAME`, `DESCRIPTION`, `PRICE`, `IMAGEURL`) VALUES 
-                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'assets/img/ticket_freitag.png'), 
-                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'assets/img/ticket_samstag.png'), 
-                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'assets/img/ticket_sonntag.png'), 
-                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von xxx bis yyy', '149.99', 'assets/img/ticket_3tage.png'), 
-                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'assets/img/ticket_vip.png');
+INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `CATEGORY`, `IMAGEURL`) VALUES 
+                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'ticket', 'assets/img/ticket_freitag.png'), 
+                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'ticket', 'assets/img/ticket_samstag.png'), 
+                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'ticket', 'assets/img/ticket_sonntag.png'), 
+                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von xxx bis yyy', '149.99', 'ticket', 'assets/img/ticket_3tage.png'), 
+                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'ticket', 'assets/img/ticket_vip.png');

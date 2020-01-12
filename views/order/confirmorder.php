@@ -11,7 +11,7 @@
         <td><?= $price?></td>
     </tr>
 </table>
-<div class="ticket border-top">
+<div class="item border-top">
     <form method="post">
         <button type="submit" class="btn btn-primary" name="deletewholecart">Bestätigen</button>
     </form>

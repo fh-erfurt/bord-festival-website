@@ -277,7 +277,7 @@ main {}
     border: 1px solid #222;
 }
 
-.input-ticketcount {
+.input-itemcount {
     width: 50px;
 }
 
@@ -369,7 +369,7 @@ main {}
     background: #0c0c0c;
 }
 
-.ticket {
+.item {
     clear: both;
     overflow: hidden;
     display: flex;

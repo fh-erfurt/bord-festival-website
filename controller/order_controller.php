@@ -3,7 +3,7 @@
 namespace app\controller;
 use Client;
 use Address;
-use Ticket;
+use Item;
 use Cart;
 use Cartitem;
 use Support_mail;
@@ -13,7 +13,7 @@ use Purchaseitem;
 
 require_once 'model/user.class.php';
 require_once 'model/address.class.php';
-require_once 'model/ticket.class.php';
+require_once 'model/item.class.php';
 require_once 'model/cart.class.php';
 require_once 'model/cartitem.class.php';
 require_once 'model/support_mail.class.php';
@@ -23,23 +23,24 @@ require_once 'model/purchaseitem.class.php';
 
 class OrderController extends \app\core\Controller
 {
-	public function actionTicketshop()
+	public function actionShop()
 	{
-		$title = "Tickets - BORD-Festival";
+		$title = "Shop - BORD-Festival";
 		$this->_params['title'] = $title;
 
-		if(isset($_POST['addtickettocart']))
+		if(isset($_POST['additemtocart']))
 		{
 			if(isset($_SESSION['client_id']))
 			{
 				$clientid = $_SESSION['client_id'];
-				$ticketid = $_POST['ticketid'] ?? null;
-				$ticketcount = $_POST['ticketcount'] ?? null;
+				$itemid = $_POST['itemid'] ?? null;
+				$itemcount = $_POST['itemcount'] ?? null;
+				$itemcategory = $_POST['itemcategory'] ?? null;
 	
 				$success = 0;
-				if($ticketcount !== '0')
+				if($itemcount !== '0')
 				{
-					if($ticketid !== null && $ticketcount !== null)
+					if($itemid !== null && $itemcount !== null)
 					{
 						$cart = Cart::find('CLIENTID = '.$clientid);
 						$cartid = 0;
@@ -57,29 +58,31 @@ class OrderController extends \app\core\Controller
 							$oldtotalprice = $cart[0]['TOTALPRICE'];
 						}
 
-						$cartitem = Cartitem::find('CARTID = '.$cartid.' AND TICKETID = '.$ticketid);
+						$cartitem = Cartitem::find('CARTID = '.$cartid.' AND ITEMID = '.$itemid);
 
 						if(empty($cartitem))
 						{
 							$cartitemdata = [
 								'CARTID'		=> $cartid,
-								'TICKETID'  	=> $ticketid,
-								'QUANTITY' 		=> $ticketcount
+								'ITEMID'  		=> $itemid,
+								'QUANTITY' 		=> $itemcount,
+								'CATEGORY'		=> $itemcategory
 							];
 						}
 						else
 						{
-							$oldticketcount = $cartitem[0]['QUANTITY'];
-							$newticketcount = $oldticketcount + $ticketcount;
+							$olditemcount = $cartitem[0]['QUANTITY'];
+							$newitemcount = $olditemcount + $itemcount;
 							$cartitemdata = [
 								'CARTITEMID'	=> $cartitem[0]['CARTITEMID'],
 								'CARTID'		=> $cartid,
-								'TICKETID'  	=> $ticketid,
-								'QUANTITY' 		=> $newticketcount
+								'ITEMID'  		=> $itemid,
+								'QUANTITY' 		=> $newitemcount,
+								'CATEGORY'		=> $itemcategory
 							];
-							//die(var_dump($cartitemdata));
 
 						}
+						//die(var_dump($cartitemdata));
 						$newcartitem = new Cartitem($cartitemdata);
 						$newcartitem->save();
 
@@ -108,10 +111,10 @@ class OrderController extends \app\core\Controller
 
 		}
 		
-		$tickets = Ticket::find();
-		if(!empty($tickets))
+		$items = Item::find();
+		if(!empty($items))
 		{
-			$this->_params['tickets'] = $tickets;
+			$this->_params['items'] = $items;
 		}
     }
     
@@ -163,8 +166,9 @@ class OrderController extends \app\core\Controller
 						$cartitemdata = [
 							'CARTITEMID'	=> $cartitem[0]['CARTITEMID'],
 							'CARTID'		=> $cartitem[0]['CARTID'],
-							'TICKETID'  	=> $cartitem[0]['TICKETID'],
+							'ITEMID'  		=> $cartitem[0]['ITEMID'],
 							'QUANTITY' 		=> $cartitem[0]['QUANTITY'],
+							'CATEGORY'		=> $cartitem[0]['CATEGORY']
 						];
 
 						$cartid = $cartitem[0]['CARTID'];
@@ -214,24 +218,26 @@ class OrderController extends \app\core\Controller
 
 				$shoppingcart = [];
 
-				foreach($cartitems as $item)
+				foreach($cartitems as $cartitem)
 				{
-					// CartitemId is needed to remove a cartitem-entry, if the Client deletes a ticket in his shoppingcart
-					$cartitemid = $item['CARTITEMID'];
-					$ticketid = $item['TICKETID'];
-					$ticket = Ticket::find('TICKETID = '.$ticketid);
+					// CartitemId is needed to remove a cartitem-entry, if the Client deletes a item in his shoppingcart
+					$cartitemid = $cartitem['CARTITEMID'];
+					$itemid = $cartitem['ITEMID'];
+					$item = Item::find('ITEMID = '.$itemid);
 
-					$ticketname = $ticket[0]['NAME'];
-					$ticketdescription = $ticket[0]['DESCRIPTION'];
-					$ticketprice = $ticket[0]['PRICE'];
-					$quantity = $item['QUANTITY'];
+					$itemname = $item[0]['NAME'];
+					$itemdescription = $item[0]['DESCRIPTION'];
+					$itemprice = $item[0]['PRICE'];
+					$quantity = $cartitem['QUANTITY'];
+					$itemcategory = $cartitem['CATEGORY'];
 
 					$iteminfo = [
 						$cartitemid,
-						$ticketname,
-						$ticketdescription,
-						$ticketprice,
-						$quantity
+						$itemname,
+						$itemdescription,
+						$itemprice,
+						$quantity,
+						$itemcategory
 					];
 
 					$shoppingcart[] = $iteminfo;
@@ -299,15 +305,15 @@ class OrderController extends \app\core\Controller
 
 					foreach($cartitems as $item)
 					{
-						$ticketid = $item['TICKETID'];
-						$ticket = Ticket::find('TICKETID = '.$ticketid);
-						$ticketprice = $ticket[0]['PRICE'];
+						$itemid = $item['ITEMID'];
+						$item = Item::find('ITEMID = '.$itemid);
+						$itemprice = $item[0]['PRICE'];
 						
 						$purchaseitemdata = [
 							'PURCHASEID'	=> $purchaseid,
-							'TICKETID'  	=> $item['TICKETID'],
+							'ITEMID'  		=> $item['ITEMID'],
 							'QUANTITY' 		=> $item['QUANTITY'],
-							'PRICE'	        => $ticketprice
+							'PRICE'	        => $itemprice
 						];
 
 						$purchaseitem = new Purchaseitem($purchaseitemdata);
@@ -336,14 +342,14 @@ class OrderController extends \app\core\Controller
 		$totalprice = 0;
 		$totalcount = 0;
 
-		foreach($cartitems as $item)
+		foreach($cartitems as $cartitem)
 		{
-			$ticketid = $item['TICKETID'];
-			$ticket = Ticket::find('TICKETID = '.$ticketid);
-			$ticketprice = $ticket[0]['PRICE'];
-			$quantity = $item['QUANTITY'];
+			$itemid = $cartitem['ITEMID'];
+			$item = Item::find('ITEMID = '.$itemid);
+			$itemprice = $item[0]['PRICE'];
+			$quantity = $cartitem['QUANTITY'];
 
-			$totalprice += $quantity * $ticketprice;
+			$totalprice += $quantity * $itemprice;
 			$totalcount += $quantity;
 		}
 
@@ -359,10 +365,10 @@ class OrderController extends \app\core\Controller
 		$changedcart->save();
 
 		/*
-		$ticket = Ticket::find('TICKETID = '.$ticketid);
-		$ticketprice = $ticket[0]['PRICE'];
+		$item = Item::find('ITEMID = '.$itemid);
+		$itemprice = $item[0]['PRICE'];
 
-		$addedprice = $ticketprice * $ticketcount;
+		$addedprice = $itemprice * $itemcount;
 
 		if($operator === '+')
 		{
