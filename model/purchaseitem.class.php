@@ -7,7 +7,7 @@ class Purchaseitem extends BaseModel
 	public $schema = [
 		'PURCHASEITEMID'	=> [ 'type' => BaseModel::TYPE_INT ],
 		'PURCHASEID'		=> [ 'type' => BaseModel::TYPE_INT ],
-		'TICKETID'  	    => [ 'type' => BaseModel::TYPE_INT ],
+		'ITEMID'  	    	=> [ 'type' => BaseModel::TYPE_INT ],
 		'QUANTITY' 		    => [ 'type' => BaseModel::TYPE_INT ],
 		'PRICE'	            => [ 'type' => BaseModel::TYPE_STRING ]
 	];

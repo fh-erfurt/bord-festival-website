@@ -50,8 +50,8 @@ if(!empty($purchasehistory))
             <?php
         }
         ?>
-        <h4 class="ticket-name"><?php echo $item[0]; ?>: <?php echo $item[2] ?> € pro Ticket</h4>
-        <p class="ticket-description">
+        <h4 class="item-name"><?php echo $item[0]; ?>: <?php echo $item[2] ?> € pro Gegenstand</h4>
+        <p class="item-description">
             <?php echo $item[1]; ?>
         </p>
             Menge: <?php echo $item[3]; ?> Gesamtpreis: <?php echo $item[3] * $item[2]; ?> €

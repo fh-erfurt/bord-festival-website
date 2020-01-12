@@ -6,13 +6,13 @@ use Address;
 use Cart;
 use Purchase;
 use Purchaseitem;
-use Ticket;
+use Item;
 require_once 'model/user.class.php';
 require_once 'model/address.class.php';
 require_once 'model/cart.class.php';
 require_once 'model/purchase.class.php';
 require_once 'model/purchaseitem.class.php';
-require_once 'model/ticket.class.php';
+require_once 'model/item.class.php';
 
 class AccountController extends \app\core\Controller
 {
@@ -230,17 +230,17 @@ class AccountController extends \app\core\Controller
 
                 foreach($purchaseitems as $item)
                 {
-                    $ticketid = $item['TICKETID'];
-                    $ticket = Ticket::find('TICKETID = '.$ticketid);
+                    $itemid = $item['ITEMID'];
+                    $item = Item::find('ITEMID = '.$itemid);
 
-                    $ticketname = $ticket[0]['NAME'];
-                    $ticketdescription = $ticket[0]['DESCRIPTION'];
+                    $itemname = $item[0]['NAME'];
+                    $itemdescription = $item[0]['DESCRIPTION'];
                     $quantity = $item['QUANTITY'];
                     $price = $item['PRICE'];
 
                     $iteminfo = [
-                        $ticketname,
-                        $ticketdescription,
+                        $itemname,
+                        $itemdescription,
                         $price,
                         $quantity
                     ];

@@ -35,8 +35,8 @@ if(isset($_GET['a']))
 									<p class="festival-logo"><a class="nav-header" href="index.php">BORD-Festival</a></p>
 								</div>
 								<div class="col-lg-8 col-md-12 col-sm-12 float-left nav-menu">
-									<a class="nav-link<?php echo ($activeAction === 'ticketshop' ? ' nav-link-active' : ''); ?>"
-									   href="?c=order&a=ticketshop">Tickets</a>
+									<a class="nav-link<?php echo ($activeAction === 'Shop' ? ' nav-link-active' : ''); ?>"
+									   href="?c=order&a=Shop">Shop</a>
 									<div class="dropdown">
 										<a href='#' class="nav-link<?php echo ($activeAction === 'contact' ? ' nav-link-active' : ''); ?>">
 										<div>Über<div class="hide-mobile"> uns</div> <div class="dropdown-icons"><span class="dropdown-closed">▸</span>

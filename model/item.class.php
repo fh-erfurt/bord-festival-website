@@ -1,13 +1,14 @@
 <?php
 
-class Ticket extends BaseModel
+class Item extends BaseModel
 {
-	const TABLENAME = '`TICKETS`';
+	const TABLENAME = '`ITEMS`';
 
 	public $schema = [
-		'TICKETID'		=> [ 'type' => BaseModel::TYPE_INT ],
+		'ITEMID'		=> [ 'type' => BaseModel::TYPE_INT ],
 		'NAME' 			=> [ 'type' => BaseModel::TYPE_STRING ],
 		'DESCRIPTION'	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'CATEGORY'		=> [ 'type' => BaseModel::TYPE_STRING ],
 		'PRICE' 		=> [ 'type' => BaseModel::TYPE_STRING ]
 	];
 }
