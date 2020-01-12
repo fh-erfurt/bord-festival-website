@@ -284,41 +284,30 @@ class OrderController extends \app\core\Controller
 				$this->_params['city'] = $address[0]['CITY'];
 				$this->_params['country'] = $address[0]['COUNTRY'];
 
-				if(isset($_POST['deletewholecart']))
+				if(isset($_POST['buycart']))
 				{
-					$purchase = Purchase::find('CLIENTID = ' . $clientid);
-
-					$purchaseid = 0;
-
-					if(empty($purchase))
-					{
-						$purchasedata = [
-							'PURCHASEDAT'	=> date("Y-m-d H:i:s"),
-							'CLIENTID' 		=> $clientid				
-						];
-				
-						$tmppurchase = new Purchase($purchasedata);
-						$tmppurchase->save();
-				
-						$purchaseid = $tmppurchase->schema['PURCHASEID'];
-					}
-					else
-					{
-						$purchaseid = $purchase[0]['PURCHASEID'];
-					}
+					$purchasedata = [
+						'PURCHASEDAT'	=> date("Y-m-d H:i:s"),
+						'CLIENTID' 		=> $clientid				
+					];
+			
+					$tmppurchase = new Purchase($purchasedata);
+					$tmppurchase->save();
+			
+					$purchaseid = $tmppurchase->schema['PURCHASEID'];
 
 					$cartitems = Cartitem::find('CARTID = ' . $cart[0]['CARTID']);
 
-					foreach($cartitems as $item)
+					foreach($cartitems as $cartitem)
 					{
-						$itemid = $item['ITEMID'];
+						$itemid = $cartitem['ITEMID'];
 						$item = Item::find('ITEMID = '.$itemid);
 						$itemprice = $item[0]['PRICE'];
 						
 						$purchaseitemdata = [
 							'PURCHASEID'	=> $purchaseid,
-							'ITEMID'  		=> $item['ITEMID'],
-							'QUANTITY' 		=> $item['QUANTITY'],
+							'ITEMID'  		=> $cartitem['ITEMID'],
+							'QUANTITY' 		=> $cartitem['QUANTITY'],
 							'PRICE'	        => $itemprice
 						];
 

@@ -217,36 +217,50 @@ class AccountController extends \app\core\Controller
             $this->_params['city'] = $address[0]['CITY'];
             $this->_params['country'] = $address[0]['COUNTRY'];
 
-            $purchase = Purchase::find('CLIENTID = '.$clientid);
+            $purchases = Purchase::find('CLIENTID = '.$clientid);
 
-            if(!empty($purchase))
+            if(!empty($purchases))
             {
-                $purchaseid = $purchase[0]['PURCHASEID'];
-                
-                $purchaseitems = Purchaseitem::find('PURCHASEID = '.$purchaseid);				
-                $this->_params['purchaseitems'] = $purchaseitems;
-
                 $purchasehistory = [];
 
-                foreach($purchaseitems as $item)
+                foreach($purchases as $purchase)
                 {
-                    $itemid = $item['ITEMID'];
-                    $item = Item::find('ITEMID = '.$itemid);
+                    $purchaseid = $purchase['PURCHASEID'];
+                    $purchasedat = $purchase['PURCHASEDAT'];
+                    
+                    $purchaseitems = Purchaseitem::find('PURCHASEID = '.$purchaseid);
+    
+                    $iteminfo = [];
+                    $totalprice = 0;
+    
+                    foreach($purchaseitems as $purchaseitem)
+                    {
+                        $itemid = $purchaseitem['ITEMID'];
+                        $item = Item::find('ITEMID = '.$itemid);
+    
+                        $itemname = $item[0]['NAME'];
+                        $itemdescription = $item[0]['DESCRIPTION'];
+                        $quantity = $purchaseitem['QUANTITY'];
+                        $price = $purchaseitem['PRICE'];
+    
+                        $iteminfo[] = [
+                            'NAME'          =>  $itemname,
+                            'DESCRIPTION'   =>  $itemdescription,
+                            'ITEMPRICE'     =>  $price,
+                            'QUANTITY'      =>  $quantity
+                        ];
+                        $totalprice += $price * $quantity;
 
-                    $itemname = $item[0]['NAME'];
-                    $itemdescription = $item[0]['DESCRIPTION'];
-                    $quantity = $item['QUANTITY'];
-                    $price = $item['PRICE'];
+                    }
 
-                    $iteminfo = [
-                        $itemname,
-                        $itemdescription,
-                        $price,
-                        $quantity
+                    $purchasehistory[] = [
+                        'PURCHASEDAT'   =>  $purchasedat,
+                        'TOTALPRICE'    =>  $totalprice,
+                        'ITEMINFO'      =>  $iteminfo
                     ];
 
-                    $purchasehistory[] = $iteminfo;
-                }	
+                }
+                //die(var_dump($purchasehistory));
 
                 $this->_params['purchasehistory'] = $purchasehistory;
             }

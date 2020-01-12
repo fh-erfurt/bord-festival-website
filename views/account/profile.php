@@ -33,30 +33,61 @@
     </tr>
 </table>
 <?php 
-$i = 0;
 if(!empty($purchasehistory))
 {
-    foreach($purchasehistory as $item) {
-        if($i > 0)
+    foreach($purchasehistory as $purchase)
+    {
+        $i = 0;
+        $purchasedat = $purchase['PURCHASEDAT'];
+        $totalprice = $purchase['TOTALPRICE'];
+        ?>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="order">
+                    <div class="row">
+                        <div class="order-header">
+                            <div class="col-lg-6 col-md-6 col-sm-12 float-left">
+                                Bestellung aufgegeben:<br><?php echo $purchasedat; ?>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 float-left">
+                                Gesamtpreis:<br><?php echo $totalprice; ?> €
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row order-content clear-left">
+                        <div class="col-lg-12 col-md-12 col-sm-12 clear-left">
+
+        <?php 
+        foreach($purchase['ITEMINFO'] as $purchaseitem)
         {
+            if($i > 0)
+            {
+                ?>
+        <div class="border-top">
+                <?php
+            }
+            else
+            {
+                ?>
+                    <div>
+                <?php
+            }
             ?>
-    <div class="border-bottom">
-            <?php
-        }
-        else
-        {
-            ?>
-    <div class="border-top border-bottom">
-            <?php
+            <h4 class="item-name"><?php echo $purchaseitem['NAME']; ?>: <?php echo $purchaseitem['ITEMPRICE'] ?> € pro Artikel</h4>
+            <p class="item-description">
+                <?php echo $purchaseitem['DESCRIPTION']; ?>
+            </p>
+                Menge: <?php echo $purchaseitem['QUANTITY']; ?> Gesamtpreis: <?php echo $purchaseitem['QUANTITY'] * $purchaseitem['ITEMPRICE']; ?> €
+        </div>
+        <?php
+            $i++;
         }
         ?>
-        <h4 class="item-name"><?php echo $item[0]; ?>: <?php echo $item[2] ?> € pro Gegenstand</h4>
-        <p class="item-description">
-            <?php echo $item[1]; ?>
-        </p>
-            Menge: <?php echo $item[3]; ?> Gesamtpreis: <?php echo $item[3] * $item[2]; ?> €
-    </div>
-    <?php
-        $i++;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
     }
 }
