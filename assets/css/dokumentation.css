@@ -77,7 +77,6 @@ a:link {
     text-decoration: underline;
     color: #000;
     float: left;
-    clear: both;
     font-size: 18px;
 }
 
@@ -122,4 +121,25 @@ td {
 }
 .th-left td:nth-child(1) {
     background-color: rgb(162, 205, 247);;
+}
+ol {
+    counter-reset: section;
+    list-style-type:none;
+    padding-left:0;
+    float: left;
+    clear: both;
+    font-size: 18px;
+}
+ol li:before {
+    counter-increment: section;
+    font-weight:700;
+    content: counters(section, ".") "";
+    float: left;
+    clear: both;
+    padding-right: 10px;
+}
+ul {counter-reset: section;  list-style-type:lower-alpha}
+ul li:before {counter-increment: section; content: ""}
+ol li ol li {
+    padding-left: 15px;
 }
