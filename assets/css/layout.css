@@ -331,8 +331,22 @@ main {}
     transition: all 0.3s ease-in-out 0s;
 }
 
-.band-title {
+.band-title-red {
     background: rgb(143, 0, 0);
+    position: absolute;
+    text-align: center;
+    padding: 10px;
+    bottom: 10%;
+    left: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    cursor: default;
+}
+
+.band-title-black {
+    background: rgb(0, 0, 0);
     position: absolute;
     text-align: center;
     padding: 10px;

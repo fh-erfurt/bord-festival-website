@@ -23,7 +23,7 @@
 ?>
 <form method="post">
     <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clearfix">
+        <div class="col-lg-4 col-md-5 col-sm-12 float-left">
             <label for="firstname" class="form-for">Vorname</label>
             <input id="firstname" class="form-control <?php echo ($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
                     type="text" name="firstname" placeholder="Vorname">
@@ -46,25 +46,22 @@
             <?php endif; ?>
         </div>
 
-        <div class="col-lg-1 col-md-1 lineup-col clearfix"></div>
+        <div class="col-lg-1 col-md-1 float-left hide-mobile"><br></div>
 
-        <div class="col-lg-4 col-md-4 col-sm-12 lineup-col clearfix">
-            <br>
-            <label for="information">Was ist das Problem?</label>
-            <textarea id="information" class="<?php echo ($missing['information'] === false) ? '' : 'text-validate-red' ?>"
-                name="information" cols="40" rows="8" values="">
+        <div class="col-lg-4 col-md-6 col-sm-12 float-left">
+            <label class="form-for" for="information">Was ist das Problem?</label>
+            <textarea id="information" class="form-control <?php echo ($missing['information'] === false) ? '' : 'text-validate-red' ?>"
+                name="information" cols="45" rows="8" values="">
             </textarea>
             <?php if($missing['information'] === true) : ?>
                 <div class="validation-helptext">Bitte ausfüllen.</div>
             <?php endif; ?>
         </div>
-
-        <div class="col-lg-5 col-md-1 lineup-col clearfix"></div>
         
-        <div class="col-lg-12 col-md-12 col-sm-12 lineup-col clearfix">
+        <div class="col-lg-4 col-md-5 col-sm-12 clear-left">
             <br><br>
             <label for="problem" class="form-for">Bitte auswählen:</label>
-            <select id="problem" name="problem">
+            <select class="form-control" id="problem" name="problem">
                 <option value="ticketshop">Fehler beim Ticketkauf</option>
                 <option value="missingticket">Ticket erscheint nicht in meiner Inbox</option>
                 <option value="password">Passwort vergessen</option>
@@ -72,7 +69,7 @@
                 <option value="general">Allgemeine Fragen über das Festival</option>
             </select>
             <br>
-        <div class="col-lg-4 col-md-4 col-sm-12 lineup-col clearfix">
+        <div class="col-lg-4 col-md-4 col-sm-12">
             <input type="submit" name="inputContact" class="btn btn-primary" value="Bestätigen">
         </div>
         </div>
