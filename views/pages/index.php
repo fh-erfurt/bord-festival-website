@@ -44,19 +44,19 @@
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/dth.jpg" />
+            <img class="lineup-image" src="assets/img/band/dth.jpg" />
             <div class="band-title-red">
                 Die Toten Hosen
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/eminem.jpg" />
+            <img class="lineup-image" src="assets/img/band/eminem.jpg" />
             <div class="band-title-black">
                 Eminem
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/metallica.jpg" />
+            <img class="lineup-image" src="assets/img/band/metallica.jpg" />
             <div class="band-title-red">
                 Metallica
             </div>
@@ -64,19 +64,19 @@
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/noisia.jpg" />
+            <img class="lineup-image" src="assets/img/band/noisia.jpg" />
             <div class="band-title-black">
                 Noisia
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/rammstein.jpg" />
+            <img class="lineup-image" src="assets/img/band/rammstein.jpg" />
             <div class="band-title-red">
                 Rammstein
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/knifeparty.jpg" />
+            <img class="lineup-image" src="assets/img/band/knifeparty.jpg" />
             <div class="band-title-black">
                 Knife Party
             </div>
@@ -84,19 +84,19 @@
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/system_of_a_down.jpg" />
+            <img class="lineup-image" src="assets/img/band/system_of_a_down.jpg" />
             <div class="band-title-red">
                 System of a down
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/pendulum.jpg7" />
+            <img class="lineup-image" src="assets/img/band/pendulum.jpg" />
             <div class="band-title-black">
                 Pendulum
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/slipknot.jpg" />
+            <img class="lineup-image" src="assets/img/band/slipknot.jpg" />
             <div class="band-title-red">
                 Slipknot
             </div>
@@ -104,19 +104,19 @@
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/steve_aoki.jpg" />
+            <img class="lineup-image" src="assets/img/band/steve_aoki.jpg" />
             <div class="band-title-black">
                 Steve Aoki
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/disturbed.jpg" />
+            <img class="lineup-image" src="assets/img/band/disturbed.jpg" />
             <div class="band-title-red">
                 Disturbed
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/vini_vici.jpg" />
+            <img class="lineup-image" src="assets/img/band/vini_vici.jpg" />
             <div class="band-title-black">
                 Vini Vici
             </div>

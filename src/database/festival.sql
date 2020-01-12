@@ -168,13 +168,13 @@ CREATE TABLE support_mails
 -- Initialbefüllung für Item-Tabelle
 --
 INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `CATEGORY`, `FILTERCATEGORY`, `IMAGEURL`) VALUES 
-                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'tickets', 'ticket', 'assets/img/ticket_freitag.png'), 
-                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'tickets', 'ticket', 'assets/img/ticket_samstag.png'), 
-                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'tickets', 'ticket', 'assets/img/ticket_sonntag.png'), 
-                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von Freitag bis Sonntag', '149.99', 'tickets', 'ticket', 'assets/img/ticket_3tage.png'), 
-                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'tickets', 'ticket', 'assets/img/ticket_vip.png'),
-                      (NULL, 'Original BORD Hoodie', 'Aus echter Baumwolle', '49.99', 'merchandise', 'hoodie', 'assets/img/ticket_vip.png'),
-                      (NULL, 'BORD Festival Cap', 'Written Logo', '19.99', 'merchandise', 'cap', 'assets/img/ticket_vip.png'),
-                      (NULL, 'BORD Festival Feuerzeug', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'lighter', 'assets/img/ticket_vip.png'),
-                      (NULL, 'BORD Festival Poster', '1% Chance für gratis Autogramm', '9.99', 'merchandise', 'poster', 'assets/img/ticket_vip.png');
+                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'tickets', 'ticket', 'assets/img/item/ticket_freitag.png'), 
+                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'tickets', 'ticket', 'assets/img/item/ticket_samstag.png'), 
+                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'tickets', 'ticket', 'assets/img/item/ticket_sonntag.png'), 
+                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von Freitag bis Sonntag', '149.99', 'tickets', 'ticket', 'assets/img/item/ticket_3tage.png'), 
+                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'tickets', 'ticket', 'assets/img/item/ticket_vip.png'),
+                      (NULL, 'Original BORD Hoodie', 'Aus echter Baumwolle', '49.99', 'merchandise', 'hoodie', 'assets/img/item/ticket_vip.png'),
+                      (NULL, 'BORD Festival Cap', 'Written Logo', '19.99', 'merchandise', 'cap', 'assets/img/item/ticket_vip.png'),
+                      (NULL, 'BORD Festival Feuerzeug', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'lighter', 'assets/img/item/ticket_vip.png'),
+                      (NULL, 'BORD Festival Poster', '1% Chance für gratis Autogramm', '9.99', 'merchandise', 'poster', 'assets/img/item/ticket_vip.png');
                       
