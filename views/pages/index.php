@@ -1,5 +1,7 @@
 <script type="text/javascript" src="assets/js/countdown.js"></script>
 <div class="row">
+    <div class="bord-banner">
+    </div>
 <div class="col-lg-12 col-md-12 col-sm-12 center">
     <p class="countdown-noch">noch</p>
 </div>
@@ -39,7 +41,7 @@
 <section>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <h1>Line-Up</h1>
+            <h1 class="page-heading center">LINE-UP 2020</h1>
         </div>
     </div>
     <div class="row">

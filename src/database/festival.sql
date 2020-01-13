@@ -173,8 +173,13 @@ INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `CATEGORY`, `FILT
                       (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'tickets', 'ticket', 'assets/img/item/ticket_sonntag.png'), 
                       (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von Freitag bis Sonntag', '149.99', 'tickets', 'ticket', 'assets/img/item/ticket_3tage.png'), 
                       (NULL, 'VIP', 'für die Bonzen', '999.99', 'tickets', 'ticket', 'assets/img/item/ticket_vip.png'),
-                      (NULL, 'Original BORD Hoodie', 'Aus echter Baumwolle', '49.99', 'merchandise', 'hoodie', 'assets/img/item/ticket_vip.png'),
-                      (NULL, 'BORD Festival Cap', 'Written Logo', '19.99', 'merchandise', 'cap', 'assets/img/item/ticket_vip.png'),
-                      (NULL, 'BORD Festival Feuerzeug', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'lighter', 'assets/img/item/ticket_vip.png'),
-                      (NULL, 'BORD Festival Poster', '1% Chance für gratis Autogramm', '9.99', 'merchandise', 'poster', 'assets/img/item/ticket_vip.png');
+                      (NULL, 'Original BORD Hoodie', 'Aus echter Baumwolle', '49.99', 'merchandise', 'kleidung', 'assets/img/item/hoodie.jpg'),
+                      (NULL, 'BORD Cap', 'Written Logo', '24.99', 'merchandise', 'kopf', 'assets/img/item/cap.jpg'),
+                      (NULL, 'BORD Festival Feuerzeug', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'assets/img/item/lighter.jpg'),
+                      (NULL, 'BORD Festival Poster', '1% Chance für gratis Autogramm', '9.99', 'merchandise', 'poster', 'assets/img/item/poster.jpg'),
+                      (NULL, 'BORD Beanie', 'Perfekt für kalte Festivaltage', '19.99', 'merchandise', 'kopf', 'assets/img/item/beanie.jpg'),
+                      (NULL, 'BORD Festival Flaschenöffner', 'Flaschenöffner - super für den Festivalalltag', '5.99', 'merchandise', 'sonstige', 'assets/img/item/bottleopener.jpg'),
+                      (NULL, 'BORD Mütze', 'hält warm und schützt gegen den Wind', '19.99', 'merchandise', 'kopf', 'assets/img/item/muetze.jpg'),
+                      (NULL, 'BORD Festival Shirt', 'Shirt für BORD-Festival-Fans', '29.99', 'merchandise', 'bekleidung', 'assets/img/item/shirt.jpg'),
+                      (NULL, 'BORDhub Aufkleber', 'Selbstklebender Sticker, 1 Stück', '2.99', 'merchandise', 'sonstige', 'assets/img/item/bordhub.png');
                       
