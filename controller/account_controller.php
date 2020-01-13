@@ -196,7 +196,7 @@ class AccountController extends \app\core\Controller
 
     public function actionProfile()
     {
-        $title = "Profil";
+        $title = "Profil - BORD-Festival";
 
         $this->_params['title'] = $title;
 
@@ -207,15 +207,19 @@ class AccountController extends \app\core\Controller
             $addressID = $client[0]['ADDRESSID'];
             $address = Address::find('ADDRESSID = ' . $addressID);
 
-            $this->_params['mail'] = $client[0]['MAIL'];
-            $this->_params['firstname'] = $client[0]['FIRSTNAME'];
-            $this->_params['lastname'] = $client[0]['LASTNAME'];
-            $this->_params['dateofbirth'] = $client[0]['DATEOFBIRTH'];
+            $accdata = [];
 
-            $this->_params['street'] = $address[0]['STREET'];
-            $this->_params['zip'] = $address[0]['ZIP'];
-            $this->_params['city'] = $address[0]['CITY'];
-            $this->_params['country'] = $address[0]['COUNTRY'];
+            $accdata['E-Mail'] = $client[0]['MAIL'];
+            $accdata['Vorname'] = $client[0]['FIRSTNAME'];
+            $accdata['Nachname'] = $client[0]['LASTNAME'];
+            $accdata['Geburtsdatum'] = $client[0]['DATEOFBIRTH'];
+
+            $accdata['Straße'] = $address[0]['STREET'];
+            $accdata['Postleitzahl'] = $address[0]['ZIP'];
+            $accdata['Stadt'] = $address[0]['CITY'];
+            $accdata['Land'] = $address[0]['COUNTRY'];
+
+            $this->_params['accdata'] = $accdata;
 
             $purchases = Purchase::find('CLIENTID = '.$clientid);
 
@@ -268,6 +272,10 @@ class AccountController extends \app\core\Controller
         else
         {
             header('Location: index.php?c=pages&a=error404');
+        }
+
+        if(isset($_POST['updateaccount']))
+        {
         }
     }
 
