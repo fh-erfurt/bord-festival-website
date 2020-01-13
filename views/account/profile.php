@@ -3,7 +3,7 @@
         <div class="accountdata">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="row">
-                    <div class="profile-title-red">
+                    <div class="title-red">
                         <div class="col-lg-12 col-md-12 col-sm-12 float-left">
                             <h1>Mein Account<h1>
                         </div>
@@ -49,7 +49,7 @@
         <div class="order-history">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="row">
-                    <div class="profile-title-red">
+                    <div class="title-red">
                         <div class="col-lg-12 col-md-12 col-sm-12 float-left">
                             <h1>Meine Bestellhistorie</h1> 
                         </div>

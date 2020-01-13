@@ -92,7 +92,7 @@
                                 <div class="col-lg-2 float-left text-right">
                                     <form action="index.php?c=order&a=shoppingcart" method="post">
                                         <input type="hidden" name="cartitemid" value="<?php echo $item['CARTITEMID']; ?>" />
-                                        <button type="submit" class="btn no-margin btn-danger" name="deleteitemfromcart">löschen</button>
+                                        <button type="submit" class="btn no-margin btn-danger" name="deleteitemfromcart">Löschen</button>
                                     </form>                            
                                 </div>
                             </div>
@@ -144,8 +144,13 @@
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-12 float-left">
                             <div class="float-right sm-width-100">
+<<<<<<< HEAD
                                 <div class="padding-top float-left sm-margin-top sm-margin-bottom">Summe(<?php echo $carttotalcount ?> Artikel): <?php echo $carttotalprice ?> €</div>
                                 <button type="submit" class="btn no-margin btn-primary float-left" name="buycart">bestellen</button>
+=======
+                                <div class="padding-top float-left sm-margin-top sm-margin-bottom">Summe(<?php echo $carttotalcount ?> Item(s)): <?php echo $carttotalprice ?> €</div>
+                                <button type="submit" class="btn no-margin btn-primary float-left" name="buycart">Bestellen</button>
+>>>>>>> a17de791a6df9332637d078ce64c2e3a238bdbe9
                             </div>
                             </div>
                         </div>

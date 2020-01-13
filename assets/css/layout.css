@@ -465,7 +465,7 @@ main {}
     display: block;
 }
 
-.profile-title-red {
+.title-red {
     overflow: hidden;
     background-color: rgb(143, 0, 0);
     margin-left: 15px;
@@ -509,6 +509,20 @@ main {}
 
 .order-content {
     overflow: hidden;
+    padding: 15px;
+}
+
+.confirmorder-content {
+    overflow: hidden;
+    background-color: #444;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.confirmorder-price-content {
+    overflow: hidden;
+    border: 3px solid #444;
     padding: 15px;
 }
 
