@@ -50,9 +50,9 @@
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-            <img class="lineup-image" src="assets/img/band/eminem.jpg" />
+            <img class="lineup-image" src="assets/img/band/helene_fischer.jpg" />
             <div class="band-title-black">
-                Eminem
+                Helene Fischer
             </div>
         </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
