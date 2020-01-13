@@ -122,6 +122,10 @@ nav ul li a:hover {
     display: inline;
 }
 
+.show-mobile {
+    display: none;
+}
+
 
 /* Change color of dropdown links on hover */
 
@@ -168,6 +172,9 @@ main {}
 
 .center {
     text-align: center;
+}
+.text-right {
+    text-align: right;
 }
 
 .festival-logo {
@@ -250,6 +257,9 @@ main {}
     }
     .hide-mobile {
         display: none;
+    }
+    .show-mobile {
+        display: block;
     }
     .sm-width-100 {
         width: 100%;
@@ -412,16 +422,35 @@ main {}
     margin-left: 23%;
 }
 
+.item-image-mini {
+    max-width: 15%;
+}
+
+.item-image-mini img {
+    max-width: 100%;
+    max-height: 100px;
+}
+
+.item-details-mini {
+    width: 80%;
+    margin-left: 5%;
+}
+
 .border-top {
     border-top: 3px solid #333;
     margin-top: 20px;
     padding-top: 20px;
+    overflow: hidden;
 }
 
 .border-bottom {
     border-bottom: 3px solid #333;
     margin-bottom: 20px;
     padding-bottom: 20px;
+    overflow: hidden;
+}
+.overflow {
+    overflow: hidden;
 }
 
 .text-validate-red {
@@ -493,4 +522,6 @@ main {}
 
 .page-heading {
     font-size: 50px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }

@@ -246,12 +246,14 @@ class AccountController extends \app\core\Controller
                         $itemdescription = $item[0]['DESCRIPTION'];
                         $quantity = $purchaseitem['QUANTITY'];
                         $price = $purchaseitem['PRICE'];
+                        $imageurl = $item[0]['IMAGEURL'];
     
                         $iteminfo[] = [
                             'NAME'          =>  $itemname,
                             'DESCRIPTION'   =>  $itemdescription,
                             'ITEMPRICE'     =>  $price,
-                            'QUANTITY'      =>  $quantity
+                            'QUANTITY'      =>  $quantity,
+                            'IMAGEURL'      =>  $imageurl
                         ];
                         $totalprice += $price * $quantity;
 

@@ -18,7 +18,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 float-left">
                                     <b><?php echo $key . ' '; ?></b><br><?php echo $value; ?>
                                 </div>  
-                                <div class="col-lg-4 col-md-4 col-sm-12 float-left">
+                                <div class="col-lg-4 col-md-6 col-sm-12 float-left">
                                     <label for="<?php echo $key; ?>"><?php echo $key . ' ändern'; ?></label>
                                     <input id="<?php echo $key; ?>" name="<?php echo $key; ?>"class="form-control" placeholder="<?php echo $key; ?>">
                                 </div>
@@ -70,10 +70,12 @@
                                     <div class="row">
                                         <div class="order-header">
                                             <div class="col-lg-6 col-md-6 col-sm-12 float-left">
-                                                Bestellung aufgegeben:<br><?php echo $purchasedat; ?>
+                                                <b>Bestellung aufgegeben:</b><br>
+                                                <?php echo $purchasedat; ?>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 float-left">
-                                                Gesamtpreis:<br><?php echo $totalprice; ?> €
+                                                <b>Gesamtpreis:</b><br>
+                                                <?php echo $totalprice; ?> €
                                             </div>
                                         </div>
                                     </div>
@@ -86,21 +88,28 @@
                             if($i > 0)
                             {
                                 ?>
-                        <div class="border-top">
+                        <div class="border-top clear-left">
                                 <?php
                             }
                             else
                             {
                                 ?>
-                                    <div>
+                                    <div class="overflow">
                                 <?php
                             }
                             ?>
-                            <h4 class="item-name"><?php echo $purchaseitem['NAME']; ?>: <?php echo $purchaseitem['ITEMPRICE'] ?> € pro Artikel</h4>
-                            <p class="item-description">
-                                <?php echo $purchaseitem['DESCRIPTION']; ?>
-                            </p>
-                                Menge: <?php echo $purchaseitem['QUANTITY']; ?> Gesamtpreis: <?php echo $purchaseitem['QUANTITY'] * $purchaseitem['ITEMPRICE']; ?> €
+                            <div class="float-left item-image-mini">
+                                <img class="" src="<?php echo $purchaseitem['IMAGEURL']; ?>" />
+                            </div>
+                            <div class="float-left item-details-mini">
+                                <h4 class="item-name"><?php echo $purchaseitem['NAME']; ?></h4>
+                                <p class="item-description">
+                                    <?php echo $purchaseitem['DESCRIPTION']; ?>
+                                </p>
+                                <?php echo $purchaseitem['ITEMPRICE'] ?> € pro Artikel<br/>
+                                Menge: <?php echo $purchaseitem['QUANTITY']; ?><br/>
+                                Gesamtpreis: <?php echo $purchaseitem['QUANTITY'] * $purchaseitem['ITEMPRICE']; ?> €
+                            </div>
                         </div>
                         <?php
                             $i++;

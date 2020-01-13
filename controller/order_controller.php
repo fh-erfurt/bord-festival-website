@@ -235,15 +235,17 @@ class OrderController extends \app\core\Controller
 					$quantity = $cartitem['QUANTITY'];
 					$itemcategory = $cartitem['CATEGORY'];
 					$itemfiltercategory = $cartitem['FILTERCATEGORY'];
-
+					$imageurl = $item[0]['IMAGEURL'];
+					
 					$iteminfo = [
-						$cartitemid,
-						$itemname,
-						$itemdescription,
-						$itemprice,
-						$quantity,
-						$itemcategory,
-						$itemfiltercategory
+						'CARTITEMID'			=>	$cartitemid,
+						'ITEMNAME'				=>	$itemname,
+						'ITEMDESCRIPTION'		=>	$itemdescription,
+						'ITEMPRICE'				=>	$itemprice,
+						'QUANTITY'				=>	$quantity,
+						'ITEMCATEGORY'			=>	$itemcategory,
+						'ITEMFILTERCATEGORY'	=>	$itemfiltercategory,
+						'IMAGEURL'				=>	$imageurl
 					];
 
 					$shoppingcart[] = $iteminfo;
