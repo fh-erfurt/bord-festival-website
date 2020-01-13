@@ -180,5 +180,6 @@ INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `CATEGORY`, `FILT
                       (NULL, 'BORD Beanie', 'Perfekt für kalte Festivaltage', '19.99', 'merchandise', 'kopf', 'assets/img/item/beanie.jpg'),
                       (NULL, 'BORD Festival Flaschenöffner', 'Flaschenöffner - super für den Festivalalltag', '5.99', 'merchandise', 'sonstige', 'assets/img/item/bottleopener.jpg'),
                       (NULL, 'BORD Mütze', 'hält warm und schützt gegen den Wind', '19.99', 'merchandise', 'kopf', 'assets/img/item/muetze.jpg'),
-                      (NULL, 'BORD Festival Shirt', 'Shirt für BORD-Festival-Fans', '29.99', 'merchandise', 'bekleidung', 'assets/img/item/shirt.jpg');
+                      (NULL, 'BORD Festival Shirt', 'Shirt für BORD-Festival-Fans', '29.99', 'merchandise', 'bekleidung', 'assets/img/item/shirt.jpg'),
+                      (NULL, 'BORDhub Aufkleber', 'Selbstklebender Sticker, 1 Stück', '2.99', 'merchandise', 'sonstige', 'assets/img/item/bordhub.png');
                       
