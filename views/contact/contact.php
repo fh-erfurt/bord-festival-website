@@ -1,4 +1,4 @@
-<h1>Support kontaktieren</h1>
+<h1 class="page-heading">Kontakt</h1>
 <br>
 <p>Bitte füllen Sie alle Angaben aus und drücken Sie auf absenden, um mit uns in Kontakt zu treten.</p><br><br>
 

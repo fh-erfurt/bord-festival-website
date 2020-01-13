@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
         <section>
-            <h1>Shop</h1>
+            <h1 class="page-heading">Shop</h1>
             <?php
             if(isset($_GET['success']))
             {

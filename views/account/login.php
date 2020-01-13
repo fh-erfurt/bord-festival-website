@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-lg-4 col-md-6 col-sm-12 center clear-fix">
 		<section>
-			<h1 class="float-left clear-fix">Login</h1>
+            <h1 class="page-heading">Login</h1>
 			<?php
 			if(!isset($missing))
 			{

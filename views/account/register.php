@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-lg-6 col-md-10 col-sm-10 center clear-fix">
 		<section>
-			<h1 class="float-left clear-fix">Registrierung</h1>
+            <h1 class="page-heading text-left">Registrierung</h1>
 
 			<?php
 			if(!isset($missing))
