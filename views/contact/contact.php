@@ -51,7 +51,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12 float-left">
             <label class="form-for" for="information">Was ist das Problem?</label>
             <textarea id="information" class="form-control <?php echo ($missing['information'] === false) ? '' : 'text-validate-red' ?>"
-                name="information" cols="45" rows="8" values="">
+                name="information" cols="45" rows="9" values="">
             </textarea>
             <?php if($missing['information'] === true) : ?>
                 <div class="validation-helptext">Bitte ausfüllen.</div>
