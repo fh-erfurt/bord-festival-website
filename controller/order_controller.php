@@ -263,7 +263,7 @@ class OrderController extends \app\core\Controller
 
 	public function actionConfirmorder()
 	{
-		$title = "Bestätigen";
+		$title = "Bestätigen - BORD-Festival";
 
 		$this->_params['title'] = $title;
 

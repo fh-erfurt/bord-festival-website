@@ -1,18 +1,38 @@
-<h1>Bitte bestätigen Sie Ihre Bestellung</h1><br>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <section>
+            <div class="row">
+                <div class="title-red">
+                    <div class="col-lg-12 col-md-12 col-sm-12 clear-left">
+                        <h1>Ihre Bestellung</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-8 col-sm-12 clear-left">
+                    <div class="confirmorder-content">
+                        <b>Versandadresse:</b><br><br>
+                        <p><?php echo "$street <br/> $zip <br/> $city <br/> $country"?></p>
+                    </div>
+                </div>
+            </div>
 
-<table>
-    <tr>
-        <th class="float-left">Lieferadresse: </th>
-        <td><?= $street . '<br>' .  $zip .
-        '<br>' . $city . '<br>' . $country?></td>
-    </tr>
-    <tr>
-        <th class="float-left">Preis: </th>
-        <td><?= $price?></td>
-    </tr>
-</table>
-<div class="item border-top">
-    <form method="post">
-        <button type="submit" class="btn btn-primary" name="buycart">Bestätigen</button>
-    </form>
+            <div class="row">
+                <div class="col-lg-4 col-md-8 col-sm-12 clear-left">
+                    <div class="confirmorder-price-content">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 lineup-col">
+                                <b>Preis: </b><?php echo $price; ?>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 lineup-col">
+                                <form method="post">
+                                    <input class="btn btn-primary" type="submit" name="buycart" value="Bestätigen">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
