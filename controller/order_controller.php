@@ -28,6 +28,19 @@ class OrderController extends \app\core\Controller
 		$title = "Shop - BORD-Festival";
 		$this->_params['title'] = $title;
 
+		if(isset($_GET['t']))
+		{
+			$t = $_GET['t'];
+
+			$where = 'category = "'.$t.'"';			
+		
+			$items = Item::find($where);
+			if(!empty($items))
+			{
+				$this->_params['items'] = $items;
+			}
+		}
+
 		if(isset($_POST['additemtocart']))
 		{
 			if(isset($_SESSION['client_id']))
@@ -112,12 +125,6 @@ class OrderController extends \app\core\Controller
 				exit();
 			}
 
-		}
-		
-		$items = Item::find();
-		if(!empty($items))
-		{
-			$this->_params['items'] = $items;
 		}
     }
     
