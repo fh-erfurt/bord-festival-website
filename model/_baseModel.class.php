@@ -216,12 +216,14 @@ abstract class BaseModel
 				$idfield = array_key_first($this->schema);
 				$id = array_values($this->data)[0];
 				$sql = 'DELETE FROM '.self::tablename().' WHERE '.$idfield.' = '.$id;
-				$db->exec($sql);
+				$statement = $db->prepare($sql);
+				$statement->execute();
 			}
 			else
 			{				
 				$sql = 'DELETE FROM '.self::tablename().' WHERE '.$where;
-				$db->exec($sql);
+				$statement = $db->prepare($sql);
+				$statement->execute();
 			}
 			
 			return true;
@@ -253,12 +255,14 @@ abstract class BaseModel
 				die($sql.'<br>');
 
 			}
+			$statement = $db->prepare($sql);
+			$statement->execute();
 			
-            $result = $db->query($sql)->fetchAll();
+            $result = $statement->fetchAll();
         }
         catch(\PDOException $e)
         {
-            die('Select statment failed: ' . $e->getMessage());
+			$errors[] = 'Error finding '.get_called_class();
 		}
 
         return $result;
@@ -303,12 +307,15 @@ abstract class BaseModel
             {
 				$sql .= ' WHERE ' . $where .  ';';
 			}
-			
-            $result = $db->query($sql)->fetchColumn();
+
+			$statement = $db->prepare($sql);
+			$statement->execute();
+
+            $result = $statement->fetchColumn();
         }
         catch(\PDOException $e)
         {
-            die('Select statment failed: ' . $e->getMessage());
+			$errors[] = 'Error counting '.get_called_class();
 		}
 
         return $result;

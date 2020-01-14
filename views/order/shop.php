@@ -10,7 +10,7 @@
                 {
                     ?>        
                     <div class="alert alert-success">
-                        Der Gegenstand wurde erfolgreich dem Warenkorb hinzugefügt
+                        Der Artikel wurde erfolgreich dem Warenkorb hinzugefügt
                     </div>
                     <?php
                 }
@@ -26,7 +26,7 @@
                 {
                     ?>        
                     <div class="alert alert-danger">
-                        Bitte ein oder mehr Gegenstände angeben!
+                        Bitte einen oder mehrere Artikel angeben!
                     </div>
                     <?php
                 }
@@ -39,7 +39,7 @@
             {
                 ?>        
                 <div class="alert alert-warning">
-                    Der gewählte Gegenstand ist nicht mehr verfügbar! Bitte kontaktiere uns oder trag dich in den Newsletter ein,
+                    Zur Zeit sind keine Artikel verfügbar! Bitte kontaktiere uns oder trag dich in den Newsletter ein,
                     um zu erfahren, wenn er wieder verfügbar ist.
                 </div>
                 <?php
