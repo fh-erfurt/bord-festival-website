@@ -33,7 +33,28 @@ class OrderController extends \app\core\Controller
 			$type = $_GET['t'];
 			$type = \addslashes($type);
 
-			$where = 'category = "'.$type.'"';			
+			$where = 'type = "'.$type.'"';
+			
+			// if(1 === 1)
+			// {
+			// 	$cat = '';
+			// 	$cat = \addslashes($cat);
+			// 	$where .= ' AND category = "'.$cat.'"';
+			// }
+			
+			// if(1 === 1)
+			// {
+			// 	$cat = '';
+			// 	$cat = \addslashes($cat);
+			// 	$where .= ' AND category = "'.$cat.'"';
+			// }
+			
+			// if(1 === 1)
+			// {
+			// 	$cat = '';
+			// 	$cat = \addslashes($cat);
+			// 	$where .= ' AND category = "'.$cat.'"';
+			// }
 		
 			$items = Item::find($where);
 			if(!empty($items))
@@ -57,8 +78,6 @@ class OrderController extends \app\core\Controller
 				$clientid = $_SESSION['client_id'];
 				$itemid = $_POST['itemid'] ?? null;
 				$itemcount = $_POST['itemcount'] ?? null;
-				$itemcategory = $_POST['itemcategory'] ?? null;
-				$itemfiltercategory = $_POST['itemfiltercategory'] ?? null;
 	
 				$success = 0;
 				if($itemcount !== '0')
@@ -88,9 +107,7 @@ class OrderController extends \app\core\Controller
 							$cartitemdata = [
 								'CARTID'			=> $cartid,
 								'ITEMID'  			=> $itemid,
-								'QUANTITY' 			=> $itemcount,
-								'CATEGORY'			=> $itemcategory,
-								'FILTERCATEGORY'	=> $itemfiltercategory
+								'QUANTITY' 			=> $itemcount
 							];
 						}
 						else
@@ -101,9 +118,7 @@ class OrderController extends \app\core\Controller
 								'CARTITEMID'		=> $cartitem[0]['CARTITEMID'],
 								'CARTID'			=> $cartid,
 								'ITEMID'  			=> $itemid,
-								'QUANTITY' 			=> $newitemcount,
-								'CATEGORY'			=> $itemcategory,
-								'FILTERCATEGORY'	=> $itemfiltercategory
+								'QUANTITY' 			=> $newitemcount
 							];
 
 						}
@@ -186,9 +201,7 @@ class OrderController extends \app\core\Controller
 							'CARTITEMID'		=> $cartitem[0]['CARTITEMID'],
 							'CARTID'			=> $cartitem[0]['CARTID'],
 							'ITEMID'  			=> $cartitem[0]['ITEMID'],
-							'QUANTITY' 			=> $cartitem[0]['QUANTITY'],
-							'CATEGORY'			=> $cartitem[0]['CATEGORY'],
-							'FILTERCATEGORY'	=> $cartitem[0]['FILTERCATEGORY']
+							'QUANTITY' 			=> $cartitem[0]['QUANTITY']
 						];
 
 						$cartid = $cartitem[0]['CARTID'];
@@ -249,8 +262,7 @@ class OrderController extends \app\core\Controller
 					$itemdescription = $item[0]['DESCRIPTION'];
 					$itemprice = $item[0]['PRICE'];
 					$quantity = $cartitem['QUANTITY'];
-					$itemcategory = $cartitem['CATEGORY'];
-					$itemfiltercategory = $cartitem['FILTERCATEGORY'];
+					$itemcategory = $item[0]['CATEGORY'];
 					$imageurl = $item[0]['IMAGEURL'];
 					
 					$iteminfo = [
@@ -260,7 +272,6 @@ class OrderController extends \app\core\Controller
 						'ITEMPRICE'				=>	$itemprice,
 						'QUANTITY'				=>	$quantity,
 						'ITEMCATEGORY'			=>	$itemcategory,
-						'ITEMFILTERCATEGORY'	=>	$itemfiltercategory,
 						'IMAGEURL'				=>	$imageurl
 					];
 

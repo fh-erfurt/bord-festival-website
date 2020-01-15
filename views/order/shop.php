@@ -74,13 +74,9 @@
                     if(isset($_SESSION['client_id']))
                     {
                         $itemid = $item['ITEMID'];
-                        $itemcategory = $item['CATEGORY'];
-                        $itemfiltercategory = $item['FILTERCATEGORY'];
                     ?>
                     <form method="post">
                         <input type="hidden" name="itemid" value="<?php echo $itemid; ?>" />
-                        <input type="hidden" name="itemcategory" value="<?php echo $itemcategory; ?>" />
-                        <input type="hidden" name="itemfiltercategory" value="<?php echo $itemfiltercategory; ?>" />
                         <p>Preis: <?php echo $item['PRICE']; ?> €</p>
                         <p>Anzahl: 
                         <button type="button" class="btn-fixed btn-primary no-script" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '-')">-</button>

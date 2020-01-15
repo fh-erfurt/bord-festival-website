@@ -62,8 +62,10 @@ CREATE TABLE items
   NAME varchar(100) NOT NULL,
   DESCRIPTION varchar(500) NOT NULL,
   PRICE decimal(6,2) NOT NULL,
-  CATEGORY varchar(30) NOT NULL,
-  FILTERCATEGORY varchar(30) NOT NULL,
+  TYPE varchar(30) NOT NULL,
+  CATEGORY varchar(30),
+  COLOR varchar(30),
+  GENDER varchar(30),
   IMAGEURL varchar(100) NOT NULL,
   CONSTRAINT items_pk PRIMARY KEY (ITEMID),
   CONSTRAINT itemname_uq UNIQUE (NAME)
@@ -96,8 +98,6 @@ CREATE TABLE cartitems
   CARTID int(7) NOT NULL,
   ITEMID int(7) NOT NULL,
   QUANTITY int(3) NOT NULL,
-  CATEGORY varchar(30) NOT NULL,
-  FILTERCATEGORY varchar(30) NOT NULL,
   CONSTRAINT cartitems_pk PRIMARY KEY (CARTITEMID),
   CONSTRAINT cartitems_carts_fk FOREIGN KEY (CARTID) REFERENCES carts (CARTID),
   CONSTRAINT cartitems_items_fk FOREIGN KEY (ITEMID) REFERENCES items (ITEMID)
@@ -167,19 +167,23 @@ CREATE TABLE support_mails
 --
 -- Initialbefüllung für Item-Tabelle
 --
-INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `CATEGORY`, `FILTERCATEGORY`, `IMAGEURL`) VALUES 
-                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'tickets', 'ticket', 'assets/img/item/ticket_freitag.png'), 
-                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'tickets', 'ticket', 'assets/img/item/ticket_samstag.png'), 
-                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'tickets', 'ticket', 'assets/img/item/ticket_sonntag.png'), 
-                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von Freitag bis Sonntag', '149.99', 'tickets', 'ticket', 'assets/img/item/ticket_3tage.png'), 
-                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'tickets', 'ticket', 'assets/img/item/ticket_vip.png'),
-                      (NULL, 'Original BORD Hoodie', 'Aus echter Baumwolle', '49.99', 'merchandise', 'kleidung', 'assets/img/item/hoodie.jpg'),
-                      (NULL, 'BORD Cap', 'Written Logo', '24.99', 'merchandise', 'kopf', 'assets/img/item/cap.jpg'),
-                      (NULL, 'BORD Festival Feuerzeug', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'assets/img/item/lighter.jpg'),
-                      (NULL, 'BORD Festival Poster', '1% Chance für gratis Autogramm', '9.99', 'merchandise', 'poster', 'assets/img/item/poster.jpg'),
-                      (NULL, 'BORD Beanie', 'Perfekt für kalte Festivaltage', '19.99', 'merchandise', 'kopf', 'assets/img/item/beanie.jpg'),
-                      (NULL, 'BORD Festival Flaschenöffner', 'Flaschenöffner - super für den Festivalalltag', '5.99', 'merchandise', 'sonstige', 'assets/img/item/bottleopener.jpg'),
-                      (NULL, 'BORD Mütze', 'hält warm und schützt gegen den Wind', '19.99', 'merchandise', 'kopf', 'assets/img/item/muetze.jpg'),
-                      (NULL, 'BORD Festival Shirt', 'Shirt für BORD-Festival-Fans', '29.99', 'merchandise', 'bekleidung', 'assets/img/item/shirt.jpg'),
-                      (NULL, 'BORDhub Aufkleber', 'Selbstklebender Sticker, 1 Stück', '2.99', 'merchandise', 'sonstige', 'assets/img/item/bordhub.png');
+INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `TYPE`, `CATEGORY`, `COLOR`, `GENDER`, `IMAGEURL`) VALUES 
+                      (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'tickets', null, null, null, 'assets/img/item/ticket_freitag.png'), 
+                      (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'tickets', null, null, null, 'assets/img/item/ticket_samstag.png'), 
+                      (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'tickets', null, null, null, 'assets/img/item/ticket_sonntag.png'), 
+                      (NULL, '3-Tages-Ticket', 'Für alle Festival-Fans. Gültig von Freitag bis Sonntag', '149.99', 'tickets', null, null, null, 'assets/img/item/ticket_3tage.png'), 
+                      (NULL, 'VIP', 'für die Bonzen', '999.99', 'tickets', null, null, null, 'assets/img/item/ticket_vip.png'),
+                      (NULL, 'Original BORD Hoodie', 'Aus echter Baumwolle', '49.99', 'merchandise', 'Bekleidung', 'schwarz', 'Männer', 'assets/img/item/hoodie.jpg'),
+                      (NULL, 'BORD Cap', 'Written Logo', '24.99', 'merchandise', 'Kopfbedeckung', 'schwarz', 'unisex', 'assets/img/item/cap.jpg'),
+                      (NULL, 'BORD Festival Feuerzeug schwarz', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'schwarz', 'unisex', 'assets/img/item/lighter.jpg'),
+                      (NULL, 'BORD Festival Feuerzeug pink', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'pink', 'unisex', 'assets/img/item/lighter.jpg'),
+                      (NULL, 'BORD Festival Feuerzeug grün', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'grün', 'unisex', 'assets/img/item/lighter.jpg'),
+                      (NULL, 'BORD Festival Feuerzeug rot', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'rot', 'unisex', 'assets/img/item/lighter.jpg'),
+                      (NULL, 'BORD Festival Feuerzeug lila', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'lila', 'unisex', 'assets/img/item/lighter.jpg'),
+                      (NULL, 'BORD Festival Poster', '1% Chance für gratis Autogramm', '9.99', 'merchandise', 'sonstige', 'keine', 'unisex', 'assets/img/item/poster.jpg'),
+                      (NULL, 'BORD Beanie', 'Perfekt für kalte Festivaltage', '19.99', 'merchandise', 'Kopfbedeckung', 'schwarz', 'Frauen', 'assets/img/item/beanie.jpg'),
+                      (NULL, 'BORD Festival Flaschenöffner', 'Flaschenöffner - super für den Festivalalltag', '5.99', 'merchandise', 'sonstige', 'schwarz', 'unisex', 'assets/img/item/bottleopener.jpg'),
+                      (NULL, 'BORD Mütze', 'hält warm und schützt gegen den Wind', '19.99', 'merchandise', 'Kopfbedeckung',  'schwarz',  'unisex', 'assets/img/item/muetze.jpg'),
+                      (NULL, 'BORD Festival Shirt', 'Shirt für BORD-Festival-Fans', '29.99', 'merchandise', 'Bekleidung', 'schwarz', 'Männer', 'assets/img/item/shirt.jpg'),
+                      (NULL, 'BORDhub Aufkleber', 'Selbstklebender Sticker, 1 Stück', '2.99', 'merchandise', 'sonstige',  'keine',  'unisex', 'assets/img/item/bordhub.png');
                       

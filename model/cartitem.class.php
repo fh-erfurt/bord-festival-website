@@ -9,7 +9,5 @@ class Cartitem extends BaseModel
 		'CARTID'		=> [ 'type' => BaseModel::TYPE_INT ],
 		'ITEMID'  		=> [ 'type' => BaseModel::TYPE_INT ],
 		'QUANTITY' 		=> [ 'type' => BaseModel::TYPE_INT ],
-		'CATEGORY'		=> [ 'type' => BaseModel::TYPE_STRING],
-		'FILTERCATEGORY'	=> [ 'type' => BaseModel::TYPE_STRING ]
 	];
 }
