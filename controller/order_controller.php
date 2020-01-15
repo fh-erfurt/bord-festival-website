@@ -39,6 +39,14 @@ class OrderController extends \app\core\Controller
 			{
 				$this->_params['items'] = $items;
 			}
+			else
+			{
+				header('Location: index.php?c=pages&a=error404');
+			}
+		}
+		else
+		{
+			header('Location: index.php?c=pages&a=error404');
 		}
 
 		if(isset($_POST['additemtocart']))
