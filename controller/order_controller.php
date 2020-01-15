@@ -30,9 +30,10 @@ class OrderController extends \app\core\Controller
 
 		if(isset($_GET['t']))
 		{
-			$t = $_GET['t'];
+			$type = $_GET['t'];
+			$type = \addslashes($type);
 
-			$where = 'category = "'.$t.'"';			
+			$where = 'category = "'.$type.'"';			
 		
 			$items = Item::find($where);
 			if(!empty($items))
