@@ -9,6 +9,9 @@ use Cartitem;
 use Support_mail;
 use Purchase;
 use Purchaseitem;
+use ItemCategory;
+use ItemGender;
+use ItemColor;
 
 
 require_once 'model/user.class.php';
@@ -19,6 +22,9 @@ require_once 'model/cartitem.class.php';
 require_once 'model/support_mail.class.php';
 require_once 'model/purchase.class.php';
 require_once 'model/purchaseitem.class.php';
+require_once 'model/itemcategory.class.php';
+require_once 'model/itemgender.class.php';
+require_once 'model/itemcolor.class.php';
 
 
 class OrderController extends \app\core\Controller
@@ -33,37 +39,43 @@ class OrderController extends \app\core\Controller
 			$type = $_GET['t'];
 			$type = \addslashes($type);
 
+			$itemcategories = ItemCategory::find();
+			$this->_params['itemcategories'] = $itemcategories;
+			$itemgender = ItemGender::find();
+			$this->_params['itemgender'] = $itemgender;
+			$itemcolors = ItemColor::find();
+			$this->_params['itemcolors'] = $itemcolors;
+
 			$where = 'type = "'.$type.'"';
+			$filter = '';
+			$sort = '';
+			$selection = [];
 			
-			// if(1 === 1)
-			// {
-			// 	$cat = '';
-			// 	$cat = \addslashes($cat);
-			// 	$where .= ' AND category = "'.$cat.'"';
-			// }
+			$filter .= self::AddFilter('category', $selection);
+			$filter .= self::AddFilter('gender', $selection);
+			$filter .= self::AddFilter('color', $selection);
+			if(!empty($selection))
+			{
+				$this->_params['selection'] = $selection;
+
+			}
 			
-			// if(1 === 1)
-			// {
-			// 	$cat = '';
-			// 	$cat = \addslashes($cat);
-			// 	$where .= ' AND category = "'.$cat.'"';
-			// }
+			if(isset($_GET['sort']))
+			{
+				$sort = $_GET['sort'];
+				$sort = \addslashes($sort);
+
+				$sort = 'ORDER BY '.$sort;
+			}
 			
-			// if(1 === 1)
-			// {
-			// 	$cat = '';
-			// 	$cat = \addslashes($cat);
-			// 	$where .= ' AND category = "'.$cat.'"';
-			// }
+
+			$where .= $filter;
+			$where .= $sort;
 		
-			$items = Item::find($where);
+			$items = Item::find($where, false);
 			if(!empty($items))
 			{
 				$this->_params['items'] = $items;
-			}
-			else
-			{
-				header('Location: index.php?c=pages&a=error404');
 			}
 		}
 		else
@@ -471,5 +483,24 @@ class OrderController extends \app\core\Controller
 			$this->_params['carttotalprice'] = $carttotalprice;
 			$this->_params['carttotalcount'] = $carttotalcount;
 		}
-	}    
+	} 
+	
+	private function AddFilter($parameter, &$selection)
+	{
+		$result = '';
+		if(isset($_POST[$parameter]))
+		{
+			$filter = $_POST[$parameter];
+			if(!empty($filter))
+			{
+				$filter = \addslashes($filter);
+				$result = ' AND '.$parameter.' = "'.$filter.'"';
+				$selection[] = [
+					$parameter	=>	$filter
+				];
+			}
+		}
+
+		return $result;
+	}
 }
