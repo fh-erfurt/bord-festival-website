@@ -176,14 +176,25 @@ INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `TYPE`, `CATEGORY
                       (NULL, 'Original BORD Hoodie', 'Aus echter Baumwolle', '49.99', 'merchandise', 'Bekleidung', 'schwarz', 'Männer', 'assets/img/item/hoodie.jpg'),
                       (NULL, 'BORD Cap', 'Written Logo', '24.99', 'merchandise', 'Kopfbedeckung', 'schwarz', 'unisex', 'assets/img/item/cap.jpg'),
                       (NULL, 'BORD Festival Feuerzeug schwarz', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'schwarz', 'unisex', 'assets/img/item/lighter.jpg'),
-                      (NULL, 'BORD Festival Feuerzeug pink', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'pink', 'unisex', 'assets/img/item/lighter.jpg'),
-                      (NULL, 'BORD Festival Feuerzeug grün', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'grün', 'unisex', 'assets/img/item/lighter.jpg'),
-                      (NULL, 'BORD Festival Feuerzeug rot', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'rot', 'unisex', 'assets/img/item/lighter.jpg'),
-                      (NULL, 'BORD Festival Feuerzeug lila', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'lila', 'unisex', 'assets/img/item/lighter.jpg'),
+                      (NULL, 'BORD Festival Feuerzeug pink', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'pink', 'unisex', 'assets/img/item/lighter_pink.png'),
+                      (NULL, 'BORD Festival Feuerzeug grün', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'grün', 'unisex', 'assets/img/item/lighter_gruen.png'),
+                      (NULL, 'BORD Festival Feuerzeug rot', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'rot', 'unisex', 'assets/img/item/lighter_rot.png'),
+                      (NULL, 'BORD Festival Feuerzeug lila', 'In vielen verschiedenen Farben', '3.99', 'merchandise', 'sonstige', 'lila', 'unisex', 'assets/img/item/lighter_lila.png'),
                       (NULL, 'BORD Festival Poster', '1% Chance für gratis Autogramm', '9.99', 'merchandise', 'sonstige', 'keine', 'unisex', 'assets/img/item/poster.jpg'),
                       (NULL, 'BORD Beanie', 'Perfekt für kalte Festivaltage', '19.99', 'merchandise', 'Kopfbedeckung', 'schwarz', 'Frauen', 'assets/img/item/beanie.jpg'),
                       (NULL, 'BORD Festival Flaschenöffner', 'Flaschenöffner - super für den Festivalalltag', '5.99', 'merchandise', 'sonstige', 'schwarz', 'unisex', 'assets/img/item/bottleopener.jpg'),
                       (NULL, 'BORD Mütze', 'hält warm und schützt gegen den Wind', '19.99', 'merchandise', 'Kopfbedeckung',  'schwarz',  'unisex', 'assets/img/item/muetze.jpg'),
                       (NULL, 'BORD Festival Shirt', 'Shirt für BORD-Festival-Fans', '29.99', 'merchandise', 'Bekleidung', 'schwarz', 'Männer', 'assets/img/item/shirt.jpg'),
                       (NULL, 'BORDhub Aufkleber', 'Selbstklebender Sticker, 1 Stück', '2.99', 'merchandise', 'sonstige',  'keine',  'unisex', 'assets/img/item/bordhub.png');
-                      
+
+DROP VIEW IF EXISTS item_categories;
+
+CREATE VIEW `item_categories` AS SELECT distinct category FROM `items` WHERE category is not null;
+
+DROP VIEW IF EXISTS item_colors;
+
+CREATE VIEW `item_colors` AS SELECT distinct color FROM `items` WHERE color is not null;
+
+DROP VIEW IF EXISTS item_gender;
+
+CREATE VIEW `item_gender` AS SELECT distinct gender FROM `items` WHERE gender is not null;
