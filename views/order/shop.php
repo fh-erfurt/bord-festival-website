@@ -33,6 +33,67 @@
             }
             ?>
             <br/>
+            <?php if(isset($_GET['t'])) : ?>
+                <?php $type = $_GET['t']; ?>
+                <?php if($type === 'merchandise') : ?>
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-12 float-left">
+                                <label for="category" class="form-for">Kategorie:</label>
+                                <select class="form-control" name="category" id="category" onchange="this.form.submit()">
+                                    <?php $filterselected = false; ?>
+                                    <?php foreach($itemcategories as $category) : ?>
+                                        <?php $select = false; ?>
+                                        <?php foreach($selection as $filter) : ?>
+                                            <?php if($category['category'] === $filter['category']) : ?>
+                                                <?php $filterselected = true; ?>
+                                                <?php $select = true; ?>
+                                            <?php endif ?>
+                                        <?php endforeach ?>
+                                        <option value="<?php echo $category['category']; ?>" <?php echo($select ? 'selected' : ''); ?>><?php echo $category['category']; ?></option>
+                                    <?php endforeach ?>
+                                    <option <?php echo $filterselected ? '' : 'selected'; ?> value> -- bitte auswählen -- </option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-sm-12 float-left">
+                                <label for="gender" class="form-for">Geschlecht:</label>
+                                <select class="form-control" name="gender" id="gender" onchange="this.form.submit()">
+                                    <?php $filterselected = false; ?>
+                                    <?php foreach($itemgender as $gender) : ?>
+                                        <?php $select = false; ?>
+                                        <?php foreach($selection as $filter) : ?>
+                                            <?php if($gender['gender'] === $filter['gender']) : ?>
+                                                <?php $filterselected = true; ?>
+                                                <?php $select = true; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach ?>
+                                        <option value="<?php echo $gender['gender']; ?>" <?php echo($select ? 'selected' : ''); ?>><?php echo $gender['gender']; ?></option>
+                                    <?php endforeach ?>
+                                    <option <?php echo $filterselected ? '' : 'selected'; ?> value> -- bitte auswählen -- </option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-sm-12 float-left">
+                                <label for="color" class="form-for">Farbe:</label>
+                                <select class="form-control" name="color" id="color" onchange="this.form.submit()">
+                                    <?php $filterselected = false; ?>
+                                    <?php foreach($itemcolors as $color) : ?>
+                                        <?php $select = false; ?>
+                                        <?php foreach($selection as $filter) : ?>
+                                            <?php if($color['color'] === $filter['color']) : ?>
+                                                <?php $filterselected = true; ?>
+                                                <?php $select = true; ?>
+                                            <?php endif ?>
+                                        <?php endforeach ?>
+                                        <option value="<?php echo $color['color']; ?>" <?php echo($select ? 'selected' : ''); ?>><?php echo $color['color']; ?></option>
+                                    <?php endforeach ?>
+                                    <option <?php echo $filterselected ? '' : 'selected'; ?> value> -- bitte auswählen -- </option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">filtern</button>
+                    </form>
+                <?php endif; ?>
+            <?php endif; ?>
             <?php
             $i = 0;
             if(empty($items))
@@ -46,66 +107,6 @@
             }
             else
             {
-                ?>
-                <form method="post">
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-12 float-left">
-                            <label for="category" class="form-for">Kategorie:</label>
-                            <select class="form-control" name="category" id="category" onchange="this.form.submit()">
-                                <?php $filterselected = false; ?>
-                                <?php foreach($itemcategories as $category) : ?>
-                                    <?php $select = false; ?>
-                                    <?php foreach($selection as $filter) : ?>
-                                        <?php if($category['category'] === $filter['category']) : ?>
-                                            <?php $filterselected = true; ?>
-                                            <?php $select = true; ?>
-                                        <?php endif ?>
-                                    <?php endforeach ?>
-                                    <option value="<?php echo $category['category']; ?>" <?php echo($select ? 'selected' : ''); ?>><?php echo $category['category']; ?></option>
-                                <?php endforeach ?>
-                                <option <?php echo $filterselected ? '' : 'selected'; ?> value> -- bitte auswählen -- </option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-sm-12 float-left">
-                            <label for="gender" class="form-for">Geschlecht:</label>
-                            <select class="form-control" name="gender" id="gender" onchange="this.form.submit()">
-                                <?php $filterselected = false; ?>
-                                <?php foreach($itemgender as $gender) : ?>
-                                    <?php $select = false; ?>
-                                    <?php foreach($selection as $filter) : ?>
-                                        <?php if($gender['gender'] === $filter['gender']) : ?>
-                                            <?php $filterselected = true; ?>
-                                            <?php $select = true; ?>
-                                        <?php endif; ?>
-                                    <?php endforeach ?>
-                                    <option value="<?php echo $gender['gender']; ?>" <?php echo($select ? 'selected' : ''); ?>><?php echo $gender['gender']; ?></option>
-                                <?php endforeach ?>
-                                <option <?php echo $filterselected ? '' : 'selected'; ?> value> -- bitte auswählen -- </option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-sm-12 float-left">
-                            <label for="color" class="form-for">Farbe:</label>
-                            <select class="form-control" name="color" id="color" onchange="this.form.submit()">
-                                <?php $filterselected = false; ?>
-                                <?php foreach($itemcolors as $color) : ?>
-                                    <?php $select = false; ?>
-                                    <?php foreach($selection as $filter) : ?>
-                                        <?php if($color['color'] === $filter['color']) : ?>
-                                            <?php $filterselected = true; ?>
-                                            <?php $select = true; ?>
-                                        <?php endif ?>
-                                    <?php endforeach ?>
-                                    <option value="<?php echo $color['color']; ?>" <?php echo($select ? 'selected' : ''); ?>><?php echo $color['color']; ?></option>
-                                <?php endforeach ?>
-                                <option <?php echo $filterselected ? '' : 'selected'; ?> value> -- bitte auswählen -- </option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">filtern</button>
-                </form>
-
-
-                <?php
                 foreach($items as $item) 
                 {
                     if($i > 0)
