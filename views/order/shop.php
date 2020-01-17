@@ -41,18 +41,14 @@
                             <div class="col-lg-4 col-sm-12 float-left">
                                 <label for="category" class="form-for">Kategorie:</label>
                                 <select class="form-control" name="category" id="category" onchange="this.form.submit()">
-                                    <?php $filterselected = false; ?>
                                     <?php foreach($itemcategories as $category) : ?>
-                                        <?php $select = false; ?>
-                                        <?php foreach($selection as $filter) : ?>
-                                            <?php if($category['category'] === $filter['category']) : ?>
-                                                <?php $filterselected = true; ?>
-                                                <?php $select = true; ?>
-                                            <?php endif ?>
-                                        <?php endforeach ?>
-                                        <option value="<?php echo $category['category']; ?>" <?php echo($select ? 'selected' : ''); ?>><?php echo $category['category']; ?></option>
+                                        <?php if(isset($selectedcategoryfilter)) : ?>
+                                        <option value="<?php echo $category['category']; ?>" <?php echo(($selectedcategoryfilter === $category['category']) ? 'selected' : ''); ?>><?php echo $category['category']; ?></option>
+                                        <?php else : ?>
+                                            <option value="<?php echo $category['category']; ?>" ><?php echo $category['category']; ?></option>
+                                        <?php endif; ?>
                                     <?php endforeach ?>
-                                    <option <?php echo $filterselected ? '' : 'selected'; ?> value> -- bitte auswählen -- </option>
+                                    <option <?php echo (empty($selectedcategoryfilter) ? 'selected' : ''); ?> value> -- bitte auswählen -- </option>
                                 </select>
                             </div>
                             <div class="col-lg-4 col-sm-12 float-left">
@@ -61,7 +57,7 @@
                                     <?php $filterselected = false; ?>
                                     <?php foreach($itemgender as $gender) : ?>
                                         <?php $select = false; ?>
-                                        <?php foreach($selection as $filter) : ?>
+                                        <?php foreach($filterselection as $filter) : ?>
                                             <?php if($gender['gender'] === $filter['gender']) : ?>
                                                 <?php $filterselected = true; ?>
                                                 <?php $select = true; ?>
@@ -78,7 +74,7 @@
                                     <?php $filterselected = false; ?>
                                     <?php foreach($itemcolors as $color) : ?>
                                         <?php $select = false; ?>
-                                        <?php foreach($selection as $filter) : ?>
+                                        <?php foreach($filterselection as $filter) : ?>
                                             <?php if($color['color'] === $filter['color']) : ?>
                                                 <?php $filterselected = true; ?>
                                                 <?php $select = true; ?>
@@ -91,6 +87,20 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">filtern</button>
+                        <?php if (empty($selectedpricesort)) : ?>
+                            <button class="btn btn-primary" type="submit" name="price" value="ASC">Preis</button>
+
+                        <?php else : ?>
+                            <input type="hidden" name="price_selected" value="<?php echo $selectedpricesort["price"]; ?>" />
+                            <button class="btn btn-primary" type="submit" name="price" value="<?php echo $selectedpricesort === "ASC" ? 'DESC' : 'ASC'; ?>">Preis <?php echo $selectedpricesort === "ASC" ? '▾' : '▴' ?></button>
+                        <?php endif; ?>
+                        <?php if (empty($selectednamesort)) : ?>
+                            <button class="btn btn-primary" type="submit" name="name" value="ASC">Name</button>
+
+                        <?php else : ?>
+                            <input type="hidden" name="name_selected" value="<?php echo $selectednamesort["name"]; ?>" />
+                            <button class="btn btn-primary" type="submit" name="name" value="<?php echo $selectednamesort === "ASC" ? 'DESC' : 'ASC'; ?>">Name <?php echo $selectednamesort === "ASC" ? '▾' : '▴'; ?></button>
+                        <?php endif; ?>
                     </form>
                 <?php endif; ?>
             <?php endif; ?>
