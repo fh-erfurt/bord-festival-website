@@ -48,27 +48,28 @@ class OrderController extends \app\core\Controller
 
 			$where = 'type = "'.$type.'"';
 			$filter = '';
-			$orderbyprice = '';
-			$orderbyname = '';
+			$orderby = '';
 			$selectedcategoryfilter = '';
 			$selectedgenderfilter = '';
 			$selectedcolorfilter = '';
-			$selectedpricesort = '';
-			$selectednamesort = '';
 
-			//echo $_POST['category'];
-			//die(var_dump($_POST['category']));
+			$selectedsort = '';
+			$getselectedsort = false;
+			if(!isset($_POST['price']) && !isset($_POST['name']))
+			{
+				$getselectedsort = true;
+			}
+
+			$filter .= self::AddFilter('category', 'selectedcategoryfilter');
+			$filter .= self::AddFilter('gender', 'selectedgenderfilter');
+			$filter .= self::AddFilter('color', 'selectedcolorfilter');
+
+			$orderby .= self::AddFilter('price', 'selectedsort', true, $getselectedsort);
 			
-			$filter .= self::AddFilter('category', 'selectedcategoryfilter', false);
-			$filter .= self::AddFilter('gender', $selectedgenderfilter, false);
-			$filter .= self::AddFilter('color', $selectedcolorfilter, false);
-
-			$orderbyprice .= self::AddFilter('price', $selectedpricesort, true);
-			$orderbyname .= self::AddFilter('name', $selectednamesort, true);
+			$orderby .= self::AddFilter('name', 'selectedsort', true, $getselectedsort);
 			
 			$where .= $filter;
-			$where .= $orderbyprice;
-			$where .= $orderbyname;
+			$where .= $orderby;
 		
 			$items = Item::find($where, false);
 			if(!empty($items))
@@ -483,38 +484,50 @@ class OrderController extends \app\core\Controller
 		}
 	} 
 	
-	private function AddFilter($field, $filtername, $usesort)
+	private function AddFilter($field, $filtername, $usesort = false, $getselectedsort = false)
 	{
 		$result = '';
 		// echo $field;
 		// echo $_POST['category'];
 		// echo $_POST[$field];
+		//var_dump($field);
+		$param = null;
+
+
 		if(isset($_POST[$field]))
 		{
 			$filter = $_POST[$field];
 		}
 		else
 		{
-			if(!empty($_POST[$field.'_selected']))
+			if($getselectedsort)
 			{
-				$filter = $_POST[$field.'_selected'];
+				if(!empty($_POST[$field.'_selected']))
+				{
+					$filter = $_POST[$field.'_selected'];
+				}
 			}
 		}
 
 		if(!empty($filter))
 		{
 			$filter = \addslashes($filter);
+
 			if($usesort)
 			{
+				$param = [
+					$field => $filter
+				];
 				$result = self::AddSort($field, $filter);
 			}
 			else
 			{
+				$param = $filter;
 				$result = self::AddWhere($field, $filter);
 
 			}
 			
-			self::AddToParams($filtername, $filter);
+			self::AddToParams($filtername, $param);
 		}
 
 		return $result;
@@ -534,7 +547,6 @@ class OrderController extends \app\core\Controller
 	{
 		if(!empty($filter))
 		{
-			//die(var_dump($param));
 			$this->_params[$filtermame] = $filter;
 
 		}	
