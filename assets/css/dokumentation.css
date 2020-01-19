@@ -37,12 +37,15 @@ body {
     height: 100%;
     border-left: 1px solid #7c7c7c;
     border-right: 1px solid #000000;
-    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 40px;
+    padding-right: 15px;
 }
 .submenu {
     float: left;
     clear: both;
-    padding-left: 15px;
+    padding-left: 20px;
 }
 .documentation {
     flex: 1;
@@ -50,6 +53,7 @@ body {
     padding-left: 50px;
     padding-right: 50px;
     padding-top: 15px;
+    padding-bottom: 15px;
     height: 100%;
     border-right: 1px solid #7c7c7c;
     overflow-y: scroll;
@@ -68,35 +72,26 @@ h1 {
 }
 h2 {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
-a:link {
+.menu a {
+    clear: both;
+}
+.menu a {
     font-weight: bold;
     text-decoration: underline;
     color: #000;
     float: left;
     font-size: 18px;
 }
-
-a:visited {
-    font-weight: bold;
-    text-decoration: underline;
-    color: #000;
+.menu .submenu a {
+    font-weight: normal;
+    font-size: 18px;
+    text-decoration: none;
 }
 
-a:hover {
-    font-weight: bold;
-    text-decoration: underline;
-    color: #000;
-}
-
-a:active {
-    font-weight: bold;
-    text-decoration: underline;
-    color: #000;
-}
 .table-50 {
     width: 50%;
     margin: 0 auto;
@@ -122,7 +117,10 @@ td {
 .th-left td:nth-child(1) {
     background-color: rgb(162, 205, 247);;
 }
-ol {
+img {
+    max-width: 100%;
+}
+/* ol {
     counter-reset: section;
     list-style-type:none;
     padding-left:0;
@@ -142,4 +140,4 @@ ul {counter-reset: section;  list-style-type:lower-alpha}
 ul li:before {counter-increment: section; content: ""}
 ol li ol li {
     padding-left: 15px;
-}
+} */
