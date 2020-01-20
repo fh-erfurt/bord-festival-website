@@ -15,7 +15,7 @@ if(isset($_GET['a']))
 		<title><?php echo $title ?? "BORD-Festival" ?></title>
 		<link rel="stylesheet" type="text/css" href="assets/css/grid.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/layout.css">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/bord-logo.png">
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/bord_logo_negativ.ico">
 		<?php if(isset($css) && is_array($css)) : ?>
 			<?php foreach($css as $index => $file) : ?>
 			<link rel="stylesheet" type="text/css" href="assets/css/<?=$file?>.css">
@@ -41,7 +41,7 @@ if(isset($_GET['a']))
 									</a>
 								</div>
 								<div class="col-lg-10 col-md-10 col-sm-12 float-left nav-menu">
-									<a class="nav-link<?php echo ($activeAction === 'index' ? ' nav-link-active' : ''); ?>" href="?c=pages&a=index">Startseite</a>
+									<a class="nav-link<?php echo ($activeAction === 'index' || $activeAction === '' ? ' nav-link-active' : ''); ?>" href="?c=pages&a=index">Startseite</a>
 									<div class="dropdown">
 										<a href='#' class="nav-link<?php echo ($activeAction === 'shop' ? ' nav-link-active' : ''); ?>">
 											<div>Shop <div class="dropdown-icons">
@@ -104,7 +104,8 @@ if(isset($_GET['a']))
 											else :
 										?>							
 												<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>" ´
-												href="?c=order&a=shoppingcart">Warenkorb
+												href="?c=order&a=shoppingcart">Warenkorb<div class="hide-mobile hide-medium-screen">
+												(<?php echo $carttotalcount . '): ' . $carttotalprice . '€'; ?></div>
 												</a>
 										<?php 
 											endif;
