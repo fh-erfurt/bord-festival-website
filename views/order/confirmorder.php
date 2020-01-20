@@ -2,10 +2,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <section>
             <div class="row">
-                <div class="title-red">
-                    <div class="col-lg-12 col-md-12 col-sm-12 clear-left">
-                        <h1>Ihre Bestellung</h1>
-                    </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 clear-left">
+                    <h1 class="page-heading">Ihre Bestellung</h1>
                 </div>
             </div>
             <div class="row">
@@ -22,7 +20,7 @@
                     <div class="confirmorder-price-content">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8 lineup-col">
-                                <b>Preis: </b><?php echo $price; ?>
+                                <b>Preis: </b><?php echo $price . '€'; ?>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 lineup-col">
                                 <form method="post">

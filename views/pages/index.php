@@ -1,10 +1,9 @@
 <script type="text/javascript" src="assets/js/countdown.js"></script>
 <div class="row">
-    <div class="bord-banner">
+    <div class="bord-banner"></div>
+    <div class="col-lg-12 col-md-12 col-sm-12 center">
+        <p class="countdown-noch">noch</p>
     </div>
-<div class="col-lg-12 col-md-12 col-sm-12 center">
-    <p class="countdown-noch">noch</p>
-</div>
 </div>
 <div class="row">
     <div class="col-lg-6 col-md-10 col-sm-12 center clear-fix">

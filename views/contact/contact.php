@@ -21,10 +21,8 @@
         <div class="contact">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="row">
-                    <div class="title-red">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h1>Kontakt</h1>
-                        </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h1 class="page-heading">Kontakt</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -97,6 +95,4 @@
         </div>
     </section>
 </div>
-<br>
-
 

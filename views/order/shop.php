@@ -1,4 +1,5 @@
 <script type="text/javascript" src="assets/js/changeItemcount.js"></script>
+
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
         <section>
@@ -125,7 +126,7 @@
                     }
                     ?>
                     <div class="float-left item-image">
-                        <img class="" src="<?php echo $item['IMAGEURL']; ?>" />
+                        <img alt="<?php echo $item['NAME']; ?>" src="<?php echo $item['IMAGEURL']; ?>" />
                     </div>
                     <div class="float-left item-details">                    
                     <h4 class="item-name"><?php echo $item['NAME']; ?></h4>

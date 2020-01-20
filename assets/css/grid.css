@@ -32,10 +32,12 @@ html {
 }
 
 .content {
+    background-color: #18181b;
     width: 100%;
-    background: #18181b;
     float: left;
-    padding: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     box-sizing: border-box;
     margin-bottom: 70px;
 }
@@ -52,6 +54,7 @@ html {
     padding-top: 15px;
     padding-bottom: 15px;
     display: inline-block;
+    font-weight: bold;
 }
 
 .nav-link-active {
@@ -64,9 +67,13 @@ html {
 }
 
 .nav-header {
-    color: #fff;
-    text-decoration: none;
     display: inline-block;
+    margin-top: 30px;
+}
+
+.nav-menu {
+    font-size: medium;
+    margin-top: 50px;
 }
 
 .alert {
@@ -176,6 +183,7 @@ html {
     .col-lg-12,
     .col-lg-11,
     .col-lg-10,
+    .col-lg-9,
     .col-lg-8,
     .col-lg-7,
     .col-lg-6,
@@ -193,8 +201,14 @@ html {
         width: 100%;
         clear: left;
     }
+    .col-lg-11 {
+        width: 91.666%;
+    }
     .col-lg-10 {
         width: 83.333%;
+    }
+    .col-lg-9 {
+        width: 75%;
     }
     .col-lg-8 {
         width: 66.666%;
@@ -240,6 +254,11 @@ html {
 }
 
 .row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.banner-row {
     margin-left: -15px;
     margin-right: -15px;
 }
@@ -300,6 +319,7 @@ html {
 @media (max-width: 600px),
 (max-device-width: 600px) {
     .col-sm-12,
+    .col-sm-11,
     .col-sm-6,
     .col-sm-4,
     .col-sm-3,
@@ -312,6 +332,9 @@ html {
     .col-sm-12 {
         width: 100%;
         clear: left;
+    }
+    .col-sm-11 {
+        width: 91.666%;
     }
     .col-sm-10 {
         width: 83.333%;

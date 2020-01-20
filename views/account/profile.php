@@ -3,10 +3,8 @@
         <div class="accountdata">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="row">
-                    <div class="title-red">
-                        <div class="col-lg-12 col-md-12 col-sm-12 float-left">
-                            <h1>Mein Account<h1>
-                        </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 float-left">
+                        <h1 class="page-heading">Mein Account<h1>
                     </div>
                 </div>
                 <div class="row">
@@ -15,11 +13,11 @@
                         foreach($accdata as $key => $value) :
                         ?> 
                             <div class="accountdata-content clear-left">
-                                <div class="col-lg-6 col-md-6 col-sm-12 float-left">
+                                <div class="col-lg-6 col-md-6 col-sm-12 float-left account-label">
                                     <b><?php echo $key . ' '; ?></b><br><?php echo $value; ?>
                                 </div>  
                                 <div class="col-lg-4 col-md-6 col-sm-12 float-left">
-                                    <label for="<?php echo $key; ?>"><?php echo $key . ' ändern'; ?></label>
+                                    <label class="account-label" for="<?php echo $key; ?>"><?php echo $key . ' ändern'; ?></label>
                                     <input id="<?php echo $key; ?>" name="<?php echo $key; ?>"class="form-control" placeholder="<?php echo $key; ?>">
                                 </div>
                             </div>
@@ -49,10 +47,8 @@
         <div class="order-history">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="row">
-                    <div class="title-red">
-                        <div class="col-lg-12 col-md-12 col-sm-12 float-left">
-                            <h1>Meine Bestellhistorie</h1> 
-                        </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 float-left">
+                        <h1 class="page-heading">Meine Bestellhistorie</h1> 
                     </div>
                 </div>
                 <?php 

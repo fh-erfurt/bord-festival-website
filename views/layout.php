@@ -15,7 +15,7 @@ if(isset($_GET['a']))
 		<title><?php echo $title ?? "BORD-Festival" ?></title>
 		<link rel="stylesheet" type="text/css" href="assets/css/grid.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/layout.css">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/bord-logo.png">
 		<?php if(isset($css) && is_array($css)) : ?>
 			<?php foreach($css as $index => $file) : ?>
 			<link rel="stylesheet" type="text/css" href="assets/css/<?=$file?>.css">
@@ -35,10 +35,13 @@ if(isset($_GET['a']))
 					<nav class="navbar">
 						<div class="content-top">
 							<div class="row">
-								<div class="col-lg col-md-12 col-sm-12 float-left">
-									<p class="festival-logo"><a class="nav-header" href="index.php">BORD-Festival</a></p>
+								<div class="col-lg-2 col-md-2 float-left hide-mobile">
+									<a class="nav-header" href="?c=pages&a=index">
+									<img class="" src="assets/img/bord_logo_negativ.png" alt="BORD-Festival" height="100" width="100">
+									</a>
 								</div>
-								<div class="col-lg-8 col-md-12 col-sm-12 float-left nav-menu">
+								<div class="col-lg-10 col-md-10 col-sm-12 float-left nav-menu">
+									<a class="nav-link<?php echo ($activeAction === 'index' ? ' nav-link-active' : ''); ?>" href="?c=pages&a=index">Startseite</a>
 									<div class="dropdown">
 										<a href='#' class="nav-link<?php echo ($activeAction === 'shop' ? ' nav-link-active' : ''); ?>">
 											<div>Shop <div class="dropdown-icons">
@@ -55,7 +58,7 @@ if(isset($_GET['a']))
 									</div>
 									<div class="dropdown">
 										<a href='#' class="nav-link<?php echo ($activeAction === 'contact' ? ' nav-link-active' : ''); ?>">
-										<div>Über<div class="hide-mobile"> uns</div> <div class="dropdown-icons"><span class="dropdown-closed">▸</span>
+										<div>Über<div class="hide-mobile hide-medium-screen"> uns</div> <div class="dropdown-icons"><span class="dropdown-closed">▸</span>
 										<span class="dropdown-open">▾</span></div></div>
 										</a>
 										<div class="dropdown-content">
@@ -70,7 +73,7 @@ if(isset($_GET['a']))
 									?>
 										<div class="dropdown">
 											<a href="?c=account&a=profile" class="nav-link<?php echo ($activeAction === 'profile' ? ' nav-link-active' : ''); ?>">
-												<div class="hide-mobile">Mein </div>Konto 
+												<div class="hide-mobile hide-medium-screen">Mein </div>Konto 
 												<div class="dropdown-icons">
 													<span class="dropdown-closed">▸</span>
 													<span class="dropdown-open">▾</span>
@@ -101,7 +104,7 @@ if(isset($_GET['a']))
 											else :
 										?>							
 												<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>" ´
-												href="?c=order&a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>): <?php echo $carttotalprice ?> €
+												href="?c=order&a=shoppingcart">Warenkorb
 												</a>
 										<?php 
 											endif;
