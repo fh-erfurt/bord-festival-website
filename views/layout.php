@@ -32,7 +32,7 @@ if(isset($_GET['a']))
 		<div class="content-wrap">
 			<header>
 				<div class="container-top">
-					<nav class="navbar">
+					<nav>
 						<div class="content-top">
 							<div class="row">
 								<div class="col-lg-2 col-md-2 float-left hide-mobile">
