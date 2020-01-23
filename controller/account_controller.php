@@ -200,24 +200,123 @@ class AccountController extends \app\core\Controller
 
         $this->_params['title'] = $title;
 
+        $clientid = $_SESSION['client_id'];
+        $client = Client::find('CLIENTID = ' . $clientid);
+        $addressid = $client[0]['ADDRESSID'];
+        $address = Address::find('ADDRESSID = ' . $addressid);
+
+        $accdata = [];
+
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true)
         {
-            $clientid = $_SESSION['client_id'];
-            $client = Client::find('CLIENTID = ' . $clientid);
-            $addressID = $client[0]['ADDRESSID'];
-            $address = Address::find('ADDRESSID = ' . $addressID);
+            if(!isset($_POST['updateaccount']))
+            {
+                $accdata['E-Mail']          = $client[0]['MAIL'];
+                $accdata['Vorname']         = $client[0]['FIRSTNAME'];
+                $accdata['Nachname']        = $client[0]['LASTNAME'];
+                $accdata['Geburtsdatum']    = $client[0]['DATEOFBIRTH'];
+                $accdata['Straße']          = $address[0]['STREET'];
+                $accdata['Postleitzahl']    = $address[0]['ZIP'];
+                $accdata['Stadt']           = $address[0]['CITY'];
+                $accdata['Land']            = $address[0]['COUNTRY'];    
+            }
+            else
+            {
+                $mail = $_POST['E-Mail'] ?? null;
+                $password = $_POST['password'] ?? null;
+                $firstname = $_POST['Vorname']  ?? null;
+                $lastname = $_POST['Nachname']  ?? null;
+                $dateofbirth = $_POST['Geburtsdatum']  ?? null;
+                $street = $_POST['Straße']  ?? null;
+                $zip = $_POST['Postleitzahl']  ?? null;
+                $city = $_POST['Stadt']  ?? null;
+                $country = $_POST['Land']  ?? null;
 
-            $accdata = [];
+                if($mail != null && $firstname != null && $lastname != null && $dateofbirth != null &&
+                   $street != null && $zip != null && $city != null && $country != null)
+                {                  
+                    $clientdata = $client[0];
 
-            $accdata['E-Mail'] = $client[0]['MAIL'];
-            $accdata['Vorname'] = $client[0]['FIRSTNAME'];
-            $accdata['Nachname'] = $client[0]['LASTNAME'];
-            $accdata['Geburtsdatum'] = $client[0]['DATEOFBIRTH'];
+                    if(password_verify($password, $clientdata['PASSWORD']))
+                    {
+                        $updatedaddressdata = [
+                            'ADDRESSID' => $addressid,
+                            'STREET'    => $street,
+                            'ZIP'       => $zip,
+                            'CITY'      => $city,
+                            'COUNTRY'   => $country
+                        ];
+                        
+                        $updatedaddress = new Address($updatedaddressdata);
+                        $updatedaddress->save();
 
-            $accdata['Straße'] = $address[0]['STREET'];
-            $accdata['Postleitzahl'] = $address[0]['ZIP'];
-            $accdata['Stadt'] = $address[0]['CITY'];
-            $accdata['Land'] = $address[0]['COUNTRY'];
+                        $hashedpassword = $clientdata['PASSWORD'];
+                        $createdat = $clientdata['CREATEDAT'];
+
+                        $updatedclientdata = [
+                            'CLIENTID'      => $clientid,
+                            'MAIL'          => $mail,
+                            'FIRSTNAME'     => $firstname,
+                            'LASTNAME'      => $lastname,
+                            'DATEOFBIRTH'   => $dateofbirth,
+                            'CREATEDAT'     => $createdat,
+                            'UPDATEDAT'     => date("Y-m-d H:i:s"),
+                            'ADRESSID'      => $addressid
+                        ];
+                        
+                        $updatedclient = new Client($updatedclientdata);
+                        $updatedclient->save(); 
+                                                                
+                        $accdata['E-Mail']          = $mail;
+                        $accdata['Vorname']         = $firstname;
+                        $accdata['Nachname']        = $lastname;
+                        $accdata['Geburtsdatum']    = $dateofbirth;
+                        $accdata['Straße']          = $street;
+                        $accdata['Postleitzahl']    = $zip;
+                        $accdata['Stadt']           = $city;
+                        $accdata['Land']            = $country;
+                    }
+                    else
+                    {
+                        $accdata['E-Mail']          = $mail;
+                        $accdata['Vorname']         = $firstname;
+                        $accdata['Nachname']        = $lastname;
+                        $accdata['Geburtsdatum']    = $dateofbirth;
+                        $accdata['Straße']          = $street;
+                        $accdata['Postleitzahl']    = $zip;
+                        $accdata['Stadt']           = $city;
+                        $accdata['Land']            = $country;
+
+                        $this->_params['updateerror'] = "Passwort nicht korrekt!";
+                    }
+                }
+                else
+                {
+                    $accdata['E-Mail']          = ltrim($mail);
+                    $accdata['Vorname']         = ltrim($firstname);
+                    $accdata['Nachname']        = ltrim($lastname);
+                    $accdata['Geburtsdatum']    = ltrim($dateofbirth);
+                    $accdata['Straße']          = ltrim($street);
+                    $accdata['Postleitzahl']    = ltrim($zip);
+                    $accdata['Stadt']           = ltrim($city);
+                    $accdata['Land']            = ltrim($country);
+
+                    $missingInformation = [];
+
+                    $missingInformation['E-Mail'] 		= $mail != null ? false : true;
+                    $missingInformation['Vorname'] 	    = $firstname != null ? false : true;
+                    $missingInformation['Nachname'] 	= $lastname != null ? false : true;
+                    $missingInformation['Geburtsdatum'] = $dateofbirth != null ? false : true;
+                    $missingInformation['Straße']		= $street != null ? false : true;
+                    $missingInformation['Postleitzahl'] = $zip != null ? false : true;
+                    $missingInformation['Stadt'] 		= $city != null ? false : true;
+                    $missingInformation['Land'] 		= $country != null ? false : true;
+                    
+                    $this->_params['missing'] = $missingInformation;
+
+                    $this->_params['updateerror'] = "Bitte alle fehlenden Felder ausfüllen!";
+                }
+            }
 
             $this->_params['accdata'] = $accdata;
 

@@ -1,22 +1,24 @@
+<?php
+	if(!isset($missing))
+	{
+		$missing['mail'] = false;
+		$missing['password1'] = false;
+		$missing['password2'] = false;
+		$missing['firstname'] = false;
+		$missing['lastname'] = false;
+		$missing['dateofbirth'] = false;
+		$missing['street'] = false;
+		$missing['zip'] = false;
+		$missing['city'] = false;
+	}
+?>
+
 <div class="background-black">
 	<div class="row">
 		<div class="col-lg-6 col-md-10 col-sm-10 center clear-fix">
 			<section>
 				<h1 class="page-heading text-left">Registrierung</h1>
-
 				<?php
-				if(!isset($missing))
-				{
-					$missing['mail'] = false;
-					$missing['password1'] = false;
-					$missing['password2'] = false;
-					$missing['firstname'] = false;
-					$missing['lastname'] = false;
-					$missing['dateofbirth'] = false;
-					$missing['street'] = false;
-					$missing['zip'] = false;
-					$missing['city'] = false;
-				}
 				if(!empty($registererror))
 				{
 					?>
