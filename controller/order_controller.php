@@ -195,6 +195,15 @@ class OrderController extends \app\core\Controller
 		if(isset($_SESSION['client_id']))
 		{
 			$clientid = $_SESSION['client_id'];
+			$client = Client::find('CLIENTID = ' . $clientid);
+			$cart = Cart::find('CLIENTID = ' . $clientid);
+			$addressid = $client[0]['ADDRESSID'];
+			$address = Address::find('ADDRESSID = ' . $addressid);
+
+			$this->_params['street'] = $address[0]['STREET'];
+			$this->_params['zip'] = $address[0]['ZIP'];
+			$this->_params['city'] = $address[0]['CITY'];
+			$this->_params['country'] = $address[0]['COUNTRY'];
 
 			if(isset($_POST['deleteitemfromcart']))
 			{
@@ -242,7 +251,37 @@ class OrderController extends \app\core\Controller
 
 			if(isset($_POST['buycart']))
 			{
-				header('Location: index.php?c=order&a=confirmorder');
+				$purchasedata = [
+					'PURCHASEDAT'	=> date("Y-m-d H:i:s"),
+					'CLIENTID' 		=> $clientid				
+				];
+		
+				$tmppurchase = new Purchase($purchasedata);
+				$tmppurchase->save();
+		
+				$purchaseid = $tmppurchase->schema['PURCHASEID'];
+
+				$cartitems = Cartitem::find('CARTID = ' . $cart[0]['CARTID']);
+
+				foreach($cartitems as $cartitem)
+				{
+					$itemid = $cartitem['ITEMID'];
+					$item = Item::find('ITEMID = '.$itemid);
+					$itemprice = $item[0]['PRICE'];
+					
+					$purchaseitemdata = [
+						'PURCHASEID'	=> $purchaseid,
+						'ITEMID'  		=> $cartitem['ITEMID'],
+						'QUANTITY' 		=> $cartitem['QUANTITY'],
+						'PRICE'	        => $itemprice
+					];
+
+					$purchaseitem = new Purchaseitem($purchaseitemdata);
+					$purchaseitem->save();
+				}
+
+				self::deletewholecart($clientid);
+				header('Location: index.php?c=pages&a=index');
 			}
 
 			$cart = Cart::find('CLIENTID = '.$clientid);
@@ -257,7 +296,8 @@ class OrderController extends \app\core\Controller
 				$this->_params['carttotalprice'] = $carttotalprice;
 				$this->_params['cartitemcount'] = $cartitemcount;	
 				
-				$cartitems = Cartitem::find('CARTID = '.$cartid);				
+				$cartitems = Cartitem::find('CARTID = '.$cartid);
+				
 				$this->_params['cartitems'] = $cartitems;
 
 				$shoppingcart = [];
@@ -300,75 +340,6 @@ class OrderController extends \app\core\Controller
 		}
 
 	}
-
-	public function actionConfirmorder()
-	{
-		$title = "Bestätigen - BORD-Festival";
-
-		$this->_params['title'] = $title;
-
-		if(isset($_SESSION['client_id']))
-		{
-			$clientid = $_SESSION['client_id'];
-			$client = Client::find('CLIENTID = ' . $clientid);
-			$cart = Cart::find('CLIENTID = ' . $clientid);
-			$addressID = $client[0]['ADDRESSID'];
-			$address = Address::find('ADDRESSID = ' . $addressID);
-
-			if($cart[0]['TOTALCOUNT'] !== '0')
-			{
-				$this->_params['price'] = $cart[0]['TOTALPRICE'];
-			
-				$this->_params['street'] = $address[0]['STREET'];
-				$this->_params['zip'] = $address[0]['ZIP'];
-				$this->_params['city'] = $address[0]['CITY'];
-				$this->_params['country'] = $address[0]['COUNTRY'];
-
-				if(isset($_POST['buycart']))
-				{
-					$purchasedata = [
-						'PURCHASEDAT'	=> date("Y-m-d H:i:s"),
-						'CLIENTID' 		=> $clientid				
-					];
-			
-					$tmppurchase = new Purchase($purchasedata);
-					$tmppurchase->save();
-			
-					$purchaseid = $tmppurchase->schema['PURCHASEID'];
-
-					$cartitems = Cartitem::find('CARTID = ' . $cart[0]['CARTID']);
-
-					foreach($cartitems as $cartitem)
-					{
-						$itemid = $cartitem['ITEMID'];
-						$item = Item::find('ITEMID = '.$itemid);
-						$itemprice = $item[0]['PRICE'];
-						
-						$purchaseitemdata = [
-							'PURCHASEID'	=> $purchaseid,
-							'ITEMID'  		=> $cartitem['ITEMID'],
-							'QUANTITY' 		=> $cartitem['QUANTITY'],
-							'PRICE'	        => $itemprice
-						];
-
-						$purchaseitem = new Purchaseitem($purchaseitemdata);
-						$purchaseitem->save();
-					}
-
-					self::deletewholecart($clientid);
-					header('Location: index.php?c=pages&a=index');
-				}
-			}
-			else
-			{
-				header('Location: index.php?c=pages&a=error404');
-			}
-		}
-		else
-		{
-			header('Location: index.php?c=pages&a=error404');
-		}
-    }
 
 	public function updateCart($cartid, $clientid)
 	{

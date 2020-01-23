@@ -1,16 +1,16 @@
 <?php
-	if(!isset($missing))
-	{
-		$missing['mail'] = false;
-		$missing['password1'] = false;
-		$missing['password2'] = false;
-		$missing['firstname'] = false;
-		$missing['lastname'] = false;
-		$missing['dateofbirth'] = false;
-		$missing['street'] = false;
-		$missing['zip'] = false;
-		$missing['city'] = false;
-	}
+if(!isset($missing))
+{
+	$missing['mail'] = false;
+	$missing['password1'] = false;
+	$missing['password2'] = false;
+	$missing['firstname'] = false;
+	$missing['lastname'] = false;
+	$missing['dateofbirth'] = false;
+	$missing['street'] = false;
+	$missing['zip'] = false;
+	$missing['city'] = false;
+}
 ?>
 
 <div class="background-black">

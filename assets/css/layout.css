@@ -315,8 +315,41 @@ main {}
     opacity: 1;
 }
 
+.popup {
+    margin: 200px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+    text-align: left;
+}
+
+.popup-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.popup-close:hover {
+    color: rgb(143, 0, 0);
+}
+
+.popup-content {
+    max-height: 30%;
+    overflow: auto;
+    margin-top: 15px;
+    color: #0c0c0c;
+}
+
 .popup-title {
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #0c0c0c
 }
 
 .input-inline {
@@ -532,36 +565,6 @@ main {}
     margin-right: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
-}
-
-.account-popup {
-    margin: 200px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    position: relative;
-    text-align: left;
-}
-
-.account-popup-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    transition: all 200ms;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-}
-
-.account-popup-close:hover {
-    color: rgb(143, 0, 0);
-}
-
-.account-popup-content {
-    max-height: 30%;
-    overflow: auto;
-    margin-top: 15px;
 }
 
 .order-history {

@@ -1,15 +1,15 @@
 <?php
-	if(!isset($missing))
-	{
-		$missing['E-Mail'] = false;
-		$missing['Vorname'] = false;
-		$missing['Nachname'] = false;
-		$missing['Geburtsdatum'] = false;
-		$missing['Straße'] = false;
-		$missing['Postleitzahl'] = false;
-		$missing['Stadt'] = false;
-		$missing['Land'] = false;
-	}
+if(!isset($missing))
+{
+    $missing['E-Mail'] = false;
+    $missing['Vorname'] = false;
+    $missing['Nachname'] = false;
+    $missing['Geburtsdatum'] = false;
+    $missing['Straße'] = false;
+    $missing['Postleitzahl'] = false;
+    $missing['Stadt'] = false;
+    $missing['Land'] = false;
+}
 ?>
 
 <div class="background-black">
@@ -42,7 +42,7 @@
                                         <label class="form-for" for="<?php echo $key; ?>"><?php echo $key; ?></label>
                                         <input class="form-control <?php echo($missing[$key] === false) ? '' : 'text-validate-red' ?>"
                                                id="<?php echo $key; ?>" name="<?php echo $key; ?>" placeholder="<?php echo $key; ?>"
-                                               value="<?php echo $value; ?> ">
+                                               value="<?php echo $value; ?>">
                                     </div>
                                 </div>
                             </div>
@@ -55,10 +55,10 @@
                         <div id="confirmpassword" class="overlay">
                             <div class="row">
                                 <div class="col-lg-5 col-md-8 col-sm-10 center">
-                                    <div class="account-popup">
+                                    <div class="popup">
                                         <h2 class="popup-title">Accountdaten ändern</h2>
-                                        <a class="account-popup-close" href="#">&times;</a>
-                                        <div class="account-popup-content">
+                                        <a class="popup-close" href="#">&times;</a>
+                                        <div class="popup-content">
                                             <label for="password">Passwort</label>
                                             <input class="form-control" id="password" name="password" type="password">
                                         </div>
@@ -73,9 +73,9 @@
         </div>
     </div>
     
-    <br>
+    <br><br>
     
-    <div class="row">
+    <div class="row border-top">
         <section>
             <div class="order-history">
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -151,6 +151,18 @@
                             </div>
                             <?php
                         }
+                    }
+                    else
+                    {
+                        ?>
+                        <div class="row">
+                            <div class="col-lg-12 col-lg-12 col-lg-12">
+                                <div class="alert alert-warning">
+                                    Keine Artikel wurden in der Bestellhistorie gefunden.
+                                </div>
+                            </div>
+                        </div>
+                    <?php
                     }
                     ?>
                 </div>
