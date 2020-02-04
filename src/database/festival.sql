@@ -198,3 +198,12 @@ CREATE VIEW `item_colors` AS SELECT distinct color FROM `items` WHERE color is n
 DROP VIEW IF EXISTS item_gender;
 
 CREATE VIEW `item_gender` AS SELECT distinct gender FROM `items` WHERE gender is not null;
+
+--
+-- Initialbefüllung für Test-Account-Erstellung
+--
+INSERT INTO `addresses` (`ADDRESSID`, `STREET`, `ZIP`, `CITY`, `COUNTRY`) VALUES
+(1, 'Altonaer Str. 25', '99085', 'Erfurt', 'GER');
+
+INSERT INTO `clients` (`CLIENTID`, `MAIL`, `FIRSTNAME`, `LASTNAME`, `DATEOFBIRTH`, `PASSWORD`, `CREATEDAT`, `UPDATEDAT`, `ADDRESSID`) VALUES
+(1, 'test@fh-erfurt.de', 'Maximilian', 'Mustermann', '1990-01-01', 0x24327924313024353467674539504d7a374d3768456d62676871306e6563686a6d546a49647737313158466b4a3136696b6639304852327557387743, '2020-02-03 21:37:10', '2020-02-03 21:37:10', 1);
