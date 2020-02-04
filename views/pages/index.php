@@ -18,7 +18,7 @@
         </section>
     </div> 
 </div> 
-<div class="background-black">
+<div class="background-start">
     <div class="row">
         <div class="newsletter-form">
             <section>
