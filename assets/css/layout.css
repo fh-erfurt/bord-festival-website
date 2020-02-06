@@ -32,6 +32,14 @@ header {
     background: #0c0c0c;
 }
 
+.display-show {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
 nav ul {
     list-style: none;
 }
@@ -533,7 +541,7 @@ main {}
 }
 
 .text-validate-red {
-    border: 2px solid red;
+    border: 2px solid rgb(255, 87, 87);
 }
 
 .validation-helptext {
@@ -541,7 +549,6 @@ main {}
     text-align: left;
     color: rgb(255, 87, 87);
     font-size: 0.75rem;
-    display: block;
 }
 
 .contact {
