@@ -33,7 +33,7 @@ if(!isset($missing))
 				<?php
 				}
 				?>
-				<form method="post">
+				<form method="post" onsubmit="return validateAll();">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-12 float-left clear-left">
 							<div class="input-group">

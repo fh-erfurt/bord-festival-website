@@ -84,7 +84,7 @@ class AccountController extends \app\core\Controller
                         else
                         {
                             $_SESSION['loggedIn'] = false;
-                            // ERROR: passwort nicht gleich
+                            $this->_params['registererror'] = 'Die Passwörter stimmen nicht überein.';
                         }
                     }
                     else

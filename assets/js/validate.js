@@ -36,7 +36,6 @@ function validateInput(inputId, validation) {
             input.classList.add("text-validate-red");
             addToErrorArray(inputId);
         }
-        console.log(errors);
     }
     toggleSubmitButton();
 }
@@ -52,9 +51,26 @@ function toggleSubmitButton() {
     if(errors.length > 0) {
         submitButton.disabled = true;
         submitButton.classList.add('btn-disabled');
+        return false;
     }
     else {
         submitButton.disabled = false;
         submitButton.classList.remove('btn-disabled');
+        return true;
     }
+}
+
+function validateAll() {
+    validateInput('InputEmail', 'mail');
+    validateInput('InputPassword');
+    validateInput('InputPassword2');
+    validateInput('InputFirstname');
+    validateInput('InputLastname');
+    validateInput('InputBirthday');
+    validateInput('InputStreet');
+    validateInput('InputZip');
+    validateInput('InputCity');
+
+    var result = toggleSubmitButton();
+    return result;
 }
