@@ -49,6 +49,16 @@ html {
     background-color: #18181b;
 }
 
+.background-start {
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 9px;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: -5px;
+    background-color: #18181b;
+}
+
 .navbar {
     padding-top: 15px;
 }

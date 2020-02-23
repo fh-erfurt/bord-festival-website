@@ -11,14 +11,22 @@
             <div class="center">
                 <div class="countdown" id="countdown-days"><?php echo $days; ?> Tage</div>
                 <div class="countdown" id="countdown-time">
-                    <div class="countdown no-script">loading...</div>
+                    <div class="no-script">
+                        <div class="spinner center">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                            </div>
+                        </div>
+                    </div>
                     <noscript><?php echo $hourstext; ?></noscript>
                 </div>
-            </div>
         </section>
     </div> 
 </div> 
-<div class="background-black">
+<div class="background-start">
     <div class="row">
         <div class="newsletter-form">
             <section>
