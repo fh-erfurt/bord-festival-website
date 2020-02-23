@@ -536,16 +536,10 @@ main {}
 }
 
 .contact {
-    margin-top: 15px;
-}
-
-.contact-header {
-    overflow: hidden;
-    background-color: #333;
-    margin-left: 15px;
-    margin-right: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px 30px;
+    background-color: rgb(59, 44, 44);
+    border: 3px solid white;
+    border-radius: 20px;
 }
 
 .contact-content {
