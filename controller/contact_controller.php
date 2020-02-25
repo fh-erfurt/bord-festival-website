@@ -12,7 +12,7 @@ class ContactController extends \app\core\Controller
 {
 	public function actionContact()
 	{
-		$title = "Kontakt";
+		$title = "Kontakt - BORD-Festival";
 
 		$this->_params['title'] = $title;
 

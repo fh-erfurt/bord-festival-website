@@ -31,12 +31,19 @@ class OrderController extends \app\core\Controller
 {
 	public function actionShop()
 	{
-		$title = "Shop - BORD-Festival";
-		$this->_params['title'] = $title;
-
 		if(isset($_GET['t']))
 		{
 			$type = $_GET['t'];
+			if($type === 'tickets')
+			{
+				$title = "Ticketshop - BORD-Festival";
+				$this->_params['title'] = $title;
+			}
+			else
+			{
+				$title = "Merchandise - BORD-Festival";
+				$this->_params['title'] = $title;
+			}
 			$type = \addslashes($type);
 
 			$itemcategories = ItemCategory::find();

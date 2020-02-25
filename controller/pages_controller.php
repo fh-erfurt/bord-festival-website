@@ -26,7 +26,7 @@ class PagesController extends \app\core\Controller
 
 	public function actionIndex()
 	{
-		$title = "Welcome - BORD-Festival";
+		$title = "Willkommen - BORD-Festival";
 		$this->_params['title'] = $title;
 
 		$this->_params['title'];
