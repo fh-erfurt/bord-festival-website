@@ -49,10 +49,10 @@ class AccountController extends \app\core\Controller
                         if($password1 === $password2)
                         {
                             $addressdata = [
-                                'STREET' 	=> $street,
-                                'ZIP' 		=> $zip,
-                                'CITY' 		=> $city,
-                                'COUNTRY' 	=> 'GER'						
+                                'street' 	=> $street,
+                                'zip' 		=> $zip,
+                                'city' 		=> $city,
+                                'country' 	=> 'GER'						
                             ];
         
                             $address = new Address($addressdata);
@@ -62,14 +62,14 @@ class AccountController extends \app\core\Controller
                             $hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
         
                             $clientdata = [						
-                                'MAIL' 			=> $mail,
-                                'FIRSTNAME'		=> $firstname,
-                                'LASTNAME' 		=> $lastname,
-                                'DATEOFBIRTH'	=> $dateofbirth,
-                                'PASSWORD' 		=> $hashedpassword,
-                                'CREATEDAT' 	=> date("Y-m-d H:i:s"),
-                                'UPDATEDAT' 	=> date("Y-m-d H:i:s"),
-                                'ADDRESSID' 	=> $address->schema['ADDRESSID']
+                                'mail' 			=> $mail,
+                                'firstname'		=> $firstname,
+                                'lastname' 		=> $lastname,
+                                'dateofbirth'	=> $dateofbirth,
+                                'password' 		=> $hashedpassword,
+                                'createdat' 	=> date("Y-m-d H:i:s"),
+                                'updatedat' 	=> date("Y-m-d H:i:s"),
+                                'addressid' 	=> $address->schema['addressid']
                             ];
 
                             $user = new Client($clientdata);
@@ -77,7 +77,7 @@ class AccountController extends \app\core\Controller
                             
                             $_SESSION['loggedIn'] = true;
                             $_SESSION['client_mail'] = $mail;
-                            $_SESSION['client_id'] = $user->schema['CLIENTID'];
+                            $_SESSION['client_id'] = $user->schema['clientid'];
         
                             header('Location: index.php');
                         }
@@ -135,7 +135,7 @@ class AccountController extends \app\core\Controller
 
                 if($mail != null && $password != null)
                 {
-                    $where = 'MAIL = "'.$mail.'"';
+                    $where = 'mail = "'.$mail.'"';
 
                     $user = Client::find($where);
                     
@@ -143,11 +143,11 @@ class AccountController extends \app\core\Controller
                     {						
                         $userdata = $user[0];
 
-                        if(password_verify($password, $userdata['PASSWORD']))
+                        if(password_verify($password, $userdata['password']))
                         {
                             $_SESSION['loggedIn'] = true;
                             $_SESSION['client_mail'] = $mail;
-                            $_SESSION['client_id'] = $userdata['CLIENTID'];
+                            $_session['client_id'] = $userdata['clientid'];
 
                             header('Location: index.php');
 
@@ -201,22 +201,22 @@ class AccountController extends \app\core\Controller
         $this->_params['title'] = $title;
 
         $clientid = $_SESSION['client_id'];
-        $client = Client::find('CLIENTID = ' . $clientid);
-        $addressid = $client[0]['ADDRESSID'];
-        $address = Address::find('ADDRESSID = ' . $addressid);
+        $client = Client::find('clientid = ' . $clientid);
+        $addressid = $client[0]['addressid'];
+        $address = Address::find('addressid = ' . $addressid);
 
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true)
         {
             if(!isset($_POST['updateaccount']))
             {
-                $this->_params['mail']          = $client[0]['MAIL'];
-                $this->_params['firstname']     = $client[0]['FIRSTNAME'];
-                $this->_params['lastname']      = $client[0]['LASTNAME'];
-                $this->_params['dateofbirth']   = $client[0]['DATEOFBIRTH'];
-                $this->_params['street']        = $address[0]['STREET'];
-                $this->_params['zip']           = $address[0]['ZIP'];
-                $this->_params['city']          = $address[0]['CITY'];
-                $this->_params['country']       = $address[0]['COUNTRY'];    
+                $this->_params['mail']          = $client[0]['mail'];
+                $this->_params['firstname']     = $client[0]['firstname'];
+                $this->_params['lastname']      = $client[0]['lastname'];
+                $this->_params['dateofbirth']   = $client[0]['dateofbirth'];
+                $this->_params['street']        = $address[0]['street'];
+                $this->_params['zip']           = $address[0]['zip'];
+                $this->_params['city']          = $address[0]['city'];
+                $this->_params['country']       = $address[0]['country'];    
             }
             else
             {
@@ -235,31 +235,31 @@ class AccountController extends \app\core\Controller
                 {                  
                     $clientdata = $client[0];
 
-                    if(password_verify($password, $clientdata['PASSWORD']))
+                    if(password_verify($password, $clientdata['password']))
                     {
                         $updatedaddressdata = [
-                            'ADDRESSID' => $addressid,
-                            'STREET'    => $street,
-                            'ZIP'       => $zip,
-                            'CITY'      => $city,
-                            'COUNTRY'   => $country
+                            'addressid' => $addressid,
+                            'street'    => $street,
+                            'zip'       => $zip,
+                            'city'      => $city,
+                            'country'   => $country
                         ];
                         
                         $updatedaddress = new Address($updatedaddressdata);
                         $updatedaddress->save();
 
-                        $hashedpassword = $clientdata['PASSWORD'];
-                        $createdat = $clientdata['CREATEDAT'];
+                        $hashedpassword = $clientdata['password'];
+                        $createdat = $clientdata['createdat'];
 
                         $updatedclientdata = [
-                            'CLIENTID'      => $clientid,
-                            'MAIL'          => $mail,
-                            'FIRSTNAME'     => $firstname,
-                            'LASTNAME'      => $lastname,
-                            'DATEOFBIRTH'   => $dateofbirth,
-                            'CREATEDAT'     => $createdat,
-                            'UPDATEDAT'     => date("Y-m-d H:i:s"),
-                            'ADRESSID'      => $addressid
+                            'clientid'      => $clientid,
+                            'mail'          => $mail,
+                            'firstname'     => $firstname,
+                            'lastname'      => $lastname,
+                            'dateofbirth'   => $dateofbirth,
+                            'createdat'     => $createdat,
+                            'updatedat'     => date("Y-m-d H:i:s"),
+                            'adressid'      => $addressid
                         ];
                         
                         $updatedclient = new Client($updatedclientdata);
@@ -316,7 +316,7 @@ class AccountController extends \app\core\Controller
                 }
             }
 
-            $purchases = Purchase::find('CLIENTID = '.$clientid);
+            $purchases = Purchase::find('clientid = '.$clientid);
 
             if(!empty($purchases))
             {
@@ -324,40 +324,40 @@ class AccountController extends \app\core\Controller
 
                 foreach($purchases as $purchase)
                 {
-                    $purchaseid = $purchase['PURCHASEID'];
-                    $purchasedat = $purchase['PURCHASEDAT'];
+                    $purchaseid = $purchase['purchaseid'];
+                    $purchasedat = $purchase['purchasedat'];
                     
-                    $purchaseitems = Purchaseitem::find('PURCHASEID = '.$purchaseid);
+                    $purchaseitems = Purchaseitem::find('purchaseid = '.$purchaseid);
     
                     $iteminfo = [];
                     $totalprice = 0;
     
                     foreach($purchaseitems as $purchaseitem)
                     {
-                        $itemid = $purchaseitem['ITEMID'];
-                        $item = Item::find('ITEMID = '.$itemid);
+                        $itemid = $purchaseitem['itemid'];
+                        $item = Item::find('itemid = '.$itemid);
     
-                        $itemname = $item[0]['NAME'];
-                        $itemdescription = $item[0]['DESCRIPTION'];
-                        $quantity = $purchaseitem['QUANTITY'];
-                        $price = $purchaseitem['PRICE'];
-                        $imageurl = $item[0]['IMAGEURL'];
+                        $itemname = $item[0]['name'];
+                        $itemdescription = $item[0]['description'];
+                        $quantity = $purchaseitem['quantity'];
+                        $price = $purchaseitem['price'];
+                        $imageurl = $item[0]['imageurl'];
     
                         $iteminfo[] = [
-                            'NAME'          =>  $itemname,
-                            'DESCRIPTION'   =>  $itemdescription,
-                            'ITEMPRICE'     =>  $price,
-                            'QUANTITY'      =>  $quantity,
-                            'IMAGEURL'      =>  $imageurl
+                            'name'          =>  $itemname,
+                            'description'   =>  $itemdescription,
+                            'itemprice'     =>  $price,
+                            'quantity'      =>  $quantity,
+                            'imageurl'      =>  $imageurl
                         ];
                         $totalprice += $price * $quantity;
 
                     }
 
                     $purchasehistory[] = [
-                        'PURCHASEDAT'   =>  $purchasedat,
-                        'TOTALPRICE'    =>  $totalprice,
-                        'ITEMINFO'      =>  $iteminfo
+                        'purchasedat'   =>  $purchasedat,
+                        'totalprice'    =>  $totalprice,
+                        'iteminfo'      =>  $iteminfo
                     ];
 
                 }
@@ -387,7 +387,7 @@ class AccountController extends \app\core\Controller
 	
 	private function CalculateCart($clientid)
 	{
-		$cart = Cart::find('CLIENTID = '.$clientid);
+		$cart = Cart::find('clientid = '.$clientid);
 		if(empty($cart))
 		{
 			$this->_params['carttotalprice'] = 0;
@@ -396,10 +396,10 @@ class AccountController extends \app\core\Controller
 		}
 		else
 		{
-			$cartid = $cart[0]['CARTID'];
-			$cartitems = Cart::find('CARTID ='.$cartid);
-			$carttotalprice = $cart[0]['TOTALPRICE'];
-			$carttotalcount = $cart[0]['TOTALCOUNT'];
+			$cartid = $cart[0]['cartid'];
+			$cartitems = Cart::find('cartid ='.$cartid);
+			$carttotalprice = $cart[0]['totalprice'];
+			$carttotalcount = $cart[0]['totalcount'];
 			$this->_params['carttotalprice'] = $carttotalprice;
 			$this->_params['carttotalcount'] = $carttotalcount;
 		}

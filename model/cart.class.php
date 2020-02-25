@@ -5,10 +5,10 @@ class Cart extends BaseModel
 	const TABLENAME = '`CARTS`';
 
 	public $schema = [
-		'CARTID'		=> [ 'type' => BaseModel::TYPE_INT ],
-		'TOTALPRICE'	=> [ 'type' => BaseModel::TYPE_STRING ],
-		'TOTALCOUNT'	=> [ 'type' => BaseModel::TYPE_INT ],
-		'LASTUPDATED'	=> [ 'type' => BaseModel::TYPE_STRING ],
-		'CLIENTID' 		=> [ 'type' => BaseModel::TYPE_STRING ]
+		'cartid'		=> [ 'type' => BaseModel::TYPE_INT ],
+		'totalprice'	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'totalcount'	=> [ 'type' => BaseModel::TYPE_INT ],
+		'lastupdated'	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'clientid' 		=> [ 'type' => BaseModel::TYPE_STRING ]
 	];
 }

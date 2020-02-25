@@ -5,14 +5,14 @@ class Client extends BaseModel
 	const TABLENAME = '`CLIENTS`';
 
 	public $schema  = [
-		'CLIENTID' 		=> [ 'type' => BaseModel::TYPE_INT ],
-		'MAIL' 			=> [ 'type' => BaseModel::TYPE_STRING ],
-		'FIRSTNAME'		=> [ 'type' => BaseModel::TYPE_STRING ],
-		'LASTNAME' 		=> [ 'type' => BaseModel::TYPE_STRING ],
-		'DATEOFBIRTH'	=> [ 'type' => BaseModel::TYPE_STRING ],
-		'PASSWORD' 		=> [ 'type' => BaseModel::TYPE_STRING ],
-		'CREATEDAT' 	=> [ 'type' => BaseModel::TYPE_STRING ],
-		'UPDATEDAT' 	=> [ 'type' => BaseModel::TYPE_STRING ],
-		'ADDRESSID' 	=> [ 'type' => BaseModel::TYPE_INT ]
+		'clientid' 		=> [ 'type' => BaseModel::TYPE_INT ],
+		'mail' 			=> [ 'type' => BaseModel::TYPE_STRING ],
+		'firstname'		=> [ 'type' => BaseModel::TYPE_STRING ],
+		'lastname' 		=> [ 'type' => BaseModel::TYPE_STRING ],
+		'dateofbirth'	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'password' 		=> [ 'type' => BaseModel::TYPE_STRING ],
+		'createdat' 	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'updatedat' 	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'addressid' 	=> [ 'type' => BaseModel::TYPE_INT ]
 	];
 }

@@ -127,22 +127,22 @@
                         }
                         ?>
                         <div class="float-left item-image">
-                            <img alt="<?php echo $item['NAME']; ?>" src="<?php echo $item['IMAGEURL']; ?>" />
+                            <img alt="<?php echo $item['name']; ?>" src="<?php echo $item['imageurl']; ?>" />
                         </div>
                         <div class="float-left item-details">                    
-                        <h4 class="item-name"><?php echo $item['NAME']; ?></h4>
+                        <h4 class="item-name"><?php echo $item['name']; ?></h4>
                         <p class="item-description">
-                            <?php echo $item['DESCRIPTION']; ?>
+                            <?php echo $item['description']; ?>
                         </p>
                     
                         <?php 
                         if(isset($_SESSION['client_id']))
                         {
-                            $itemid = $item['ITEMID'];
+                            $itemid = $item['itemid'];
                         ?>
                         <form method="post">
                             <input type="hidden" name="itemid" value="<?php echo $itemid; ?>" />
-                            <p>Preis: <?php echo $item['PRICE']; ?> €</p>
+                            <p>Preis: <?php echo $item['price']; ?> €</p>
                             <p>Anzahl: 
                             <button type="button" class="btn-fixed btn-primary no-script" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '-')">-</button>
                             <input type="text" id="itemcount<?php echo $itemid; ?>" class="input-inline input-itemcount" name="itemcount" value="1">
@@ -155,7 +155,7 @@
                         else
                         {
                         ?>
-                        <p>Preis: <?php echo $item['PRICE']; ?> €</p>
+                        <p>preis: <?php echo $item['price']; ?> €</p>
                         <button class="btn btn-disabled" disabled>in den Warenkorb</button> Bitte einloggen!
                         <?php
                         }

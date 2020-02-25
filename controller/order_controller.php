@@ -95,45 +95,44 @@ class OrderController extends \app\core\Controller
 				{
 					if($itemid !== null && $itemcount !== null)
 					{
-						$cart = Cart::find('CLIENTID = '.$clientid);
+						$cart = Cart::find('clientid = '.$clientid);
 						$cartid = 0;
 						$oldtotalprice = 0;
 
 						if(empty($cart))
 						{
 							$tmpcart = self::intizialiseCart($clientid);
-							$cartid = $tmpcart->schema['CARTID'];
-							$oldtotalprice = $tmpcart->schema['TOTALPRICE'];
+							$cartid = $tmpcart->schema['cartid'];
+							$oldtotalprice = $tmpcart->schema['totalprice'];
 						}
 						else
 						{
-							$cartid = $cart[0]['CARTID'];
-							$oldtotalprice = $cart[0]['TOTALPRICE'];
+							$cartid = $cart[0]['cartid'];
+							$oldtotalprice = $cart[0]['totalprice'];
 						}
 
-						$cartitem = Cartitem::find('CARTID = '.$cartid.' AND ITEMID = '.$itemid);
+						$cartitem = Cartitem::find('cartid = '.$cartid.' AND itemid = '.$itemid);
 
 						if(empty($cartitem))
 						{
 							$cartitemdata = [
-								'CARTID'			=> $cartid,
-								'ITEMID'  			=> $itemid,
-								'QUANTITY' 			=> $itemcount
+								'cartid'			=> $cartid,
+								'itemid'  			=> $itemid,
+								'quantity' 			=> $itemcount
 							];
 						}
 						else
 						{
-							$olditemcount = $cartitem[0]['QUANTITY'];
+							$olditemcount = $cartitem[0]['quantity'];
 							$newitemcount = $olditemcount + $itemcount;
 							$cartitemdata = [
-								'CARTITEMID'		=> $cartitem[0]['CARTITEMID'],
-								'CARTID'			=> $cartid,
-								'ITEMID'  			=> $itemid,
-								'QUANTITY' 			=> $newitemcount
+								'cartitemid'		=> $cartitem[0]['cartitemid'],
+								'cartid'			=> $cartid,
+								'itemid'  			=> $itemid,
+								'quantity' 			=> $newitemcount
 							];
 
 						}
-						//die(var_dump($cartitemdata));
 						$newcartitem = new Cartitem($cartitemdata);
 						$newcartitem->save();
 
@@ -169,17 +168,17 @@ class OrderController extends \app\core\Controller
 		if(!empty($clientid))
 		{
 			$cartdata = [
-				'TOTALPRICE'	=> null,
-				'TOTALCOUNT'	=> null,
-				'LASTUPDATED'	=> date("Y-m-d H:i:s"),
-				'CLIENTID' 		=> $clientid
+				'totalprice'	=> null,
+				'totalcount'	=> null,
+				'lastupdated'	=> date("Y-m-d H:i:s"),
+				'clientid' 		=> $clientid
 	
 			];
 	
 			$cart = new Cart($cartdata);
 			$cart->save();
 	
-			$cartid = $cart->schema['CARTID'];
+			$cartid = $cart->schema['cartid'];
 			$result = $cart;
 		}
 
@@ -195,15 +194,15 @@ class OrderController extends \app\core\Controller
 		if(isset($_SESSION['client_id']))
 		{
 			$clientid = $_SESSION['client_id'];
-			$client = Client::find('CLIENTID = ' . $clientid);
-			$cart = Cart::find('CLIENTID = ' . $clientid);
-			$addressid = $client[0]['ADDRESSID'];
-			$address = Address::find('ADDRESSID = ' . $addressid);
+			$client = Client::find('clientid = ' . $clientid);
+			$cart = Cart::find('clientid = ' . $clientid);
+			$addressid = $client[0]['addressid'];
+			$address = Address::find('addressid = ' . $addressid);
 
-			$this->_params['street'] = $address[0]['STREET'];
-			$this->_params['zip'] = $address[0]['ZIP'];
-			$this->_params['city'] = $address[0]['CITY'];
-			$this->_params['country'] = $address[0]['COUNTRY'];
+			$this->_params['street'] = $address[0]['street'];
+			$this->_params['zip'] = $address[0]['zip'];
+			$this->_params['city'] = $address[0]['city'];
+			$this->_params['country'] = $address[0]['country'];
 
 			if(isset($_POST['deleteitemfromcart']))
 			{
@@ -212,19 +211,19 @@ class OrderController extends \app\core\Controller
 				$success = false;
 				if($cartitemid !== null)
 				{
-					$cartitem = Cartitem::find('CARTITEMID = '.$cartitemid);
+					$cartitem = Cartitem::find('cartitemid = '.$cartitemid);
 					$cartid = 0;
 
 					if(!empty($cartitem))
 					{
 						$cartitemdata = [
-							'CARTITEMID'		=> $cartitem[0]['CARTITEMID'],
-							'CARTID'			=> $cartitem[0]['CARTID'],
-							'ITEMID'  			=> $cartitem[0]['ITEMID'],
-							'QUANTITY' 			=> $cartitem[0]['QUANTITY']
+							'cartitemid'		=> $cartitem[0]['cartitemid'],
+							'cartid'			=> $cartitem[0]['cartid'],
+							'itemid'  			=> $cartitem[0]['itemid'],
+							'quantity' 			=> $cartitem[0]['quantity']
 						];
 
-						$cartid = $cartitem[0]['CARTID'];
+						$cartid = $cartitem[0]['cartid'];
 						$newcartitem = new Cartitem($cartitemdata);
 						$newcartitem->delete();
 
@@ -252,28 +251,28 @@ class OrderController extends \app\core\Controller
 			if(isset($_POST['buycart']))
 			{
 				$purchasedata = [
-					'PURCHASEDAT'	=> date("Y-m-d H:i:s"),
-					'CLIENTID' 		=> $clientid				
+					'purchasedat'	=> date("Y-m-d H:i:s"),
+					'clientid' 		=> $clientid				
 				];
 		
 				$tmppurchase = new Purchase($purchasedata);
 				$tmppurchase->save();
 		
-				$purchaseid = $tmppurchase->schema['PURCHASEID'];
+				$purchaseid = $tmppurchase->schema['purchaseid'];
 
-				$cartitems = Cartitem::find('CARTID = ' . $cart[0]['CARTID']);
+				$cartitems = Cartitem::find('cartid = ' . $cart[0]['cartid']);
 
 				foreach($cartitems as $cartitem)
 				{
-					$itemid = $cartitem['ITEMID'];
-					$item = Item::find('ITEMID = '.$itemid);
-					$itemprice = $item[0]['PRICE'];
+					$itemid = $cartitem['itemid'];
+					$item = Item::find('itemid = '.$itemid);
+					$itemprice = $item[0]['price'];
 					
 					$purchaseitemdata = [
-						'PURCHASEID'	=> $purchaseid,
-						'ITEMID'  		=> $cartitem['ITEMID'],
-						'QUANTITY' 		=> $cartitem['QUANTITY'],
-						'PRICE'	        => $itemprice
+						'purchaseid'	=> $purchaseid,
+						'itemid'  		=> $cartitem['itemid'],
+						'quantity' 		=> $cartitem['quantity'],
+						'price'	        => $itemprice
 					];
 
 					$purchaseitem = new Purchaseitem($purchaseitemdata);
@@ -284,19 +283,19 @@ class OrderController extends \app\core\Controller
 				header('Location: index.php?c=pages&a=index');
 			}
 
-			$cart = Cart::find('CLIENTID = '.$clientid);
+			$cart = Cart::find('clientid = '.$clientid);
 			$sum = 0;
 
 			if(!empty($cart))
 			{
-				$cartid = $cart[0]['CARTID'];
+				$cartid = $cart[0]['cartid'];
 
-				$carttotalprice = $cart[0]['TOTALPRICE'];
-				$cartitemcount = Cartitem::count('CARTID = '.$cartid);
+				$carttotalprice = $cart[0]['totalprice'];
+				$cartitemcount = Cartitem::count('cartid = '.$cartid);
 				$this->_params['carttotalprice'] = $carttotalprice;
 				$this->_params['cartitemcount'] = $cartitemcount;	
 				
-				$cartitems = Cartitem::find('CARTID = '.$cartid);
+				$cartitems = Cartitem::find('cartid = '.$cartid);
 				
 				$this->_params['cartitems'] = $cartitems;
 
@@ -305,25 +304,25 @@ class OrderController extends \app\core\Controller
 				foreach($cartitems as $cartitem)
 				{
 					// CartitemId is needed to remove a cartitem-entry, if the Client deletes a item in his shoppingcart
-					$cartitemid = $cartitem['CARTITEMID'];
-					$itemid = $cartitem['ITEMID'];
-					$item = Item::find('ITEMID = '.$itemid);
+					$cartitemid = $cartitem['cartitemid'];
+					$itemid = $cartitem['itemid'];
+					$item = Item::find('itemid = '.$itemid);
 
-					$itemname = $item[0]['NAME'];
-					$itemdescription = $item[0]['DESCRIPTION'];
-					$itemprice = $item[0]['PRICE'];
-					$quantity = $cartitem['QUANTITY'];
-					$itemcategory = $item[0]['CATEGORY'];
-					$imageurl = $item[0]['IMAGEURL'];
+					$itemname = $item[0]['name'];
+					$itemdescription = $item[0]['description'];
+					$itemprice = $item[0]['price'];
+					$quantity = $cartitem['quantity'];
+					$itemcategory = $item[0]['category'];
+					$imageurl = $item[0]['imageurl'];
 					
 					$iteminfo = [
-						'CARTITEMID'			=>	$cartitemid,
-						'ITEMNAME'				=>	$itemname,
-						'ITEMDESCRIPTION'		=>	$itemdescription,
-						'ITEMPRICE'				=>	$itemprice,
-						'QUANTITY'				=>	$quantity,
-						'ITEMCATEGORY'			=>	$itemcategory,
-						'IMAGEURL'				=>	$imageurl
+						'cartitemid'			=>	$cartitemid,
+						'itemname'				=>	$itemname,
+						'itemdescription'		=>	$itemdescription,
+						'itemprice'				=>	$itemprice,
+						'quantity'				=>	$quantity,
+						'itemcategory'			=>	$itemcategory,
+						'imageurl'				=>	$imageurl
 					];
 
 					$shoppingcart[] = $iteminfo;
@@ -343,28 +342,28 @@ class OrderController extends \app\core\Controller
 
 	public function updateCart($cartid, $clientid)
 	{
-		$cartitems = Cartitem::find('CARTID = '.$cartid);
+		$cartitems = Cartitem::find('cartid = '.$cartid);
 
 		$totalprice = 0;
 		$totalcount = 0;
 
 		foreach($cartitems as $cartitem)
 		{
-			$itemid = $cartitem['ITEMID'];
-			$item = Item::find('ITEMID = '.$itemid);
-			$itemprice = $item[0]['PRICE'];
-			$quantity = $cartitem['QUANTITY'];
+			$itemid = $cartitem['itemid'];
+			$item = Item::find('itemid = '.$itemid);
+			$itemprice = $item[0]['price'];
+			$quantity = $cartitem['quantity'];
 
 			$totalprice += $quantity * $itemprice;
 			$totalcount += $quantity;
 		}
 
 		$changedcartdata = [
-			'CARTID'		=> $cartid,
-			'TOTALPRICE'	=> $totalprice,
-			'TOTALCOUNT'	=> $totalcount,
-			'LASTUPDATED'	=> date("Y-m-d H:i:s"),
-			'CLIENTID' 		=> $clientid
+			'cartid'		=> $cartid,
+			'totalprice'	=> $totalprice,
+			'totalcount'	=> $totalcount,
+			'lastupdated'	=> date("Y-m-d H:i:s"),
+			'clientid' 		=> $clientid
 		];
 
 		$changedcart = new Cart($changedcartdata);
@@ -405,18 +404,18 @@ class OrderController extends \app\core\Controller
 
 	public function deleteWholecart($clientid)
 	{		
-		$cart = Cart::find('CLIENTID = '.$clientid);
+		$cart = Cart::find('clientid = '.$clientid);
 		$success = false;
 
 		if(!empty($cart))
 		{					
-			$cartid = $cart[0]['CARTID'];
-			$cartitemdata = Cartitem::find('CARTID = '.$cartid);
+			$cartid = $cart[0]['cartid'];
+			$cartitemdata = Cartitem::find('cartid = '.$cartid);
 
 			if(!empty($cartitemdata))
 			{
 				$cartitem = new Cartitem($cartitemdata[0]);
-				$where = 'CARTID = '.$cartid;
+				$where = 'cartid = '.$cartid;
 				$cartitem->delete($where);
 				self::updateCart($cartid, $clientid);
 				$success = true;
@@ -437,7 +436,7 @@ class OrderController extends \app\core\Controller
 
 	private function CalculateCart($clientid)
 	{
-		$cart = Cart::find('CLIENTID = '.$clientid);
+		$cart = Cart::find('clientid = '.$clientid);
 		if(empty($cart))
 		{
 			$this->_params['carttotalprice'] = 0;
@@ -446,10 +445,10 @@ class OrderController extends \app\core\Controller
 		}
 		else
 		{
-			$cartid = $cart[0]['CARTID'];
-			$cartitems = Cart::find('CARTID ='.$cartid);
-			$carttotalprice = $cart[0]['TOTALPRICE'];
-			$carttotalcount = $cart[0]['TOTALCOUNT'];
+			$cartid = $cart[0]['cartid'];
+			$cartitems = Cart::find('cartid ='.$cartid);
+			$carttotalprice = $cart[0]['totalprice'];
+			$carttotalcount = $cart[0]['totalcount'];
 			$this->_params['carttotalprice'] = $carttotalprice;
 			$this->_params['carttotalcount'] = $carttotalcount;
 		}

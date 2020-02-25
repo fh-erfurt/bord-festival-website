@@ -22,12 +22,12 @@ DROP TABLE IF EXISTS addresses;
 
 CREATE TABLE IF NOT EXISTS addresses
 	(
-		ADDRESSID int(7) NOT NULL AUTO_INCREMENT,
-		STREET varchar(100) NOT NULL,
-		ZIP varchar(10) NOT NULL,
-		CITY varchar(100) NOT NULL,
-		COUNTRY varchar(30) default 'GER',
-		CONSTRAINT addresses_pk PRIMARY KEY (ADDRESSID)
+		addressid int(7) NOT NULL AUTO_INCREMENT,
+		street varchar(100) NOT NULL,
+		zip varchar(10) NOT NULL,
+		city varchar(100) NOT NULL,
+		country varchar(30) default 'GER',
+		CONSTRAINT addresses_pk PRIMARY KEY (addressid)
 	);
 
 --
@@ -37,18 +37,18 @@ DROP TABLE IF EXISTS clients;
 
 CREATE TABLE clients 
 (
-  CLIENTID int(7) NOT NULL AUTO_INCREMENT,
-  MAIL varchar(100) NOT NULL,
-  FIRSTNAME varchar(50) NOT NULL,
-  LASTNAME varchar(50) NOT NULL,
-  DATEOFBIRTH date NOT NULL,
-  PASSWORD binary(60) NOT NULL,
-  CREATEDAT datetime NOT NULL,
-  UPDATEDAT datetime NOT NULL,
-  ADDRESSID int (7) NOT NULL,
-  CONSTRAINT clients_pk PRIMARY KEY (CLIENTID),
-  CONSTRAINT mail_uq UNIQUE (MAIL),
-  CONSTRAINT clients_addresses_fk FOREIGN KEY (ADDRESSID) REFERENCES ADDRESSES (ADDRESSID)
+  clientid int(7) NOT NULL AUTO_INCREMENT,
+  mail varchar(100) NOT NULL,
+  firstname varchar(50) NOT NULL,
+  lastname varchar(50) NOT NULL,
+  dateofbirth date NOT NULL,
+  password binary(60) NOT NULL,
+  createdat datetime NOT NULL,
+  updatedat datetime NOT NULL,
+  addressid int (7) NOT NULL,
+  CONSTRAINT clients_pk PRIMARY KEY (clientid),
+  CONSTRAINT mail_uq UNIQUE (mail),
+  CONSTRAINT clients_addresses_fk FOREIGN KEY (addressid) REFERENCES ADDRESSES (addressid)
 );
 
 --
@@ -58,17 +58,17 @@ DROP TABLE IF EXISTS items;
 
 CREATE TABLE items 
 (
-  ITEMID int(2) NOT NULL AUTO_INCREMENT,
-  NAME varchar(100) NOT NULL,
-  DESCRIPTION varchar(500) NOT NULL,
-  PRICE decimal(6,2) NOT NULL,
-  TYPE varchar(30) NOT NULL,
-  CATEGORY varchar(30),
-  COLOR varchar(30),
-  GENDER varchar(30),
-  IMAGEURL varchar(100) NOT NULL,
-  CONSTRAINT items_pk PRIMARY KEY (ITEMID),
-  CONSTRAINT itemname_uq UNIQUE (NAME)
+  itemid int(2) NOT NULL AUTO_INCREMENT,
+  name varchar(100) NOT NULL,
+  description varchar(500) NOT NULL,
+  price decimal(6,2) NOT NULL,
+  type varchar(30) NOT NULL,
+  category varchar(30),
+  color varchar(30),
+  gender varchar(30),
+  imageurl varchar(100) NOT NULL,
+  CONSTRAINT items_pk PRIMARY KEY (itemid),
+  CONSTRAINT itemname_uq UNIQUE (name)
 );
 
 --
@@ -78,13 +78,13 @@ DROP TABLE IF EXISTS carts;
 
 CREATE TABLE carts 
 (
-  CARTID int(7) NOT NULL AUTO_INCREMENT,
-  TOTALPRICE decimal(8,2),
-  TOTALCOUNT int(6),
-  LASTUPDATED datetime NOT NULL,
-  CLIENTID int(7) NOT NULL,
-  CONSTRAINT carts_pk PRIMARY KEY (CARTID),
-  CONSTRAINT carts_clients_fk FOREIGN KEY (CLIENTID) REFERENCES clients (CLIENTID)
+  cartid int(7) NOT NULL AUTO_INCREMENT,
+  totalprice decimal(8,2),
+  totalcount int(6),
+  lastupdated datetime NOT NULL,
+  clientid int(7) NOT NULL,
+  CONSTRAINT carts_pk PRIMARY KEY (cartid),
+  CONSTRAINT carts_clients_fk FOREIGN KEY (clientid) REFERENCES clients (clientid)
 );
 
 --
@@ -94,13 +94,13 @@ DROP TABLE IF EXISTS cartitems;
 
 CREATE TABLE cartitems 
 (
-  CARTITEMID int(10) NOT NULL AUTO_INCREMENT,
-  CARTID int(7) NOT NULL,
-  ITEMID int(7) NOT NULL,
-  QUANTITY int(3) NOT NULL,
-  CONSTRAINT cartitems_pk PRIMARY KEY (CARTITEMID),
-  CONSTRAINT cartitems_carts_fk FOREIGN KEY (CARTID) REFERENCES carts (CARTID),
-  CONSTRAINT cartitems_items_fk FOREIGN KEY (ITEMID) REFERENCES items (ITEMID)
+  cartitemid int(10) NOT NULL AUTO_INCREMENT,
+  cartid int(7) NOT NULL,
+  itemid int(7) NOT NULL,
+  quantity int(3) NOT NULL,
+  CONSTRAINT cartitems_pk PRIMARY KEY (cartitemid),
+  CONSTRAINT cartitems_carts_fk FOREIGN KEY (cartid) REFERENCES carts (cartid),
+  CONSTRAINT cartitems_items_fk FOREIGN KEY (itemid) REFERENCES items (itemid)
 );
 
 --
@@ -110,11 +110,11 @@ DROP TABLE IF EXISTS purchases;
 
 CREATE TABLE purchases 
 (
-  PURCHASEID int(7) NOT NULL AUTO_INCREMENT,
-  PURCHASEDAT datetime NOT NULL,
-  CLIENTID int(7) NOT NULL,
-  CONSTRAINT purchases_pk PRIMARY KEY (PURCHASEID),
-  CONSTRAINT purchases_clients_fk FOREIGN KEY (CLIENTID) REFERENCES clients (CLIENTID)
+  purchaseid int(7) NOT NULL AUTO_INCREMENT,
+  purchasedat datetime NOT NULL,
+  clientid int(7) NOT NULL,
+  CONSTRAINT purchases_pk PRIMARY KEY (purchaseid),
+  CONSTRAINT purchases_clients_fk FOREIGN KEY (clientid) REFERENCES clients (clientid)
 );
 
 --
@@ -124,14 +124,14 @@ DROP TABLE IF EXISTS purchaseitems;
 
 CREATE TABLE purchaseitems 
 (
-  PURCHASEITEMID int(10) NOT NULL AUTO_INCREMENT,
-  PURCHASEID int(7) NOT NULL,
-  ITEMID int(7) NOT NULL,
-  QUANTITY int(3) NOT NULL,
-  PRICE decimal(6,2) NOT NULL,
-  CONSTRAINT purchaseitems_pk PRIMARY KEY (PURCHASEITEMID),
-  CONSTRAINT purchaseitems_purchases_fk FOREIGN KEY (PURCHASEID) REFERENCES purchases (PURCHASEID),
-  CONSTRAINT purchaseitems_items_fk FOREIGN KEY (ITEMID) REFERENCES items (ITEMID)
+  purchaseitemid int(10) NOT NULL AUTO_INCREMENT,
+  purchaseid int(7) NOT NULL,
+  itemid int(7) NOT NULL,
+  quantity int(3) NOT NULL,
+  price decimal(6,2) NOT NULL,
+  CONSTRAINT purchaseitems_pk PRIMARY KEY (purchaseitemid),
+  CONSTRAINT purchaseitems_purchases_fk FOREIGN KEY (purchaseid) REFERENCES purchases (purchaseid),
+  CONSTRAINT purchaseitems_items_fk FOREIGN KEY (itemid) REFERENCES items (itemid)
 );
 
 --
@@ -141,10 +141,10 @@ DROP TABLE IF EXISTS newsletter;
 
 CREATE TABLE newsletter 
 (
-  NEWSLETTERID int(10) NOT NULL AUTO_INCREMENT,
-  MAIL varchar(100) NOT NULL,
-  CREATEDAT datetime NOT NULL,
-  CONSTRAINT newsletter_pk PRIMARY KEY (NEWSLETTERID)
+  newsletterid int(10) NOT NULL AUTO_INCREMENT,
+  mail varchar(100) NOT NULL,
+  createdat datetime NOT NULL,
+  CONSTRAINT newsletter_pk PRIMARY KEY (newsletterid)
 );
 
 --
@@ -154,20 +154,20 @@ DROP TABLE IF EXISTS support_mails;
 
 CREATE TABLE support_mails
 (
-  MAILID int(10) NOT NULL AUTO_INCREMENT,
-  FIRSTNAME varchar(50) NOT NULL,
-  LASTNAME varchar(50) NOT NULL,
-  MAIL varchar(100) NOT NULL,
-  PROBLEM varchar(30) NOT NULL,
-  INFORMATION varchar(2048) NOT NULL,
-  CREATEDAT datetime NOT NULL,
-  CONSTRAINT support_mails_pk PRIMARY KEY (MAILID)
+  mailid int(10) NOT NULL AUTO_INCREMENT,
+  firstname varchar(50) NOT NULL,
+  lastname varchar(50) NOT NULL,
+  mail varchar(100) NOT NULL,
+  problem varchar(30) NOT NULL,
+  information varchar(2048) NOT NULL,
+  createdat datetime NOT NULL,
+  CONSTRAINT support_mails_pk PRIMARY KEY (mailid)
 );
 
 --
 -- Initialbefüllung für Item-Tabelle
 --
-INSERT INTO `items` (`ITEMID`, `NAME`, `DESCRIPTION`, `PRICE`, `TYPE`, `CATEGORY`, `COLOR`, `GENDER`, `IMAGEURL`) VALUES 
+INSERT INTO `items` (`itemid`, `name`, `description`, `price`, `type`, `category`, `color`, `gender`, `imageurl`) VALUES 
                       (NULL, 'Tagesticket Freitag', 'Gültig am Freitag', '49.99', 'tickets', null, null, null, 'assets/img/item/ticket_freitag.png'), 
                       (NULL, 'Tagesticket Samstag', 'Gültig am Samstag', '69.99', 'tickets', null, null, null, 'assets/img/item/ticket_samstag.png'), 
                       (NULL, 'Tagesticket Sonntag', 'Gültig am Sonntag', '39.99', 'tickets', null, null, null, 'assets/img/item/ticket_sonntag.png'), 
@@ -202,8 +202,8 @@ CREATE VIEW `item_gender` AS SELECT distinct gender FROM `items` WHERE gender is
 --
 -- Initialbefüllung für Test-Account-Erstellung
 --
-INSERT INTO `addresses` (`ADDRESSID`, `STREET`, `ZIP`, `CITY`, `COUNTRY`) VALUES
+INSERT INTO `addresses` (`addressid`, `street`, `zip`, `city`, `country`) VALUES
 (1, 'Altonaer Str. 25', '99085', 'Erfurt', 'GER');
 
-INSERT INTO `clients` (`CLIENTID`, `MAIL`, `FIRSTNAME`, `LASTNAME`, `DATEOFBIRTH`, `PASSWORD`, `CREATEDAT`, `UPDATEDAT`, `ADDRESSID`) VALUES
+INSERT INTO `clients` (`clientid`, `mail`, `firstname`, `lastname`, `dateofbirth`, `password`, `createdat`, `updatedat`, `addressid`) VALUES
 (1, 'test@fh-erfurt.de', 'Maximilian', 'Mustermann', '1990-01-01', 0x24327924313024353467674539504d7a374d3768456d62676871306e6563686a6d546a49647737313158466b4a3136696b6639304852327557387743, '2020-02-03 21:37:10', '2020-02-03 21:37:10', 1);

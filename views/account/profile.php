@@ -151,8 +151,8 @@ if(!isset($missing))
                         foreach($purchasehistory as $purchase)
                         {
                             $i = 0;
-                            $purchasedat = $purchase['PURCHASEDAT'];
-                            $totalprice = $purchase['TOTALPRICE'];
+                            $purchasedat = $purchase['purchasedat'];
+                            $totalprice = $purchase['totalprice'];
                             ?>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -173,7 +173,7 @@ if(!isset($missing))
                                             <div class="col-lg-12 col-md-12 col-sm-12 clear-left">
     
                             <?php 
-                            foreach($purchase['ITEMINFO'] as $purchaseitem)
+                            foreach($purchase['iteminfo'] as $purchaseitem)
                             {
                                 if($i > 0)
                                 {
@@ -189,16 +189,16 @@ if(!isset($missing))
                                 }
                                 ?>
                                 <div class="float-left item-image-mini">
-                                    <img class="" src="<?php echo $purchaseitem['IMAGEURL']; ?>" />
+                                    <img class="" src="<?php echo $purchaseitem['imageurl']; ?>" />
                                 </div>
                                 <div class="float-left item-details-mini">
-                                    <h4 class="item-name"><?php echo $purchaseitem['NAME']; ?></h4>
+                                    <h4 class="item-name"><?php echo $purchaseitem['name']; ?></h4>
                                     <p class="item-description">
-                                        <?php echo $purchaseitem['DESCRIPTION']; ?>
+                                        <?php echo $purchaseitem['description']; ?>
                                     </p>
-                                    <?php echo $purchaseitem['ITEMPRICE'] ?> € pro Artikel<br/>
-                                    Menge: <?php echo $purchaseitem['QUANTITY']; ?><br/>
-                                    Gesamtpreis: <?php echo $purchaseitem['QUANTITY'] * $purchaseitem['ITEMPRICE']; ?> €
+                                    <?php echo $purchaseitem['itemprice'] ?> € pro Artikel<br/>
+                                    Menge: <?php echo $purchaseitem['quantity']; ?><br/>
+                                    Gesamtpreis: <?php echo $purchaseitem['quantity'] * $purchaseitem['itemprice']; ?> €
                                 </div>
                             </div>
                             <?php

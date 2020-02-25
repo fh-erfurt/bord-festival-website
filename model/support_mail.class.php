@@ -5,12 +5,12 @@ class Support_mail extends BaseModel
 	const TABLENAME = '`SUPPORT_MAILS`';
 
 	public $schema = [
-		'MAILID'		=> [ 'type' => BaseModel::TYPE_INT ],
-		'FIRSTNAME' 	=> [ 'type' => BaseModel::TYPE_STRING ],
-		'LASTNAME' 		=> [ 'type' => BaseModel::TYPE_STRING ],
-		'MAIL'			=> [ 'type' => BaseModel::TYPE_STRING ],
-		'PROBLEM' 		=> [ 'type' => BaseModel::TYPE_STRING ],
-		'INFORMATION' 	=> [ 'type' => BaseModel::TYPE_STRING ],
-		'CREATEDAT' 	=> [ 'type' => BaseModel::TYPE_STRING ]
+		'mailid'		=> [ 'type' => BaseModel::TYPE_INT ],
+		'firstname' 	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'lastname' 		=> [ 'type' => BaseModel::TYPE_STRING ],
+		'mail'			=> [ 'type' => BaseModel::TYPE_STRING ],
+		'problem' 		=> [ 'type' => BaseModel::TYPE_STRING ],
+		'information' 	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'createdat' 	=> [ 'type' => BaseModel::TYPE_STRING ]
 	];
 }

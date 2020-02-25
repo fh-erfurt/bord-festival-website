@@ -28,12 +28,12 @@ class ContactController extends \app\core\Controller
 			if($firstname != null && $lastname != null && $mail != null && $inputProblem != null && $inputInformation != null)
 			{	
 				$maildata = [
-					'FIRSTNAME'		=> $firstname,
-					'LASTNAME'		=> $lastname,
-					'MAIL'			=> $mail,
-					'PROBLEM'		=> $inputProblem,
-					'INFORMATION'	=> $inputInformation,
-					'CREATEDAT' 	=> date("Y-m-d H:i:s")
+					'firstname'		=> $firstname,
+					'lastname'		=> $lastname,
+					'mail'			=> $mail,
+					'problem'		=> $inputproblem,
+					'information'	=> $inputinformation,
+					'createdat' 	=> date("Y-m-d H:i:s")
 				];
 
 				$newSupportMail = new Support_mail($maildata);
@@ -77,7 +77,7 @@ class ContactController extends \app\core\Controller
 
 	private function CalculateCart($clientid)
 	{
-		$cart = Cart::find('CLIENTID = '.$clientid);
+		$cart = Cart::find('clientid = '.$clientid);
 		if(empty($cart))
 		{
 			$this->_params['carttotalprice'] = 0;
@@ -86,10 +86,10 @@ class ContactController extends \app\core\Controller
 		}
 		else
 		{
-			$cartid = $cart[0]['CARTID'];
-			$cartitems = Cart::find('CARTID ='.$cartid);
-			$carttotalprice = $cart[0]['TOTALPRICE'];
-			$carttotalcount = $cart[0]['TOTALCOUNT'];
+			$cartid = $cart[0]['cartid'];
+			$cartitems = Cart::find('cartid ='.$cartid);
+			$carttotalprice = $cart[0]['totalprice'];
+			$carttotalcount = $cart[0]['totalcount'];
 			$this->_params['carttotalprice'] = $carttotalprice;
 			$this->_params['carttotalcount'] = $carttotalcount;
 		}

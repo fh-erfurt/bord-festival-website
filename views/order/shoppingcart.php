@@ -72,27 +72,27 @@
                                 <div class="order-content">
                                     <div class="col-lg-5 float-left">
                                         <div class="float-left item-image-mini">
-                                            <img class="" src="<?php echo $item['IMAGEURL']; ?>" />
+                                            <img class="" src="<?php echo $item['imageurl']; ?>" />
                                         </div>
                                         <div class="float-left item-details-mini">
-                                            <h4 class="item-name"><?php echo $item['ITEMNAME']; ?></h4>
+                                            <h4 class="item-name"><?php echo $item['itemname']; ?></h4>
                                             <p class="item-description">
-                                                <?php echo $item['ITEMDESCRIPTION']; ?>
+                                                <?php echo $item['itemdescription']; ?>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 float-left">
-                                        <?php echo $item['ITEMPRICE']; ?> €
+                                        <?php echo $item['itemprice']; ?> €
                                     </div>
                                     <div class="col-lg-1 float-left">
-                                        <?php echo $item['QUANTITY']; ?>
+                                        <?php echo $item['quantity']; ?>
                                     </div>
                                     <div class="col-lg-2 float-left">
-                                        <?php echo $item['QUANTITY'] * $item['ITEMPRICE']; ?> €
+                                        <?php echo $item['quantity'] * $item['itemprice']; ?> €
                                     </div>
                                     <div class="col-lg-2 float-left text-right">
                                         <form action="index.php?c=order&a=shoppingcart" method="post">
-                                            <input type="hidden" name="cartitemid" value="<?php echo $item['CARTITEMID']; ?>" />
+                                            <input type="hidden" name="cartitemid" value="<?php echo $item['cartitemid']; ?>" />
                                             <button type="submit" class="btn no-margin btn-danger" name="deleteitemfromcart">Löschen</button>
                                         </form>                            
                                     </div>
@@ -102,18 +102,18 @@
     
                         <div class="show-mobile">
                             <div class="float-left item-image-mini">
-                                <img class="" src="<?php echo $item['IMAGEURL']; ?>" />
+                                <img class="" src="<?php echo $item['imageurl']; ?>" />
                             </div>
                             <div class="float-left item-details-mini">
-                                <h4 class="item-name"><?php echo $item['ITEMNAME']; ?></h4>
+                                <h4 class="item-name"><?php echo $item['itemname']; ?></h4>
                                 <p class="item-description">
-                                    <?php echo $item['ITEMDESCRIPTION']; ?>
+                                    <?php echo $item['itemdescription']; ?>
                                 </p>
-                                <?php echo $item['ITEMPRICE'] ?> € pro Artikel<br/>
-                                Menge: <?php echo $item['QUANTITY']; ?><br/>
-                                Gesamtpreis: <?php echo $item['QUANTITY'] * $item['ITEMPRICE']; ?> €
+                                <?php echo $item['itemprice'] ?> € pro Artikel<br/>
+                                Menge: <?php echo $item['quantity']; ?><br/>
+                                Gesamtpreis: <?php echo $item['quantity'] * $item['itemprice']; ?> €
                                 <form action="index.php?c=order&a=shoppingcart" method="post">
-                                    <input type="hidden" name="cartitemid" value="<?php echo $item['CARTITEMID']; ?>" />
+                                    <input type="hidden" name="cartitemid" value="<?php echo $item['cartitemid']; ?>" />
                                     <button type="submit" class="btn btn-danger" name="deleteitemfromcart">Löschen</button>
                                 </form>
                             </div>

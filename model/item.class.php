@@ -5,13 +5,13 @@ class Item extends BaseModel
 	const TABLENAME = '`ITEMS`';
 
 	public $schema = [
-		'ITEMID'		=> [ 'type' => BaseModel::TYPE_INT ],
-		'NAME' 			=> [ 'type' => BaseModel::TYPE_STRING ],
-		'DESCRIPTION'	=> [ 'type' => BaseModel::TYPE_STRING ],
-		'TYPE'			=> [ 'type' => BaseModel::TYPE_STRING ],
-		'CATEGORY'		=> [ 'type' => BaseModel::TYPE_STRING ],
-		'COLOR'			=> [ 'type' => BaseModel::TYPE_STRING ],
-		'GENDER'		=> [ 'type' => BaseModel::TYPE_STRING ],
-		'PRICE' 		=> [ 'type' => BaseModel::TYPE_STRING ]
+		'itemid'		=> [ 'type' => BaseModel::TYPE_INT ],
+		'name' 			=> [ 'type' => BaseModel::TYPE_STRING ],
+		'description'	=> [ 'type' => BaseModel::TYPE_STRING ],
+		'type'			=> [ 'type' => BaseModel::TYPE_STRING ],
+		'category'		=> [ 'type' => BaseModel::TYPE_STRING ],
+		'color'			=> [ 'type' => BaseModel::TYPE_STRING ],
+		'gender'		=> [ 'type' => BaseModel::TYPE_STRING ],
+		'price' 		=> [ 'type' => BaseModel::TYPE_STRING ]
 	];
 }
