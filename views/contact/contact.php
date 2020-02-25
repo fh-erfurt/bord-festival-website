@@ -19,7 +19,7 @@ if(!isset($missing))
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-7 col-md-10 col-sm-12 center contact">
+                    <div class="col-lg-7 col-md-10 col-sm-12 center">
                     <?php
                         if(isset($contacterror))
                         {    
@@ -37,7 +37,7 @@ if(!isset($missing))
                         <form method="post">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12 float-left clear-left">
-                                    <label for="firstname" class="form-for-contact">Vorname</label>
+                                    <label for="firstname" class="form-for">Vorname</label>
                                     <input id="firstname" class="form-control <?php echo ($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
                                             type="text" name="firstname" placeholder="Vorname">
                                     <?php if($missing['firstname'] === true) : ?>
@@ -45,7 +45,7 @@ if(!isset($missing))
                                     <?php endif; ?>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 float-left">
-                                    <label for="lastname" class="form-for-contact">Nachname</label>
+                                    <label for="lastname" class="form-for">Nachname</label>
                                     <input id="lastname" class="form-control <?php echo ($missing['lastname'] === false) ? '' : 'text-validate-red' ?>"
                                             type="text" name="lastname" placeholder="Nachname">
                                     <?php if($missing['lastname'] === true) : ?>
@@ -53,7 +53,7 @@ if(!isset($missing))
                                     <?php endif; ?>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12">        
-                                    <label for="mail" class="form-for-contact">E-Mail</label>
+                                    <label for="mail" class="form-for">E-Mail</label>
                                     <input id="mail" class="form-control <?php echo ($missing['mail'] === false) ? '' : 'text-validate-red' ?>"
                                             type="text" name="mail" placeholder="E-Mail">
                                     <?php if($missing['mail'] === true) : ?>
@@ -62,7 +62,7 @@ if(!isset($missing))
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12 float-left">
-                                    <label class="form-for-contact" for="information">Nachricht</label>
+                                    <label class="form-for" for="information">Nachricht</label>
                                     <textarea id="information" class="form-control <?php echo ($missing['information'] === false) ? '' : 'text-validate-red' ?>"
                                         name="information" cols="45" rows="9" values="">
                                     </textarea>
@@ -72,7 +72,7 @@ if(!isset($missing))
                                 </div>
                                 
                                 <div class="col-lg-12 col-md-12 col-sm-12">        
-                                    <label for="problem" class="form-for-contact">Thema</label>
+                                    <label for="problem" class="form-for">Thema</label>
                                     <input id="problem" class="form-control <?php echo ($missing['problem'] === false) ? '' : 'text-validate-red' ?>"
                                             type="text" name="problem" placeholder="Thema">
                                     <?php if($missing['problem'] === true) : ?>
@@ -80,8 +80,8 @@ if(!isset($missing))
                                     <?php endif; ?>
                                 </div>
 
-                                <div class="col-lg-12 col-md-8 col-sm-12 center">
-                                    <input type="submit" name="inputContact" class="btn btn-primary" value="Bestätigen">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <input type="submit" name="inputContact" class="btn btn-primary float-left" value="Abschicken">
                                 </div>
                             </div>
                         </form>
