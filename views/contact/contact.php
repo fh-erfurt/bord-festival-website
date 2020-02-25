@@ -1,3 +1,5 @@
+<script type="text/javascript" src="assets/js/validate.js"></script>
+
 <?php
 if(!isset($missing))
 {
@@ -34,54 +36,46 @@ if(!isset($missing))
                         <?php   
                         }
                         ?>
-                        <form method="post">
+                        <form method="post" onsubmit="return validateContact();">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12 float-left clear-left">
-                                    <label for="firstname" class="form-for">Vorname</label>
-                                    <input id="firstname" class="form-control <?php echo ($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
-                                            type="text" name="firstname" placeholder="Vorname">
-                                    <?php if($missing['firstname'] === true) : ?>
-                                        <div class="validation-helptext">Bitte geben Sie Ihren Vornamen an.</div>
-                                    <?php endif; ?>
+                                    <label for="InputFirstname" class="form-for">Vorname</label>
+                                    <input id="InputFirstname" class="form-control <?php echo ($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
+                                            type="text" name="firstname" placeholder="Vorname" onfocusout="validateInput(this.id)">
+                                    <div id="InputFirstname-error" class="validation-helptext <?php echo(($missing['firstname'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihren Vornamen an</div>                        
                                 </div>
+
                                 <div class="col-lg-6 col-md-6 col-sm-12 float-left">
-                                    <label for="lastname" class="form-for">Nachname</label>
-                                    <input id="lastname" class="form-control <?php echo ($missing['lastname'] === false) ? '' : 'text-validate-red' ?>"
-                                            type="text" name="lastname" placeholder="Nachname">
-                                    <?php if($missing['lastname'] === true) : ?>
-                                        <div class="validation-helptext">Bitte geben Sie Ihren Nachnamen an.</div>
-                                    <?php endif; ?>
+                                    <label for="InputLastname" class="form-for">Nachname</label>
+                                    <input id="InputLastname" class="form-control <?php echo ($missing['lastname'] === false) ? '' : 'text-validate-red' ?>"
+                                            type="text" name="lastname" placeholder="Nachname" onfocusout="validateInput(this.id)">
+                                    <div id="InputLastname-error" class="validation-helptext <?php echo(($missing['lastname'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihren Nachnamen an</div>                        
                                 </div>
+
                                 <div class="col-lg-12 col-md-12 col-sm-12">        
-                                    <label for="mail" class="form-for">E-Mail</label>
-                                    <input id="mail" class="form-control <?php echo ($missing['mail'] === false) ? '' : 'text-validate-red' ?>"
-                                            type="text" name="mail" placeholder="E-Mail">
-                                    <?php if($missing['mail'] === true) : ?>
-                                        <div class="validation-helptext">Bitte geben Sie Ihre E-Mail an.</div>
-                                    <?php endif; ?>
+                                    <label for="InputMail" class="form-for">E-Mail</label>
+                                    <input id="InputMail" class="form-control <?php echo ($missing['mail'] === false) ? '' : 'text-validate-red' ?>"
+                                            type="text" name="mail" placeholder="E-Mail" onfocusout="validateInput(this.id, 'mail')">
+                                    <div id="InputMail-error" class="validation-helptext <?php echo(($missing['mail'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre E-Mail an</div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12 float-left">
-                                    <label class="form-for" for="information">Nachricht</label>
-                                    <textarea id="information" class="form-control <?php echo ($missing['information'] === false) ? '' : 'text-validate-red' ?>"
-                                        name="information" cols="45" rows="9" values="">
-                                    </textarea>
-                                    <?php if($missing['information'] === true) : ?>
-                                        <div class="validation-helptext">Bitte ausfüllen.</div>
-                                    <?php endif; ?>
+                                    <label class="form-for" for="InputInformation">Nachricht</label>
+                                    <textarea id="InputInformation" class="form-control <?php echo ($missing['information'] === false) ? '' : 'text-validate-red' ?>"
+                                        name="information" cols="45" rows="9" values=" " onfocusout="validateInput(this.id)"></textarea>
+                                    <div id="InputInformation-error" class="validation-helptext <?php echo(($missing['information'] === true) ? 'display-show' : 'display-none'); ?>">Bitte ausfüllen</div>                        
+
                                 </div>
                                 
                                 <div class="col-lg-12 col-md-12 col-sm-12">        
-                                    <label for="problem" class="form-for">Thema</label>
-                                    <input id="problem" class="form-control <?php echo ($missing['problem'] === false) ? '' : 'text-validate-red' ?>"
-                                            type="text" name="problem" placeholder="Thema">
-                                    <?php if($missing['problem'] === true) : ?>
-                                        <div class="validation-helptext">Bitte ausfüllen.</div>
-                                    <?php endif; ?>
+                                    <label for="InputProblem" class="form-for">Thema</label>
+                                    <input id="InputProblem" class="form-control <?php echo ($missing['problem'] === false) ? '' : 'text-validate-red' ?>"
+                                            type="text" name="problem" placeholder="Thema" onfocusout="validateInput(this.id)">
+                                    <div id="InputProblem-error" class="validation-helptext <?php echo(($missing['problem'] === true) ? 'display-show' : 'display-none'); ?>">Bitte ausfüllen</div>                        
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <input type="submit" name="inputContact" class="btn btn-primary float-left" value="Abschicken">
+                                    <input id="buttonSubmit" type="submit" name="inputContact" class="btn btn-primary float-left" value="Abschicken">
                                 </div>
                             </div>
                         </form>

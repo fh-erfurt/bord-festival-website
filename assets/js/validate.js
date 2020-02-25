@@ -73,7 +73,7 @@ function validateLogin() {
 }
 
 function validateProfile() {
-    validateInput('InputEmail', 'mail');
+    validateInput('InputMail', 'mail');
     validateInput('InputFirstname');
     validateInput('InputLastname');
     validateInput('InputBirthday');
@@ -81,6 +81,17 @@ function validateProfile() {
     validateInput('InputZip');
     validateInput('InputCity');
     validateInput('InputCountry');
+
+    var result = toggleSubmitButton();
+    return result;
+}
+
+function validateContact() {
+    validateInput('InputMail', 'mail');
+    validateInput('InputFirstname');
+    validateInput('InputLastname');
+    validateInput('InputInformation');
+    validateInput('InputProblem');
 
     var result = toggleSubmitButton();
     return result;
