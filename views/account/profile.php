@@ -1,20 +1,21 @@
+<script type="text/javascript" src="assets/js/validate.js"></script>
 <?php
 if(!isset($missing))
 {
-    $missing['E-Mail'] = false;
-    $missing['Vorname'] = false;
-    $missing['Nachname'] = false;
-    $missing['Geburtsdatum'] = false;
-    $missing['Straße'] = false;
-    $missing['Postleitzahl'] = false;
-    $missing['Stadt'] = false;
-    $missing['Land'] = false;
+    $missing['mail'] = false;
+    $missing['firstname'] = false;
+    $missing['lastname'] = false;
+    $missing['dateofbirth'] = false;
+    $missing['street'] = false;
+    $missing['zip'] = false;
+    $missing['city'] = false;
+    $missing['country'] = false;
 }
 ?>
 
 <div class="background-black">
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 center">
+        <div class="col-lg-8 col-md-10 col-sm-10 clear-fix center">
             <h class="page-heading">Mein Account</h>
             <section>
                 <?php
@@ -32,25 +33,81 @@ if(!isset($missing))
                 }
                 ?>
                 <div class="accountdata">
-                    <form action="?c=account&a=profile"method="post">
-                        <?php
-                        foreach($accdata as $key => $value) :
-                        ?>
-                            <div class="row">
+                    <form action="index.php?c=account&a=profile" method="post" onsubmit="return validateProfile();">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 float-left clear-left">
                                 <div class="accountdata-content">
-                                    <div class="col-lg-6 col-md-8 col-sm-12 center">
-                                        <label class="form-for" for="<?php echo $key; ?>"><?php echo $key; ?></label>
-                                        <input class="form-control <?php echo($missing[$key] === false) ? '' : 'text-validate-red' ?>"
-                                               id="<?php echo $key; ?>" name="<?php echo $key; ?>" placeholder="<?php echo $key; ?>"
-                                               value="<?php echo $value; ?>">
-                                    </div>
+                                    <label class="form-for" for="InputMail">E-Mail</label>
+                                    <input class="form-control <?php echo($missing['mail'] === false) ? '' : 'text-validate-red' ?>"
+                                            id="InputMail" name="mail" placeholder="E-Mail"
+                                            value="<?php echo $mail; ?>" onfocusout="validateInput(this.id, 'mail')">
+                                    <div id="InputMail-error" class="validation-helptext <?php echo(($missing['mail'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre E-Mail an</div>
+                                </div>
+
+                                <div class="accountdata-content">
+                                    <label class="form-for" for="InputFirstname">Vorname</label>
+                                    <input class="form-control <?php echo($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
+                                            id="InputFirstname" name="firstname" placeholder="Vorname"
+                                            value="<?php echo $firstname; ?>" onfocusout="validateInput(this.id)">
+                                    <div id="InputFirstname-error" class="validation-helptext <?php echo(($missing['firstname'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihren Vornamen an</div>
+                                </div>
+
+                                <div class="accountdata-content">
+                                    <label class="form-for" for="InputLastname">Nachname</label>
+                                    <input class="form-control <?php echo($missing['lastname'] === false) ? '' : 'text-validate-red' ?>"
+                                            id="InputLastname" name="lastname" placeholder="Nachname"
+                                            value="<?php echo $lastname; ?>" onfocusout="validateInput(this.id)">
+                                    <div id="InputLastname-error" class="validation-helptext <?php echo(($missing['lastname'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihren Nachnamen an</div>
+                                </div>
+
+                                <div class="accountdata-content">
+                                    <label class="form-for" for="InputBirthday">Geburtsdatum</label>
+                                    <input class="form-control <?php echo($missing['dateofbirth'] === false) ? '' : 'text-validate-red' ?>"
+                                            id="InputBirthday" name="dateofbirth" placeholder="Geburtsdatum"
+                                            value="<?php echo $dateofbirth; ?>" onfocusout="validateInput(this.id)">
+                                    <div id="InputBirthday-error" class="validation-helptext <?php echo(($missing['dateofbirth'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihren Geburtstag an</div>
                                 </div>
                             </div>
-                        <?php
-                        endforeach;
-                        ?>
-                        <div class="col-lg-6 col-md-6 col-sm-12 center">
-                            <a class="btn btn-primary" href="#confirmpassword">Accountdaten ändern</a>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 float-left">
+                                <div class="accountdata-content">
+                                    <label class="form-for" for="InputStreet">Straße</label>
+                                    <input class="form-control <?php echo($missing['street'] === false) ? '' : 'text-validate-red' ?>"
+                                            id="InputStreet" name="street" placeholder="Straße"
+                                            value="<?php echo $street; ?>" onfocusout="validateInput(this.id)">
+                                    <div id="InputStreet-error" class="validation-helptext <?php echo(($missing['street'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre Straße an</div>
+                                </div>
+
+                                <div class="accountdata-content">
+                                    <label class="form-for" for="InputZip">PLZ</label>
+                                    <input class="form-control <?php echo($missing['zip'] === false) ? '' : 'text-validate-red' ?>"
+                                            id="InputZip" name="zip" placeholder="PLZ"
+                                            value="<?php echo $zip; ?>" onfocusout="validateInput(this.id)">
+                                    <div id="InputZip-error" class="validation-helptext <?php echo(($missing['zip'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre Postleitzahl an</div>
+                                </div>
+
+                                <div class="accountdata-content">
+                                    <label class="form-for" for="InputCity">Stadt</label>
+                                    <input class="form-control <?php echo($missing['city'] === false) ? '' : 'text-validate-red' ?>"
+                                            id="InputCity" name="city" placeholder="Stadt"
+                                            value="<?php echo $city; ?>" onfocusout="validateInput(this.id)">
+                                    <div id="InputCity-error" class="validation-helptext <?php echo(($missing['city'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre Stadt an</div>
+                                </div>
+
+                                <div class="accountdata-content">
+                                    <label class="form-for" for="InputCountry">Land</label>
+                                    <input class="form-control <?php echo($missing['country'] === false) ? '' : 'text-validate-red' ?>"
+                                            id="InputCountry" name="country" placeholder="Land"
+                                            value="<?php echo $country; ?>" onfocusout="validateInput(this.id)">
+                                    <div id="InputCountry-error" class="validation-helptext <?php echo(($missing['country'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihr Land an</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">                        
+                            <div class="col-lg-12 col-md-12 col-sm-12 clear-fix clear-left">
+                                <a class="btn btn-primary" href="#confirmpassword">Accountdaten ändern</a>
+                            </div>
                         </div>
                         <div id="confirmpassword" class="overlay">
                             <div class="row">
@@ -62,7 +119,11 @@ if(!isset($missing))
                                             <label for="password">Passwort</label>
                                             <input class="form-control" id="password" name="password" type="password">
                                         </div>
-                                        <input class="btn btn-primary" type="submit" name="updateaccount" value="Bestätigen">
+                                        <div class="row">		
+								            <div class="col-lg-12 col-md-12 col-sm-12 clearfix clear-left">
+                                                <input id="buttonSubmit" class="btn btn-primary" type="submit" name="updateaccount" value="Bestätigen">
+								            </div>
+							            </div>
                                     </div>                               
                                 </div>
                             </div>
@@ -157,7 +218,7 @@ if(!isset($missing))
                         ?>
                         <div class="row">
                             <div class="col-lg-12 col-lg-12 col-lg-12">
-                                <div class="alert alert-warning">
+                                <div class="alert alert-warning center">
                                     Keine Artikel wurden in der Bestellhistorie gefunden.
                                 </div>
                             </div>

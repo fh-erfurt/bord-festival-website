@@ -71,3 +71,17 @@ function validateLogin() {
     var result = toggleSubmitButton();
     return result;
 }
+
+function validateProfile() {
+    validateInput('InputEmail', 'mail');
+    validateInput('InputFirstname');
+    validateInput('InputLastname');
+    validateInput('InputBirthday');
+    validateInput('InputStreet');
+    validateInput('InputZip');
+    validateInput('InputCity');
+    validateInput('InputCountry');
+
+    var result = toggleSubmitButton();
+    return result;
+}
