@@ -53,19 +53,19 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/dth.jpg" />
+                <img class="lineup-image" src="assets/img/band/dth.jpg" alt="Die Toten Hosen"/>
                 <div class="band-title-red">
                     Die Toten Hosen
                 </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/eminem.jpg" />
+                <img class="lineup-image" src="assets/img/band/eminem.jpg" alt="Eminem"/>
                 <div class="band-title-black">
                     Eminem
                 </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/metallica.jpg" />
+                <img class="lineup-image" src="assets/img/band/metallica.jpg" alt="Metallica"/>
                 <div class="band-title-red">
                     Metallica
                 </div>
@@ -73,19 +73,19 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/noisia.jpg" />
+                <img class="lineup-image" src="assets/img/band/noisia.jpg" alt="Noisia"/>
                 <div class="band-title-black">
                     Noisia
                 </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/rammstein.jpg" />
+                <img class="lineup-image" src="assets/img/band/rammstein.jpg" alt="Rammstein"/>
                 <div class="band-title-red">
                     Rammstein
                 </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/knifeparty.jpg" />
+                <img class="lineup-image" src="assets/img/band/knifeparty.jpg" alt="Knife Party"/>
                 <div class="band-title-black">
                     Knife Party
                 </div>
@@ -93,19 +93,19 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/system_of_a_down.jpg" />
+                <img class="lineup-image" src="assets/img/band/system_of_a_down.jpg" alt="System of a down"/>
                 <div class="band-title-red">
                     System of a down
                 </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/pendulum.jpg" />
+                <img class="lineup-image" src="assets/img/band/pendulum.jpg" alt="Pendulum"/>
                 <div class="band-title-black">
                     Pendulum
                 </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/slipknot.jpg" />
+                <img class="lineup-image" src="assets/img/band/slipknot.jpg" alt="Slipknot"/>
                 <div class="band-title-red">
                     Slipknot
                 </div>
@@ -113,19 +113,19 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/steve_aoki.jpg" />
+                <img class="lineup-image" src="assets/img/band/steve_aoki.jpg" alt="Steve Aoki"/>
                 <div class="band-title-black">
                     Steve Aoki
                 </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/disturbed.jpg" />
+                <img class="lineup-image" src="assets/img/band/disturbed.jpg" alt="Disturbed"/>
                 <div class="band-title-red">
                     Disturbed
                 </div>
             </div> 
             <div class="col-lg-4 col-md-6 col-sm-12 lineup-col clear-fix">
-                <img class="lineup-image" src="assets/img/band/vini_vici.jpg" />
+                <img class="lineup-image" src="assets/img/band/vini_vici.jpg" alt="Vini Vici"/>
                 <div class="band-title-black">
                     Vini Vici
                 </div>
