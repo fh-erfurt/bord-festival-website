@@ -22,6 +22,7 @@ if(isset($_GET['a']))
 		<title><?php echo $title ?? "BORD-Festival" ?></title>
 		<link rel="stylesheet" type="text/css" href="assets/css/grid.css">
 		<link rel="stylesheet" type="text/css" href="assets/css/layout.css">
+		<link rel="stylesheet" href="assets/css/print.css"type="text/css" media="print" />
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/bord_logo.ico">
 		<?php if(isset($css) && is_array($css)) : ?>
 			<?php foreach($css as $index => $file) : ?>

@@ -1,0 +1,10 @@
+.print {
+    display: none;
+}
+header, .footer {
+    display: none;
+}
+.order > .print-border {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}

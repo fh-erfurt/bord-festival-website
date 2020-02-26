@@ -14,7 +14,7 @@ if(!isset($missing))
 ?>
 
 <div class="background-black">
-    <div class="row">
+    <div class="row print">
         <div class="col-lg-8 col-md-10 col-sm-10 clear-fix center">
             <h1 class="page-heading">Mein Account</h1>
             <section>
@@ -159,7 +159,7 @@ if(!isset($missing))
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="order">
-                                        <div class="row">
+                                        <div class="row print-border">
                                             <div class="order-header">
                                                 <div class="col-lg-6 col-md-6 col-sm-12 float-left">
                                                     <b>Bestellung aufgegeben:</b><br>
@@ -214,6 +214,9 @@ if(!isset($missing))
                             </div>
                             <?php
                         }
+                        
+                        ?><button class="btn btn-primary print" onclick="window.print();return false;">ausdrucken</button>
+                        <?php
                     }
                     else
                     {
