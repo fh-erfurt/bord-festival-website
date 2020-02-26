@@ -59,17 +59,28 @@ if(!isset($missing))
                                             value="<?php echo $lastname; ?>" onfocusout="validateInput(this.id)">
                                     <div id="InputLastname-error" class="validation-helptext <?php echo(($missing['lastname'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihren Nachnamen an</div>
                                 </div>
-
+                                
                                 <div class="accountdata-content">
                                     <label class="form-for" for="InputBirthday">Geburtsdatum</label>
                                     <input class="form-control <?php echo($missing['dateofbirth'] === false) ? '' : 'text-validate-red' ?>"
-                                            id="InputBirthday" name="dateofbirth" placeholder="Geburtsdatum"
-                                            value="<?php echo $dateofbirth; ?>" onfocusout="validateInput(this.id)">
+                                    id="InputBirthday" name="dateofbirth" placeholder="Geburtsdatum"
+                                    value="<?php echo $dateofbirth; ?>" onfocusout="validateInput(this.id)">
                                     <div id="InputBirthday-error" class="validation-helptext <?php echo(($missing['dateofbirth'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihren Geburtstag an</div>
                                 </div>
                             </div>
-
+                            
                             <div class="col-lg-6 col-md-6 col-sm-12 float-left">
+                                <div class="accountdata-content ">
+                                    <label class="form-for" for="InputCountry">Land</label>
+                                    <select id="InputCountry" class="form-control <?php echo($missing['country'] === false) ? '' : 'text-validate-red' ?>"
+                                            name="country" onfocusout="validateInput(this.id);">                                    
+                                        <?php foreach($countryList as $countries) : ?>
+                                        <option value="<?php echo $countries; ?>"<?php echo($countries === $country) ? ' selected' : '' ?>><?php echo $countries; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <div id="InputCountry-error" class="validation-helptext <?php echo(($missing['country'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihr Land an</div>
+                                </div>
+
                                 <div class="accountdata-content">
                                     <label class="form-for" for="InputStreet">Straße</label>
                                     <input class="form-control <?php echo($missing['street'] === false) ? '' : 'text-validate-red' ?>"
@@ -93,15 +104,6 @@ if(!isset($missing))
                                             value="<?php echo $city; ?>" onfocusout="validateInput(this.id)">
                                     <div id="InputCity-error" class="validation-helptext <?php echo(($missing['city'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre Stadt an</div>
                                 </div>
-
-                                <div class="accountdata-content">
-                                    <label class="form-for" for="InputCountry">Land</label>
-                                    <input class="form-control <?php echo($missing['country'] === false) ? '' : 'text-validate-red' ?>"
-                                            id="InputCountry" name="country" placeholder="Land"
-                                            value="<?php echo $country; ?>" onfocusout="validateInput(this.id)">
-                                    <div id="InputCountry-error" class="validation-helptext <?php echo(($missing['country'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihr Land an</div>
-                                </div>
-
                             </div>
                         </div>
                         <div class="row">                        

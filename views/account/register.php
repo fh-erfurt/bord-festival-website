@@ -11,6 +11,7 @@ if(!isset($missing))
 	$missing['street'] = false;
 	$missing['zip'] = false;
 	$missing['city'] = false;
+	$missing['country'] = false;
 }
 ?>
 
@@ -54,9 +55,6 @@ if(!isset($missing))
 									type="password" name="password2" placeholder="Passwort wiederholen" onfocusout="validateInput(this.id)">
 								<div id="InputPassword2-error" class="validation-helptext <?php echo(($missing['password2'] === true) ? 'display-show' : 'display-none'); ?>">Bitte bestätigen Sie das Passwort</div>
 							</div>
-						</div>
-						
-						<div class="col-lg-6 col-md-6 col-sm-12 float-left">
 							<div class="input-group">
 								<label class="form-for" for="InputFirstname">Vorname</label>
 								<input id="InputFirstname" class="form-control <?php echo($missing['firstname'] === false) ? '' : 'text-validate-red' ?>"
@@ -74,24 +72,38 @@ if(!isset($missing))
 								<input id="InputBirthday" class="form-control <?php echo($missing['dateofbirth'] === false) ? '' : 'text-validate-red' ?>"
 									type="date" name="dateofbirth" placeholder="Geburtsdatum" onfocusout="validateInput(this.id)">
 								<div id="InputBirthday-error" class="validation-helptext <?php echo(($missing['dateofbirth'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihr Geburtsdatum an</div>
-							</div>
+							</div>							
+						</div>
+
+						<div class="col-lg-6 col-md-6 col-sm-12 float-left">
+							<div class="input-group">
+								<label class="form-for" for="InputCountry">Land</label>
+								<select id="InputCountry" class="form-control <?php echo($missing['country'] === false) ? '' : 'text-validate-red' ?>"
+										name="country" onfocusout="validateInput(this.id);">
+									<option value="" selected disabled hidden> -- bitte auswählen -- </option>
+									<?php foreach($countryList as $countries) :	?>
+									<option value="<?php echo $countries; ?>"><?php echo $countries; ?></option>
+									<?php endforeach; ?>
+								</select>
+								<div id="InputCountry-error" class="validation-helptext <?php echo(($missing['country'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihr Land an</div>
+							</div>								
 							<div class="input-group">
 								<label class="form-for" for="InputStreet">Straße und Hausnummer</label>
 								<input id="InputStreet" class="form-control <?php echo($missing['street'] === false) ? '' : 'text-validate-red' ?>"
-									type="text" name="street" placeholder="Straße / Hausnummer" onfocusout="validateInput(this.id)">
+								type="text" name="street" placeholder="Straße / Hausnummer" onfocusout="validateInput(this.id)">
 								<div id="InputStreet-error" class="validation-helptext <?php echo(($missing['street'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre Straße und Hausnummer an</div>
-							</div>
+							</div>							
 							<div class="input-group">
 								<label class="form-for" for="InputZip">PLZ</label>
 								<input id="InputZip" class="form-control <?php echo($missing['zip'] === false) ? '' : 'text-validate-red' ?>"
-									type="text" name="zip" placeholder="PLZ" onfocusout="validateInput(this.id)">
+								type="text" name="zip" placeholder="PLZ" onfocusout="validateInput(this.id)">
 								<div id="InputZip-error" class="validation-helptext <?php echo(($missing['zip'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre Postleitzahl an</div>
 							</div>
 							<div class="input-group">
 								<label class="form-for" for="InputCity">Ort</label>
 								<input id="InputCity" class="form-control <?php echo($missing['city'] === false) ? '' : 'text-validate-red' ?>"
 									type="text" name="city" placeholder="Ort" onfocusout="validateInput(this.id)">
-								<div id="InputCity-error" class="validation-helptext <?php echo(($missing['city'] === true) ? 'display-show' : 'display-none'); ?>">Bitte bestätigen Sie das Passwort</div>
+								<div id="InputCity-error" class="validation-helptext <?php echo(($missing['city'] === true) ? 'display-show' : 'display-none'); ?>">Bitte geben Sie Ihre Stadt an</div>
 							</div>
 						</div>
 					</div>

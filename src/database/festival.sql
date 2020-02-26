@@ -203,7 +203,7 @@ CREATE VIEW `item_gender` AS SELECT distinct gender FROM `items` WHERE gender is
 -- Initialbefüllung für Test-Account-Erstellung
 --
 INSERT INTO `addresses` (`addressid`, `street`, `zip`, `city`, `country`) VALUES
-(1, 'Altonaer Str. 25', '99085', 'Erfurt', 'GER');
+(1, 'Altonaer Str. 25', '99085', 'Erfurt', 'Germany');
 
 INSERT INTO `clients` (`clientid`, `mail`, `firstname`, `lastname`, `dateofbirth`, `password`, `createdat`, `updatedat`, `addressid`) VALUES
 (1, 'test@fh-erfurt.de', 'Maximilian', 'Mustermann', '1990-01-01', 0x24327924313024353467674539504d7a374d3768456d62676871306e6563686a6d546a49647737313158466b4a3136696b6639304852327557387743, '2020-02-03 21:37:10', '2020-02-03 21:37:10', 1);
