@@ -52,6 +52,7 @@ function postCartWithAjax(itemid, itemcountelement) {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(params);
+    setTimeout(function() {getCalculatedCart()}, 300 );
     return xhr;
 }
 function fadeIn(element) {
@@ -69,15 +70,22 @@ function hide(element) {
     element.style.position = 'absolute';
 }
 
-function getAjax() {
+function getCalculatedCart() {
     var url = 'index.php?c=order&a=shop&t=tickets&calculatecart=true&json=true';
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     xhr.open('GET', url);
     xhr.onreadystatechange = function() {
         if (xhr.readyState>3 && xhr.status==200) {
-            console.log(xhr.responseText);
-
+            var obj = JSON.parse(xhr.responseText);
+            console.log(obj);
+            var cartcount = document.getElementById('carttotalcount');
+            var cartprice = document.getElementById('carttotalprice');
+            cartcount.innerHTML = obj['cartTotalCount'];
+            cartprice.innerHTML = obj['cartTotalPrice'] + ' €';
         } 
+        if (obj['cartTotalCount'] > 0) {
+            document.getElementById('hide-empty-cart').style.display = 'inline';
+        }
     };
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.send();

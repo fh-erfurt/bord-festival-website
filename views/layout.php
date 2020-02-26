@@ -103,22 +103,12 @@ if(isset($_GET['a']))
 									?>
 									
 									<?php 
-										if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) :
-											if(empty($cartTotalCount) || empty($cartTotalPrice)) :
-									?>
-												<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>"
-												href="?c=order&a=shoppingcart">Warenkorb (<?php echo $cartTotalCount ?>)
-												</a>
-										<?php 
-											else :
-										?>							
-												<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>" ´
-												href="?c=order&a=shoppingcart">Warenkorb<div class="hide-mobile hide-medium-screen">
-												(<?php echo $cartTotalCount . '): ' . $cartTotalPrice . '€'; ?></div>
-												</a>
-										<?php 
-											endif;
-										?>
+										if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) : ?>
+										<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>"
+											href="?c=order&a=shoppingcart">Warenkorb (<span id="carttotalcount" class="display-inline"><?php echo $cartTotalCount ?></span>)<span id="hide-empty-cart" class="<?php echo(empty($cartTotalCount) ? 'display-none' : ''); ?>"><span class="hide-mobile hide-medium-screen display-inline">:
+												<span id="carttotalprice" class="display-inline"> <?php echo $cartTotalPrice ?><span> €
+											</span></span>
+										</a>
 									<?php
 										endif;
 									?>
