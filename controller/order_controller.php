@@ -23,7 +23,7 @@ require_once 'model/support_mail.class.php';
 require_once 'model/purchase.class.php';
 require_once 'model/purchaseitem.class.php';
 require_once 'model/itemcategory.class.php';
-require_once 'model/itemgender.class.php';
+require_once 'model/itemGender.class.php';
 require_once 'model/itemcolor.class.php';
 
 
@@ -62,34 +62,34 @@ class OrderController extends \app\core\Controller
 			}
 			$type = \addslashes($type);
 
-			$itemcategories = ItemCategory::find();
-			$this->_params['itemcategories'] = $itemcategories;
-			$itemgender = ItemGender::find();
-			$this->_params['itemgender'] = $itemgender;
-			$itemcolors = ItemColor::find();
-			$this->_params['itemcolors'] = $itemcolors;
+			$itemCategories = ItemCategory::find();
+			$this->_params['itemCategories'] = $itemCategories;
+			$itemGender = ItemGender::find();
+			$this->_params['itemGender'] = $itemGender;
+			$itemColors = ItemColor::find();
+			$this->_params['itemColors'] = $itemColors;
 
 			$where = 'type = "'.$type.'"';
 			$filter = '';
 			$orderby = '';
-			$selectedcategoryfilter = '';
-			$selectedgenderfilter = '';
-			$selectedcolorfilter = '';
+			$selectedCategoryFilter = '';
+			$selectedGenderFilter = '';
+			$selectedColorFilter = '';
 
-			$selectedsort = '';
-			$getselectedsort = false;
+			$selectedSort = '';
+			$getSelectedSort = false;
 			if(!isset($_POST['price']) && !isset($_POST['name']))
 			{
-				$getselectedsort = true;
+				$getSelectedSort = true;
 			}
 
-			$filter .= self::AddFilter('category', 'selectedcategoryfilter');
-			$filter .= self::AddFilter('gender', 'selectedgenderfilter');
-			$filter .= self::AddFilter('color', 'selectedcolorfilter');
+			$filter .= self::AddFilter('category', 'selectedCategoryFilter');
+			$filter .= self::AddFilter('gender', 'selectedGenderFilter');
+			$filter .= self::AddFilter('color', 'selectedColorFilter');
 
-			$orderby .= self::AddFilter('price', 'selectedsort', true, $getselectedsort);
+			$orderby .= self::AddFilter('price', 'selectedSort', true, $getSelectedSort);
 			
-			$orderby .= self::AddFilter('name', 'selectedsort', true, $getselectedsort);
+			$orderby .= self::AddFilter('name', 'selectedSort', true, $getSelectedSort);
 			
 			$where .= $filter;
 			$where .= $orderby;
@@ -105,7 +105,7 @@ class OrderController extends \app\core\Controller
 			header('Location: index.php?c=pages&a=error404');
 		}
 
-		if(isset($_POST['additemtocart']))
+		if(isset($_POST['addItemToCart']))
 		{
 			self::addItemsToCart($json);
 		}
@@ -154,7 +154,7 @@ class OrderController extends \app\core\Controller
 			$this->_params['city'] = $address[0]['city'];
 			$this->_params['country'] = $address[0]['country'];
 
-			if(isset($_POST['deleteitemfromcart']))
+			if(isset($_POST['deleteItemFromCart']))
 			{
 				$cartitemid = $_POST['cartitemid'] ?? null;
 				
@@ -190,15 +190,15 @@ class OrderController extends \app\core\Controller
 				exit();	
 			}
 
-			if(isset($_POST['deletewholecart']))
+			if(isset($_POST['deleteWholeCart']))
 			{
-				$success = self::deleteWholecart($clientid);
+				$success = self::deleteWholeCart($clientid);
 				http_response_code( 303 );
 				header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
 				exit();	
 			}
 
-			if(isset($_POST['buycart']))
+			if(isset($_POST['buyCart']))
 			{
 				$purchasedata = [
 					'purchasedat'	=> date("Y-m-d H:i:s"),
@@ -229,7 +229,7 @@ class OrderController extends \app\core\Controller
 					$purchaseitem->save();
 				}
 
-				self::deletewholecart($clientid);
+				self::deleteWholeCart($clientid);
 				header('Location: index.php?c=pages&a=index');
 			}
 
@@ -240,9 +240,9 @@ class OrderController extends \app\core\Controller
 			{
 				$cartid = $cart[0]['cartid'];
 
-				$carttotalprice = $cart[0]['totalprice'];
+				$cartTotalPrice = $cart[0]['totalprice'];
 				$cartitemcount = Cartitem::count('cartid = '.$cartid);
-				$this->_params['carttotalprice'] = $carttotalprice;
+				$this->_params['cartTotalPrice'] = $cartTotalPrice;
 				$this->_params['cartitemcount'] = $cartitemcount;	
 				
 				$cartitems = Cartitem::find('cartid = '.$cartid);
@@ -321,7 +321,7 @@ class OrderController extends \app\core\Controller
 	}
 
 
-	public function deleteWholecart($clientid)
+	public function deleteWholeCart($clientid)
 	{		
 		$cart = Cart::find('clientid = '.$clientid);
 		$success = false;
@@ -358,24 +358,24 @@ class OrderController extends \app\core\Controller
 		$cart = Cart::find('clientid = '.$clientid);
 		if(empty($cart))
 		{
-			$this->_params['carttotalprice'] = 0;
-			$this->_params['carttotalcount'] = 0;
+			$this->_params['cartTotalPrice'] = 0;
+			$this->_params['cartTotalCount'] = 0;
 			
 		}
 		else
 		{
 			$cartid = $cart[0]['cartid'];
 			$cartitems = Cart::find('cartid ='.$cartid);
-			$carttotalprice = $cart[0]['totalprice'];
-			$carttotalcount = $cart[0]['totalcount'];
-			$this->_params['carttotalprice'] = $carttotalprice;
-			$this->_params['carttotalcount'] = $carttotalcount;
+			$cartTotalPrice = $cart[0]['totalprice'];
+			$cartTotalCount = $cart[0]['totalcount'];
+			$this->_params['cartTotalPrice'] = $cartTotalPrice;
+			$this->_params['cartTotalCount'] = $cartTotalCount;
 		}
 
 		if($json)
 		{
-			$output['carttotalprice'] = $this->_params['carttotalprice'];
-			$output['carttotalcount'] = $this->_params['carttotalcount'];
+			$output['cartTotalPrice'] = $this->_params['cartTotalPrice'];
+			$output['cartTotalCount'] = $this->_params['cartTotalCount'];
 			echo json_encode($output);
 		}
 	} 
@@ -470,7 +470,7 @@ class OrderController extends \app\core\Controller
 
 	}
 	
-	private function AddFilter($field, $filtername, $usesort = false, $getselectedsort = false)
+	private function AddFilter($field, $filtername, $usesort = false, $getselectedSort = false)
 	{
 		$result = '';
 		$param = null;
@@ -481,7 +481,7 @@ class OrderController extends \app\core\Controller
 		}
 		else
 		{
-			if($getselectedsort)
+			if($getselectedSort)
 			{
 				if(!empty($_POST[$field.'_selected']))
 				{

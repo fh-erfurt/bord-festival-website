@@ -19,13 +19,13 @@ if(!isset($missing))
             <h1 class="page-heading">Mein Account</h1>
             <section>
                 <?php
-                if(!empty($updateerror))
+                if(!empty($updateError))
                 {
                 ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-8 col-sm-12 center">
                         <div class="alert alert-danger">
-                            <?php echo $updateerror; ?>
+                            <?php echo $updateError; ?>
                         </div>
                     </div>
                 </div>
@@ -108,10 +108,10 @@ if(!isset($missing))
                         </div>
                         <div class="row">                        
                             <div class="col-lg-12 col-md-12 col-sm-12 clear-fix clear-left">
-                                <a class="btn btn-primary" href="#confirmpassword">Accountdaten ändern</a>
+                                <a class="btn btn-primary" href="#confirmPassword">Accountdaten ändern</a>
                             </div>
                         </div>
-                        <div id="confirmpassword" class="overlay">
+                        <div id="confirmPassword" class="overlay">
                             <div class="row">
                                 <div class="col-lg-5 col-md-8 col-sm-10 center">
                                     <div class="popup">
@@ -123,7 +123,7 @@ if(!isset($missing))
                                         </div>
                                         <div class="row">		
 								            <div class="col-lg-12 col-md-12 col-sm-12 clearfix clear-left">
-                                                <input id="buttonSubmit" class="btn btn-primary" type="submit" name="updateaccount" value="Bestätigen">
+                                                <input id="buttonSubmit" class="btn btn-primary" type="submit" name="updateAccount" value="Bestätigen">
 								            </div>
 							            </div>
                                     </div>                               
@@ -148,9 +148,9 @@ if(!isset($missing))
                         </div>
                     </div>
                     <?php 
-                    if(!empty($purchasehistory))
+                    if(!empty($purchaseHistory))
                     {
-                        foreach($purchasehistory as $purchase)
+                        foreach($purchaseHistory as $purchase)
                         {
                             $i = 0;
                             $purchasedat = $purchase['purchasedat'];
@@ -175,7 +175,7 @@ if(!isset($missing))
                                             <div class="col-lg-12 col-md-12 col-sm-12 clear-left">
     
                             <?php 
-                            foreach($purchase['iteminfo'] as $purchaseitem)
+                            foreach($purchase['iteminfo'] as $purchaseItem)
                             {
                                 if($i > 0)
                                 {
@@ -191,16 +191,16 @@ if(!isset($missing))
                                 }
                                 ?>
                                 <div class="float-left item-image-mini">
-                                    <img class="" src="<?php echo $purchaseitem['imageurl']; ?>" />
+                                    <img class="" src="<?php echo $purchaseItem['imageurl']; ?>" />
                                 </div>
                                 <div class="float-left item-details-mini">
-                                    <h4 class="item-name"><?php echo $purchaseitem['name']; ?></h4>
+                                    <h4 class="item-name"><?php echo $purchaseItem['name']; ?></h4>
                                     <p class="item-description">
-                                        <?php echo $purchaseitem['description']; ?>
+                                        <?php echo $purchaseItem['description']; ?>
                                     </p>
-                                    <?php echo $purchaseitem['itemprice'] ?> € pro Artikel<br/>
-                                    Menge: <?php echo $purchaseitem['quantity']; ?><br/>
-                                    Gesamtpreis: <?php echo $purchaseitem['quantity'] * $purchaseitem['itemprice']; ?> €
+                                    <?php echo $purchaseItem['itemprice'] ?> € pro Artikel<br/>
+                                    Menge: <?php echo $purchaseItem['quantity']; ?><br/>
+                                    Gesamtpreis: <?php echo $purchaseItem['quantity'] * $purchaseItem['itemprice']; ?> €
                                 </div>
                             </div>
                             <?php

@@ -43,7 +43,7 @@ class ContactController extends \app\core\Controller
 			}
 			else
 			{
-				$this->_params['contacterror'] = 'Bitte alle fehlenden Felder ausfüllen!';
+				$this->_params['contactError'] = 'Bitte alle fehlenden Felder ausfüllen!';
 				
 				// Array containing information about which inputs are missing
 				$missingInformation = [];
@@ -80,18 +80,18 @@ class ContactController extends \app\core\Controller
 		$cart = Cart::find('clientid = '.$clientid);
 		if(empty($cart))
 		{
-			$this->_params['carttotalprice'] = 0;
-			$this->_params['carttotalcount'] = 0;
+			$this->_params['cartTotalPrice'] = 0;
+			$this->_params['cartTotalCount'] = 0;
 			
 		}
 		else
 		{
 			$cartid = $cart[0]['cartid'];
 			$cartitems = Cart::find('cartid ='.$cartid);
-			$carttotalprice = $cart[0]['totalprice'];
-			$carttotalcount = $cart[0]['totalcount'];
-			$this->_params['carttotalprice'] = $carttotalprice;
-			$this->_params['carttotalcount'] = $carttotalcount;
+			$cartTotalPrice = $cart[0]['totalprice'];
+			$cartTotalCount = $cart[0]['totalcount'];
+			$this->_params['cartTotalPrice'] = $cartTotalPrice;
+			$this->_params['cartTotalCount'] = $cartTotalCount;
 		}
 	}
 }

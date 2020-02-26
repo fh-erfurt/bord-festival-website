@@ -23,13 +23,13 @@ if(!isset($missing))
                 <div class="row">
                     <div class="col-lg-7 col-md-10 col-sm-12 center">
                     <?php
-                        if(isset($contacterror))
+                        if(isset($contactError))
                         {    
                         ?>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">                                
                                     <div class="alert alert-danger">
-                                        <?php echo $contacterror; ?>
+                                        <?php echo $contactError; ?>
                                     </div><br>
                                 </div>
                             </div>

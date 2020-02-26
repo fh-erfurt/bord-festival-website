@@ -54,57 +54,57 @@
                                 <div class="col-lg-4 col-sm-12 float-left">
                                     <label for="category" class="form-for">Kategorie:</label>
                                     <select class="form-control" name="category" id="category" onchange="this.form.submit()">
-                                        <?php foreach($itemcategories as $category) : ?>
-                                            <?php if(isset($selectedcategoryfilter)) : ?>
-                                            <option value="<?php echo $category['category']; ?>" <?php echo(($selectedcategoryfilter === $category['category']) ? 'selected' : ''); ?>><?php echo $category['category']; ?></option>
+                                        <?php foreach($itemCategories as $category) : ?>
+                                            <?php if(isset($selectedCategoryFilter)) : ?>
+                                            <option value="<?php echo $category['category']; ?>" <?php echo(($selectedCategoryFilter === $category['category']) ? 'selected' : ''); ?>><?php echo $category['category']; ?></option>
                                             <?php else : ?>
                                                 <option value="<?php echo $category['category']; ?>" ><?php echo $category['category']; ?></option>
                                             <?php endif; ?>
                                         <?php endforeach ?>
-                                        <option <?php echo (empty($selectedcategoryfilter) ? 'selected' : ''); ?> value> -- bitte auswählen -- </option>
+                                        <option <?php echo (empty($selectedCategoryFilter) ? 'selected' : ''); ?> value> -- bitte auswählen -- </option>
                                     </select>
                                 </div>
                                 <div class="col-lg-4 col-sm-12 float-left">
                                     <label for="gender" class="form-for">Geschlecht:</label>
                                     <select class="form-control" name="gender" id="gender" onchange="this.form.submit()">
-                                        <?php foreach($itemgender as $gender) : ?>
-                                            <?php if(isset($selectedgenderfilter)) : ?>
-                                            <option value="<?php echo $gender['gender']; ?>" <?php echo(($selectedgenderfilter === $gender['gender']) ? 'selected' : ''); ?>><?php echo $gender['gender']; ?></option>
+                                        <?php foreach($itemGender as $gender) : ?>
+                                            <?php if(isset($selectedGenderFilter)) : ?>
+                                            <option value="<?php echo $gender['gender']; ?>" <?php echo(($selectedGenderFilter === $gender['gender']) ? 'selected' : ''); ?>><?php echo $gender['gender']; ?></option>
                                             <?php else : ?>
                                                 <option value="<?php echo $gender['gender']; ?>" ><?php echo $gender['gender']; ?></option>
                                             <?php endif; ?>
                                         <?php endforeach ?>
-                                        <option <?php echo (empty($selectedgenderfilter) ? 'selected' : ''); ?> value> -- bitte auswählen -- </option>
+                                        <option <?php echo (empty($selectedGenderFilter) ? 'selected' : ''); ?> value> -- bitte auswählen -- </option>
                                     </select>
                                 </div>
                                 <div class="col-lg-4 col-sm-12 float-left">
                                     <label for="color" class="form-for">Farbe:</label>
                                     <select class="form-control" name="color" id="color" onchange="this.form.submit()">
-                                        <?php foreach($itemcolors as $color) : ?>
-                                            <?php if(isset($selectedcolorfilter)) : ?>
-                                            <option value="<?php echo $color['color']; ?>" <?php echo(($selectedcolorfilter === $color['color']) ? 'selected' : ''); ?>><?php echo $color['color']; ?></option>
+                                        <?php foreach($itemColors as $color) : ?>
+                                            <?php if(isset($selectedColorFilter)) : ?>
+                                            <option value="<?php echo $color['color']; ?>" <?php echo(($selectedColorFilter === $color['color']) ? 'selected' : ''); ?>><?php echo $color['color']; ?></option>
                                             <?php else : ?>
                                                 <option value="<?php echo $color['color']; ?>" ><?php echo $color['color']; ?></option>
                                             <?php endif; ?>
                                         <?php endforeach ?>
-                                        <option <?php echo (empty($selectedcolorfilter) ? 'selected' : ''); ?> value> -- bitte auswählen -- </option>
+                                        <option <?php echo (empty($selectedColorFilter) ? 'selected' : ''); ?> value> -- bitte auswählen -- </option>
                                     </select>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">filtern</button>
-                            <?php if (empty($selectedsort["price"])) : ?>
+                            <?php if (empty($selectedSort["price"])) : ?>
                                 <button class="btn btn-primary" type="submit" name="price" value="ASC">Preis</button>
 
                             <?php else : ?>
-                                <input type="hidden" name="price_selected" value="<?php echo $selectedsort["price"]; ?>" />
-                                <button class="btn btn-primary" type="submit" name="price" value="<?php echo $selectedsort["price"] === "ASC" ? 'DESC' : 'ASC'; ?>">Preis <?php echo $selectedsort["price"] === "ASC" ? '▾' : '▴' ?></button>
+                                <input type="hidden" name="price_selected" value="<?php echo $selectedSort["price"]; ?>" />
+                                <button class="btn btn-primary" type="submit" name="price" value="<?php echo $selectedSort["price"] === "ASC" ? 'DESC' : 'ASC'; ?>">Preis <?php echo $selectedSort["price"] === "ASC" ? '▾' : '▴' ?></button>
                             <?php endif; ?>
-                            <?php if (empty($selectedsort["name"])) : ?>
+                            <?php if (empty($selectedSort["name"])) : ?>
                                 <button class="btn btn-primary" type="submit" name="name" value="ASC">Name</button>
 
                             <?php else : ?>
-                                <input type="hidden" name="name_selected" value="<?php echo $selectedsort["name"]; ?>" />
-                                <button class="btn btn-primary" type="submit" name="name" value="<?php echo $selectedsort["name"] === "ASC" ? 'DESC' : 'ASC'; ?>">Name <?php echo $selectedsort["name"] === "ASC" ? '▾' : '▴'; ?></button>
+                                <input type="hidden" name="name_selected" value="<?php echo $selectedSort["name"]; ?>" />
+                                <button class="btn btn-primary" type="submit" name="name" value="<?php echo $selectedSort["name"] === "ASC" ? 'DESC' : 'ASC'; ?>">Name <?php echo $selectedSort["name"] === "ASC" ? '▾' : '▴'; ?></button>
                             <?php endif; ?>
                         </form>
                     <?php endif; ?>
@@ -160,9 +160,9 @@
                             <button type="button" class="btn-fixed btn-primary hide-js-disabled" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '+')">+</button>
                             </p><br>
                             <noscript>
-                                <button type="submit" class="btn btn-primary hide-js-enabled" name="additemtocart">In den Warenkorb</button>
+                                <button type="submit" class="btn btn-primary hide-js-enabled" name="addItemToCart">In den Warenkorb</button>
                             </noscript>
-                            <a class="btn btn-primary hide-js-disabled" name="additemtocart" onclick="postCartWithAjax(<?php echo $itemid; ?>, 'itemcount<?php echo $itemid; ?>')">In den Warenkorb</a>
+                            <a class="btn btn-primary hide-js-disabled" name="addItemToCart" onclick="postCartWithAjax(<?php echo $itemid; ?>, 'itemcount<?php echo $itemid; ?>')">In den Warenkorb</a>
                         </form>
                         <?php
                         }

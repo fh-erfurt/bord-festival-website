@@ -1,4 +1,5 @@
 <script type="text/javascript" src="assets/js/validate.js"></script>
+
 <?php
 if(!isset($missing))
 {
@@ -21,13 +22,13 @@ if(!isset($missing))
 			<section>
 				<h1 class="page-heading text-left">Registrierung</h1>
 				<?php
-				if(!empty($registererror))
+				if(!empty($registerError))
 				{
 					?>
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 clear-fix">
 						<div class="alert alert-danger">
-							<?php echo $registererror; ?>
+							<?php echo $registerError; ?>
 						</div>
 					</div>
 				</div>

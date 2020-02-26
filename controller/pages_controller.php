@@ -41,21 +41,21 @@ class PagesController extends \app\core\Controller
 
 		$days = floor($diff / (60 * 60 * 24));
 		$hours = floor(($diff % (60 * 60 * 24)) / (60 * 60));
-		$festivalstart = "31.07.2020 18:00";
-		$festivalende = "02.08.2020 20:00";
+		$festivalStart = "31.07.2020 18:00";
+		$festivalEnde = "02.08.2020 20:00";
 
 		if($hours <> 1)
 		{
-			$hourstext = strval($hours).' Stunden';
+			$hoursText = strval($hours).' Stunden';
 		}
 		else
 		{
-			$hourstext = strval($hours).' Stunde';
+			$hoursText = strval($hours).' Stunde';
 		}
 		$this->_params['days'] = $days;
-		$this->_params['hourstext'] = $hourstext;
-		$this->_params['festivalstart'] = $festivalstart;
-		$this->_params['festivalende'] = $festivalende;
+		$this->_params['hoursText'] = $hoursText;
+		$this->_params['festivalStart'] = $festivalStart;
+		$this->_params['festivalEnde'] = $festivalEnde;
 
 		if(isset($_POST['reg_newsletter']))
 		{
@@ -101,18 +101,18 @@ class PagesController extends \app\core\Controller
 		$cart = Cart::find('clientid = '.$clientid);
 		if(empty($cart))
 		{
-			$this->_params['carttotalprice'] = 0;
-			$this->_params['carttotalcount'] = 0;
+			$this->_params['cartTotalPrice'] = 0;
+			$this->_params['cartTotalCount'] = 0;
 			
 		}
 		else
 		{
 			$cartid = $cart[0]['cartid'];
 			$cartitems = Cart::find('cartid ='.$cartid);
-			$carttotalprice = $cart[0]['totalprice'];
-			$carttotalcount = $cart[0]['totalcount'];
-			$this->_params['carttotalprice'] = $carttotalprice;
-			$this->_params['carttotalcount'] = $carttotalcount;
+			$cartTotalPrice = $cart[0]['totalprice'];
+			$cartTotalCount = $cart[0]['totalcount'];
+			$this->_params['cartTotalPrice'] = $cartTotalPrice;
+			$this->_params['cartTotalCount'] = $cartTotalCount;
 		}
 	}
 

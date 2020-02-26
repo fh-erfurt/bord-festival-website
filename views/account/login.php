@@ -13,13 +13,13 @@ if(!isset($missing))
 			<section>
 				<h1 class="page-heading">Login</h1>
 				<?php
-				if(!empty($loginerror))
+				if(!empty($loginError))
 				{
 				?>
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 clear-fix">
 						<div class="alert alert-danger">
-							<?php echo $loginerror; ?>
+							<?php echo $loginError; ?>
 						</div>
 					</div>
 				</div>

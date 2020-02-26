@@ -104,17 +104,17 @@ if(isset($_GET['a']))
 									
 									<?php 
 										if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) :
-											if(empty($carttotalcount) || empty($carttotalprice)) :
+											if(empty($cartTotalCount) || empty($cartTotalPrice)) :
 									?>
 												<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>"
-												href="?c=order&a=shoppingcart">Warenkorb (<?php echo $carttotalcount ?>)
+												href="?c=order&a=shoppingcart">Warenkorb (<?php echo $cartTotalCount ?>)
 												</a>
 										<?php 
 											else :
 										?>							
 												<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>" ´
 												href="?c=order&a=shoppingcart">Warenkorb<div class="hide-mobile hide-medium-screen">
-												(<?php echo $carttotalcount . '): ' . $carttotalprice . '€'; ?></div>
+												(<?php echo $cartTotalCount . '): ' . $cartTotalPrice . '€'; ?></div>
 												</a>
 										<?php 
 											endif;

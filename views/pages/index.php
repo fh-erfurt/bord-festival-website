@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <noscript><?php echo $hourstext; ?></noscript>
+                    <noscript><?php echo $hoursText; ?></noscript>
                 </div>
         </section>
     </div> 

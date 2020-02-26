@@ -93,7 +93,7 @@
                                     <div class="col-lg-2 float-left text-right">
                                         <form action="index.php?c=order&a=shoppingcart" method="post">
                                             <input type="hidden" name="cartitemid" value="<?php echo $item['cartitemid']; ?>" />
-                                            <button type="submit" class="btn no-margin btn-danger" name="deleteitemfromcart">Löschen</button>
+                                            <button type="submit" class="btn no-margin btn-danger" name="deleteItemFromCart">Löschen</button>
                                         </form>                            
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                                 Gesamtpreis: <?php echo $item['quantity'] * $item['itemprice']; ?> €
                                 <form action="index.php?c=order&a=shoppingcart" method="post">
                                     <input type="hidden" name="cartitemid" value="<?php echo $item['cartitemid']; ?>" />
-                                    <button type="submit" class="btn btn-danger" name="deleteitemfromcart">Löschen</button>
+                                    <button type="submit" class="btn btn-danger" name="deleteItemFromCart">Löschen</button>
                                 </form>
                             </div>
                         </div>
@@ -141,16 +141,16 @@
                         <form method="post">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-12 float-left">
-                                    <button type="submit" class="btn no-margin btn-danger" name="deletewholecart">Warenkorb leeren</button>
+                                    <button type="submit" class="btn no-margin btn-danger" name="deleteWholeCart">Warenkorb leeren</button>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-12 float-left">
                                     <div class="float-right sm-width-100">
-                                        <div class="padding-top float-left sm-margin-top sm-margin-bottom">Summe(<?php echo $carttotalcount ?> Item(s)): <?php echo $carttotalprice ?> €</div>
-                                        <a class="btn no-margin btn-primary float-left" href="#confirmorder">Bestellen</a>
+                                        <div class="padding-top float-left sm-margin-top sm-margin-bottom">Summe(<?php echo $cartTotalCount ?> Item(s)): <?php echo $cartTotalPrice ?> €</div>
+                                        <a class="btn no-margin btn-primary float-left" href="#confirmOrder">Bestellen</a>
                                     </div>
                                 </div>
                             </div>
-                            <div id="confirmorder" class="overlay">
+                            <div id="confirmOrder" class="overlay">
                                 <div class="row">
                                     <div class="col-lg-5 col-md-8 col-sm-10 center">
                                         <div class="popup">
@@ -162,10 +162,10 @@
                                                 <div class="row no-margin-right">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 float-left clear-left">                                                    
                                                         <b>Preis</b><br>
-                                                        <?php echo $carttotalprice; ?>
+                                                        <?php echo $cartTotalPrice; ?>
                                                     </div>
                                                     <div class="col-lg-6 col-lg-6 col-sm-6 float-left">
-                                                        <button type="submit" class="btn btn-primary no-margin float-right" name="buycart">Bestätigen</button>
+                                                        <button type="submit" class="btn btn-primary no-margin float-right" name="buyCart">Bestätigen</button>
                                                     </div>
                                                 </div>
                                             </div>

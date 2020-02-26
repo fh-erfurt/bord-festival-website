@@ -62,14 +62,14 @@ class AccountController extends \app\core\Controller
         
                             $address->save();
         
-                            $hashedpassword = password_hash($password1 , PASSWORD_BCRYPT);
+                            $hashedPassword = password_hash($password1 , PASSWORD_BCRYPT);
         
                             $clientdata = [						
                                 'mail' 			=> $mail,
                                 'firstname'		=> $firstname,
                                 'lastname' 		=> $lastname,
                                 'dateofbirth'	=> $dateofbirth,
-                                'password' 		=> $hashedpassword,
+                                'password' 		=> $hashedPassword,
                                 'createdat' 	=> date("Y-m-d H:i:s"),
                                 'updatedat' 	=> date("Y-m-d H:i:s"),
                                 'addressid' 	=> $address->schema['addressid']
@@ -87,12 +87,12 @@ class AccountController extends \app\core\Controller
                         else
                         {
                             $_SESSION['loggedIn'] = false;
-                            $this->_params['registererror'] = 'Die Passwörter stimmen nicht überein.';
+                            $this->_params['registerError'] = 'Die Passwörter stimmen nicht überein.';
                         }
                     }
                     else
                     {
-                        $this->_params['registererror'] = 'Diese E-Mail-Adresse ist bereits registriert.
+                        $this->_params['registerError'] = 'Diese E-Mail-Adresse ist bereits registriert.
                         Du kannst dich <a href="index.php?c=account&a=login" class="link">hier</a> einloggen.';
                         
                     }
@@ -101,20 +101,20 @@ class AccountController extends \app\core\Controller
                 {
                     $missingInformation = [];
 
-                    $missingInformation['mail'] 		= $_POST['mail'] != null ? false : true;
-                    $missingInformation['password1'] 	= $_POST['password1'] != null ? false : true;
-                    $missingInformation['password2']	= $_POST['password2'] != null ? false : true;
-                    $missingInformation['dateofbirth'] 	= $_POST['dateofbirth'] != null ? false : true;
-                    $missingInformation['firstname'] 	= $_POST['firstname'] != null ? false : true;
-                    $missingInformation['lastname'] 	= $_POST['lastname'] != null ? false : true;
-                    $missingInformation['street']		= $_POST['street'] != null ? false : true;
-                    $missingInformation['zip'] 			= $_POST['zip'] != null ? false : true;
-                    $missingInformation['city'] 		= $_POST['city'] != null ? false : true;
-                    $missingInformation['country'] 		= $_POST['country'] != null ? false : true;
+                    $missingInformation['mail'] 		= $mail != null ? false : true;
+                    $missingInformation['password1'] 	= $password1 != null ? false : true;
+                    $missingInformation['password2']	= $password2 != null ? false : true;
+                    $missingInformation['dateofbirth'] 	= $dateofbirth != null ? false : true;
+                    $missingInformation['firstname'] 	= $firstname != null ? false : true;
+                    $missingInformation['lastname'] 	= $lastname != null ? false : true;
+                    $missingInformation['street']		= $street != null ? false : true;
+                    $missingInformation['zip'] 			= $zip != null ? false : true;
+                    $missingInformation['city'] 		= $city != null ? false : true;
+                    $missingInformation['country'] 		= $country != null ? false : true;
                     
                     $this->_params['missing'] = $missingInformation;
 
-                    $this->_params['registererror'] = "Bitte alle fehlenden Felder ausfüllen!";
+                    $this->_params['registerError'] = "Bitte alle fehlenden Felder ausfüllen!";
                 }
             }
         }
@@ -158,12 +158,12 @@ class AccountController extends \app\core\Controller
                         }
                         else 
                         {
-                            $this->_params['loginerror'] = 'E-Mail und Passwort stimmen nicht überein';
+                            $this->_params['loginError'] = 'E-Mail und Passwort stimmen nicht überein';
                         }
                     }
                     else
                     {
-                        $this->_params['loginerror'] = 'E-Mail und Passwort stimmen nicht überein';
+                        $this->_params['loginError'] = 'E-Mail und Passwort stimmen nicht überein';
                     }
                 }
                 else
@@ -174,7 +174,7 @@ class AccountController extends \app\core\Controller
                     $missingInformation['password'] = $password != null ? false : true;
 
                     $this->_params['missing'] = $missingInformation;
-                    $this->_params['loginerror'] = 'Bitte E-Mail und Passwort eingeben!';
+                    $this->_params['loginError'] = 'Bitte E-Mail und Passwort eingeben!';
                 }
             }
         }
@@ -213,7 +213,7 @@ class AccountController extends \app\core\Controller
 
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true)
         {
-            if(!isset($_POST['updateaccount']))
+            if(!isset($_POST['updateAccount']))
             {
                 $this->_params['mail']          = $client[0]['mail'];
                 $this->_params['firstname']     = $client[0]['firstname'];
@@ -291,7 +291,7 @@ class AccountController extends \app\core\Controller
                         $this->_params['city']        = $city;
                         $this->_params['country']     = $country;
 
-                        $this->_params['updateerror'] = "Passwort nicht korrekt!";
+                        $this->_params['updateError'] = "Passwort nicht korrekt!";
                     }
                 }
                 else
@@ -318,7 +318,7 @@ class AccountController extends \app\core\Controller
                     
                     $this->_params['missing'] = $missingInformation;
 
-                    $this->_params['updateerror'] = "Bitte alle fehlenden Felder ausfüllen!";
+                    $this->_params['updateError'] = "Bitte alle fehlenden Felder ausfüllen!";
                 }
             }
 
@@ -326,27 +326,27 @@ class AccountController extends \app\core\Controller
 
             if(!empty($purchases))
             {
-                $purchasehistory = [];
+                $purchaseHistory = [];
 
                 foreach($purchases as $purchase)
                 {
                     $purchaseid = $purchase['purchaseid'];
                     $purchasedat = $purchase['purchasedat'];
                     
-                    $purchaseitems = Purchaseitem::find('purchaseid = '.$purchaseid);
+                    $purchaseItems = Purchaseitem::find('purchaseid = '.$purchaseid);
     
                     $iteminfo = [];
                     $totalprice = 0;
     
-                    foreach($purchaseitems as $purchaseitem)
+                    foreach($purchaseItems as $purchaseItem)
                     {
-                        $itemid = $purchaseitem['itemid'];
+                        $itemid = $purchaseItem['itemid'];
                         $item = Item::find('itemid = '.$itemid);
     
                         $itemname = $item[0]['name'];
                         $itemdescription = $item[0]['description'];
-                        $quantity = $purchaseitem['quantity'];
-                        $price = $purchaseitem['price'];
+                        $quantity = $purchaseItem['quantity'];
+                        $price = $purchaseItem['price'];
                         $imageurl = $item[0]['imageurl'];
     
                         $iteminfo[] = [
@@ -360,25 +360,19 @@ class AccountController extends \app\core\Controller
 
                     }
 
-                    $purchasehistory[] = [
+                    $purchaseHistory[] = [
                         'purchasedat'   =>  $purchasedat,
                         'totalprice'    =>  $totalprice,
                         'iteminfo'      =>  $iteminfo
                     ];
 
                 }
-                //die(var_dump($purchasehistory));
-
-                $this->_params['purchasehistory'] = $purchasehistory;
+                $this->_params['purchaseHistory'] = $purchaseHistory;
             }
         }
         else
         {
             header('Location: index.php?c=pages&a=error404');
-        }
-
-        if(isset($_POST['updateaccount']))
-        {
         }
     }
 
@@ -396,18 +390,18 @@ class AccountController extends \app\core\Controller
 		$cart = Cart::find('clientid = '.$clientid);
 		if(empty($cart))
 		{
-			$this->_params['carttotalprice'] = 0;
-			$this->_params['carttotalcount'] = 0;
+			$this->_params['cartTotalPrice'] = 0;
+			$this->_params['cartTotalCount'] = 0;
 			
 		}
 		else
 		{
 			$cartid = $cart[0]['cartid'];
 			$cartitems = Cart::find('cartid ='.$cartid);
-			$carttotalprice = $cart[0]['totalprice'];
-			$carttotalcount = $cart[0]['totalcount'];
-			$this->_params['carttotalprice'] = $carttotalprice;
-			$this->_params['carttotalcount'] = $carttotalcount;
+			$cartTotalPrice = $cart[0]['totalprice'];
+			$cartTotalCount = $cart[0]['totalcount'];
+			$this->_params['cartTotalPrice'] = $cartTotalPrice;
+			$this->_params['cartTotalCount'] = $cartTotalCount;
 		}
 	}
 }
