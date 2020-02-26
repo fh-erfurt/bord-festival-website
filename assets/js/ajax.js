@@ -1,20 +1,3 @@
-// function ajaxPost() {
-//     var newName = 'John Smith',
-//         xhr = new XMLHttpRequest();
-
-//     xhr.open('POST', 'index.php?c=order&a=shop&t=tickets');
-//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//     xhr.onload = function() {
-//         if (xhr.status === 200 && xhr.responseText !== newName) {
-//             alert('Something went wrong.  Name is now ' + xhr.responseText);
-//         }
-//         else if (xhr.status !== 200) {
-//             alert('Request failed.  Returned status of ' + xhr.status);
-//         }
-//     };
-//     xhr.send(encodeURI('name=' + newName));
-// }
-
 // Hide shoppingcart-buttons for normal PHP-Posting when JavaScript is working
 window.onload = function () {
     var elementsToHide = document.getElementsByClassName("hide-js-enabled");
@@ -55,9 +38,12 @@ function postCartWithAjax(itemid, itemcountelement) {
     setTimeout(function() {getCalculatedCart()}, 300 );
     return xhr;
 }
+
+// hide/show messages for added cartitems
 function fadeIn(element) {
     element.style.position = 'relative';
     element.style.visibility = 'visible';
+    element.style.marginLeft = 'inherit';
     element.style.opacity = 1;
     setTimeout(function() {fadeOut(element)}, 5000 );
 }
@@ -70,6 +56,7 @@ function hide(element) {
     element.style.position = 'absolute';
 }
 
+// Calculate Cart dynamically with AJAX when items got added to the cart
 function getCalculatedCart() {
     var url = 'index.php?c=order&a=shop&t=tickets&calculatecart=true&json=true';
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -91,54 +78,3 @@ function getCalculatedCart() {
     xhr.send();
     return xhr;
 }
-
-// example request
-//postAjax('http://foo.bar/', 'p1=1&p2=Hello+World', function(data){ console.log(data); });
-/*
-document.addEventListener('DOMContentLoaded', function(){
-    event.stopPropagation(); // no send to the top element
-    event.preventDefault(); // no default action on submit
-
-    var request = new XMLHttpRequest();
-    request.open('get', '?json=1', true);
-
-    request.onreadystatechange = function() {
-        // request finished?
-        if(this.readyState == 4) // XMLHttpRequest.DONE
-        {
-            // HTTP-Status-Code is OK?
-            if(this.status == 200)
-            {
-                var resJson = null;
-                try
-                {
-                    resJson = JSON.parse(this.response);
-                    console.log(resJson);
-                }
-                catch(err)
-                {
-
-                    console.log(error);
-                }
-                
-                if(resJson !== null)
-                {
-                    if(resJson.error !== null)
-                    {
-                        console.log(error);
-                    }
-                    else
-                    {
-                        errorBox.style.display = 'none';
-                    }
-                }
-            }
-            else
-            {
-                console.log(this.statusText);
-            }
-        }
-    }
-});
-
-*/

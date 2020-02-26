@@ -36,13 +36,13 @@
                 }
                 ?>
                 
-                <div class="alert alert-success" id="ajaxsuccess">
+                <div class="alert alert-success hide-js-disabled" id="ajaxsuccess">
                     Der Artikel wurde erfolgreich dem Warenkorb hinzugefügt
                 </div>
-                <div class="alert alert-danger" id="ajaxerror">
+                <div class="alert alert-danger hide-js-disabled" id="ajaxerror">
                     Es gab einen Fehler beim Hinzufügen zum Warenkorb. Bitte versuch es erneut oder kontaktiere uns!
                 </div>
-                <div class="alert alert-warning" id="ajaxwarning">
+                <div class="alert alert-warning hide-js-disabled" id="ajaxwarning">
                     Bitte einen oder mehrere Artikel angeben!
                 </div>
                 <br/>

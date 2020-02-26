@@ -261,6 +261,7 @@ p.text {
 #ajaxsuccess, #ajaxerror, #ajaxwarning {
     position: absolute;
     visibility: hidden;
+    margin-left: -9999px;
     opacity: 0;
     -webkit-transition: opacity 600ms, visibility 600ms;
     transition: opacity 600ms, visibility 600ms;
