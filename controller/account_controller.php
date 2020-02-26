@@ -90,7 +90,7 @@ class AccountController extends \app\core\Controller
                     else
                     {
                         $this->_params['registererror'] = 'Diese E-Mail-Adresse ist bereits registriert.
-                        Du kannst dich <a href="index.php?a=login" class="link">hier</a> einloggen.';
+                        Du kannst dich <a href="index.php?c=account&a=login" class="link">hier</a> einloggen.';
                         
                     }
                 }
@@ -147,7 +147,7 @@ class AccountController extends \app\core\Controller
                         {
                             $_SESSION['loggedIn'] = true;
                             $_SESSION['client_mail'] = $mail;
-                            $_session['client_id'] = $userdata['clientid'];
+                            $_SESSION['client_id'] = $userdata['clientid'];
 
                             header('Location: index.php');
 
