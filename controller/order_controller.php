@@ -387,9 +387,10 @@ class OrderController extends \app\core\Controller
 			$clientid = $_SESSION['client_id'];
 			$itemid = $_POST['itemid'] ?? null;
 			$itemcount = $_POST['itemcount'] ?? null;
+			$itemcountint = (int)$itemcount ?? null;
 
 			$success = 0;
-			if($itemcount !== '0')
+			if(!empty($itemcountint) && $itemcountint > 0)
 			{
 				if($itemid !== null && $itemcount !== null)
 				{
