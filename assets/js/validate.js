@@ -59,6 +59,7 @@ function validateRegister() {
     validateInput('InputStreet');
     validateInput('InputZip');
     validateInput('InputCity');
+    validateInput('InputCountry');
 
     var result = toggleSubmitButton();
     return result;
