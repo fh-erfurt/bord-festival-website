@@ -31,6 +31,22 @@ class OrderController extends \app\core\Controller
 {
 	public function actionShop()
 	{
+		$json = false;
+		if(isset($_GET['json']) && ($_GET['json']) === "true")
+		{
+			$json = true;
+			if(isset($_GET['addtocart']) && ($_GET['addtocart']) === "true")
+			{
+				self::addItemsToCart($json);
+			}
+			if(isset($_GET['calculatecart']) && ($_GET['calculatecart']) === "true")
+			{
+				$clientid = $_SESSION['client_id'];
+				self::CalculateCart($clientid, $json);
+			}
+		}
+		else
+		{
 		if(isset($_GET['t']))
 		{
 			$type = $_GET['t'];
@@ -91,82 +107,9 @@ class OrderController extends \app\core\Controller
 
 		if(isset($_POST['additemtocart']))
 		{
-			if(isset($_SESSION['client_id']))
-			{
-				$clientid = $_SESSION['client_id'];
-				$itemid = $_POST['itemid'] ?? null;
-				$itemcount = $_POST['itemcount'] ?? null;
-	
-				$success = 0;
-				if($itemcount !== '0')
-				{
-					if($itemid !== null && $itemcount !== null)
-					{
-						$cart = Cart::find('clientid = '.$clientid);
-						$cartid = 0;
-						$oldtotalprice = 0;
-
-						if(empty($cart))
-						{
-							$tmpcart = self::intizialiseCart($clientid);
-							$cartid = $tmpcart->schema['cartid'];
-							$oldtotalprice = $tmpcart->schema['totalprice'];
-						}
-						else
-						{
-							$cartid = $cart[0]['cartid'];
-							$oldtotalprice = $cart[0]['totalprice'];
-						}
-
-						$cartitem = Cartitem::find('cartid = '.$cartid.' AND itemid = '.$itemid);
-
-						if(empty($cartitem))
-						{
-							$cartitemdata = [
-								'cartid'			=> $cartid,
-								'itemid'  			=> $itemid,
-								'quantity' 			=> $itemcount
-							];
-						}
-						else
-						{
-							$olditemcount = $cartitem[0]['quantity'];
-							$newitemcount = $olditemcount + $itemcount;
-							$cartitemdata = [
-								'cartitemid'		=> $cartitem[0]['cartitemid'],
-								'cartid'			=> $cartid,
-								'itemid'  			=> $itemid,
-								'quantity' 			=> $newitemcount
-							];
-
-						}
-						$newcartitem = new Cartitem($cartitemdata);
-						$newcartitem->save();
-
-						//update total
-						self::updateCart($cartid, $clientid);
-
-						$this->_params['updatedcartsuccess'] = true;
-						$success = 1;
-					}
-					else
-					{
-						$this->_params['updatedcartsuccess'] = false;
-						$success = 0;
-					}
-				}
-				else
-				{
-					$this->_params['updatedcartsuccess'] = false;
-					$success = 2;
-				}
-				// PRG (Post-Redirect-Get) Pattern to allow page reloading after using a form
-				http_response_code( 303 );
-				header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
-				exit();
-			}
-
+			self::addItemsToCart($json);
 		}
+	}
     }
     
     public function intizialiseCart($clientid)
@@ -375,37 +318,6 @@ class OrderController extends \app\core\Controller
 
 		$changedcart = new Cart($changedcartdata);
 		$changedcart->save();
-
-		/*
-		$item = Item::find('ITEMID = '.$itemid);
-		$itemprice = $item[0]['PRICE'];
-
-		$addedprice = $itemprice * $itemcount;
-
-		if($operator === '+')
-		{
-			$totalprice = $oldtotalprice + $addedprice;
-
-		}
-		else if($operator === '-')
-		{
-			$totalprice = $oldtotalprice - $addedprice;
-		}
-		else
-		{
-
-		}
-
-		$changedcartdata = [
-			'CARTID'		=> $cartid,
-			'TOTALPRICE'	=> $totalprice,
-			'LASTUPDATED'	=> date("Y-m-d H:i:s"),
-			'CLIENTID' 		=> $clientid
-		];
-
-		$changedcart = new Cart($changedcartdata);
-		$changedcart->save();
-		*/
 	}
 
 
@@ -441,7 +353,7 @@ class OrderController extends \app\core\Controller
 		}
 	}
 
-	private function CalculateCart($clientid)
+	private function CalculateCart($clientid, $json = false)
 	{
 		$cart = Cart::find('clientid = '.$clientid);
 		if(empty($cart))
@@ -459,17 +371,109 @@ class OrderController extends \app\core\Controller
 			$this->_params['carttotalprice'] = $carttotalprice;
 			$this->_params['carttotalcount'] = $carttotalcount;
 		}
+
+		if($json)
+		{
+			$output['carttotalprice'] = $this->_params['carttotalprice'];
+			$output['carttotalcount'] = $this->_params['carttotalcount'];
+			echo json_encode($output);
+		}
 	} 
+
+	private function addItemsToCart($json = false)
+	{
+		if(isset($_SESSION['client_id']))
+		{
+			$clientid = $_SESSION['client_id'];
+			$itemid = $_POST['itemid'] ?? null;
+			$itemcount = $_POST['itemcount'] ?? null;
+
+			$success = 0;
+			if($itemcount !== '0')
+			{
+				if($itemid !== null && $itemcount !== null)
+				{
+					$cart = Cart::find('clientid = '.$clientid);
+					$cartid = 0;
+					$oldtotalprice = 0;
+
+					if(empty($cart))
+					{
+						$tmpcart = self::intizialiseCart($clientid);
+						$cartid = $tmpcart->schema['cartid'];
+						$oldtotalprice = $tmpcart->schema['totalprice'];
+					}
+					else
+					{
+						$cartid = $cart[0]['cartid'];
+						$oldtotalprice = $cart[0]['totalprice'];
+					}
+
+					$cartitem = Cartitem::find('cartid = '.$cartid.' AND itemid = '.$itemid);
+
+					if(empty($cartitem))
+					{
+						$cartitemdata = [
+							'cartid'			=> $cartid,
+							'itemid'  			=> $itemid,
+							'quantity' 			=> $itemcount
+						];
+					}
+					else
+					{
+						$olditemcount = $cartitem[0]['quantity'];
+						$newitemcount = $olditemcount + $itemcount;
+						$cartitemdata = [
+							'cartitemid'		=> $cartitem[0]['cartitemid'],
+							'cartid'			=> $cartid,
+							'itemid'  			=> $itemid,
+							'quantity' 			=> $newitemcount
+						];
+
+					}
+					$newcartitem = new Cartitem($cartitemdata);
+					$newcartitem->save();
+
+					//update total
+					self::updateCart($cartid, $clientid);
+
+					$this->_params['updatedcartsuccess'] = true;
+					$success = 1;
+				}
+				else
+				{
+					$this->_params['updatedcartsuccess'] = false;
+					$success = 0;
+				}
+			}
+			else
+			{
+				$this->_params['updatedcartsuccess'] = false;
+				$success = 2;
+			}
+			if($json)
+			{
+				echo $success;
+			}
+			else
+			{
+				// PRG (Post-Redirect-Get) Pattern to allow page reloading after using a form
+				http_response_code( 303 );
+				header( "Location: {$_SERVER['REQUEST_URI']}&success=".$success ); 
+				exit();
+			}
+		}
+		else 
+		{
+			echo 'no session id';
+		}
+
+	}
 	
 	private function AddFilter($field, $filtername, $usesort = false, $getselectedsort = false)
 	{
 		$result = '';
-		// echo $field;
-		// echo $_POST['category'];
-		// echo $_POST[$field];
-		//var_dump($field);
 		$param = null;
-
 
 		if(isset($_POST[$field]))
 		{

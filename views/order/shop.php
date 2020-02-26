@@ -1,4 +1,5 @@
 <script type="text/javascript" src="assets/js/changeItemcount.js"></script>
+<script type="text/javascript" src="assets/js/ajax.js"></script>
 
 <div class="background-black">
     <div class="row">
@@ -20,20 +21,30 @@
                     {
                         ?>        
                         <div class="alert alert-danger">
-                            Es gab einen Fehler beim Hinzufügen zum Warenkorb. Bitte kontaktiere uns!
+                            Es gab einen Fehler beim Hinzufügen zum Warenkorb. Bitte versuch es erneut oder kontaktiere uns!
                         </div>
                         <?php
                     }
                     else if($_GET['success'] === "2")
                     {
                         ?>        
-                        <div class="alert alert-danger">
+                        <div class="alert alert-warning">
                             Bitte einen oder mehrere Artikel angeben!
                         </div>
                         <?php
                     }
                 }
                 ?>
+                
+                <div class="alert alert-success" id="ajaxsuccess">
+                    Der Artikel wurde erfolgreich dem Warenkorb hinzugefügt
+                </div>
+                <div class="alert alert-danger" id="ajaxerror">
+                    Es gab einen Fehler beim Hinzufügen zum Warenkorb. Bitte versuch es erneut oder kontaktiere uns!
+                </div>
+                <div class="alert alert-warning" id="ajaxwarning">
+                    Bitte einen oder mehrere Artikel angeben!
+                </div>
                 <br/>
                 <?php if(isset($_GET['t'])) : ?>
                     <?php $type = $_GET['t']; ?>
@@ -144,11 +155,14 @@
                             <input type="hidden" name="itemid" value="<?php echo $itemid; ?>" />
                             <p>Preis: <?php echo $item['price']; ?> €</p>
                             <p>Anzahl: 
-                            <button type="button" class="btn-fixed btn-primary no-script" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '-')">-</button>
+                            <button type="button" class="btn-fixed btn-primary hide-js-disabled" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '-')">-</button>
                             <input type="text" id="itemcount<?php echo $itemid; ?>" class="input-inline input-itemcount" name="itemcount" value="1">
-                            <button type="button" class="btn-fixed btn-primary no-script" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '+')">+</button>
+                            <button type="button" class="btn-fixed btn-primary hide-js-disabled" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '+')">+</button>
                             </p><br>
-                            <button type="submit" class="btn btn-primary" name="additemtocart">In den Warenkorb</button>
+                            <noscript>
+                                <button type="submit" class="btn btn-primary hide-js-enabled" name="additemtocart">In den Warenkorb</button>
+                            </noscript>
+                            <a class="btn btn-primary hide-js-disabled" name="additemtocart" onclick="postCartWithAjax(<?php echo $itemid; ?>, 'itemcount<?php echo $itemid; ?>')">In den Warenkorb</a>
                         </form>
                         <?php
                         }

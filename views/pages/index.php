@@ -17,7 +17,7 @@
             <div class="center">
                 <div class="countdown" id="countdown-days"><?php echo $days; ?> Tage</div>
                 <div class="countdown" id="countdown-time">
-                    <div class="no-script">
+                    <div class="hide-js-disabled">
                         <div class="spinner center">
                             <div class="rect1"></div>
                             <div class="rect2"></div>

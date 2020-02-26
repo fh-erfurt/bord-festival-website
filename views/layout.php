@@ -8,7 +8,14 @@ if(isset($_GET['a']))
 		$activeType = $_GET['t'];
 	}
 }
+    $isJSON = false;
+    if(isset($_GET['json']) && $_GET['json'] === "true")
+    {
+        $isJSON = true;
+    }
 ?>
+<?php if($isJSON === true): ?>
+<?php else : ?>
 
 <html>
 	<head>
@@ -24,7 +31,7 @@ if(isset($_GET['a']))
 		<meta name="viewport" content="initial-scale=1.0,width=device-width" />
 		<noscript>
 			<style>
-				.no-script {display:none;}
+				.hide-js-disabled {display:none;}
 			</style>
 		</noscript>
 	</head>
@@ -136,3 +143,4 @@ if(isset($_GET['a']))
 		</footer>
 	</body>
 </html>
+<?php endif ?>
