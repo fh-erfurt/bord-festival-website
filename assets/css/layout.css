@@ -145,7 +145,7 @@ nav ul li a:hover {
     display: inline;
 }
 
-.show-mobile {
+.show-mobile, .show-mobile-inline {
     display: none;
 }
 
@@ -315,6 +315,12 @@ p.text {
     .show-mobile {
         display: block;
     }
+    .show-mobile-inline {
+        display: inline;
+    }
+    img.show-mobile-inline {
+        margin-bottom: -3px;
+    }
     .sm-width-100 {
         width: 100%;
     }
@@ -334,6 +340,12 @@ p.text {
     }
     .bord-banner {
         content: url(../img/bord_banner_mini.png) !important;
+    }
+    header {
+        height: 70px;
+    }
+    .nav-menu {
+        margin-top: 0;
     }
 }
 

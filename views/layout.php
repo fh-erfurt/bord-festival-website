@@ -49,7 +49,7 @@ if(isset($_GET['a']))
 									</a>
 								</div>
 								<div class="col-lg-10 col-md-10 col-sm-12 float-left nav-menu">
-									<a class="nav-link<?php echo ($activeAction === 'index' || $activeAction === '' ? ' nav-link-active' : ''); ?>" href="?c=pages&a=index">Startseite</a>
+									<a class="nav-link<?php echo ($activeAction === 'index' || $activeAction === '' ? ' nav-link-active' : ''); ?>" href="?c=pages&a=index">Start<span class="hide-mobile">seite</span></a>
 									<div class="dropdown">
 										<a href='#' class="nav-link<?php echo ($activeAction === 'shop' ? ' nav-link-active' : ''); ?>">
 											<div>Shop <div class="dropdown-icons">
@@ -106,7 +106,7 @@ if(isset($_GET['a']))
 									<?php 
 										if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && isset($_SESSION['client_id'])) : ?>
 										<a class="nav-link<?php echo ($activeAction === 'shoppingcart' ? ' nav-link-active' : ''); ?>"
-											href="?c=order&a=shoppingcart">Warenkorb (<span id="carttotalcount" class="display-inline"><?php echo $cartTotalCount ?></span>)<span id="hide-empty-cart" class="<?php echo(empty($cartTotalCount) ? 'display-none' : ''); ?>"><span class="hide-mobile hide-medium-screen display-inline">:
+											href="?c=order&a=shoppingcart"><span class="hide-mobile">Warenkorb</span><img class="show-mobile-inline" src="assets/img/shoppingcart.png">(<span id="carttotalcount" class="display-inline"><?php echo $cartTotalCount ?></span>)<span id="hide-empty-cart" class="<?php echo(empty($cartTotalCount) ? 'display-none' : ''); ?>"><span class="hide-mobile hide-medium-screen display-inline">:
 												<span id="carttotalprice" class="display-inline"> <?php echo $cartTotalPrice ?><span> €
 											</span></span>
 										</a>
