@@ -463,11 +463,6 @@ class OrderController extends \app\core\Controller
 				exit();
 			}
 		}
-		else 
-		{
-			echo 'no session id';
-		}
-
 	}
 	
 	private function AddFilter($field, $filtername, $usesort = false, $getselectedSort = false)

@@ -24,7 +24,6 @@
                             <div class="rect3"></div>
                             <div class="rect4"></div>
                             <div class="rect5"></div>
-                            </div>
                         </div>
                     </div>
                     <noscript><?php echo $hoursText; ?></noscript>
