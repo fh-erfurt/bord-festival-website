@@ -198,6 +198,12 @@ main {}
     text-align: right;
 }
 
+.text-left {
+    text-align: left;
+}
+p.text {
+    line-height: 25px;
+}
 .festival-logo {
     font-size: 40px;
 }

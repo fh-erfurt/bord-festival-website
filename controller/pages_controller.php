@@ -115,4 +115,9 @@ class PagesController extends \app\core\Controller
 			$this->_params['carttotalcount'] = $carttotalcount;
 		}
 	}
+
+	public function actionImpressum()
+	{
+		$title = "Impressum - BORD-Festival";
+	}
 }

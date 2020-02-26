@@ -16,7 +16,7 @@ if(!isset($missing))
 <div class="background-black">
     <div class="row">
         <div class="col-lg-8 col-md-10 col-sm-10 clear-fix center">
-            <h class="page-heading">Mein Account</h>
+            <h1 class="page-heading">Mein Account</h1>
             <section>
                 <?php
                 if(!empty($updateerror))
