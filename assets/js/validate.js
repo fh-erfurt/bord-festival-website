@@ -96,3 +96,10 @@ function validateContact() {
     var result = toggleSubmitButton();
     return result;
 }
+
+function validateNewsletter() {
+    validateInput('InputEmail', 'mail');
+
+    var result = toggleSubmitButton();
+    return result;
+}

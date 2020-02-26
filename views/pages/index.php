@@ -1,4 +1,10 @@
 <script type="text/javascript" src="assets/js/countdown.js"></script>
+<script type="text/javascript" src="assets/js/validate.js"></script>
+
+<?php
+    if(!isset($valid))
+        $valid = true;
+?>
 <div class="row">
     <div class="bord-banner"></div>
     <div class="col-lg-12 col-md-12 col-sm-12 center">
@@ -30,15 +36,17 @@
     <div class="row">
         <div class="newsletter-form">
             <section>
-                <form method="post">
+                <form method="post" onsubmit="return validateNewsletter();">
                     <div class="col-lg-4 col-md-4 col-sm-12 float-left">
                         <label for="InputEmail" class="newsletter-label">In den Newsletter eintragen:</label>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 float-left">
-                        <input id="InputEmail" class="form-control" type="email" name="email" placeholder="E-Mail">
+                        <input id="InputEmail" class="form-control <?php echo ($valid === true) ? '' : 'text-validate-red' ?>"
+                            type="email" name="email" placeholder="E-Mail" onfocusout="validateInput(this.id)">
+                        <div id="InputEmail-error" class="validation-helptext <?php echo(($valid === false) ? 'display-show' : 'display-none'); ?>">Bitte geben sie eine valide E-Mail an.</div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 float-left">
-                        <button type="submit" class="btn btn-primary sm-margin-top float-left" name="reg_newsletter">Newsletter abonnieren</button>
+                        <button id="buttonSubmit" type="submit" class="btn btn-primary sm-margin-top float-left" name="reg_newsletter">Newsletter abonnieren</button>
                     </div>
                 </form>
             </section>

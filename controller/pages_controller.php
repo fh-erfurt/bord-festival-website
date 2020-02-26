@@ -9,6 +9,7 @@ use Cartitem;
 use Support_mail;
 use Purchase;
 use Purchaseitem;
+use Newsletter;
 
 
 require_once 'model/user.class.php';
@@ -19,6 +20,8 @@ require_once 'model/cartitem.class.php';
 require_once 'model/support_mail.class.php';
 require_once 'model/purchase.class.php';
 require_once 'model/purchaseitem.class.php';
+require_once 'model/newsletter.class.php';
+
 
 
 class PagesController extends \app\core\Controller
@@ -54,6 +57,29 @@ class PagesController extends \app\core\Controller
 		$this->_params['festivalstart'] = $festivalstart;
 		$this->_params['festivalende'] = $festivalende;
 
+		if(isset($_POST['reg_newsletter']))
+		{
+			$mail = $_POST['email'] ?? null;
+
+			if($mail != null)
+			{
+				$mail = $_POST['email'];
+	
+				$newsletterMailData = [
+					'mail' 		=> $mail,
+					'createdat' => date("Y-m-d H:i:s")
+				];
+	
+				$newsletterMail = new Newsletter($newsletterMailData);
+				$newsletterMail->save();
+
+				$this->_params['valid'] = true;
+			}
+			else
+			{
+				$this->_params['valid'] = false;	
+			}
+		}
 	}
 
 	public function actionError404()
