@@ -12,10 +12,7 @@ if(!isset($missing))
 		<div class="col-lg-4 col-md-6 col-sm-12 center clear-fix">
 			<section>
 				<h1 class="page-heading">Login</h1>
-				<?php
-				if(!empty($loginError))
-				{
-				?>
+				<?php if(!empty($loginError)) : ?>
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 clear-fix">
 						<div class="alert alert-danger">
@@ -23,9 +20,7 @@ if(!isset($missing))
 						</div>
 					</div>
 				</div>
-				<?php
-				}
-				?>
+				<?php endif; ?>
 				<form method="post" onsubmit="return validateLogin();">
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12">

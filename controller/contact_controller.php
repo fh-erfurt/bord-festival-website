@@ -10,6 +10,7 @@ require_once 'model/cart.class.php';
 
 class ContactController extends \app\core\Controller
 {
+	// saving contact-requests from users
 	public function actionContact()
 	{
 		$title = "Kontakt - BORD-Festival";
@@ -66,6 +67,7 @@ class ContactController extends \app\core\Controller
 		$this->_params['title'] = $title;
     }
     
+	// Get ClientId to calculate the Cart in menu
 	public function actionNavbar()
 	{
 		if(isset($_SESSION['client_id']))
@@ -75,6 +77,7 @@ class ContactController extends \app\core\Controller
 		}
 	}
 
+	// calculate the cart
 	private function CalculateCart($clientid)
 	{
 		$cart = Cart::find('clientid = '.$clientid);

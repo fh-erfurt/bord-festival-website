@@ -18,10 +18,7 @@ if(!isset($missing))
         <div class="col-lg-8 col-md-10 col-sm-10 clear-fix center">
             <h1 class="page-heading">Mein Account</h1>
             <section>
-                <?php
-                if(!empty($updateError))
-                {
-                ?>
+                <?php if(!empty($updateError)) : ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-8 col-sm-12 center">
                         <div class="alert alert-danger">
@@ -29,9 +26,7 @@ if(!isset($missing))
                         </div>
                     </div>
                 </div>
-                <?php
-                }
-                ?>
+                <?php endif; ?>
                 <div class="accountdata">
                     <form action="index.php?c=account&a=profile" method="post" onsubmit="return validateProfile();">
                         <div class="row">
@@ -147,14 +142,12 @@ if(!isset($missing))
                             <h1 class="page-heading">Meine Bestellhistorie</h1> 
                         </div>
                     </div>
-                    <?php 
-                    if(!empty($purchaseHistory))
-                    {
-                        foreach($purchaseHistory as $purchase)
-                        {
-                            $i = 0;
-                            $purchasedat = $purchase['purchasedat'];
-                            $totalprice = $purchase['totalprice'];
+                    <?php if(!empty($purchaseHistory)) : ?>
+                        <?php foreach($purchaseHistory as $purchase) : ?>
+                            <?php
+                                $i = 0;
+                                $purchasedat = $purchase['purchasedat'];
+                                $totalprice = $purchase['totalprice'];
                             ?>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -172,55 +165,36 @@ if(!isset($missing))
                                             </div>
                                         </div>
                                         <div class="row order-content clear-left">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 clear-left">
-    
-                            <?php 
-                            foreach($purchase['iteminfo'] as $purchaseItem)
-                            {
-                                if($i > 0)
-                                {
-                                    ?>
-                            <div class="border-top clear-left">
-                                    <?php
-                                }
-                                else
-                                {
-                                    ?>
-                                        <div class="overflow">
-                                    <?php
-                                }
-                                ?>
-                                <div class="float-left item-image-mini">
-                                    <img class="" src="<?php echo $purchaseItem['imageurl']; ?>" />
-                                </div>
-                                <div class="float-left item-details-mini">
-                                    <h4 class="item-name"><?php echo $purchaseItem['name']; ?></h4>
-                                    <p class="item-description">
-                                        <?php echo $purchaseItem['description']; ?>
-                                    </p>
-                                    <?php echo $purchaseItem['itemprice'] ?> € pro Artikel<br/>
-                                    Menge: <?php echo $purchaseItem['quantity']; ?><br/>
-                                    Gesamtpreis: <?php echo $purchaseItem['quantity'] * $purchaseItem['itemprice']; ?> €
-                                </div>
-                            </div>
-                            <?php
-                                $i++;
-                            }
-                            ?>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 clear-left">    
+                                                <?php foreach($purchase['iteminfo'] as $purchaseItem) : ?>
+                                                    <?php if($i > 0) : ?>
+                                                        <div class="border-top clear-left">
+                                                    <?php else : ?>
+                                                        <div class="overflow">
+                                                    <?php endif; ?>
+                                                    <div class="float-left item-image-mini">
+                                                        <img class="" src="<?php echo $purchaseItem['imageurl']; ?>" />
+                                                    </div>
+                                                    <div class="float-left item-details-mini">
+                                                        <h4 class="item-name"><?php echo $purchaseItem['name']; ?></h4>
+                                                        <p class="item-description">
+                                                            <?php echo $purchaseItem['description']; ?>
+                                                        </p>
+                                                        <?php echo $purchaseItem['itemprice'] ?> € pro Artikel<br/>
+                                                        Menge: <?php echo $purchaseItem['quantity']; ?><br/>
+                                                        Gesamtpreis: <?php echo $purchaseItem['quantity'] * $purchaseItem['itemprice']; ?> €
+                                                    </div>
+                                            </div>
+                                            <?php $i++; ?>
+                                            <?php endforeach; ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                        }
-                        
-                        ?><button class="btn btn-primary print" onclick="window.print();return false;">ausdrucken</button>
-                        <?php
-                    }
-                    else
-                    {
-                        ?>
+                        <?php endforeach; ?>
+                        <button class="btn btn-primary print" onclick="window.print();return false;">ausdrucken</button>
+                    <?php else: ?>
                         <div class="row">
                             <div class="col-lg-12 col-lg-12 col-lg-12">
                                 <div class="alert alert-warning center">
@@ -228,9 +202,7 @@ if(!isset($missing))
                                 </div>
                             </div>
                         </div>
-                    <?php
-                    }
-                    ?>
+                    <?php endif;?>
                 </div>
             </div>
         </section>

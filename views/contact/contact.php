@@ -22,20 +22,15 @@ if(!isset($missing))
                 </div>
                 <div class="row">
                     <div class="col-lg-7 col-md-10 col-sm-12 center">
-                    <?php
-                        if(isset($contactError))
-                        {    
-                        ?>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12">                                
-                                    <div class="alert alert-danger">
-                                        <?php echo $contactError; ?>
-                                    </div><br>
-                                </div>
+                        <?php if(isset($contactError)) : ?>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">                                
+                                <div class="alert alert-danger">
+                                    <?php echo $contactError; ?>
+                                </div><br>
                             </div>
-                        <?php   
-                        }
-                        ?>
+                        </div>
+                        <?php endif; ?>
                         <form method="post" onsubmit="return validateContact();">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12 float-left clear-left">

@@ -29,9 +29,11 @@ require_once 'model/itemcolor.class.php';
 
 class OrderController extends \app\core\Controller
 {
+	// views for ticketshop and merchandiseshop
 	public function actionShop()
 	{
 		$json = false;
+		// input and output if JSON/AJAX is used
 		if(isset($_GET['json']) && ($_GET['json']) === "true")
 		{
 			$json = true;
@@ -45,73 +47,76 @@ class OrderController extends \app\core\Controller
 				self::CalculateCart($clientid, $json);
 			}
 		}
+		// if JSON/AJAX isn't used
 		else
 		{
-		if(isset($_GET['t']))
-		{
-			$type = $_GET['t'];
-			if($type === 'tickets')
+			if(isset($_GET['t']))
 			{
-				$title = "Ticketshop - BORD-Festival";
-				$this->_params['title'] = $title;
+				$type = $_GET['t'];
+				if($type === 'tickets')
+				{
+					$title = "Ticketshop - BORD-Festival";
+					$this->_params['title'] = $title;
+				}
+				else
+				{
+					$title = "Merchandise - BORD-Festival";
+					$this->_params['title'] = $title;
+				}
+				$type = \addslashes($type);
+
+				// get the filter values and sortings for the merchandise-shop from database
+				// pre-order and pre-filter the output, if a filter already exists
+				$itemCategories = ItemCategory::find();
+				$this->_params['itemCategories'] = $itemCategories;
+				$itemGender = ItemGender::find();
+				$this->_params['itemGender'] = $itemGender;
+				$itemColors = ItemColor::find();
+				$this->_params['itemColors'] = $itemColors;
+
+				$where = 'type = "'.$type.'"';
+				$filter = '';
+				$orderby = '';
+				$selectedCategoryFilter = '';
+				$selectedGenderFilter = '';
+				$selectedColorFilter = '';
+
+				$selectedSort = '';
+				$getSelectedSort = false;
+				if(!isset($_POST['price']) && !isset($_POST['name']))
+				{
+					$getSelectedSort = true;
+				}
+
+				$filter .= self::AddFilter('category', 'selectedCategoryFilter');
+				$filter .= self::AddFilter('gender', 'selectedGenderFilter');
+				$filter .= self::AddFilter('color', 'selectedColorFilter');
+
+				$orderby .= self::AddFilter('price', 'selectedSort', true, $getSelectedSort);
+				
+				$orderby .= self::AddFilter('name', 'selectedSort', true, $getSelectedSort);
+				
+				$where .= $filter;
+				$where .= $orderby;
+			
+				$items = Item::find($where, false);
+				if(!empty($items))
+				{
+					$this->_params['items'] = $items;
+				}
 			}
 			else
 			{
-				$title = "Merchandise - BORD-Festival";
-				$this->_params['title'] = $title;
+				header('Location: index.php?c=pages&a=error404');
 			}
-			$type = \addslashes($type);
 
-			$itemCategories = ItemCategory::find();
-			$this->_params['itemCategories'] = $itemCategories;
-			$itemGender = ItemGender::find();
-			$this->_params['itemGender'] = $itemGender;
-			$itemColors = ItemColor::find();
-			$this->_params['itemColors'] = $itemColors;
-
-			$where = 'type = "'.$type.'"';
-			$filter = '';
-			$orderby = '';
-			$selectedCategoryFilter = '';
-			$selectedGenderFilter = '';
-			$selectedColorFilter = '';
-
-			$selectedSort = '';
-			$getSelectedSort = false;
-			if(!isset($_POST['price']) && !isset($_POST['name']))
+			if(isset($_POST['addItemToCart']))
 			{
-				$getSelectedSort = true;
-			}
-
-			$filter .= self::AddFilter('category', 'selectedCategoryFilter');
-			$filter .= self::AddFilter('gender', 'selectedGenderFilter');
-			$filter .= self::AddFilter('color', 'selectedColorFilter');
-
-			$orderby .= self::AddFilter('price', 'selectedSort', true, $getSelectedSort);
-			
-			$orderby .= self::AddFilter('name', 'selectedSort', true, $getSelectedSort);
-			
-			$where .= $filter;
-			$where .= $orderby;
-		
-			$items = Item::find($where, false);
-			if(!empty($items))
-			{
-				$this->_params['items'] = $items;
+				self::addItemsToCart($json);
 			}
 		}
-		else
-		{
-			header('Location: index.php?c=pages&a=error404');
-		}
-
-		if(isset($_POST['addItemToCart']))
-		{
-			self::addItemsToCart($json);
-		}
-	}
     }
-    
+    // create a new shopping cart for new users, to prevent errors
     public function intizialiseCart($clientid)
 	{
 		$result = null;
@@ -134,7 +139,10 @@ class OrderController extends \app\core\Controller
 
 		return $result;
     }
-    
+	
+	// show the shoppingcart items
+	// delete items from shoppingcart
+	// buy items from shoppingcart and remove them from shoppingcart into account-purchases
 	public function actionShoppingcart()
 	{
 		$title = "Warenkorb - BORD-Festival";
@@ -143,6 +151,7 @@ class OrderController extends \app\core\Controller
 
 		if(isset($_SESSION['client_id']))
 		{
+			// get user data for purchasing
 			$clientid = $_SESSION['client_id'];
 			$client = Client::find('clientid = ' . $clientid);
 			$cart = Cart::find('clientid = ' . $clientid);
@@ -154,6 +163,7 @@ class OrderController extends \app\core\Controller
 			$this->_params['city'] = $address[0]['city'];
 			$this->_params['country'] = $address[0]['country'];
 
+			// delete items from cart
 			if(isset($_POST['deleteItemFromCart']))
 			{
 				$cartitemid = $_POST['cartitemid'] ?? null;
@@ -190,6 +200,7 @@ class OrderController extends \app\core\Controller
 				exit();	
 			}
 
+			// delete the whole cart
 			if(isset($_POST['deleteWholeCart']))
 			{
 				$success = self::deleteWholeCart($clientid);
@@ -198,6 +209,7 @@ class OrderController extends \app\core\Controller
 				exit();	
 			}
 
+			// buy the cart and move the items into table "purchases"
 			if(isset($_POST['buyCart']))
 			{
 				$purchasedata = [
@@ -236,6 +248,7 @@ class OrderController extends \app\core\Controller
 			$cart = Cart::find('clientid = '.$clientid);
 			$sum = 0;
 
+			// get shoppingcart items for displaying
 			if(!empty($cart))
 			{
 				$cartid = $cart[0]['cartid'];
@@ -290,6 +303,7 @@ class OrderController extends \app\core\Controller
 
 	}
 
+	// update the cart, if the user added or removed items
 	public function updateCart($cartid, $clientid)
 	{
 		$cartitems = Cartitem::find('cartid = '.$cartid);
@@ -320,7 +334,7 @@ class OrderController extends \app\core\Controller
 		$changedcart->save();
 	}
 
-
+	// delete all items in the cart
 	public function deleteWholeCart($clientid)
 	{		
 		$cart = Cart::find('clientid = '.$clientid);
@@ -344,6 +358,7 @@ class OrderController extends \app\core\Controller
 		return $success;
     }
     
+	// Get ClientId to calculate the Cart in menu
 	public function actionNavbar()
 	{
 		if(isset($_SESSION['client_id']))
@@ -352,7 +367,7 @@ class OrderController extends \app\core\Controller
 			self::CalculateCart($clientid);
 		}
 	}
-
+	// calculate the cart
 	private function CalculateCart($clientid, $json = false)
 	{
 		$cart = Cart::find('clientid = '.$clientid);
@@ -380,6 +395,7 @@ class OrderController extends \app\core\Controller
 		}
 	} 
 
+	// is called when a user adds items from the shopping pages into the cart
 	private function addItemsToCart($json = false)
 	{
 		if(isset($_SESSION['client_id']))
@@ -390,6 +406,8 @@ class OrderController extends \app\core\Controller
 			$itemcountint = (int)$itemcount ?? null;
 
 			$success = 0;
+
+			// validation: only accepts itemcounts greater than 0
 			if(!empty($itemcountint) && $itemcountint > 0)
 			{
 				if($itemid !== null && $itemcount !== null)
@@ -398,6 +416,7 @@ class OrderController extends \app\core\Controller
 					$cartid = 0;
 					$oldtotalprice = 0;
 
+					// get or create a cart
 					if(empty($cart))
 					{
 						$tmpcart = self::intizialiseCart($clientid);
@@ -412,6 +431,7 @@ class OrderController extends \app\core\Controller
 
 					$cartitem = Cartitem::find('cartid = '.$cartid.' AND itemid = '.$itemid);
 
+					// update the itemcount, if the item already exists in the cart or add the item to the cart, if it doesn't exist
 					if(empty($cartitem))
 					{
 						$cartitemdata = [
@@ -435,7 +455,7 @@ class OrderController extends \app\core\Controller
 					$newcartitem = new Cartitem($cartitemdata);
 					$newcartitem->save();
 
-					//update total
+					//update the cart
 					self::updateCart($cartid, $clientid);
 
 					$this->_params['updatedcartsuccess'] = true;
@@ -466,6 +486,7 @@ class OrderController extends \app\core\Controller
 		}
 	}
 	
+	// called when a user sets a filter or a sort in the merchandise-shop
 	private function AddFilter($field, $filtername, $usesort = false, $getselectedSort = false)
 	{
 		$result = '';

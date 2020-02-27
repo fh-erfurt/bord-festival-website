@@ -26,7 +26,9 @@ require_once 'model/newsletter.class.php';
 
 class PagesController extends \app\core\Controller
 {
-
+	// view for the index-page
+	// sets the startdate for the index-page-countdown
+	// saves the newsletter, if someone enters his mail in the newsletter-form
 	public function actionIndex()
 	{
 		$title = "Willkommen - BORD-Festival";
@@ -57,6 +59,7 @@ class PagesController extends \app\core\Controller
 		$this->_params['festivalStart'] = $festivalStart;
 		$this->_params['festivalEnde'] = $festivalEnde;
 
+		// save newsletter-mail
 		if(isset($_POST['reg_newsletter']))
 		{
 			$mail = $_POST['email'] ?? null;
@@ -82,11 +85,13 @@ class PagesController extends \app\core\Controller
 		}
 	}
 
+	// Default Error 404 Page
 	public function actionError404()
 	{
 		
 	}
-	
+
+	// Get ClientId to calculate the Cart in menu
 	public function actionNavbar()
 	{
 		if(isset($_SESSION['client_id']))
@@ -96,6 +101,7 @@ class PagesController extends \app\core\Controller
 		}
 	}
 
+	// Calculate the Cart in menu
 	private function CalculateCart($clientid)
 	{
 		$cart = Cart::find('clientid = '.$clientid);

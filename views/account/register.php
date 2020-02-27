@@ -21,10 +21,7 @@ if(!isset($missing))
 		<div class="col-lg-6 col-md-10 col-sm-10 center clear-fix">
 			<section>
 				<h1 class="page-heading text-left">Registrierung</h1>
-				<?php
-				if(!empty($registerError))
-				{
-					?>
+				<?php if(!empty($registerError)) :?>
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 clear-fix">
 						<div class="alert alert-danger">
@@ -32,9 +29,7 @@ if(!isset($missing))
 						</div>
 					</div>
 				</div>
-				<?php
-				}
-				?>
+				<?php endif; ?>
 				<form method="post" onsubmit="return validateRegister();">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-12 float-left clear-left">

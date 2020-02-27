@@ -6,36 +6,21 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <section>
                 <h1 class="page-heading">Shop</h1>
-                <?php
-                if(isset($_GET['success']))
-                {
-                    if($_GET['success'] === "1")
-                    {
-                        ?>        
+                <?php if(isset($_GET['success'])) : ?>
+                    <?php if($_GET['success'] === "1") : ?>
                         <div class="alert alert-success">
                             Der Artikel wurde erfolgreich dem Warenkorb hinzugefügt
                         </div>
-                        <?php
-                    }
-                    else if($_GET['success'] === "0")
-                    {
-                        ?>        
+                        <?php elseif($_GET['success'] === "0") : ?>        
                         <div class="alert alert-danger">
                             Es gab einen Fehler beim Hinzufügen zum Warenkorb. Bitte versuch es erneut oder kontaktiere uns!
                         </div>
-                        <?php
-                    }
-                    else if($_GET['success'] === "2")
-                    {
-                        ?>        
+                        <?php elseif($_GET['success'] === "2") : ?>        
                         <div class="alert alert-warning">
                             Bitte einen oder mehrere Artikel angeben!
                         </div>
-                        <?php
-                    }
-                }
-                ?>
-                
+                    <?php endif; ?>
+                <?php endif; ?>
                 <div class="alert alert-success hide-js-disabled" id="ajaxsuccess">
                     Der Artikel wurde erfolgreich dem Warenkorb hinzugefügt
                 </div>
@@ -109,79 +94,52 @@
                         </form>
                     <?php endif; ?>
                 <?php endif; ?>
-                <?php
-                $i = 0;
-                if(empty($items))
-                {
-                    ?>        
+                <?php $i = 0; ?>
+                <?php if(empty($items)) : ?>        
                     <div class="alert alert-warning">
                         Zur Zeit sind keine Artikel verfügbar! Bitte kontaktiere uns oder trag dich in den Newsletter ein,
                         um zu erfahren, wenn er wieder verfügbar ist.
                     </div>
-                    <?php
-                }
-                else
-                {
-                    foreach($items as $item) 
-                    {
-                        if($i > 0)
-                        {
-                            ?>
+                <?php else : ?>
+                    <?php foreach($items as $item) : ?>
+                        <?php if($i > 0) : ?>
                             <div class="item border-top">
-                            <?php
-                        }
-                        else
-                        {
-                            ?>
+                        <?php else: ?>
                             <div class="item">
-                            <?php
-                        }
-                        ?>
-                        <div class="float-left item-image">
-                            <img alt="<?php echo $item['name']; ?>" src="<?php echo $item['imageurl']; ?>" />
-                        </div>
-                        <div class="float-left item-details">                    
-                        <h4 class="item-name"><?php echo $item['name']; ?></h4>
-                        <p class="item-description">
-                            <?php echo $item['description']; ?>
-                        </p>
-                    
-                        <?php 
-                        if(isset($_SESSION['client_id']))
-                        {
-                            $itemid = $item['itemid'];
-                        ?>
-                        <form method="post">
-                            <input type="hidden" name="itemid" value="<?php echo $itemid; ?>" />
-                            <p>Preis: <?php echo $item['price']; ?> €</p>
-                            <p>Anzahl: 
-                            <button type="button" class="btn-fixed btn-primary hide-js-disabled" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '-')">-</button>
-                            <input type="text" id="itemcount<?php echo $itemid; ?>" class="input-inline input-itemcount" name="itemcount" value="1">
-                            <button type="button" class="btn-fixed btn-primary hide-js-disabled" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '+')">+</button>
-                            </p><br>
-                            <noscript>
-                                <button type="submit" class="btn btn-primary hide-js-enabled" name="addItemToCart">In den Warenkorb</button>
-                            </noscript>
-                            <a class="btn btn-primary hide-js-disabled" name="addItemToCart" onclick="postCartWithAjax(<?php echo $itemid; ?>, 'itemcount<?php echo $itemid; ?>')">In den Warenkorb</a>
-                        </form>
-                        <?php
-                        }
-                        else
-                        {
-                        ?>
-                        <p>preis: <?php echo $item['price']; ?> €</p>
-                        <button class="btn btn-disabled" disabled>in den Warenkorb</button> Bitte einloggen!
-                        <?php
-                        }
-                    
-                        $i++;
-                        ?>
-                        </div>
-                        </div>
-                        <?php
-                    }
-                }
-                ?>
+                        <?php endif; ?>
+                                <div class="float-left item-image">
+                                    <img alt="<?php echo $item['name']; ?>" src="<?php echo $item['imageurl']; ?>" />
+                                </div>
+                                <div class="float-left item-details">                    
+                                    <h4 class="item-name"><?php echo $item['name']; ?></h4>
+                                    <p class="item-description">
+                                        <?php echo $item['description']; ?>
+                                    </p>
+                                
+                                    <?php if(isset($_SESSION['client_id'])) : ?>
+                                        <?php $itemid = $item['itemid']; ?>
+                                        <form method="post">
+                                            <input type="hidden" name="itemid" value="<?php echo $itemid; ?>" />
+                                            <p>Preis: <?php echo $item['price']; ?> €</p>
+                                            <p>Anzahl: 
+                                            <button type="button" class="btn-fixed btn-primary hide-js-disabled" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '-')">-</button>
+                                            <input type="text" id="itemcount<?php echo $itemid; ?>" class="input-inline input-itemcount" name="itemcount" value="1">
+                                            <button type="button" class="btn-fixed btn-primary hide-js-disabled" onclick="changeItemcount('itemcount<?php echo $itemid; ?>', '+')">+</button>
+                                            </p><br>
+                                            <noscript>
+                                                <button type="submit" class="btn btn-primary hide-js-enabled" name="addItemToCart">In den Warenkorb</button>
+                                            </noscript>
+                                            <a class="btn btn-primary hide-js-disabled" name="addItemToCart" onclick="postCartWithAjax(<?php echo $itemid; ?>, 'itemcount<?php echo $itemid; ?>')">In den Warenkorb</a>
+                                        </form>
+                                    <?php else : ?>
+                                        <p>preis: <?php echo $item['price']; ?> €</p>
+                                        <button class="btn btn-disabled" disabled>in den Warenkorb</button> Bitte einloggen!
+                                    <?php endif; ?>
+                                    <?php $i++; ?>
+                                </div>
+                            </div>
+                    <?php endforeach; ?>                
+                <?php endif; ?>
             </section>
         </div>
     </div>

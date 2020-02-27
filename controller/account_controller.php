@@ -16,6 +16,7 @@ require_once 'model/item.class.php';
 
 class AccountController extends \app\core\Controller
 {
+    // register a new user
     public function actionRegister()
     {
         $title = "Registrierung - BORD-Festival";
@@ -40,6 +41,7 @@ class AccountController extends \app\core\Controller
                 $city		= $_POST['city'] ?? null;
                 $country    = $_POST['country'] ?? null;
 
+                // validating the user input and checking, if mail already exists
                 if($mail != null && $password1 != null && $password2 != null && $dateofbirth != null && $firstname != null &&
                 $lastname != null && $street != null && $zip != null && $city != null && $country != null)
                 {
@@ -99,6 +101,7 @@ class AccountController extends \app\core\Controller
                 }
                 else
                 {
+                    // save the input, if the input was invalid
                     $missingInformation = [];
 
                     $missingInformation['mail'] 		= $mail != null ? false : true;
@@ -124,6 +127,7 @@ class AccountController extends \app\core\Controller
         }
     }
 
+    // login for users
     public function actionLogin()
     {
         $title = "Login - BORD-Festival";
@@ -137,6 +141,7 @@ class AccountController extends \app\core\Controller
                 $mail    = $_POST['mail'] ?? null;
                 $password = $_POST['password'] ?? null;
 
+                // validating user and mail
                 if($mail != null && $password != null)
                 {
                     $where = 'mail = "'.$mail.'"';
@@ -197,7 +202,7 @@ class AccountController extends \app\core\Controller
         exit();
     }
 
-
+    // account information page
     public function actionProfile()
     {
         $title = "Profil - BORD-Festival";
@@ -210,7 +215,7 @@ class AccountController extends \app\core\Controller
         $client = Client::find('clientid = ' . $clientid);
         $addressid = $client[0]['addressid'];
         $address = Address::find('addressid = ' . $addressid);
-
+        
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true)
         {
             if(!isset($_POST['updateAccount']))
@@ -224,6 +229,7 @@ class AccountController extends \app\core\Controller
                 $this->_params['city']          = $address[0]['city'];
                 $this->_params['country']       = $address[0]['country'];    
             }
+            // change account information
             else
             {
                 $mail = $_POST['mail'] ?? null;
@@ -305,6 +311,7 @@ class AccountController extends \app\core\Controller
                     $this->_params['city']        = $city;
                     $this->_params['country']     = $country;
 
+                    // save the input, if the input was invalid
                     $missingInformation = [];
 
                     $missingInformation['mail']         = $mail != null ? false : true;
@@ -376,6 +383,7 @@ class AccountController extends \app\core\Controller
         }
     }
 
+	// Get ClientId to calculate the Cart in menu
 	public function actionNavbar()
 	{
 		if(isset($_SESSION['client_id']))
@@ -384,7 +392,8 @@ class AccountController extends \app\core\Controller
 			self::CalculateCart($clientid);
 		}
 	}
-	
+    
+    //calculate the cart
 	private function CalculateCart($clientid)
 	{
 		$cart = Cart::find('clientid = '.$clientid);
