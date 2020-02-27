@@ -51,6 +51,11 @@
                 <p class="text">
                     <a class="link" href="https://media.insiders.nl/vib/files/image/4de25bcccfaf29bc8a6dd90ce047e61e0608adf6.jpg">https://media.insiders.nl/vib/files/image/4de25bcccfaf29bc8a6dd90ce047e61e0608adf6.jpg</a>
                 </p>
+                <br><br>
+                <h3>Warenkorb-Icon</h3>
+                <p class="text">
+                    <a class="link" href="http://endlessicons.com/wp-content/uploads/2012/11/shopping-cart-icon-614x460.png">http://endlessicons.com/wp-content/uploads/2012/11/shopping-cart-icon-614x460.png</a>
+                </p>
                 <br>
                 <p class="text">Quelle: <a class="link" href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
             </div>

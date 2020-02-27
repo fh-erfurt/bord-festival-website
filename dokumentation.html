@@ -14,6 +14,7 @@
         <div class="container">
             <div class="menu">
                 <h1>Inhaltsverzeichnis</h1>
+                <a href="#aufgaben">Aufgabenteilung</a>
                 <a href="#einleitung">1. Einleitung</a>
                 <a href="#zielbestimmung">2. Zielbestimmung</a>
                 <div class="submenu">
@@ -26,13 +27,12 @@
                     <a href="#startseite">3.1 Startseite</a>
                     <a href="#registrierung">3.2 Registrierung</a>
                     <a href="#login">3.3 Login</a>
-                    <a href="#profil">3.4 Profil</a>
+                    <a href="#profil">3.4 Account</a>
                     <a href="#kontakt">3.5 Kontakt</a>
                     <a href="#ticketshop">3.6 Ticketshop</a>
                     <a href="#merchandiseshop">3.7 Merchandiseshop</a>
                     <a href="#warenkorb">3.8 Warenkorb</a>
                     <a href="#anfahrt">3.9 Anfahrt</a>
-                    <a href="#impressum">3.10 Impressum</a>
                 </div>
                 <a href="#datenbank">4. Datenbank</a>
                 <a href="#produktumgebung">5. Produktumgebung</a>
@@ -55,37 +55,86 @@
                         </tr>
                         <tr>
                             <td>Stand der Dokumentation:</td>
-                            <td>18.01.2020</td>
+                            <td>26.02.2020</td>
                         </tr>
                         <tr>
                             <td>Bearbeitungsstatus:</td>
-                            <td>in Bearbeitung</td>
+                            <td>abgeschlossen</td>
                         </tr>
                     </table>
                 </div>
+                <br>
+                <h1 id="aufgaben">Für die Bewertung hervorgehoben:</h1>
+                <ul>
+                    <li>komplett responsives Design mit Anpassung in 3 Stufen (Bildschirmbreite bis 600px, bis 950px, ab 950px)</li>
+                    <li>auf kleinen Displays sieht die Seite teilweise extra anders aus, weil Smartphones eine andere Bedienung erfordern (größere Buttons, nicht viele Elemente nebeneinander), beispielsweise bei:
+                        <ul>
+                            <li>Warenkorb, wenn Artikel im Warenkorb liegen</li>
+                            <li>Startseite, Bannergrafik ändert sich</li>
+                            <li>Hintergrundgrafik wird auf kleinen Displays nicht mitskaliert, damit sie nicht zu klein wird</li>
+                        </ul>
+                    </li>
+                    <li>Menüeinträge werden auf kleineren Displays gekürzt, Warenkorb wird durch Warenkorb-Icon ersetzt, Icon im Dropdown-Menü ändert sich beim darüberhovern</li>
+                    <li>Umsetzung aller Animationen mit CSS, um nicht auf JavaScript zurückgreifen zu müssen</li>     
+                    <li>Verwendung von divs statt HTML-Tabellen (außer in der Dokumentation), um es Screenreadern leichter zu machen</li>                       
+                </ul>
+                
+                <h1 id="aufgaben">Aufgabenteilung</h1>
+                <p>
+                    <b>Raphael Freybe:</b><br>
+                    dynamische Aufteilung des Shops in zwei Seiten (Merchandise, Tickets)<br>
+                    Design und Backend für Kontakt<br>
+                    Design und Backend für Accountdaten-Änderung<br>
+                    Design und Backend Bestellbestätigung Warenkorb<br>
+                    Newsletter-Eintragung<br>
+                    JavaScript-Validierung für Login und Kontakt<br>
+                    Serverseitige Validierung der Formulare (Login, Registrierung, Kontakt)<br>
+                    Designänderungen CSS<br>
+                    Code-Überarbeitungen<br>
+                    BORD-Schriftzug-Grafiken<br>
+                    Datenbankentwurf<br>
+                </p>
+                <p>
+                    <b>Daniel Depta:</b><br>
+                    Aufbau des MVCs<br>
+                    Responsive Design, Gestaltung des Layouts<br>
+                    Entwurf der Startseite, CSS-Animationen<br>
+                    Design und Backend für Shop<br>
+                    Filter und Sortierung im Shop<br>                    
+                    Design und Backend für Warenkorb<br>
+                    Design und Backend für Login/Registrierung (Accounthandling)<br>
+                    Design und Backend für Bestellhistorie<br>
+                    Print-CSS für Account-Bestellhistorie<br>
+                    Grafiken für den Shop, Hintergrundgrafik<br>
+                    JavaScript-Countdown, NoScript-Alternative<br>
+                    JavaScript-Validierung für Registrierung<br>
+                    AJAX: Posten und Laden von Daten für Shop<br>
+                    Aufbau der Dokumentationsseite<br>
+                    Datenbankentwurf<br>
+                </p>
                 <h1 id="einleitung">1. Einleitung</h1>
                 <span>
-                        <ul>
-                            <li>Festival-Website mit Shop und Informationen</li>
-                            <li>Login, Warenkorb, Bestellung, Kontakt</li>
-                            <li>Es gibt 5 verschiedene Ticketarten und Merchandise zu kaufen</li>
-                            <li>Merchandise kann nach verschiedenen Kategorien gefiltert werden</li>
-                            <li>Es gibt nur Kundenaccounts</li>
-                            <li>Man kann nur als eingeloggter Kunde bestellen</li>
-                        </ul>
+                    Es soll im Rahmen des 3. Semesters an der FH Erfurt eine Website mit PHP-Backend entwickelt werden.<br>
+                    Wir wollen eine Festival-Website entwickeln, die folgende Möglichkeiten bietet:
+                    <ul>
+                        <li>Tickets (5 Ticketarten) und Merchandise kaufen</li>
+                        <li>über das Festival und das Line-Up informieren</li>
+                        <li>Registrierung, Login, Accountverwaltung, Bestellhistorie</li>
+                        <li>Kunden können mit uns in Kontakt treten/Newsletter</li>
+                    </ul>
                     </span>
                 <h1 id="zielbestimmung">2. Zielbestimmung</h1>
                 <h2 id="musskriterien">2.1 Muss-Kriterien</h2>
                 <span>
                         <ul>
                             <li>Anpassung an verschiedene Displayauflösungen</li>
-                            <li>6 Hauptseiten:
+                            <li>Mindestens 6 Hauptseiten:
                                 <ul>
                                     <li>Startseite mit Line-Up</li>
                                     <li>Kontakt</li>
                                     <li>Login</li>
                                     <li>Registrierung</li>
-                                    <li>Profil</li>
+                                    <li>Profil (Accountänderung, Bestellhistorie)</li>
                                     <li>Anfahrt</li>
                                     <li>Impressum</li>                                    
                                 </ul>
@@ -94,8 +143,7 @@
                                 <ul>
                                     <li>Ticketshop</li>
                                     <li>Merchandiseshop</li>
-                                    <li>Warenkorb</li>
-                                    <li>Bestell-Zusammenfassung mit Lieferadresse</li>                                                            
+                                    <li>Warenkorb mit Bestell-Zusammenfassung und Lieferadresse</li>                                                            
                                 </ul>
                             </li>
                             <li>Validierung von Formulareingaben Client- und serverseitig</li>
@@ -124,31 +172,70 @@
                         <li>Mit JavaScript generierter Countdown zeigt fiktiven Start des Festivals an - ist JavaScript deaktiviert werden die verbleibenden Tage und Stunden gezeigt</li>
                         <li>Umrechnung in die Sommerzeit mit bedacht</li>
                         <li>Hintergrundbild mit Farbverlauf ins Schwarze für die richtige Einstellung beim ersten Betreten der Seite</li>
-                        <li>Abbonierung des Newsletters erfolgt per Speicherung der eingetragenen E-Mail in die Datenbank</li>
+                        <li>Abonnieren des Newsletters erfolgt per Speicherung der eingetragenen E-Mail in die Datenbank</li>
+                        <li>E-Mail wird nur gespeichert, wenn eine gültige E-Mail eingegeben wurde (Prüfung per Regex)</li>
                         <li>Darstellung des Line-Ups mit Bildern und Bandtitel - Hoveranimationen sorgen für eine bessere User-Experience</li>
                     </ul>
                 </span>
                 <h2 id="registrierung">3.2 Registrierung</h2>
                 <span>
+                    Bei Neuerstellung eines Accounts werden Accountdaten:
                     <ul>
-                        <li>Bei Neuerstellung eines Accounts werden Accountdaten und persönliche Daten abgefragt</li>
-                        <li>Wie bei allen anderen Formularen geschieht die Validierung mit Php und Javascript - Fehlermeldungen sehen mit beiden Validierungen gleich aus</li>
-                        <li>Das E-Mail Feld beinhaltet eine Regular Expression zur besseren Aussortierung unvalider E-Mails</li>
-                        <li>Ist JavaScript aktiviert geschieht die Validierung bereits beim raustabben -> Markierung des fehlerhaften Feldes und Sperrung des Submit-Buttons</li>
-                        <li>Bei Angabe einer bereits registrierten E-Mail -> Ausgabe einer Fehlernachricht mit Link zur Login-Seite</li>
+                        <li>E-Mail-Adresse</li>
+                        <li>Passwort</li>
+                        <li>Passwortbestätigung</li>
+                    </ul>
+                    und persönliche Daten:</li>
+                    <ul>
+                        <li>Vorname</li>
+                        <li>Nachname</li>
+                        <li>Geburtsdatum</li>
+                        <li>Land</li>
+                        <li>Straße / Hausnummer</li>
+                        <li>Postleitzahl</li>
+                        <li>Ort</li>
+                    </ul>
+                    abgefragt
+                        <li>Die Validierung der Felder erfolgt sowohl clientseitig mit JavaScript als auch serverseitig mit PHP - Fehlermeldungen sehen mit beiden Validierungen gleich aus</li>
+                        <li>Das E-Mail-Feld beinhaltet eine Regular Expression zur besseren Aussortierung ungültiger E-Mails</li>
+                        <li>bei aktiviertem JavaScript geschieht die Validierung bereits beim raustabben -> Markierung des fehlerhaften Feldes und Sperrung des Submit-Buttons</li>
+                        <li>Bei Angabe einer bereits registrierten E-Mail wird ein Hinweis mit Link zur Login-Seite angezeigt</li>
+                        <br>
+                        Es wird überprüft, ob die beiden übermittelten Passwörter übereinstimmen. Wenn dies der Fall ist, wird ein Account angelegt und der Benutzer eingeloggt. Wenn die Passwörter nicht übereinstimmen, wird ein Hinweis ausgegeben und der Benutzer muss es erneut versuchen.<br>
+                        Bei erfolgreicher Registrierung wird das Passwort über die PHP-password_hash-Funktion als bcrypt gehasht und mit einem salt versehen und in der Datenbank gespeichert (Tabelle "clients"). Das Klartextpasswort wird nicht gespeichert.<br>
+                        Die restlichen Accountdaten werden auch in der clients-Tabelle in der Datenbank gespeichert.<br>
+                        Bei den Adressdaten wird überprüft, ob diese Adresse bereits mit allen Parametern in der Tabelle "addresses" vorhanden ist. Ist dies der Fall, wird diese AddressID verwendet.<br>
+                        Falls die Adresse in der Datenbank noch nicht vorhanden ist, wird ein neuer Eintrag in der Tabelle "addresses" erzeugt und die dadurch entstandene AddressID im Account gespeichert.
                     </ul>
                 </span>
                 <h2 id="login">3.3 Login</h2>
                 <span>
+                    Zum Einloggen werden folgende Daten abgefragt:
                     <ul>
-                        <li>Auch bei Login zweifache Validierung mit Php und JavaScript (siehe Registrierung)</li>
+                        <li>E-Mail-Adresse</li>
+                        <li>Passwort</li>
                     </ul>
+                    <ul>
+                        <li>Die Validierung der Felder erfolgt sowohl clientseitig mit JavaScript als auch serverseitig mit PHP - Fehlermeldungen sehen mit beiden Validierungen gleich aus</li>
+                    </ul>
+                    <br>
+                    Wenn beide Felder mit gültigen Werten gefüllt sind, wird überprüft, ob zu der eingegebenen E-Mail-Adresse ein Account vorhanden ist. Wenn dies nicht der Fall ist, wird ein Hinweis an den Benutzer ausgegeben.<br>
+                    Wenn ein Account vorhanden ist, wird das übermittelte Passwort gehasht und mit dem Hash des Passworts des vorhandenen Accounts verglichen. Wenn diese Hashes übereinstimmen, wird der Benutzer eingeloggt und ein serverseitiges Cookie gesetzt, damit der Benutzer für die Dauer der Session eingeloggt bleibt.
                 </span>
-                <h2 id="profil">3.4 Profil</h2>
+                <h2 id="profil">3.4 Account</h2>
+                Nur mit eingeloggtem Benutzer sichtbar.
+                <h2>Accountdaten ändern</h2>
                 <ul>
                     <li>Einsicht aller Accountdaten mit der Möglichkeit alle Daten in den entsprechenden Textfeldern zu ändern</li>
                     <li>Drücken auf Account ändern führt zu Pop-Up (komplett mit CSS umgesetzt), indem mit der Eingabe des Passworts die Accountdaten-Änderung bestätigt wird</li>
                     <li>Wie bei der Registrierung wird das formular zweiseitig mit Php und JavaScript validiert</li>
+                </ul>
+                <h2>Bestellhistorie</h2>
+                <ul>
+                    <li>Ausgabe der Bestellungen, die der Account bereits getätigt hat</li>
+                    <li>Bestellungen sind in der Tabelle "purchases" gespeichert</li>
+                    <li>Auflistung erfolgt in einer Art tabellarischen Form mit Produktinformationen, Gesamtpreis und Bestellungsdatum</li>
+                    <li>Möglichkeit des Ausdruckens der Bestellhistorie</li>
                 </ul>
                 <h2 id="kontakt">3.5 Kontakt</h2>
                 <span>
@@ -158,10 +245,71 @@
                     </ul>
                 </span>
                 <h2 id="ticketshop">3.6 Ticketshop</h2>
+                Nur eingeloggte Benutzer können Artikel in den Warenkorb legen.<br>
+                <ul>
+                    <li>dynamische Ausgabe der in der Tabelle "items" gespeicherten Daten (wo type = 'tickets') als Liste
+                        Ausgabe von:
+                        <ul>
+                            <li>Produktbild</li>
+                            <li>Produktname</li>
+                            <li>Produktbezeichnung</li>
+                            <li>Preis</li>
+                            <li>Anzahl der zu bestellenden Artikelanzahl (vom Benutzer über Buttons und Eingabefeld anpassbar)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <br>
+                Die Artikelanzahl kann für jeden Artikel über einen "-"-Button und über einen "+"-Button angepasst werden, wenn JavaScript aktiviert ist. Wenn JavaScript nicht aktiviert ist, werden diese Buttons nicht angezeigt. Die Eingabe der Artikelanzahl ist unabhängig von JavaScript immer möglich.<br>
+                Bei einer ungültigen Eingabe wird ein Hinweis ausgegeben.<br><br>
+                Über den "Warenkorb"-Button an jedem Artikel kann das Produkt mit der gewünschten Anzahl in den Warenkorb gelegt werden.<br>
+                Mit aktiviertem JavaScript geschieht dies ohne Seitenneuladen per AJAX. Dabei wird automatisch auch die Gesamtanzahl und der Gesamtpreis des Warenkorbs in der Menüleiste aktualisiert. Wenn ein Fehler aufgetreten ist, wird dieser per AJAX dem Benutzer mitgeteilt.<br>
+                Wenn JavaScript deaktiviert ist, wird die Bestellung per PHP-Post im Warenkorb gespeichert und der Warenkorb aktualisiert. 
                 <h2 id="merchandiseshop">3.7 Merchandiseshop</h2>
+                Nur eingeloggte Benutzer können Artikel in den Warenkorb legen.<br>
+                Der Merchandiseshop kann nach folgenden Kriterien gefiltert werden:
+                <ul>
+                    <li>Kategorie</li>
+                    <li>Geschlecht</li>
+                    <li>Farbe</li>
+                </ul>
+                Die jeweiligen Filterwerte werden automatisch aus den Attributen generiert, die zu den Produkten in der Tabelle "items" in der Datenbank gespeichert wurden. Dadurch wurden die Views "item_gender", "item_color" und "item_category" angelegt. Die Filter können miteinander kombiniert werden. Bei aktiviertem JavaScript wird der Filter nach jeder Auswahl ausgelöst.<br>
+                Des Weiteren können die Produkte nach Preis und Name auf- und absteigend sortiert werden. Die Sortierrichtung wird an den Sortierbuttons über ein Symbol gekennzeichnet.
+                <ul>
+                    <li>dynamische Ausgabe der in der Tabelle "items" gespeicherten Daten (wo type = 'merchandise') als Liste
+                        Ausgabe von:
+                        <ul>
+                            <li>Produktbild</li>
+                            <li>Produktname</li>
+                            <li>Produktbezeichnung</li>
+                            <li>Preis</li>
+                            <li>Anzahl der zu bestellenden Artikelanzahl (vom Benutzer über Buttons und Eingabefeld anpassbar)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <br>
+                Die Artikelanzahl kann für jeden Artikel über einen "-"-Button und über einen "+"-Button angepasst werden, wenn JavaScript aktiviert ist. Wenn JavaScript nicht aktiviert ist, werden diese Buttons nicht angezeigt. Die Eingabe der Artikelanzahl ist unabhängig von JavaScript immer möglich.<br>
+                Bei einer ungültigen Eingabe wird ein Hinweis ausgegeben.<br><br>
+                Über den "Warenkorb"-Button an jedem Artikel kann das Produkt mit der gewünschten Anzahl in den Warenkorb gelegt werden.<br>
+                Mit aktiviertem JavaScript geschieht dies ohne Seitenneuladen per AJAX. Dabei wird automatisch auch die Gesamtanzahl und der Gesamtpreis des Warenkorbs in der Menüleiste aktualisiert. Wenn ein Fehler aufgetreten ist, wird dieser per AJAX dem Benutzer mitgeteilt.<br>
+                Wenn JavaScript deaktiviert ist, wird die Bestellung per PHP-Post im Warenkorb gespeichert und der Warenkorb aktualisiert. 
                 <h2 id="warenkorb">3.8 Warenkorb</h2>
+                Nur mit eingeloggtem Benutzer sichtbar.<br>
+                Auflistung der im Warenkorb gespeicherten Artikel (Tabelle "carts"). Der Warenkorb bleibt auch bei erneutem Login bestehen.<br>
+                Die Artikel werden in einer Art Tabelle mit folgenden Informationen angezeigt:
+                <ul>
+                    <li>Produktbild</li>
+                    <li>Produktname</li>
+                    <li>Produktbezeichnung</li>
+                    <li>Preis pro Artikel</li>
+                    <li>Bestellmenge</li>
+                    <li>Gesamtsumme für den Artikel (Preis * Bestellmenge)</li>
+                </ul>
+                Jeder Artikel kann einzeln aus dem Warenkorb gelöscht werden. Der Warenkorb kann aber auch über einen Button unter der Tabelle komplett geleert werden.<br>
+                Unter der Tabelle befindet sich ebenfalls eine berechnete Gesamtsumme des Warenkorbs (Gesamtsumme aller Artikel addiert). Daneben befindet sich der Button zum Bestellen des Warenkorbs.<br>
+                <br>
+                Bei der Bestellung des Warenkorbs wird die gespeicherte Adresse des Benutzers und die Gesamtsumme in einem Popup angezeigt. Wenn der Benutzer die Bestellung bestätigt, werden die dazugehörigen Warenkorb-Einträge in der Datenbank in die "purchases"-Tabelle verschoben.
                 <h2 id="anfahrt">3.9 Anfahrt</h2>
-                <h2 id="impressum">3.10 Impressum</h2>
+                Anfahrt mit Anfahrtsskizze, damit Festivalbesucher uns leicht finden.
                 <h1 id="datenbank">4. Datenbank</h1>
                 <span>
                         <img src="assets/img/ER_Diagramm.png">
@@ -181,7 +329,10 @@
                             <li>Bitte kopieren Sie alle Dateien in diesem Verzeichnis in den Ordner Ihres Apache-Servers (htdocs)</li>
                             <li>Importieren Sie die festival.sql-Datei aus dem Verzeichnis "\src\database\festival.sql" in Ihre MariaDB/MySQL-Datenbank</li>
                             <li>Richten Sie gegebenenfalls in der Datei "\init\10_database.php" Ihre Datenbank-Verbindung ein</li>
-                            <li>Legen Sie sich auf der Registrierungsseite einen Account an - in der Datenbank sind noch keine Testaccounts verfügbar</li>
+                            <li>Legen Sie sich auf der Registrierungsseite einen Account an - oder verwenden Sie folgende Test-Login-Daten:</li>
+                            
+                            E-Mail: test@fh-erfurt.de<br>
+                            Passwort: testpw123
                         </ol>
                     </span>
                 <h1 id="bilderquellen">7. Bilderquellen</h1>
@@ -199,6 +350,7 @@
                         Pendulum: <a href="https://wallpapersden.com/pendulum-band-faces-wallpaper/2560x1440/">https://wallpapersden.com/pendulum-band-faces-wallpaper/2560x1440/</a><br>
                         Steve Aoki: <a href="https://www.bigcitybeats.de/deejays/steve-aoki">https://www.bigcitybeats.de/deejays/steve-aoki</a><br>
                         Vini Vici: <a href="https://www.electriclove.at/line-up/artist-vini-vici-1123">https://www.electriclove.at/line-up/artist-vini-vici-1123</a><br>
+                        
                         <h3>Merchandiseshop</h3>
                         Hoodie: <a href="https://de.cleanpng.com/png-7o16rd/">https://de.cleanpng.com/png-7o16rd/</a><br>
                         Cap: <a href="https://de.cleanpng.com/png-5qy49h/">https://de.cleanpng.com/png-5qy49h/</a><br>
@@ -208,6 +360,11 @@
                         Flaschenöffner: <a href="https://cdn.datadirectory.co.uk/images/500/imp-8517_black.png">https://cdn.datadirectory.co.uk/images/500/imp-8517_black.png</a><br>
                         Mütze: <a href="https://neubauten.org/sites/default/files/merchandise/enmuetze1.jpg">https://neubauten.org/sites/default/files/merchandise/enmuetze1.jpg</a><br>
                         T-Shirt Herren: <a href="https://www.stickpng.com/assets/images/580b57fbd9996e24bc43bf73.png">https://www.stickpng.com/assets/images/580b57fbd9996e24bc43bf73.png</a><br>
+                        <h3>Hintergrundbild</h3>
+                        <a class="link" href="https://media.insiders.nl/vib/files/image/4de25bcccfaf29bc8a6dd90ce047e61e0608adf6.jpg">https://media.insiders.nl/vib/files/image/4de25bcccfaf29bc8a6dd90ce047e61e0608adf6.jpg</a>
+                        
+                        <h3>Warenkorb-Icon</h3>
+                        <a class="link" href="http://endlessicons.com/wp-content/uploads/2012/11/shopping-cart-icon-614x460.png">http://endlessicons.com/wp-content/uploads/2012/11/shopping-cart-icon-614x460.png</a>
                     </span>
                 <br>
                 <br>
