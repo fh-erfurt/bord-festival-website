@@ -27,6 +27,26 @@ body {
     }
 }
 
+
+.background-black {
+    overflow: hidden;
+    padding: 15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-bottom: 50px;
+    background-color: #18181b;
+}
+
+.background-start {
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 9px;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: -5px;
+    background-color: #18181b;
+}
+
 header {
     height: 130px;
     background: #0c0c0c;
@@ -229,6 +249,10 @@ p.text {
 
 #countdown-time {
     height: 100px;
+}
+
+.img-100 {
+    width: 100%;
 }
 
 .newsletter-form {

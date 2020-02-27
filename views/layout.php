@@ -72,7 +72,7 @@ if(isset($_GET['a']))
 										<div class="dropdown-content">
 											<a class="<?php echo ($activeAction === 'contact' ? ' dropdown-link-active' : ''); ?>"
 											   href="?c=contact&a=contact">Kontakt</a>
-											<a href="#">Anfahrt</a>
+											<a href="?a=anfahrt">Anfahrt</a>
 											<a href="dokumentation.html">Dokumentation</a>
 											<a class="<?php echo ($activeAction === 'impressum' ? ' dropdown-link-active' : ''); ?>"
 											   href="?a=impressum">Impressum</a>

@@ -85,6 +85,16 @@ class PagesController extends \app\core\Controller
 		}
 	}
 
+	public function actionImpressum()
+	{
+		$title = "Impressum - BORD-Festival";
+	}
+
+	public function actionAnfahrt()
+	{
+		$title = "Anfahrt - BORD-Festival";
+	}
+
 	// Default Error 404 Page
 	public function actionError404()
 	{
@@ -120,10 +130,5 @@ class PagesController extends \app\core\Controller
 			$this->_params['cartTotalPrice'] = $cartTotalPrice;
 			$this->_params['cartTotalCount'] = $cartTotalCount;
 		}
-	}
-
-	public function actionImpressum()
-	{
-		$title = "Impressum - BORD-Festival";
 	}
 }

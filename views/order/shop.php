@@ -133,7 +133,7 @@
                                         </form>
                                     <?php else : ?>
                                         <p>preis: <?php echo $item['price']; ?> €</p>
-                                        <button class="btn btn-disabled" disabled>in den Warenkorb</button> Bitte einloggen!
+                                        <button class="btn btn-disabled" disabled>in den Warenkorb</button><br>Bitte einloggen!
                                     <?php endif; ?>
                                     <?php $i++; ?>
                                 </div>
