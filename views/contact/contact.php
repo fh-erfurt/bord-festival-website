@@ -30,7 +30,14 @@ if(!isset($missing))
                                 </div><br>
                             </div>
                         </div>
-                        <?php endif; ?>
+                        <?php endif; ?>                        
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 clear-fix">
+                                <div class="alert alert-danger hide-js-disabled" id="ajaxerror">
+                                    Bitte alle Felder mit gültigen Werten ausfüllen!
+                                </div>
+                            </div>
+                        </div>
                         <form method="post" onsubmit="return validateContact();">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12 float-left clear-left">

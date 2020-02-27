@@ -19,7 +19,6 @@ function postCartWithAjax(itemid, itemcountelement) {
     xhr.open('POST', url);
     xhr.onreadystatechange = function() {
         if (xhr.readyState>3 && xhr.status==200) { 
-            console.log(xhr.responseText);
             if(xhr.responseText == 1) {
                 var element = document.getElementById('ajaxsuccess');
                 fadeIn(element);
@@ -64,7 +63,6 @@ function getCalculatedCart() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState>3 && xhr.status==200) {
             var obj = JSON.parse(xhr.responseText);
-            console.log(obj);
             var cartcount = document.getElementById('carttotalcount');
             var cartprice = document.getElementById('carttotalprice');
             cartcount.innerHTML = obj['cartTotalCount'];

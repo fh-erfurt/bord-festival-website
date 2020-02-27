@@ -41,6 +41,10 @@ function toggleSubmitButton() {
     if (errors.length > 0) {
         submitButton.disabled = true;
         submitButton.classList.add('btn-disabled');
+        var element = document.getElementById('ajaxerror');
+        if(element) {
+            fadeIn(element);
+        }
         return false;
     } else {
         submitButton.disabled = false;
@@ -103,4 +107,11 @@ function validateNewsletter() {
 
     var result = toggleSubmitButton();
     return result;
+}
+
+function fadeIn(element) {
+    element.style.position = 'relative';
+    element.style.visibility = 'visible';
+    element.style.marginLeft = 'inherit';
+    element.style.opacity = 1;
 }

@@ -36,7 +36,6 @@ var x = setInterval(function() {
   } else {
     prehours = "";
   }
-  console.log(prehours);
 
   // Display the result in the element with id="countdown"
   document.getElementById("countdown-days").innerHTML = days + " Tage";

@@ -27,6 +27,13 @@ if(!isset($missing))
                     </div>
                 </div>
                 <?php endif; ?>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 clear-fix">
+						<div class="alert alert-danger hide-js-disabled" id="ajaxerror">
+							Bitte alle Felder mit gültigen Werten ausfüllen!
+						</div>
+					</div>
+				</div>
                 <div class="accountdata">
                     <form action="index.php?c=account&a=profile" method="post" onsubmit="return validateProfile();">
                         <div class="row">
