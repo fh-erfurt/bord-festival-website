@@ -120,24 +120,6 @@ td {
 img {
     max-width: 100%;
 }
-/* ol {
-    counter-reset: section;
-    list-style-type:none;
-    padding-left:0;
-    float: left;
-    clear: both;
-    font-size: 18px;
+.img-small {
+    width: 50%;
 }
-ol li:before {
-    counter-increment: section;
-    font-weight:700;
-    content: counters(section, ".") "";
-    float: left;
-    clear: both;
-    padding-right: 10px;
-}
-ul {counter-reset: section;  list-style-type:lower-alpha}
-ul li:before {counter-increment: section; content: ""}
-ol li ol li {
-    padding-left: 15px;
-} */
